@@ -1,0 +1,38 @@
+PODS:
+  - Alamofire (5.4.4)
+  - GoogleMaps (6.0.1):
+    - GoogleMaps/Maps (= 6.0.1)
+  - GoogleMaps/Base (6.0.1)
+  - GoogleMaps/Maps (6.0.1):
+    - GoogleMaps/Base
+  - GooglePlaces (5.1.0)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - GoogleMaps (= 6.0.1)
+  - GooglePlaces
+  - Moya
+  - Toast-Swift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - GoogleMaps
+    - GooglePlaces
+    - Moya
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  GoogleMaps: c213fc2334b7374144cede914da779b99be0ab74
+  GooglePlaces: c57cd5aa7e91d10fa5106c792de74f3bd6436260
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: c8b6c3072b75ade5c14f7c824f60dae328c163e4
+
+COCOAPODS: 1.11.2
