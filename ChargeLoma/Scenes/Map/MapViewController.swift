@@ -7,10 +7,13 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 
 class MapViewController: UIViewController {
 
     @IBOutlet weak var viewMap: UIView!
+    
+    private let locationManager = CLLocationManager()
     var mapView: GMSMapView!
     var listStationMarker: [GMSMarker] = []
     
@@ -23,7 +26,6 @@ class MapViewController: UIViewController {
         return vm
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -35,10 +37,15 @@ class MapViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setBarTintColor(color: .clear)
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
+//        viewModel.input.getStationFilter()
+        
+        self.viewMap.addSubview(mapView)
+        self.fetchMarkerMap()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
@@ -46,15 +53,36 @@ class MapViewController: UIViewController {
     }
 
     func setupUI() {
+        NavigationManager.instance.setupWithNavigationController(navigationController: self.navigationController)
         setupSearchBar()
+//        setupHandleTapView()
+//        self.edgesForExtendedLayout = []
+        
     }
+    
+//    func setupHandleTapView() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapView))
+//        tap.cancelsTouchesInView = false
+//        self.mapView.addGestureRecognizer(tap)
+//    }
+//
+//    @objc func handleTapView() {
+//        debugPrint("Test")
+//    }
     
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 13.663491595353403, longitude: 100.6061463206966, zoom: 9.0)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewMap.frame.width, height: self.viewMap.frame.height), camera: camera)
         mapView.delegate = self
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         self.viewMap.isUserInteractionEnabled = true
         self.viewMap.addSubview(mapView)
+        self.viewMap.clipsToBounds = true
+        
+        //initializing CLLocationManager
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     func setupSearchBar() {
@@ -63,6 +91,7 @@ class MapViewController: UIViewController {
         searchBar = UISearchBar(frame: customFrame)
         searchBar.delegate = self
         searchBar.placeholder = ""
+        searchBar.searchBarStyle = .prominent
         searchBar.compatibleSearchTextField.textColor = UIColor.gray
         searchBar.compatibleSearchTextField.backgroundColor = UIColor.white
         searchBar.setImage(UIImage(named: "search_icon"), for: .search, state: .normal)
@@ -73,7 +102,7 @@ class MapViewController: UIViewController {
         searchBar.setImage(UIImage(named: "menu"), for: .resultsList, state: .normal)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapSearch(_:)))
-        searchBar.addGestureRecognizer(tap)
+        searchBar.searchTextField.addGestureRecognizer(tap)
         searchBar.isUserInteractionEnabled = true
         
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
@@ -112,7 +141,7 @@ extension MapViewController {
             let marker = GMSMarker(position: position)
             marker.snippet = "\(index)"
             marker.isTappable = true
-            marker.iconView =  MarkerStationView.instantiate(index: index, message: "test", imageUrl: "")
+            marker.iconView =  MarkerStationView.instantiate(station: item, index: index)
             marker.tracksViewChanges = true
             listStationMarker.append(marker)
         })
@@ -125,19 +154,32 @@ extension MapViewController {
 
 extension MapViewController : GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-//        guard let markerView = marker.iconView as? MarkerMapView else { return false }
-//        return viewModel.input.didSelectMarkerAt(mapView, marker: marker)
-        return true
+        guard let markerView = marker.iconView as? MarkerStationView else { return false }
+        return viewModel.input.didSelectMarkerAt(mapView, marker: marker)
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
         var lat = coordinate.latitude
         var lng = coordinate.longitude
-        
-//        DispatchQueue.global().async {
-//
-//        }
+    
+//        debugPrint("Tap \(lat)")
+    }
+
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        guard let markerView = marker.iconView as? MarkerStationView else { return nil }
+        let view = MarkerStationInfoView.instantiateFromNib()
+        view.setupUI()
+        view.setupValue(markerView.station)
+        return view
+    }
+
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        debugPrint("didTapInfoWindowOf")
+        guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
+        NavigationManager.instance.pushVC(to: .stationDetail(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 650, completion: {
+            
+        }))
     }
     
 }
@@ -146,16 +188,45 @@ extension MapViewController: UISearchBarDelegate {
     
     @objc func handleTapSearch(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
-        debugPrint("handleTapSearch")
+        self.searchBar.endEditing(true)
+        NavigationManager.instance.pushVC(to: .searchStation, presentation: .Present(modalTransitionStyle: .crossDissolve, modalPresentationStyle: .fullScreen))
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        self.searchBar.endEditing(true)
+        self.searchBar.endEditing(true)
     }
     
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
-        debugPrint("Test")
+        NavigationManager.instance.pushVC(to: .profile)
     }
 }
+
+extension MapViewController: CLLocationManagerDelegate {
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        
+        locationManager.startUpdatingLocation()
+        
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.first else {
+            return
+        }
+        
+        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        
+        locationManager.stopUpdatingLocation()
+        
+    }
+    
+}
 

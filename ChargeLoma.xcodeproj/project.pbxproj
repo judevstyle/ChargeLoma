@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AB2D7ABF4CF3B4928FA4F233 /* Pods_ChargeLoma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */; };
+		EF0EE90C27849F1F00FC148D /* MarkerStationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EE90B27849F1F00FC148D /* MarkerStationInfoView.swift */; };
+		EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0EE90D27849F2700FC148D /* MarkerStationInfoView.xib */; };
+		EF0EE9102784A80E00FC148D /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EE90F2784A80E00FC148D /* UIImageView+Kingfisher.swift */; };
+		EF2213A1278AB4800007B50C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2213A0278AB4800007B50C /* Login.storyboard */; };
+		EF2213A3278AB48C0007B50C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2213A2278AB48C0007B50C /* LoginViewController.swift */; };
 		EF34D057277DA97F0084AB8C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34D056277DA97F0084AB8C /* UIView+Extension.swift */; };
 		EF3ACAF5277C57A60096BF95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ACAF4277C57A60096BF95 /* AppDelegate.swift */; };
 		EF3ACAFF277C57A70096BF95 /* ChargeLoma.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF3ACAFD277C57A70096BF95 /* ChargeLoma.xcdatamodeld */; };
@@ -53,6 +58,17 @@
 		EF3ACB95277C69980096BF95 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ACB94277C69980096BF95 /* MeViewController.swift */; };
 		EF3ACB97277C699E0096BF95 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3ACB96277C699E0096BF95 /* Me.storyboard */; };
 		EF63C1A527848547000664EA /* StationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63C1A427848547000664EA /* StationRepository.swift */; };
+		EF75C29227889D88004FEC64 /* SearchStation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF75C29127889D88004FEC64 /* SearchStation.storyboard */; };
+		EF75C2982788A361004FEC64 /* SearchStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2972788A361004FEC64 /* SearchStationViewController.swift */; };
+		EF75C29A2788A7DC004FEC64 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2992788A7DC004FEC64 /* UINavigationBar+Extension.swift */; };
+		EF75C29E2788AA60004FEC64 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF75C29D2788AA60004FEC64 /* Profile.storyboard */; };
+		EF75C2A02788AA66004FEC64 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C29F2788AA66004FEC64 /* ProfileViewController.swift */; };
+		EF75C2A22788B418004FEC64 /* GetStationFindOneRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2A12788B418004FEC64 /* GetStationFindOneRequest.swift */; };
+		EF75C2A42788B513004FEC64 /* GetStationFindOneResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2A32788B513004FEC64 /* GetStationFindOneResponse.swift */; };
+		EF75C2A62788B5A6004FEC64 /* GetStationFindOneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2A52788B5A6004FEC64 /* GetStationFindOneUseCase.swift */; };
+		EF75C2A92788B601004FEC64 /* StationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2A82788B601004FEC64 /* StationDetailViewModel.swift */; };
+		EF75C2AB2788C4D7004FEC64 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2AA2788C4D7004FEC64 /* UIButton+Extension.swift */; };
+		EF75C2AD2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2AC2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift */; };
 		EF8234F1277D5F1500379B38 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8234F0277D5F1500379B38 /* UISearchBar+Extension.swift */; };
 		EF8234FA277D74E400379B38 /* ProviderMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8234F9277D74E400379B38 /* ProviderMasterAPI.swift */; };
 		EF8234FD277D74F400379B38 /* PlugTypeMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8234FC277D74F400379B38 /* PlugTypeMasterAPI.swift */; };
@@ -81,12 +97,23 @@
 		EF823548277D9F0D00379B38 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF823547277D9F0D00379B38 /* MapViewModel.swift */; };
 		EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF82354C277DA5A800379B38 /* MarkerStationView.swift */; };
 		EF82354F277DA5AE00379B38 /* MarkerStationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF82354E277DA5AE00379B38 /* MarkerStationView.xib */; };
+		EFF43754278602FB0000213C /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF43753278602FB0000213C /* HalfModalPresentationController.swift */; };
+		EFF437562786030E0000213C /* HalfModalTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF437552786030E0000213C /* HalfModalTransitioningDelegate.swift */; };
+		EFF43758278603180000213C /* HalfModalInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF43757278603180000213C /* HalfModalInteractiveTransition.swift */; };
+		EFF4375A278603210000213C /* HalfModalTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF43759278603210000213C /* HalfModalTransitionAnimator.swift */; };
+		EFF4375D278603C20000213C /* StationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFF4375C278603C20000213C /* StationDetail.storyboard */; };
+		EFF4375F278603CB0000213C /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4375E278603CB0000213C /* StationDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChargeLoma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.release.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.release.xcconfig"; sourceTree = "<group>"; };
 		B6A3D28E1A1FF4A17CF91189 /* Pods-ChargeLoma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.debug.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.debug.xcconfig"; sourceTree = "<group>"; };
+		EF0EE90B27849F1F00FC148D /* MarkerStationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStationInfoView.swift; sourceTree = "<group>"; };
+		EF0EE90D27849F2700FC148D /* MarkerStationInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerStationInfoView.xib; sourceTree = "<group>"; };
+		EF0EE90F2784A80E00FC148D /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		EF2213A0278AB4800007B50C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		EF2213A2278AB48C0007B50C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF34D056277DA97F0084AB8C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		EF3ACAF1277C57A60096BF95 /* ChargeLoma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargeLoma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3ACAF4277C57A60096BF95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +158,17 @@
 		EF3ACB94277C69980096BF95 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		EF3ACB96277C699E0096BF95 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		EF63C1A427848547000664EA /* StationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRepository.swift; sourceTree = "<group>"; };
+		EF75C29127889D88004FEC64 /* SearchStation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStation.storyboard; sourceTree = "<group>"; };
+		EF75C2972788A361004FEC64 /* SearchStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStationViewController.swift; sourceTree = "<group>"; };
+		EF75C2992788A7DC004FEC64 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
+		EF75C29D2788AA60004FEC64 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		EF75C29F2788AA66004FEC64 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EF75C2A12788B418004FEC64 /* GetStationFindOneRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStationFindOneRequest.swift; sourceTree = "<group>"; };
+		EF75C2A32788B513004FEC64 /* GetStationFindOneResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStationFindOneResponse.swift; sourceTree = "<group>"; };
+		EF75C2A52788B5A6004FEC64 /* GetStationFindOneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStationFindOneUseCase.swift; sourceTree = "<group>"; };
+		EF75C2A82788B601004FEC64 /* StationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewModel.swift; sourceTree = "<group>"; };
+		EF75C2AA2788C4D7004FEC64 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		EF75C2AC2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		EF8234F0277D5F1500379B38 /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		EF8234F9277D74E400379B38 /* ProviderMasterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderMasterAPI.swift; sourceTree = "<group>"; };
 		EF8234FC277D74F400379B38 /* PlugTypeMasterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugTypeMasterAPI.swift; sourceTree = "<group>"; };
@@ -159,6 +197,12 @@
 		EF823547277D9F0D00379B38 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		EF82354C277DA5A800379B38 /* MarkerStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStationView.swift; sourceTree = "<group>"; };
 		EF82354E277DA5AE00379B38 /* MarkerStationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerStationView.xib; sourceTree = "<group>"; };
+		EFF43753278602FB0000213C /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
+		EFF437552786030E0000213C /* HalfModalTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitioningDelegate.swift; sourceTree = "<group>"; };
+		EFF43757278603180000213C /* HalfModalInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalInteractiveTransition.swift; sourceTree = "<group>"; };
+		EFF43759278603210000213C /* HalfModalTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitionAnimator.swift; sourceTree = "<group>"; };
+		EFF4375C278603C20000213C /* StationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StationDetail.storyboard; sourceTree = "<group>"; };
+		EFF4375E278603CB0000213C /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +227,24 @@
 				83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EF0EE90A27849F0E00FC148D /* MarkerStationInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				EF0EE90B27849F1F00FC148D /* MarkerStationInfoView.swift */,
+				EF0EE90D27849F2700FC148D /* MarkerStationInfoView.xib */,
+			);
+			path = MarkerStationInfoView;
+			sourceTree = "<group>";
+		};
+		EF22139F278AB4710007B50C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EF2213A0278AB4800007B50C /* Login.storyboard */,
+				EF2213A2278AB48C0007B50C /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		EF3ACAE8277C57A60096BF95 = {
@@ -223,6 +285,10 @@
 		EF3ACB0B277C57CB0096BF95 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EF22139F278AB4710007B50C /* Login */,
+				EF75C29C2788AA55004FEC64 /* Profile */,
+				EF75C29027889D7B004FEC64 /* SearchStation */,
+				EFF4375B278603B70000213C /* StationDetail */,
 				EF3ACB93277C698A0096BF95 /* Me */,
 				EF3ACB8E277C69560096BF95 /* AddLocation */,
 				EF3ACB89277C693D0096BF95 /* ForYou */,
@@ -289,6 +355,7 @@
 		EF3ACB53277C5D550096BF95 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EFF43750278602B70000213C /* HalfModalPresentation */,
 				EF3ACB61277C60DC0096BF95 /* KeyboardListener.swift */,
 				EF3ACB54277C5D600096BF95 /* Extensions */,
 			);
@@ -307,6 +374,10 @@
 				EF82350F277D78F900379B38 /* Decodable+Extension.swift */,
 				EF82353C277D966C00379B38 /* Encodable+Extension.swift */,
 				EF34D056277DA97F0084AB8C /* UIView+Extension.swift */,
+				EF0EE90F2784A80E00FC148D /* UIImageView+Kingfisher.swift */,
+				EF75C2992788A7DC004FEC64 /* UINavigationBar+Extension.swift */,
+				EF75C2AA2788C4D7004FEC64 /* UIButton+Extension.swift */,
+				EF75C2AC2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -417,6 +488,32 @@
 				EF63C1A427848547000664EA /* StationRepository.swift */,
 			);
 			path = Station;
+			sourceTree = "<group>";
+		};
+		EF75C29027889D7B004FEC64 /* SearchStation */ = {
+			isa = PBXGroup;
+			children = (
+				EF75C29127889D88004FEC64 /* SearchStation.storyboard */,
+				EF75C2972788A361004FEC64 /* SearchStationViewController.swift */,
+			);
+			path = SearchStation;
+			sourceTree = "<group>";
+		};
+		EF75C29C2788AA55004FEC64 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EF75C29D2788AA60004FEC64 /* Profile.storyboard */,
+				EF75C29F2788AA66004FEC64 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		EF75C2A72788B5ED004FEC64 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF75C2A82788B601004FEC64 /* StationDetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EF8234F3277D737E00379B38 /* Data */ = {
@@ -588,6 +685,7 @@
 			isa = PBXGroup;
 			children = (
 				EF82353E277D975600379B38 /* PostStationFilterResponse.swift */,
+				EF75C2A32788B513004FEC64 /* GetStationFindOneResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -596,6 +694,7 @@
 			isa = PBXGroup;
 			children = (
 				EF82353A277D959100379B38 /* PostStationFilterRequest.swift */,
+				EF75C2A12788B418004FEC64 /* GetStationFindOneRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -604,6 +703,7 @@
 			isa = PBXGroup;
 			children = (
 				EF823544277D9E0000379B38 /* PostStationFilterUseCase.swift */,
+				EF75C2A52788B5A6004FEC64 /* GetStationFindOneUseCase.swift */,
 			);
 			path = Station;
 			sourceTree = "<group>";
@@ -627,6 +727,7 @@
 		EF82354A277DA58B00379B38 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EF0EE90A27849F0E00FC148D /* MarkerStationInfoView */,
 				EF82354B277DA59500379B38 /* MarkerStationView */,
 			);
 			path = Components;
@@ -639,6 +740,43 @@
 				EF82354E277DA5AE00379B38 /* MarkerStationView.xib */,
 			);
 			path = MarkerStationView;
+			sourceTree = "<group>";
+		};
+		EFF43750278602B70000213C /* HalfModalPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				EFF43752278602E10000213C /* Presentation */,
+				EFF43751278602DB0000213C /* Transitioning */,
+			);
+			path = HalfModalPresentation;
+			sourceTree = "<group>";
+		};
+		EFF43751278602DB0000213C /* Transitioning */ = {
+			isa = PBXGroup;
+			children = (
+				EFF437552786030E0000213C /* HalfModalTransitioningDelegate.swift */,
+				EFF43757278603180000213C /* HalfModalInteractiveTransition.swift */,
+				EFF43759278603210000213C /* HalfModalTransitionAnimator.swift */,
+			);
+			path = Transitioning;
+			sourceTree = "<group>";
+		};
+		EFF43752278602E10000213C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				EFF43753278602FB0000213C /* HalfModalPresentationController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		EFF4375B278603B70000213C /* StationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EF75C2A72788B5ED004FEC64 /* ViewModel */,
+				EFF4375C278603C20000213C /* StationDetail.storyboard */,
+				EFF4375E278603CB0000213C /* StationDetailViewController.swift */,
+			);
+			path = StationDetail;
 			sourceTree = "<group>";
 		};
 		FC4C709D17F330E28E55597B /* Frameworks */ = {
@@ -722,18 +860,23 @@
 				EF82354F277DA5AE00379B38 /* MarkerStationView.xib in Resources */,
 				EF3ACB48277C59CA0096BF95 /* Kanit-Medium.ttf in Resources */,
 				EF3ACB4B277C59CA0096BF95 /* Kanit-SemiBold.ttf in Resources */,
+				EF75C29227889D88004FEC64 /* SearchStation.storyboard in Resources */,
 				EF3ACB04277C57A80096BF95 /* LaunchScreen.storyboard in Resources */,
 				EF3ACB7C277C67510096BF95 /* Main.storyboard in Resources */,
 				EF3ACB49277C59CA0096BF95 /* Kanit-Light.ttf in Resources */,
+				EFF4375D278603C20000213C /* StationDetail.storyboard in Resources */,
 				EF3ACB4C277C59CA0096BF95 /* Kanit-Bold.ttf in Resources */,
 				EF3ACB97277C699E0096BF95 /* Me.storyboard in Resources */,
+				EF2213A1278AB4800007B50C /* Login.storyboard in Resources */,
 				EF3ACB51277C5CFE0096BF95 /* Colors.xcassets in Resources */,
 				EF3ACB01277C57A80096BF95 /* Assets.xcassets in Resources */,
+				EF75C29E2788AA60004FEC64 /* Profile.storyboard in Resources */,
 				EF3ACB8D277C694D0096BF95 /* ForYou.storyboard in Resources */,
 				EF3ACB90277C69600096BF95 /* AddLocation.storyboard in Resources */,
 				EF3ACB86277C692F0096BF95 /* Go.storyboard in Resources */,
 				EF3ACB4D277C59CA0096BF95 /* Kanit-Regular.ttf in Resources */,
 				EF3ACB4A277C59CA0096BF95 /* Kanit-Thin.ttf in Resources */,
+				EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */,
 				EF3ACB0E277C57F30096BF95 /* Splash.storyboard in Resources */,
 				EF3ACB83277C68E50096BF95 /* Map.storyboard in Resources */,
 			);
@@ -808,8 +951,12 @@
 				EF823524277D7E2000379B38 /* ProviderMasterRepository.swift in Sources */,
 				EF3ACB70277C62CD0096BF95 /* RegEx.swift in Sources */,
 				EF8234F1277D5F1500379B38 /* UISearchBar+Extension.swift in Sources */,
+				EF75C2982788A361004FEC64 /* SearchStationViewController.swift in Sources */,
 				EF823536277D94F700379B38 /* StationAPI.swift in Sources */,
 				EF3ACB65277C61900096BF95 /* FontManager.swift in Sources */,
+				EFF437562786030E0000213C /* HalfModalTransitioningDelegate.swift in Sources */,
+				EF75C2A92788B601004FEC64 /* StationDetailViewModel.swift in Sources */,
+				EF75C2A22788B418004FEC64 /* GetStationFindOneRequest.swift in Sources */,
 				EF3ACB60277C60AE0096BF95 /* UIViewController+Extension.swift in Sources */,
 				EF823508277D787300379B38 /* KeyedDecodingContainer+Extension.swift in Sources */,
 				EF3ACB81277C68DF0096BF95 /* MapViewController.swift in Sources */,
@@ -824,16 +971,23 @@
 				EF3ACB88277C69360096BF95 /* GoViewController.swift in Sources */,
 				EF823531277D81DC00379B38 /* SplashViewModel.swift in Sources */,
 				EF3ACAFF277C57A70096BF95 /* ChargeLoma.xcdatamodeld in Sources */,
+				EFF4375A278603210000213C /* HalfModalTransitionAnimator.swift in Sources */,
+				EF75C2A42788B513004FEC64 /* GetStationFindOneResponse.swift in Sources */,
 				EF823545277D9E0000379B38 /* PostStationFilterUseCase.swift in Sources */,
 				EF3ACB5E277C60390096BF95 /* NavigationManager.swift in Sources */,
 				EF3ACB62277C60DC0096BF95 /* KeyboardListener.swift in Sources */,
+				EF2213A3278AB48C0007B50C /* LoginViewController.swift in Sources */,
+				EFF4375F278603CB0000213C /* StationDetailViewController.swift in Sources */,
 				EF3ACB5B277C5E180096BF95 /* DomainNameConfig.swift in Sources */,
 				EF3ACB6C277C62890096BF95 /* Basic.swift in Sources */,
 				EF823515277D792F00379B38 /* Combine.swift in Sources */,
+				EF75C2A62788B5A6004FEC64 /* GetStationFindOneUseCase.swift in Sources */,
 				EF82353F277D975600379B38 /* PostStationFilterResponse.swift in Sources */,
 				EF8234FD277D74F400379B38 /* PlugTypeMasterAPI.swift in Sources */,
 				EF823519277D798700379B38 /* GetProviderMasterResponse.swift in Sources */,
 				EF3ACB92277C697C0096BF95 /* AddLocationViewController.swift in Sources */,
+				EF75C2AB2788C4D7004FEC64 /* UIButton+Extension.swift in Sources */,
+				EF75C29A2788A7DC004FEC64 /* UINavigationBar+Extension.swift in Sources */,
 				EF3ACB6E277C62B30096BF95 /* AsyncHelper.swift in Sources */,
 				EF34D057277DA97F0084AB8C /* UIView+Extension.swift in Sources */,
 				EF63C1A527848547000664EA /* StationRepository.swift in Sources */,
@@ -842,6 +996,7 @@
 				EF3ACB7E277C67870096BF95 /* MainTabBarController.swift in Sources */,
 				EF82350A277D788700379B38 /* AnyKey.swift in Sources */,
 				EF823533277D83FB00379B38 /* ToastManager.swift in Sources */,
+				EFF43758278603180000213C /* HalfModalInteractiveTransition.swift in Sources */,
 				EF82353B277D959100379B38 /* PostStationFilterRequest.swift in Sources */,
 				EF3ACB95277C69980096BF95 /* MeViewController.swift in Sources */,
 				EF82352C277D7F2300379B38 /* GetFindAllProviderMasterUseCase.swift in Sources */,
@@ -850,12 +1005,17 @@
 				EF823526277D7E4300379B38 /* PlugTypeMasterRepository.swift in Sources */,
 				EF3ACB10277C57FC0096BF95 /* SplashViewController.swift in Sources */,
 				EF3ACB58277C5D850096BF95 /* UIColor+Extension.swift in Sources */,
+				EF0EE90C27849F1F00FC148D /* MarkerStationInfoView.swift in Sources */,
 				EF82350C277D78BD00379B38 /* Utils.swift in Sources */,
 				EF82350E277D78E900379B38 /* Decoder+Extension.swift in Sources */,
+				EFF43754278602FB0000213C /* HalfModalPresentationController.swift in Sources */,
 				EF3ACB73277C638A0096BF95 /* Localizable.swift in Sources */,
 				EF82353D277D966D00379B38 /* Encodable+Extension.swift in Sources */,
 				EF823548277D9F0D00379B38 /* MapViewModel.swift in Sources */,
 				EF82352A277D7F1300379B38 /* GetFindAllPlugTypeMasterUseCase.swift in Sources */,
+				EF0EE9102784A80E00FC148D /* UIImageView+Kingfisher.swift in Sources */,
+				EF75C2A02788AA66004FEC64 /* ProfileViewController.swift in Sources */,
+				EF75C2AD2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift in Sources */,
 				EF82351E277D7CFE00379B38 /* GetPlugTypeMasterResponse.swift in Sources */,
 				EF3ACB68277C61FD0096BF95 /* Language.swift in Sources */,
 			);

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "map.svg",
+      "filename" : "map.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "map@2x.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "map@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

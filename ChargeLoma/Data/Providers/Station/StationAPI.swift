@@ -11,12 +11,15 @@ import UIKit
 
 public enum StationAPI {
     case stationFilter(request: PostStationFilterRequest)
+    case findOne(request: GetStationFindOneRequest)
 }
 
 extension StationAPI: TargetType {
     public var baseURL: URL {
         switch self {
         case .stationFilter:
+            return DomainNameConfig.station.url
+        case .findOne:
             return DomainNameConfig.station.url
         }
     }
@@ -25,6 +28,8 @@ extension StationAPI: TargetType {
         switch self {
         case .stationFilter:
             return "/stationFilter"
+        case .findOne(let request):
+            return "/\(request.stId ?? "")"
         }
     }
 
@@ -44,8 +49,9 @@ extension StationAPI: TargetType {
     public var task: Task {
         switch self {
         case let .stationFilter(request):
-            debugPrint("json \(request.toJSON())")
             return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
+        case let .findOne(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }
 

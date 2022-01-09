@@ -11,6 +11,7 @@ import Moya
 
 protocol StationRepository {
     func postStationFilter(request: PostStationFilterRequest) -> AnyPublisher<PostStationFilterResponse, Error>
+    func getFindOne(request: GetStationFindOneRequest) -> AnyPublisher<GetStationFindOneResponse, Error>
 }
 
 final class StationRepositoryImpl: ChargeLoma.StationRepository {
@@ -21,5 +22,12 @@ final class StationRepositoryImpl: ChargeLoma.StationRepository {
             .cb
             .request(.stationFilter(request: request))
             .map(PostStationFilterResponse.self)
+    }
+    
+    func getFindOne(request: GetStationFindOneRequest) -> AnyPublisher<GetStationFindOneResponse, Error> {
+        return self.provider
+            .cb
+            .request(.findOne(request: request))
+            .map(GetStationFindOneResponse.self)
     }
 }

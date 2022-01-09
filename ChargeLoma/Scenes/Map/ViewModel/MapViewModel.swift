@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 import Combine
+import GoogleMaps
 
 protocol MapProtocolInput {
     func getStationFilter()
+    func didSelectMarkerAt(_ mapView: GMSMapView, marker: GMSMarker) -> Bool
 }
 
 protocol MapProtocolOutput: class {
@@ -79,6 +81,13 @@ class MapViewModel: MapProtocol, MapProtocolOutput {
                 self.didStationFilterSuccess?()
             }
         }.store(in: &self.anyCancellable)
+    }
+    
+    func didSelectMarkerAt(_ mapView: GMSMapView, marker: GMSMarker) -> Bool {
+
+        debugPrint("didSelectMarkerAt")
+        
+        return false
     }
 }
 

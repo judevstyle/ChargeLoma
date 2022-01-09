@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mb5-tv-RIU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -30,6 +30,7 @@
                             <constraint firstItem="mb5-tv-RIU" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="z7v-am-xU9"/>
                         </constraints>
                     </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="viewMap" destination="mb5-tv-RIU" id="gmR-vZ-OsJ"/>
                     </connections>

@@ -27,13 +27,13 @@ class MainTabBarController: UITabBarController {
         tabBar.layer.shadowOffset = .zero
         tabBar.layer.shadowRadius = 2
         
-        let mapVC = tabBarNavigation(unselectImage: UIImage(named: "map"), selectImage: UIImage(named: "map"), title: "แผนที่", badgeValue: nil, navigationTitle: "แผนที่", navigationOpeningSender: .map)
+        let mapVC = tabBarNavigation(unselectImage: UIImage(named: "map")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "map")?.withRenderingMode(.alwaysTemplate), title: "แผนที่", badgeValue: nil, navigationTitle: "แผนที่", navigationOpeningSender: .map)
 
-        let goVC = tabBarNavigation(unselectImage: UIImage(named: "car"), selectImage: UIImage(named: "car"), title: "ไป", badgeValue: nil, navigationTitle: "Favorite", navigationOpeningSender: .go)
+        let goVC = tabBarNavigation(unselectImage: UIImage(named: "car")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "car")?.withRenderingMode(.alwaysTemplate), title: "ไป", badgeValue: nil, navigationTitle: "Favorite", navigationOpeningSender: .go)
 
-        let foryouVC = tabBarNavigation(unselectImage: UIImage(named: "passion"), selectImage: UIImage(named: "passion"), title: "สำหรับคุณ", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .foryou)
+        let foryouVC = tabBarNavigation(unselectImage: UIImage(named: "passion")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "passion")?.withRenderingMode(.alwaysTemplate), title: "สำหรับคุณ", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .foryou)
 
-        let addLocationVC = tabBarNavigation(unselectImage: UIImage(named: "plus"), selectImage: UIImage(named: "plus"), title: "เพิ่มสถานี", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
+        let addLocationVC = tabBarNavigation(unselectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), title: "เพิ่มสถานี", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
         
         let meVC = tabBarNavigation(unselectImage: UIImage(named: "user"), selectImage: UIImage(named: "user"), title: "ฉัน", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
         
@@ -46,11 +46,12 @@ class MainTabBarController: UITabBarController {
         let navController = navigationOpeningSender.navController
         navController.tabBarItem.image = unselectImage
         navController.tabBarItem.selectedImage =  selectImage
-        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         navController.tabBarItem.title = title
         navController.tabBarItem.badgeColor = .red
         navController.tabBarItem.badgeValue = badgeValue
         navController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.biggerTinyText], for: .normal)
+//        navController.edgesForExtendedLayout = []
 
         //navigationController
         
