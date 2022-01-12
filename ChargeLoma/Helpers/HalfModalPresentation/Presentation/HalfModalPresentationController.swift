@@ -2,8 +2,10 @@
 //  HalfModalPresentationController.swift
 //  ChargeLoma
 //
-//  Created by Nontawat Kanboon on 5/1/2565 BE.
+//  Created by Nontawat Kanboon on 10/1/2565 BE.
 //
+
+import Foundation
 import UIKit
 
 public enum ModalScaleState {
@@ -62,8 +64,8 @@ public class HalfModalPresentationController : UIPresentationController {
             if self.fristDirection == nil {
                 self.fristDirection = velocity.y
             }
-//            
-            if self.fristTapPosition ?? 0.0 <= HalfModalPresentationController.heightModal + 50 {
+//
+            if self.fristTapPosition ?? 0.0 <= HalfModalPresentationController.heightModal {
                 switch state {
                 case .normal:
                     presentedView!.frame.origin.y = endPoint.y + (containerView!.frame.height - HalfModalPresentationController.heightModal)
@@ -75,28 +77,20 @@ public class HalfModalPresentationController : UIPresentationController {
             
             break
         case .ended:
-            //                let space = containerView!.frame.height - presentedView!.frame.origin.y
-            //                debugPrint("Space : \(space)")
-            //                if space > (100 + HalfModalPresentationController.heightModal) {
-            //                    changeScale(to: .adjustedOnce)
-            //                    callbackTransition(isHalfEnd: false)
-            //                } else {
-            //                    changeScale(to: .normal)
-            //                    callbackTransition(isHalfEnd: true)
-            //                }
-            if case .Up = pan.verticalDirection(target: presentedView!) {
-                print("Swiping up")
-                changeScale(to: .adjustedOnce)
-                callbackTransition(isHalfEnd: false)
-            } else {
-                if state == .adjustedOnce {
-                    changeScale(to: .normal)
-                    callbackTransition(isHalfEnd: true)
+            if self.fristTapPosition ?? 0.0 <= HalfModalPresentationController.heightModal {
+                if case .Up = pan.verticalDirection(target: presentedView!) {
+                    print("Swiping up")
+                    changeScale(to: .adjustedOnce)
+                    callbackTransition(isHalfEnd: false)
                 } else {
-                    presentedViewController.dismiss(animated: true, completion: nil)
+                    if state == .adjustedOnce {
+                        changeScale(to: .normal)
+                        callbackTransition(isHalfEnd: true)
+                    } else {
+                        presentedViewController.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
-            
             self.fristTapPosition = nil
             break
         default:
@@ -105,13 +99,11 @@ public class HalfModalPresentationController : UIPresentationController {
     }
     
     func callbackTransition(isHalfEnd: Bool) {
-        if let nav = presentedViewController as? UINavigationController {
-            if let vc = nav.viewControllers.first as? StationDetailViewController {
-                if  isHalfEnd == true {
-                    vc.transitionHalfScreenEnd()
-                } else {
-                    vc.transitionFullScreenEnd()
-                }
+        if let vc = presentedViewController as? DetailStationViewController {
+            if  isHalfEnd == true {
+                vc.transitionHalfScreenEnd()
+            } else {
+                vc.transitionFullScreenEnd()
             }
         }
     }

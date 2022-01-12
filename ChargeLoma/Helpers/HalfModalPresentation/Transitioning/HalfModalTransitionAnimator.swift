@@ -2,9 +2,10 @@
 //  HalfModalTransitionAnimator.swift
 //  ChargeLoma
 //
-//  Created by Nontawat Kanboon on 5/1/2565 BE.
+//  Created by Nontawat Kanboon on 10/1/2565 BE.
 //
 
+import Foundation
 import UIKit
 
 class HalfModalTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {

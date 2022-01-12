@@ -11,12 +11,13 @@ import UIKit
 
 public enum PlugTypeMasterAPI {
     case findAll
+    case plugTypeCategory
 }
 
 extension PlugTypeMasterAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .findAll:
+        case .findAll, .plugTypeCategory:
             return DomainNameConfig.plugTypeMaster.url
         }
     }
@@ -25,6 +26,8 @@ extension PlugTypeMasterAPI: TargetType {
         switch self {
         case .findAll:
             return ""
+        case .plugTypeCategory:
+            return "/plugTypeCategory"
         }
     }
     
@@ -41,7 +44,7 @@ extension PlugTypeMasterAPI: TargetType {
     
     public var task: Task {
         switch self {
-        case .findAll:
+        case .findAll, .plugTypeCategory:
             return .requestPlain
         }
     }

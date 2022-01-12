@@ -21,13 +21,15 @@ public enum NavigationOpeningSender {
     case me
     
     //Detail
-    case stationDetail(_ stId: String)
+    case detailStation(_ stId: String)
     
     //SearchStation
     case searchStation
     
     //Profile
     case profile
+    
+    case mapFilter
     
     public var storyboardName: String {
         switch self {
@@ -47,12 +49,14 @@ public enum NavigationOpeningSender {
             return "ForYou"
         case .me:
             return "Me"
-        case .stationDetail:
-            return "StationDetail"
+        case .detailStation:
+            return "DetailStation"
         case .searchStation:
             return "SearchStation"
         case .profile:
             return "Profile"
+        case .mapFilter:
+            return "MapFilter"
         }
     }
     
@@ -74,12 +78,14 @@ public enum NavigationOpeningSender {
             return "ForYouViewController"
         case .me:
             return "MeViewController"
-        case .stationDetail:
-            return "StationDetailViewController"
+        case .detailStation:
+            return "DetailStationViewController"
         case .searchStation:
             return "SearchStationTableViewController"
         case .profile:
             return "ProfileViewController"
+        case .mapFilter:
+            return "MapFilterViewController"
         }
     }
     
@@ -92,6 +98,12 @@ public enum NavigationOpeningSender {
     
     public var titleNavigation: String {
         switch self {
+        case .mapFilter:
+            return "Filter"
+        case .go:
+            return "เส้นทาง"
+        case .foryou:
+            return "สำหรับคุณ"
         default:
             return ""
         }
@@ -176,7 +188,7 @@ class NavigationManager {
         }
     }
     
-    func pushVC(to: NavigationOpeningSender, presentation: Presentation = .Push, isHiddenNavigationBar: Bool = false) {
+    func pushVC(to: NavigationOpeningSender, presentation: Presentation = .Push, isHiddenNavigationBar: Bool = false, animated: Bool = true) {
         let loadingStoryBoard = to.storyboardName
         
         let storyboard = UIStoryboard(name: loadingStoryBoard, bundle: nil)
@@ -189,8 +201,8 @@ class NavigationManager {
 //                className.viewModel.input.setDelegate(delegate: delegate)
 //                viewController = className
 //            }
-        case .stationDetail(let stId):
-            if let className = storyboard.instantiateInitialViewController() as? StationDetailViewController {
+        case .detailStation(let stId):
+            if let className = storyboard.instantiateInitialViewController() as? DetailStationViewController {
                 className.viewModel.setStId(stId)
                 viewController = className
             }
@@ -202,10 +214,10 @@ class NavigationManager {
         
         viewController.hideKeyboardWhenTappedAround()
         
-        self.presentVC(viewController: viewController, presentation: presentation, isHiddenNavigationBar: isHiddenNavigationBar, to: to)
+        self.presentVC(viewController: viewController, presentation: presentation, isHiddenNavigationBar: isHiddenNavigationBar, to: to, animated: animated)
     }
     
-    private func presentVC(viewController: UIViewController, presentation: Presentation, isHiddenNavigationBar: Bool = false, to: NavigationOpeningSender) {
+    private func presentVC(viewController: UIViewController, presentation: Presentation, isHiddenNavigationBar: Bool = false, to: NavigationOpeningSender, animated: Bool = true) {
         if let nav = self.navigationController {
             nav.isNavigationBarHidden = isHiddenNavigationBar
         }
@@ -217,7 +229,7 @@ class NavigationManager {
             
             self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             self.navigationController.navigationBar.tintColor = .white
-            self.navigationController.pushViewController(viewController, animated: true)
+            self.navigationController.pushViewController(viewController, animated: animated)
             
         case .Root:
             let storyboard = UIStoryboard(name: to.storyboardName, bundle: nil)
@@ -248,15 +260,14 @@ class NavigationManager {
             
             self.navigationController.present(nav, animated: true, completion: completion)
         case .presentHalfModalAndFullScreen(let rootVC, let heightHalf, let completion):
-            
-            let nav: UINavigationController = getNavigationController(vc: viewController, isTranslucent: true, isFullScreen: false)
-            
+
             var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
-            halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: rootVC, presentingViewController: nav)
-            nav.modalPresentationStyle = .custom
-            nav.transitioningDelegate = halfModalTransitioningDelegate
+            halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: rootVC, presentingViewController: viewController)
+            viewController.modalPresentationStyle = .custom
+            viewController.transitioningDelegate = halfModalTransitioningDelegate
             HalfModalPresentationController.heightModal = heightHalf
-            self.navigationController.present(nav, animated: true, completion: completion)
+            self.navigationController.present(viewController, animated: true, completion: completion)
+            
         case .Present(let withNav, let modalTransitionStyle, let modalPresentationStyle):
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = true
@@ -318,18 +329,33 @@ class NavigationManager {
     private func getNavigationController(vc: UIViewController, isTranslucent: Bool = false, isFullScreen: Bool = false) -> UINavigationController {
         
         let nav: UINavigationController = UINavigationController(rootViewController: vc)
+        
+//        if #available(iOS 15.0, *) {
+//            let appearance = UINavigationBarAppearance()
+//            appearance.configureWithTransparentBackground()
+//            
+//            appearance.backgroundColor = .clear
+//            appearance.shadowColor = .clear
+//            appearance.shadowImage = UIImage()
+//            appearance.backgroundImage = UIImage()
+//            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h2Text, NSAttributedString.Key.foregroundColor: UIColor.white]
+//            
+//            nav.navigationBar.scrollEdgeAppearance = appearance
+//            nav.navigationBar.standardAppearance = appearance
+//            nav.navigationBar.compactAppearance = appearance
+//        } else {
+//            
+//            nav.navigationBar.barTintColor = UIColor.basePrimary
+//            nav.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.bottom, barMetrics: .default)
+//            nav.navigationBar.shadowImage = UIImage()
+//            nav.navigationBar.isTranslucent = true
+//            nav.navigationBar.isHidden = true
+//            nav.navigationBar.barStyle = .black
+//            nav.navigationBar.tintColor = .white
+//            nav.navigationBar.layoutIfNeeded()
+//        }
+        
 
-        nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        nav.navigationBar.shadowImage = UIImage()
-        nav.navigationBar.isTranslucent = isTranslucent
-        nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h3Bold, NSAttributedString.Key.foregroundColor: UIColor.white]
-        nav.navigationBar.barTintColor = UIColor.gold
-        
-        if isFullScreen == true {
-            nav.modalPresentationStyle = .overFullScreen
-        }
-        
-        nav.navigationBar.tintColor = .white
         return nav
     }
     

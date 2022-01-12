@@ -11,6 +11,7 @@ public enum DomainNameConfig {
     case plugTypeMaster
     case providerMaster
     case station
+    case googleMap
 }
 
 extension DomainNameConfig {
@@ -18,6 +19,7 @@ extension DomainNameConfig {
     public var urlString: String {
         
         let baseURL: String = "http://charge-loma.ssoftdev.com/api"
+        let googleMapURL: String = "https://maps.googleapis.com/maps/api"
         
         switch self {
         case .plugTypeMaster:
@@ -26,6 +28,8 @@ extension DomainNameConfig {
             return "\(baseURL)/provider-master"
         case .station:
             return "\(baseURL)/station"
+        case .googleMap:
+            return "\(googleMapURL)"
         }
     }
     

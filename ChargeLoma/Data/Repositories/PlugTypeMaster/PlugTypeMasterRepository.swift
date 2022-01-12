@@ -11,6 +11,7 @@ import Moya
 
 protocol PlugTypeMasterRepository {
     func findAll() -> AnyPublisher<GetPlugTypeMasterResponse, Error>
+    func plugTypeCategory() -> AnyPublisher<GetPlugTypeCategoryResponse, Error>
 }
 
 final class PlugTypeMasterRepositoryImpl: ChargeLoma.PlugTypeMasterRepository {
@@ -21,5 +22,12 @@ final class PlugTypeMasterRepositoryImpl: ChargeLoma.PlugTypeMasterRepository {
             .cb
             .request(.findAll)
             .map(GetPlugTypeMasterResponse.self)
+    }
+    
+    func plugTypeCategory() -> AnyPublisher<GetPlugTypeCategoryResponse, Error> {
+        return self.provider
+            .cb
+            .request(.plugTypeCategory)
+            .map(GetPlugTypeCategoryResponse.self)
     }
 }

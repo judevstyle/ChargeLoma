@@ -41,6 +41,8 @@ public struct StationData: Codable, Hashable  {
     public var plugDesc: String?
     public var isFastCharge: Bool = false
     public var rating: Double?
+    public var stationDesc: String?
+    public var serviceRate: Double?
     
     public init() {}
     
@@ -62,5 +64,7 @@ public struct StationData: Codable, Hashable  {
         try plugDesc            <- decoder["plug_desc"]
         try isFastCharge        <- decoder["isFastCharge"]
         try rating              <- decoder["p_type_id"]
+        try stationDesc         <- decoder["station_desc"]
+        try serviceRate         <- decoder["service_rate"]
     }
 }

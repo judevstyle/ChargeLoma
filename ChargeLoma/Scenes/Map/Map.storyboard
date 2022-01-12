@@ -20,18 +20,45 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9UU-iM-4hK">
+                                <rect key="frame" x="353" y="699" width="45" height="98"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt9-wk-uIr">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Gen-0Q-opp"/>
+                                            <constraint firstAttribute="width" constant="45" id="mnn-F4-iGX"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_map_menu"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-Pl-1Zm">
+                                        <rect key="frame" x="0.0" y="53" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Xxq-e9-XAd"/>
+                                            <constraint firstAttribute="height" constant="45" id="eH3-00-v34"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="btn_map_location"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9UU-iM-4hK" secondAttribute="trailing" constant="16" id="2RB-Uz-b9A"/>
                             <constraint firstItem="mb5-tv-RIU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="BAF-bt-S1R"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mb5-tv-RIU" secondAttribute="bottom" id="CvY-yT-wdH"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9UU-iM-4hK" secondAttribute="bottom" constant="16" id="HS8-99-l5j"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mb5-tv-RIU" secondAttribute="trailing" id="S75-Dn-GvG"/>
                             <constraint firstItem="mb5-tv-RIU" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="z7v-am-xU9"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnMapLocation" destination="3Xe-Pl-1Zm" id="AO8-e5-87D"/>
+                        <outlet property="btnMapMenu" destination="dt9-wk-uIr" id="MGh-0u-0hd"/>
                         <outlet property="viewMap" destination="mb5-tv-RIU" id="gmR-vZ-OsJ"/>
                     </connections>
                 </viewController>
@@ -41,6 +68,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_map_location" width="53" height="53"/>
+        <image name="btn_map_menu" width="53" height="53"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
