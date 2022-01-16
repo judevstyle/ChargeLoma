@@ -20,6 +20,11 @@ protocol DetailStationProtocolOutput: class {
     
     func getDataStation() -> StationData?
     
+    //TableView
+    func getNumberOfRowsInSection(_ tableView: UITableView, section: Int, type: DetailStationTableViewType) -> Int
+    func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath, type: DetailStationTableViewType) -> UITableViewCell
+    func getItemViewCellHeight(type: DetailStationTableViewType) -> CGFloat
+    
 }
 
 protocol DetailStationProtocol: DetailStationProtocolInput, DetailStationProtocolOutput {
@@ -77,7 +82,43 @@ class DetailStationViewModel: DetailStationProtocol, DetailStationProtocolOutput
     func getDataStation() -> StationData? {
         return self.dataStation
     }
+}
+
+extension DetailStationViewModel {
+    
+    func getNumberOfRowsInSection(_ tableView: UITableView, section: Int, type: DetailStationTableViewType) -> Int {
+        switch type {
+        case .plugTableView:
+            return self.dataStation?.plugMapping?.count ?? 0
+        case .reviewTableView:
+            return 0
+        }
+    }
+    
+    func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath, type: DetailStationTableViewType) -> UITableViewCell {
+        switch type {
+        case .plugTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlugTableViewCell.identifier, for: indexPath) as! PlugTableViewCell
+            cell.selectionStyle = .none
+            cell.item = self.dataStation?.plugMapping?[indexPath.item]
+            return cell
+        case .reviewTableView:
+            return UITableViewCell()
+        }
+    }
+    
+    func getItemViewCellHeight(type: DetailStationTableViewType) -> CGFloat {
+        switch type {
+        case .plugTableView:
+            return 80
+        case .reviewTableView:
+            return 0
+        }
+    }
     
 }
 
-
+public enum DetailStationTableViewType {
+    case plugTableView
+    case reviewTableView
+}

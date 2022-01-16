@@ -56,9 +56,6 @@ class MapViewController: UIViewController {
         self.navigationController?.setBarTintColor(color: .clear)
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
-//        viewModel.input.getStationFilter()
-        
-        self.viewMap.addSubview(mapView)
         self.fetchMarkerMap()
     }
 
@@ -100,11 +97,13 @@ class MapViewController: UIViewController {
         searchBar.delegate = self
         searchBar.placeholder = ""
         searchBar.searchBarStyle = .prominent
-        searchBar.compatibleSearchTextField.textColor = UIColor.gray
+        searchBar.compatibleSearchTextField.textColor = UIColor.lightGray
         searchBar.compatibleSearchTextField.backgroundColor = UIColor.white
         searchBar.setImage(UIImage(named: "search_icon"), for: .search, state: .normal)
         searchBar.searchTextField.isEnabled = true
         searchBar.tintColor = .gray
+        searchBar.searchTextField.textColor = .gray
+        searchBar.searchTextField.tintColor = .gray
         searchBar.searchTextField.clearButtonMode = .always
         searchBar.showsSearchResultsButton = true
         searchBar.setImage(UIImage(named: "menu"), for: .resultsList, state: .normal)
@@ -112,11 +111,7 @@ class MapViewController: UIViewController {
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "ค้นหา...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.smallText])
         
         searchBar.searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapSearch(_:)))
-//        searchBar.searchTextField.addGestureRecognizer(tap)
-//        searchBar.isUserInteractionEnabled = true
-        
+    
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
         
@@ -226,7 +221,7 @@ extension MapViewController : GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
-        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 350, completion: {
+        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: {
             
         }))
     }

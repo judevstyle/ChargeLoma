@@ -37,10 +37,56 @@ class DetailStationViewController: UIViewController {
     
     @IBOutlet weak var headPlug: UILabel!
     
+    @IBOutlet weak var iconLocation: UIImageView!
+    
+    @IBOutlet weak var iconTime: UIImageView!
+    
+    @IBOutlet weak var titleNavigate: UILabel!
+    @IBOutlet weak var titleFavorite: UILabel!
+    @IBOutlet weak var titleShare: UILabel!
+    
+    @IBOutlet weak var btnEdit: UIButton!
+    
+    @IBOutlet weak var plugTableView: UITableView!
+    @IBOutlet weak var plugTableViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var headService: UILabel!
+    
+    @IBOutlet weak var cbParking: CheckBoxView!
+    @IBOutlet weak var titleParking: UILabel!
+    
+    @IBOutlet weak var cbFoodShop: CheckBoxView!
+    @IBOutlet weak var titleFoodShop: UILabel!
+    
+    @IBOutlet weak var cbCoffeeShop: CheckBoxView!
+    @IBOutlet weak var titleCoffeShop: UILabel!
+    
+    @IBOutlet weak var cbToilet: CheckBoxView!
+    @IBOutlet weak var titleToilet: UILabel!
+    
+    @IBOutlet weak var cbMarket: CheckBoxView!
+    @IBOutlet weak var titleMarket: UILabel!
+    
+    @IBOutlet weak var cbSleep: CheckBoxView!
+    @IBOutlet weak var titleSleep: UILabel!
+    
+    @IBOutlet weak var cbWifi: CheckBoxView!
+    @IBOutlet weak var titleWifi: UILabel!
+    
+    @IBOutlet weak var cbOther: CheckBoxView!
+    @IBOutlet weak var titleOther: UILabel!
+    
+    
     private let locationManager = CLLocationManager()
     var mapView: GMSMapView!
     
     private var lastContentOffset: CGFloat = 0
+    
+    @IBOutlet weak var bgBottomBar: UIView!
+    @IBOutlet weak var bgRating: UIView!
+    @IBOutlet weak var titleRating: UILabel!
+    
+    @IBOutlet weak var btnWriteReview: UIButton!
     
     lazy var viewModel: DetailStationProtocol = {
         let vm = DetailStationViewModel(vc: self)
@@ -51,6 +97,7 @@ class DetailStationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel.input.getDetailStation()
     }
     
@@ -61,7 +108,8 @@ class DetailStationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupUI()
         setupMap()
-//        UIApplication.shared.statusBarStyle = .lightContent
+        setupTableView()
+        setupCheckBox()
     }
     
     private func setupUI() {
@@ -73,6 +121,36 @@ class DetailStationViewController: UIViewController {
         self.view.layer.shadowOffset = .zero
         self.view.layer.shadowRadius = 20
         self.view.layer.shadowOpacity = 0.2
+        
+        self.iconTime.image = UIImage(named: "clock")?.withRenderingMode(.alwaysTemplate)
+        self.iconLocation.image = UIImage(named: "compass")?.withRenderingMode(.alwaysTemplate)
+        self.iconTime.tintColor = .basePrimary
+        self.iconLocation.tintColor = .basePrimary
+        
+        self.titleNavigate.textColor = .basePrimary
+        self.titleFavorite.textColor = .basePrimary
+        self.titleShare.textColor = .basePrimary
+        self.titleNavigate.text = "นำทาง"
+        self.titleFavorite.text = "ชื่นชอบ"
+        self.titleShare.text = "แชร์"
+        
+        self.titleNavigate.font = .smallText
+        self.titleFavorite.font = .smallText
+        self.titleShare.font = .smallText
+        
+        self.btnNavigate.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        self.btnNavigate.tintColor = .basePrimary
+        self.btnFavorite.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        self.btnFavorite.tintColor = .baseTextGray
+        self.btnShare.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        self.btnShare.tintColor = .basePrimary
+        
+        self.btnEdit.setRounded(rounded: 8)
+        self.btnEdit.setBorder(width: 1.0, color: .basePrimary)
+        self.btnEdit.tintColor = .basePrimary
+        self.btnEdit.titleLabel?.font = .bodyBold
+        self.btnEdit.backgroundColor = .white
+        self.btnEdit.setTitle("แก้ไขข้อมูล", for: .normal)
         
         self.automaticallyAdjustsScrollViewInsets = false;
         self.scrollView.contentInset = .zero
@@ -109,42 +187,87 @@ class DetailStationViewController: UIViewController {
         headDesc.text = "รายละเอียด"
         headPlug.text = "หัวจ่าย"
         serviceCharge.text = "ค่าบริการ \(0.0) บาท"
+        
+        self.bgBottomBar.alpha = 0.0
+        
+        self.btnWriteReview.backgroundColor = .basePrimary
+        self.btnWriteReview.titleLabel?.textColor = .white
+        self.btnWriteReview.tintColor = .white
+        self.btnWriteReview.titleLabel?.font = .bodyText
+        self.btnWriteReview.setRounded(rounded: 8.0)
+        
+        self.bgRating.setRounded(rounded: 8)
+        self.titleRating.font = .bodyText
+        self.titleRating.tintColor = .white
     }
     
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 13.663491595353403, longitude: 100.6061463206966, zoom: 7.0)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewMap.frame.width, height: self.viewMap.frame.height), camera: camera)
         mapView.delegate = self
-        self.viewMap.isUserInteractionEnabled = false
         self.viewMap.addSubview(mapView)
         mapView.isUserInteractionEnabled = false
-        
-        //initializing CLLocationManager
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
+
     }
     
+    func setupTableView() {
+        plugTableViewHeight.constant = 0
+        plugTableView.delegate = self
+        plugTableView.dataSource = self
+        plugTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        plugTableView.registerCell(identifier: PlugTableViewCell.identifier)
+    }
 
+    func setupCheckBox() {
+        headService.text = "สิ่งอำนวยความสะดวกอื่นๆ"
+        headService.font = .bodyBold
+        
+        self.cbParking.isEnableCheckBox = false
+        self.cbFoodShop.isEnableCheckBox = false
+        self.cbCoffeeShop.isEnableCheckBox = false
+        self.cbToilet.isEnableCheckBox = false
+        self.cbMarket.isEnableCheckBox = false
+        self.cbSleep.isEnableCheckBox = false
+        self.cbWifi.isEnableCheckBox = false
+        self.cbOther.isEnableCheckBox = false
+        
+        self.titleParking.text = "ที่จอดรถ"
+        self.titleFoodShop.text = "ร้านอาหาร"
+        self.titleCoffeShop.text = "ร้านกาแฟ"
+        self.titleToilet.text = "ห้องน้ำ"
+        self.titleMarket.text = "ร้านค้า"
+        self.titleSleep.text = "ที่พักผ่อน"
+        self.titleWifi.text = "Wifi"
+        self.titleOther.text = "อื่นๆ"
+        
+        self.titleParking.font = .bodyText
+        self.titleParking.textColor = .darkGray
+        
+        self.titleFoodShop.font = .bodyText
+        self.titleFoodShop.textColor = .darkGray
+        
+        self.titleCoffeShop.font = .bodyText
+        self.titleCoffeShop.textColor = .darkGray
+        
+        self.titleToilet.font = .bodyText
+        self.titleToilet.textColor = .darkGray
+        
+        self.titleMarket.font = .bodyText
+        self.titleMarket.textColor = .darkGray
+        
+        self.titleSleep.font = .bodyText
+        self.titleSleep.textColor = .darkGray
+        
+        self.titleWifi.font = .bodyText
+        self.titleWifi.textColor = .darkGray
+        
+        self.titleOther.font = .bodyText
+        self.titleOther.textColor = .darkGray
+    }
 }
 
 extension DetailStationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
-//             scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.height
-//         }
-        
-        if (self.lastContentOffset > scrollView.contentOffset.y) {
-            // move up
-            debugPrint("Scroll UP")
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-           // move down
-            debugPrint("Scroll Down")
-        }
-
-        // update the new position acquired
-        self.lastContentOffset = scrollView.contentOffset.y
-        debugPrint("Position Scroll \(self.lastContentOffset)")
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -156,12 +279,18 @@ extension DetailStationViewController: HalfModalPresentable {
     public func transitionFullScreenEnd() {
         viewIndicator.isHidden = true
         scrollView.isScrollEnabled = true
+        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
+            self.bgBottomBar.alpha = 1.0
+        }, completion: nil)
         debugPrint("isScrollEnabled")
     }
 
     public func transitionHalfScreenEnd() {
         viewIndicator.isHidden = false
 //        scrollView.isScrollEnabled = false
+        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
+            self.bgBottomBar.alpha = 0.0
+        }, completion: nil)
         debugPrint("isNoScrollEnabled")
     }
 }
@@ -178,6 +307,7 @@ extension DetailStationViewController {
         return { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.setupValue()
+            weakSelf.plugTableView.reloadData()
         }
     }
     
@@ -204,12 +334,6 @@ extension DetailStationViewController {
         
         distanceValue.text = "ไม่พบพิกัดผู้ใช้งาน"
         timeValue.text = station.servicetimeOpen ?? ""
-
-        if let lat = station.lat, let lng = station.lng {
-            debugPrint("sss")
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 9.0)
-            mapView.animate(to: camera)
-        }
         
         setupMarker(item: station)
         
@@ -219,13 +343,19 @@ extension DetailStationViewController {
     }
     
     func setupMarker(item: StationData) {
-        let position = CLLocationCoordinate2D(latitude: item.lat ?? 0.0, longitude: item.lng ?? 0.0)
-        let marker = GMSMarker(position: position)
-        marker.snippet = "\(index)"
-        marker.isTappable = true
-        marker.iconView =  MarkerStationView.instantiate(station: item, index: 0)
-        marker.tracksViewChanges = true
-        marker.map = self.mapView
+        if let lat = item.lat, let lng = item.lng {
+            let position = CLLocationCoordinate2D(latitude: item.lat ?? 0.0, longitude: item.lng ?? 0.0)
+            let marker = GMSMarker(position: position)
+            marker.snippet = "\(index)"
+            marker.isTappable = true
+            marker.iconView =  MarkerStationView.instantiate(station: item, index: 0)
+            marker.tracksViewChanges = true
+            marker.map = self.mapView
+            
+            debugPrint("Station")
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 15.0)
+            self.mapView.animate(to: camera)
+        }
     }
 }
 
@@ -239,30 +369,58 @@ extension DetailStationViewController : GMSMapViewDelegate {
     }
 }
 
-//implementing extension from CLLocationManagerDelegate
-extension DetailStationViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        guard status == .authorizedWhenInUse else {
-            return
-        }
-        
-        locationManager.startUpdatingLocation()
-        
-        
+////implementing extension from CLLocationManagerDelegate
+//extension DetailStationViewController: CLLocationManagerDelegate {
+//
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        guard status == .authorizedWhenInUse else {
+//            return
+//        }
+//        locationManager.startUpdatingLocation()
+//
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//        guard let location = locations.first else {
+//            return
+//        }
+//        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7, bearing: 0, viewingAngle: 0)
+//        locationManager.stopUpdatingLocation()
+//    }
+//}
+
+extension DetailStationViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let location = locations.first else {
-            return
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView {
+        case plugTableView:
+            let count = viewModel.output.getNumberOfRowsInSection(tableView, section: section, type: .plugTableView)
+            let height = viewModel.output.getItemViewCellHeight(type: .plugTableView)
+            plugTableViewHeight.constant = (CGFloat(count)*height)
+            return count
+        default:
+            return 0
         }
-        
-        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7, bearing: 0, viewingAngle: 0)
-        
-        locationManager.stopUpdatingLocation()
-        
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView {
+        case plugTableView:
+            return viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .plugTableView)
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch tableView {
+        case plugTableView:
+            return viewModel.output.getItemViewCellHeight(type: .plugTableView)
+        default:
+            return 0
+        }
+    }
 }

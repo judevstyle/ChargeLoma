@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController {
         
         
         tabBar.tintColor = UIColor.basePrimary
-        tabBar.unselectedItemTintColor = UIColor.black
+        tabBar.unselectedItemTintColor = .darkGray
         tabBar.backgroundColor = UIColor.baseTabbarBG
         tabBar.isTranslucent = false
         tabBar.backgroundImage = UIImage()
@@ -35,7 +35,7 @@ class MainTabBarController: UITabBarController {
 
         let addLocationVC = tabBarNavigation(unselectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), title: "เพิ่มสถานี", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
         
-        let meVC = tabBarNavigation(unselectImage: UIImage(named: "user"), selectImage: UIImage(named: "user"), title: "ฉัน", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
+        let meVC = tabBarNavigation(unselectImage: UIImage(named: "user"), selectImage: UIImage(named: "user"), title: "ฉัน", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .me)
         
         viewControllers = [mapVC, goVC, foryouVC, addLocationVC, meVC]
     }

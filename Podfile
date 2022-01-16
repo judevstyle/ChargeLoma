@@ -9,6 +9,10 @@ target 'ChargeLoma' do
   pod 'GoogleMaps', '6.0.1'
   pod 'GooglePlaces'
   pod 'Toast-Swift'
+  pod 'HMSegmentedControl'
+  
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   
   # Pods for ChargeLoma
 

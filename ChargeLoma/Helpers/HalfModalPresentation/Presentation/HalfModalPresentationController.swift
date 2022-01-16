@@ -64,7 +64,6 @@ public class HalfModalPresentationController : UIPresentationController {
             if self.fristDirection == nil {
                 self.fristDirection = velocity.y
             }
-//
             if self.fristTapPosition ?? 0.0 <= HalfModalPresentationController.heightModal {
                 switch state {
                 case .normal:

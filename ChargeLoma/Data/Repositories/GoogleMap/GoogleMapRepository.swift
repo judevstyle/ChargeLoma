@@ -12,6 +12,7 @@ import Moya
 protocol GoogleMapRepository {
     func placeAutoComplete(request: GetPlaceAutoCompleteRequest) -> AnyPublisher<GetPlaceAutoCompleteResponse, Error>
     func placeDetail(request: GetPlaceDetailRequest) -> AnyPublisher<GetPlaceDetailResponse, Error>
+    func placeDirection(request: GetPlaceDirectionRequest) -> AnyPublisher<GetPlaceDirectionResponse, Error>
 }
 
 final class GoogleMapRepositoryImpl: ChargeLoma.GoogleMapRepository {
@@ -29,5 +30,12 @@ final class GoogleMapRepositoryImpl: ChargeLoma.GoogleMapRepository {
             .cb
             .request(.getPlaceDetail(request: request))
             .map(GetPlaceDetailResponse.self)
+    }
+    
+    func placeDirection(request: GetPlaceDirectionRequest) -> AnyPublisher<GetPlaceDirectionResponse, Error> {
+        return self.provider
+            .cb
+            .request(.getPlaceDirection(request: request))
+            .map(GetPlaceDirectionResponse.self)
     }
 }

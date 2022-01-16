@@ -20,24 +20,28 @@ class MarkerStationInfoView: UIView {
 
     
     func setupUI() {
-        InnerView.setShadowBoxView()
+//        InnerView.setShadowBoxView()
         InnerView.setRounded(rounded: 8)
         
         
         topView.roundedTop(radius: 8)
         bottomView.roundedBottom(radius: 8)
         
-        titleText.font = .extraSmallText
-        rateValue.font = .extraSmallText
-        rateDesc.font = .extraSmallText
+        titleText.font = .bodyText
+        rateValue.font = .bodyText
+        rateDesc.font = .bodyText
         titleText.tintColor = .white
-        rateValue.tintColor = .black
-        rateDesc.tintColor = .black
+        rateValue.tintColor = .baseTextGray
+        rateDesc.tintColor = .baseTextGray
     }
     
     func setupValue(_ item: StationData?) {
         titleText.text = item?.stationName ?? ""
-        rateValue.text = "\(item?.rating ?? 0.0)"
+        if let rating = item?.rating {
+            rateValue.text = "\(rating)"
+        } else {
+            rateValue.text = "-"
+        }
         rateDesc.text = item?.plugDesc ?? ""
     }
     

@@ -16,12 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfd-h3-dJ7">
-                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hur-5q-LNU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yO-eN-vvb">
+                                        <rect key="frame" x="0.0" y="0.0" width="344" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-rE-1ZC">
+                                        <rect key="frame" x="344" y="0.0" width="70" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="Trg-Qa-0je"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="ยกเลิก"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Kjy-GR-Hcl"/>
+                                </constraints>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5gv-xV-aal">
-                                <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellStation" id="UGo-z6-FlN">
@@ -39,15 +55,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aeS-Rm-c1a" firstAttribute="bottom" secondItem="5gv-xV-aal" secondAttribute="bottom" id="7mh-v2-tOz"/>
+                            <constraint firstItem="Hur-5q-LNU" firstAttribute="leading" secondItem="aeS-Rm-c1a" secondAttribute="leading" id="9AS-kS-DU3"/>
                             <constraint firstItem="aeS-Rm-c1a" firstAttribute="trailing" secondItem="5gv-xV-aal" secondAttribute="trailing" id="HBY-22-746"/>
                             <constraint firstItem="5gv-xV-aal" firstAttribute="leading" secondItem="aeS-Rm-c1a" secondAttribute="leading" id="LPr-r2-79O"/>
-                            <constraint firstItem="dfd-h3-dJ7" firstAttribute="top" secondItem="aeS-Rm-c1a" secondAttribute="top" id="Qje-Z1-OE7"/>
-                            <constraint firstAttribute="trailing" secondItem="dfd-h3-dJ7" secondAttribute="trailing" id="aWT-ES-nyb"/>
-                            <constraint firstItem="5gv-xV-aal" firstAttribute="top" secondItem="dfd-h3-dJ7" secondAttribute="bottom" id="llA-qv-6yR"/>
-                            <constraint firstItem="dfd-h3-dJ7" firstAttribute="leading" secondItem="aeS-Rm-c1a" secondAttribute="leading" id="u3h-of-G56"/>
+                            <constraint firstItem="aeS-Rm-c1a" firstAttribute="trailing" secondItem="Hur-5q-LNU" secondAttribute="trailing" id="Zuu-kx-i8J"/>
+                            <constraint firstItem="5gv-xV-aal" firstAttribute="top" secondItem="Hur-5q-LNU" secondAttribute="bottom" id="ad7-td-cdH"/>
+                            <constraint firstItem="Hur-5q-LNU" firstAttribute="top" secondItem="aeS-Rm-c1a" secondAttribute="top" id="xyU-X7-7Uh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeBtn" destination="Wza-rE-1ZC" id="cNc-k4-2Vf"/>
+                        <outlet property="searchBar" destination="5yO-eN-vvb" id="Xuu-zc-Unq"/>
                         <outlet property="tableView" destination="5gv-xV-aal" id="Lxj-LQ-ITq"/>
                     </connections>
                 </viewController>

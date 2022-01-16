@@ -24,12 +24,14 @@ public enum NavigationOpeningSender {
     case detailStation(_ stId: String)
     
     //SearchStation
-    case searchStation
+    case searchStation(_ delegate: SearchStationViewModelDelegate, type: TypeDirectionMap)
     
     //Profile
     case profile
     
     case mapFilter
+    
+    case preLogin
     
     public var storyboardName: String {
         switch self {
@@ -57,6 +59,8 @@ public enum NavigationOpeningSender {
             return "Profile"
         case .mapFilter:
             return "MapFilter"
+        case .preLogin:
+            return "PreLogin"
         }
     }
     
@@ -81,11 +85,13 @@ public enum NavigationOpeningSender {
         case .detailStation:
             return "DetailStationViewController"
         case .searchStation:
-            return "SearchStationTableViewController"
+            return "SearchStationViewController"
         case .profile:
             return "ProfileViewController"
         case .mapFilter:
             return "MapFilterViewController"
+        case .preLogin:
+            return "PreLoginViewController"
         }
     }
     
@@ -176,6 +182,7 @@ class NavigationManager {
         case ModelNav(completion: (() -> Void)?, isFullScreen: Bool = true)
         case presentFullScreen(completion: (() -> Void)?)
         case presentHalfModalAndFullScreen(rootVc: UIViewController, heightHalf: CGFloat, completion: (() -> Void)?)
+        case PushInTabbar
     }
     
     init() {
@@ -206,6 +213,11 @@ class NavigationManager {
                 className.viewModel.setStId(stId)
                 viewController = className
             }
+        case .searchStation(let delegate, let type):
+            if let className = storyboard.instantiateInitialViewController() as? SearchStationViewController {
+                className.viewModel.setDelegate(delegate: delegate, type: type)
+                viewController = className
+            }
         default:
             viewController = storyboard.instantiateInitialViewController() ?? to.viewController
         }
@@ -230,7 +242,14 @@ class NavigationManager {
             self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             self.navigationController.navigationBar.tintColor = .white
             self.navigationController.pushViewController(viewController, animated: animated)
+        case .PushInTabbar:
+            if (self.navigationController.tabBarController != nil) {
+                viewController.hidesBottomBarWhenPushed = false
+            }
             
+            self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            self.navigationController.navigationBar.tintColor = .white
+            self.navigationController.pushViewController(viewController, animated: animated)
         case .Root:
             let storyboard = UIStoryboard(name: to.storyboardName, bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()
@@ -253,6 +272,7 @@ class NavigationManager {
             nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
             nav.navigationBar.shadowImage = UIImage()
             nav.navigationBar.isTranslucent = true
+            nav.isNavigationBarHidden = true
             
             nav.view.backgroundColor = UIColor.black
             nav.modalPresentationStyle = .overFullScreen

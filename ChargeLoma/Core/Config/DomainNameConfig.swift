@@ -12,6 +12,7 @@ public enum DomainNameConfig {
     case providerMaster
     case station
     case googleMap
+    case information
 }
 
 extension DomainNameConfig {
@@ -30,6 +31,8 @@ extension DomainNameConfig {
             return "\(baseURL)/station"
         case .googleMap:
             return "\(googleMapURL)"
+        case .information:
+            return "\(baseURL)/information"
         }
     }
     

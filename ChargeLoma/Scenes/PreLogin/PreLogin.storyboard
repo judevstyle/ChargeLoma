@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pre Login View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="PreLoginViewController" customModule="ChargeLoma" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgn-Xz-pWb">
+                                <rect key="frame" x="8" y="354" width="398" height="198"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-C5-jn4">
+                                        <rect key="frame" x="151.5" y="0.0" width="95" height="95"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="Fwp-RF-qE6"/>
+                                            <constraint firstAttribute="width" constant="95" id="GU3-uA-gXV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBd-93-Lh4">
+                                        <rect key="frame" x="0.0" y="103" width="398" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dlz-W2-tYm">
+                                        <rect key="frame" x="136.5" y="140" width="125" height="50"/>
+                                        <color key="backgroundColor" name="basePrimary"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="93H-wC-VKV"/>
+                                            <constraint firstAttribute="width" constant="125" id="Fyy-Yi-eHs"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="เข้าสู่ระบบ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="TZa-C5-jn4" firstAttribute="top" secondItem="Qgn-Xz-pWb" secondAttribute="top" id="R7H-M5-n9o"/>
+                                    <constraint firstItem="Dlz-W2-tYm" firstAttribute="top" secondItem="XBd-93-Lh4" secondAttribute="bottom" constant="16" id="UWE-9P-aJq"/>
+                                    <constraint firstAttribute="trailing" secondItem="XBd-93-Lh4" secondAttribute="trailing" id="Zaw-Ih-iJf"/>
+                                    <constraint firstItem="XBd-93-Lh4" firstAttribute="leading" secondItem="Qgn-Xz-pWb" secondAttribute="leading" id="lgr-x5-F0W"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dlz-W2-tYm" secondAttribute="bottom" constant="8" id="rDE-z4-iwJ"/>
+                                    <constraint firstItem="Dlz-W2-tYm" firstAttribute="centerX" secondItem="Qgn-Xz-pWb" secondAttribute="centerX" id="rgm-kp-nCA"/>
+                                    <constraint firstItem="XBd-93-Lh4" firstAttribute="top" secondItem="TZa-C5-jn4" secondAttribute="bottom" constant="8" id="shj-Mz-FbJ"/>
+                                    <constraint firstItem="TZa-C5-jn4" firstAttribute="centerX" secondItem="Qgn-Xz-pWb" secondAttribute="centerX" id="uid-GY-QrF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qgn-Xz-pWb" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="0tu-Aa-vCH"/>
+                            <constraint firstItem="Qgn-Xz-pWb" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="3Pl-H7-65a"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qgn-Xz-pWb" secondAttribute="trailing" constant="8" id="6WJ-dG-YK4"/>
+                            <constraint firstItem="Qgn-Xz-pWb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="aCf-Ye-vhE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnLogin" destination="Dlz-W2-tYm" id="oXb-HT-Lc6"/>
+                        <outlet property="logoImage" destination="TZa-C5-jn4" id="oMc-hK-75d"/>
+                        <outlet property="titleText" destination="XBd-93-Lh4" id="scO-OC-Zkl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="42.028985507246382" y="42.857142857142854"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="118.5" height="163"/>
+        <namedColor name="basePrimary">
+            <color red="0.0078431372549019607" green="0.53333333333333333" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

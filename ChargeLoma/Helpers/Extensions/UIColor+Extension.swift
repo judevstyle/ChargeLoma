@@ -25,6 +25,7 @@ extension UIColor {
     static var baseIndicator = UIColor(named: "baseIndicator")!
     static var bgBadge = UIColor(named: "bgBadge")!
     static var baseTextGray = UIColor(named: "baseTextGray")!
+    static var baseSecondary = UIColor(named: "baseSecondary")!
     
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)

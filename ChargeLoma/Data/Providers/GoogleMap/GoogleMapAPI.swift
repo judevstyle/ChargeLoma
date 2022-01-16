@@ -12,12 +12,13 @@ import UIKit
 public enum GoogleMapAPI {
     case getPlaceAutoComplete(request: GetPlaceAutoCompleteRequest)
     case getPlaceDetail(request: GetPlaceDetailRequest)
+    case getPlaceDirection(request: GetPlaceDirectionRequest)
 }
 
 extension GoogleMapAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getPlaceAutoComplete, .getPlaceDetail:
+        case .getPlaceAutoComplete, .getPlaceDetail, .getPlaceDirection:
             return DomainNameConfig.googleMap.url
         }
     }
@@ -28,6 +29,8 @@ extension GoogleMapAPI: TargetType {
             return "/place/autocomplete/json"
         case .getPlaceDetail:
             return "/place/details/json"
+        case .getPlaceDirection:
+            return "/directions/json"
         }
     }
 
@@ -47,6 +50,8 @@ extension GoogleMapAPI: TargetType {
         case let .getPlaceAutoComplete(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         case let .getPlaceDetail(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .getPlaceDirection(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }

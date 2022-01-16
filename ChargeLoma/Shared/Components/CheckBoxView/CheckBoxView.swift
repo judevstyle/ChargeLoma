@@ -23,6 +23,7 @@ class CheckBoxView: UIView {
     
     public var isSelectedBtn: Bool = false
     public var index: Int = 0
+    public var isEnableCheckBox = true
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -67,34 +68,37 @@ class CheckBoxView: UIView {
     }
     
     @objc func checkMarkTapped(_ sender: UIButton) {
-        
-        
-        UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-
-        }) { (success) in
+        if isEnableCheckBox == true {
             UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
-                if !self.isSelectedBtn {
-                    self.setSelected()
-                } else {
-                    self.setUnselected()
-                }
-                self.delegate?
-                    .didSelected(view: self, isSelectedBtn: self.isSelectedBtn, index: self.index)
-                sender.transform = .identity
-            }, completion: nil)
+                sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+
+            }) { (success) in
+                UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
+                    if !self.isSelectedBtn {
+                        self.setSelected()
+                    } else {
+                        self.setUnselected()
+                    }
+                    self.delegate?
+                        .didSelected(view: self, isSelectedBtn: self.isSelectedBtn, index: self.index)
+                    sender.transform = .identity
+                }, completion: nil)
+            }
         }
     }
     
     func setSelected() {
         self.isSelectedBtn = true
-        btnCheckBox.setImage(UIImage.init(systemName: "checkmark.square.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btnCheckBox.setImage(UIImage.init(systemName: "checkmark.square.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnCheckBox.tintColor = .basePrimary
+        btnCheckBox.imageView?.contentMode = .scaleAspectFit
     }
 
     func setUnselected() {
         self.isSelectedBtn = false
-        btnCheckBox.setImage(UIImage.init(systemName: "checkmark.square")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        btnCheckBox.tintColor = .darkGray
+        btnCheckBox.setImage(UIImage.init(named: "check-box-empty")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnCheckBox.tintColor = .lightGray
+        btnCheckBox.imageView?.contentMode = .scaleAspectFit
     }
     
 }

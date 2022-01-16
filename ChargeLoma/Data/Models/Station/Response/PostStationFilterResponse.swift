@@ -43,6 +43,7 @@ public struct StationData: Codable, Hashable  {
     public var rating: Double?
     public var stationDesc: String?
     public var serviceRate: Double?
+    public var plugMapping: [PlugMapping]?
     
     public init() {}
     
@@ -66,5 +67,23 @@ public struct StationData: Codable, Hashable  {
         try rating              <- decoder["p_type_id"]
         try stationDesc         <- decoder["station_desc"]
         try serviceRate         <- decoder["service_rate"]
+        try plugMapping         <- decoder["PlugMapping"]
+    }
+}
+
+public struct PlugMapping: Codable, Hashable  {
+    
+    public var pMappingId: Int?
+    public var qty: Int?
+    public var power: String?
+    public var plugTypeMaster: PlugTypeData?
+    
+    public init() {}
+    
+    public init(from decoder: Decoder) throws {
+        try pMappingId    <- decoder["p_mapping_id"]
+        try qty             <- decoder["qty"]
+        try power           <- decoder["power"]
+        try plugTypeMaster  <- decoder["PlugTypeMaster"]
     }
 }
