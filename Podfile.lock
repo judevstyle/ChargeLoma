@@ -380,6 +380,7 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
+  - FittedSheets (2.4.2)
   - GoogleDataTransport (9.1.2):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
@@ -447,6 +448,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
+  - FittedSheets
   - GoogleMaps (= 6.0.1)
   - GooglePlaces
   - HMSegmentedControl
@@ -463,6 +465,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFirestore
+    - FittedSheets
     - GoogleDataTransport
     - GoogleMaps
     - GooglePlaces
@@ -486,6 +489,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 04186597c095da37d90ff9fd3e53bc61a1ff2440
   FirebaseCoreDiagnostics: 56fb7216d87e0e6ec2feddefa9d8a392fe8b2c18
   FirebaseFirestore: 0e7321a508cc9de54316ec45400caba6b5719beb
+  FittedSheets: 661408776eb4ff514a31da75b3600bd7222b2b3d
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleMaps: c213fc2334b7374144cede914da779b99be0ab74
   GooglePlaces: c57cd5aa7e91d10fa5106c792de74f3bd6436260
@@ -500,6 +504,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 79b4dd5e79487c370a3dc50551ce0063259e7298
+PODFILE CHECKSUM: 940a37eb5623a2cdf99def81cb97040b5e8758f5
 
 COCOAPODS: 1.11.2

@@ -55,6 +55,6 @@
     </objects>
     <resources>
         <image name="marker_green" width="38" height="57"/>
-        <image name="user" width="21" height="21"/>
+        <image name="user" width="40" height="40"/>
     </resources>
 </document>

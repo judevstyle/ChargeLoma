@@ -13,6 +13,7 @@ target 'ChargeLoma' do
   
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'FittedSheets'
   
   # Pods for ChargeLoma
 

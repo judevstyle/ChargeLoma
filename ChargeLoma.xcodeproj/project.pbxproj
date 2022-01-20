@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AB2D7ABF4CF3B4928FA4F233 /* Pods_ChargeLoma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */; };
+		EF0CE1C5279847850072C156 /* StationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF0CE1C4279847850072C156 /* StationDetail.storyboard */; };
+		EF0CE1C72798478E0072C156 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CE1C62798478E0072C156 /* StationDetailViewController.swift */; };
+		EF0CE1CA27985CE50072C156 /* StationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CE1C927985CE50072C156 /* StationDetailViewModel.swift */; };
 		EF0EE90C27849F1F00FC148D /* MarkerStationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EE90B27849F1F00FC148D /* MarkerStationInfoView.swift */; };
 		EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF0EE90D27849F2700FC148D /* MarkerStationInfoView.xib */; };
 		EF0EE9102784A80E00FC148D /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0EE90F2784A80E00FC148D /* UIImageView+Kingfisher.swift */; };
@@ -60,10 +63,6 @@
 		EF3ACB95277C69980096BF95 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ACB94277C69980096BF95 /* MeViewController.swift */; };
 		EF3ACB97277C699E0096BF95 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3ACB96277C699E0096BF95 /* Me.storyboard */; };
 		EF63C1A527848547000664EA /* StationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63C1A427848547000664EA /* StationRepository.swift */; };
-		EF6CC9B8278C8DF000C2974B /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6CC9B7278C8DF000C2974B /* HalfModalPresentationController.swift */; };
-		EF6CC9BA278C8E0500C2974B /* HalfModalTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6CC9B9278C8E0500C2974B /* HalfModalTransitioningDelegate.swift */; };
-		EF6CC9BC278C8E1800C2974B /* HalfModalInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6CC9BB278C8E1800C2974B /* HalfModalInteractiveTransition.swift */; };
-		EF6CC9BE278C8E2A00C2974B /* HalfModalTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6CC9BD278C8E2A00C2974B /* HalfModalTransitionAnimator.swift */; };
 		EF75C29227889D88004FEC64 /* SearchStation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF75C29127889D88004FEC64 /* SearchStation.storyboard */; };
 		EF75C2982788A361004FEC64 /* SearchStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2972788A361004FEC64 /* SearchStationViewController.swift */; };
 		EF75C29A2788A7DC004FEC64 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75C2992788A7DC004FEC64 /* UINavigationBar+Extension.swift */; };
@@ -147,6 +146,8 @@
 		EFC454B0278B3F2A00BFC608 /* FilterItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC454AE278B3F2A00BFC608 /* FilterItemCollectionViewCell.xib */; };
 		EFC454B2278B420100BFC608 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC454B1278B420100BFC608 /* UICollectionView+Extension.swift */; };
 		EFC454B5278B4AC900BFC608 /* MapFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC454B4278B4AC900BFC608 /* MapFilterViewModel.swift */; };
+		EFCA077D27948B73004DC4F2 /* MarkerDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA077C27948B73004DC4F2 /* MarkerDirectionView.swift */; };
+		EFCA077F27948B79004DC4F2 /* MarkerDirectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCA077E27948B79004DC4F2 /* MarkerDirectionView.xib */; };
 		EFD831F4278AECF100FDEAC5 /* MapFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD831F3278AECF100FDEAC5 /* MapFilter.storyboard */; };
 		EFD831F6278AED1B00FDEAC5 /* MapFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831F5278AED1B00FDEAC5 /* MapFilterViewController.swift */; };
 		EFD831F8278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831F7278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift */; };
@@ -159,6 +160,9 @@
 		24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChargeLoma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.release.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.release.xcconfig"; sourceTree = "<group>"; };
 		B6A3D28E1A1FF4A17CF91189 /* Pods-ChargeLoma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.debug.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.debug.xcconfig"; sourceTree = "<group>"; };
+		EF0CE1C4279847850072C156 /* StationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StationDetail.storyboard; sourceTree = "<group>"; };
+		EF0CE1C62798478E0072C156 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		EF0CE1C927985CE50072C156 /* StationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewModel.swift; sourceTree = "<group>"; };
 		EF0EE90B27849F1F00FC148D /* MarkerStationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStationInfoView.swift; sourceTree = "<group>"; };
 		EF0EE90D27849F2700FC148D /* MarkerStationInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerStationInfoView.xib; sourceTree = "<group>"; };
 		EF0EE90F2784A80E00FC148D /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
@@ -210,10 +214,6 @@
 		EF3ACB94277C69980096BF95 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		EF3ACB96277C699E0096BF95 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		EF63C1A427848547000664EA /* StationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRepository.swift; sourceTree = "<group>"; };
-		EF6CC9B7278C8DF000C2974B /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
-		EF6CC9B9278C8E0500C2974B /* HalfModalTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitioningDelegate.swift; sourceTree = "<group>"; };
-		EF6CC9BB278C8E1800C2974B /* HalfModalInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalInteractiveTransition.swift; sourceTree = "<group>"; };
-		EF6CC9BD278C8E2A00C2974B /* HalfModalTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitionAnimator.swift; sourceTree = "<group>"; };
 		EF75C29127889D88004FEC64 /* SearchStation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStation.storyboard; sourceTree = "<group>"; };
 		EF75C2972788A361004FEC64 /* SearchStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStationViewController.swift; sourceTree = "<group>"; };
 		EF75C2992788A7DC004FEC64 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
@@ -297,6 +297,8 @@
 		EFC454AE278B3F2A00BFC608 /* FilterItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		EFC454B1278B420100BFC608 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		EFC454B4278B4AC900BFC608 /* MapFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewModel.swift; sourceTree = "<group>"; };
+		EFCA077C27948B73004DC4F2 /* MarkerDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDirectionView.swift; sourceTree = "<group>"; };
+		EFCA077E27948B79004DC4F2 /* MarkerDirectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerDirectionView.xib; sourceTree = "<group>"; };
 		EFD831F3278AECF100FDEAC5 /* MapFilter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapFilter.storyboard; sourceTree = "<group>"; };
 		EFD831F5278AED1B00FDEAC5 /* MapFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewController.swift; sourceTree = "<group>"; };
 		EFD831F7278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlugTypeCategoryResponse.swift; sourceTree = "<group>"; };
@@ -327,6 +329,24 @@
 				83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EF0CE1C3279847720072C156 /* StationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EF0CE1C827985CD40072C156 /* ViewModel */,
+				EF0CE1C4279847850072C156 /* StationDetail.storyboard */,
+				EF0CE1C62798478E0072C156 /* StationDetailViewController.swift */,
+			);
+			path = StationDetail;
+			sourceTree = "<group>";
+		};
+		EF0CE1C827985CD40072C156 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF0CE1C927985CE50072C156 /* StationDetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EF0EE90A27849F0E00FC148D /* MarkerStationInfoView */ = {
@@ -396,6 +416,7 @@
 		EF3ACB0B277C57CB0096BF95 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EF0CE1C3279847720072C156 /* StationDetail */,
 				EFA0EADF2793C28C002B258D /* GalleryPhoto */,
 				EFA36EC4279323DA00BF2E51 /* PreLogin */,
 				EF1C9A05278B6F2F0034643D /* DetailStation */,
@@ -469,7 +490,6 @@
 		EF3ACB53277C5D550096BF95 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EF6CC9B4278C8DD600C2974B /* HalfModalPresentation */,
 				EF3ACB61277C60DC0096BF95 /* KeyboardListener.swift */,
 				EF3ACB54277C5D600096BF95 /* Extensions */,
 			);
@@ -609,33 +629,6 @@
 				EF63C1A427848547000664EA /* StationRepository.swift */,
 			);
 			path = Station;
-			sourceTree = "<group>";
-		};
-		EF6CC9B4278C8DD600C2974B /* HalfModalPresentation */ = {
-			isa = PBXGroup;
-			children = (
-				EF6CC9B6278C8DE500C2974B /* Transitioning */,
-				EF6CC9B5278C8DDD00C2974B /* Presentation */,
-			);
-			path = HalfModalPresentation;
-			sourceTree = "<group>";
-		};
-		EF6CC9B5278C8DDD00C2974B /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				EF6CC9B7278C8DF000C2974B /* HalfModalPresentationController.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		EF6CC9B6278C8DE500C2974B /* Transitioning */ = {
-			isa = PBXGroup;
-			children = (
-				EF6CC9B9278C8E0500C2974B /* HalfModalTransitioningDelegate.swift */,
-				EF6CC9BB278C8E1800C2974B /* HalfModalInteractiveTransition.swift */,
-				EF6CC9BD278C8E2A00C2974B /* HalfModalTransitionAnimator.swift */,
-			);
-			path = Transitioning;
 			sourceTree = "<group>";
 		};
 		EF75C29027889D7B004FEC64 /* SearchStation */ = {
@@ -943,6 +936,7 @@
 		EF82354A277DA58B00379B38 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA077B27948B61004DC4F2 /* MarkerDirectionView */,
 				EFD831FB278B2B4200FDEAC5 /* CheckBoxView */,
 				EF0EE90A27849F0E00FC148D /* MarkerStationInfoView */,
 				EF82354B277DA59500379B38 /* MarkerStationView */,
@@ -978,6 +972,7 @@
 		EFA0EADF2793C28C002B258D /* GalleryPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA077527946896004DC4F2 /* ViewModel */,
 				EFA0EAE02793C35D002B258D /* GalleryPhoto.storyboard */,
 				EFA0EAE22793C36A002B258D /* GalleryPhotoViewController.swift */,
 			);
@@ -1150,6 +1145,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		EFCA077527946896004DC4F2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EFCA077B27948B61004DC4F2 /* MarkerDirectionView */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA077C27948B73004DC4F2 /* MarkerDirectionView.swift */,
+				EFCA077E27948B79004DC4F2 /* MarkerDirectionView.xib */,
+			);
+			path = MarkerDirectionView;
+			sourceTree = "<group>";
+		};
 		EFD831F2278AECE000FDEAC5 /* MapFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1263,7 @@
 				EF3ACB48277C59CA0096BF95 /* Kanit-Medium.ttf in Resources */,
 				EF3ACB4B277C59CA0096BF95 /* Kanit-SemiBold.ttf in Resources */,
 				EF75C29227889D88004FEC64 /* SearchStation.storyboard in Resources */,
+				EF0CE1C5279847850072C156 /* StationDetail.storyboard in Resources */,
 				EF3ACB04277C57A80096BF95 /* LaunchScreen.storyboard in Resources */,
 				EF3ACB7C277C67510096BF95 /* Main.storyboard in Resources */,
 				EF3ACB49277C59CA0096BF95 /* Kanit-Light.ttf in Resources */,
@@ -1280,6 +1292,7 @@
 				EF3ACB0E277C57F30096BF95 /* Splash.storyboard in Resources */,
 				EF3ACB83277C68E50096BF95 /* Map.storyboard in Resources */,
 				EFD831F4278AECF100FDEAC5 /* MapFilter.storyboard in Resources */,
+				EFCA077F27948B79004DC4F2 /* MarkerDirectionView.xib in Resources */,
 				EFA36E9C27930B4500BF2E51 /* ForYouLastedCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1366,7 +1379,6 @@
 				EFC454B5278B4AC900BFC608 /* MapFilterViewModel.swift in Sources */,
 				EF3ACB81277C68DF0096BF95 /* MapViewController.swift in Sources */,
 				EF7F08DD278F357F00FE4E9C /* GetPlaceAutoCompleteResponse.swift in Sources */,
-				EF6CC9BC278C8E1800C2974B /* HalfModalInteractiveTransition.swift in Sources */,
 				EF9AF8E22791497A0051B616 /* SearchStationViewModel.swift in Sources */,
 				EF823513277D791700379B38 /* MoyaProvider+Combine.swift in Sources */,
 				EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */,
@@ -1378,6 +1390,7 @@
 				EFA0EAE32793C36A002B258D /* GalleryPhotoViewController.swift in Sources */,
 				EF3ACB77277C644E0096BF95 /* ConfigBundle.swift in Sources */,
 				EF823510277D78F900379B38 /* Decodable+Extension.swift in Sources */,
+				EFCA077D27948B73004DC4F2 /* MarkerDirectionView.swift in Sources */,
 				EF3ACAF5277C57A60096BF95 /* AppDelegate.swift in Sources */,
 				EF8234FA277D74E400379B38 /* ProviderMasterAPI.swift in Sources */,
 				EF3ACB8B277C69470096BF95 /* ForYouViewController.swift in Sources */,
@@ -1409,9 +1422,9 @@
 				EF82353F277D975600379B38 /* PostStationFilterResponse.swift in Sources */,
 				EF8234FD277D74F400379B38 /* PlugTypeMasterAPI.swift in Sources */,
 				EF823519277D798700379B38 /* GetProviderMasterResponse.swift in Sources */,
+				EF0CE1C72798478E0072C156 /* StationDetailViewController.swift in Sources */,
 				EF3ACB92277C697C0096BF95 /* AddLocationViewController.swift in Sources */,
 				EF75C2AB2788C4D7004FEC64 /* UIButton+Extension.swift in Sources */,
-				EF6CC9BA278C8E0500C2974B /* HalfModalTransitioningDelegate.swift in Sources */,
 				EF75C29A2788A7DC004FEC64 /* UINavigationBar+Extension.swift in Sources */,
 				EF7F08E3278F387F00FE4E9C /* GetPlaceAutoCompleteUseCase.swift in Sources */,
 				EF3ACB6E277C62B30096BF95 /* AsyncHelper.swift in Sources */,
@@ -1439,7 +1452,6 @@
 				EFA36EBD279311FE00BF2E51 /* GetInformationFindAllUseCase.swift in Sources */,
 				EFA36EB52793103500BF2E51 /* GetInformationFindAllRequest.swift in Sources */,
 				EF3ACB58277C5D850096BF95 /* UIColor+Extension.swift in Sources */,
-				EF6CC9B8278C8DF000C2974B /* HalfModalPresentationController.swift in Sources */,
 				EF9AF8DB279145E80051B616 /* GetPlaceDirectionRequest.swift in Sources */,
 				EF0EE90C27849F1F00FC148D /* MarkerStationInfoView.swift in Sources */,
 				EFA36EA627930BFB00BF2E51 /* ContentTableViewCell.swift in Sources */,
@@ -1452,8 +1464,8 @@
 				EF82352A277D7F1300379B38 /* GetFindAllPlugTypeMasterUseCase.swift in Sources */,
 				EFA36EB8279310C100BF2E51 /* InformationRepository.swift in Sources */,
 				EF0EE9102784A80E00FC148D /* UIImageView+Kingfisher.swift in Sources */,
+				EF0CE1CA27985CE50072C156 /* StationDetailViewModel.swift in Sources */,
 				EF75C2A02788AA66004FEC64 /* ProfileViewController.swift in Sources */,
-				EF6CC9BE278C8E2A00C2974B /* HalfModalTransitionAnimator.swift in Sources */,
 				EF75C2AD2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift in Sources */,
 				EF82351E277D7CFE00379B38 /* GetPlugTypeMasterResponse.swift in Sources */,
 				EFA36EC6279323F100BF2E51 /* PreLoginViewController.swift in Sources */,

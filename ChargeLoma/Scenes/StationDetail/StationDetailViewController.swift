@@ -1,20 +1,19 @@
 //
-//  DetailStationViewController.swift
+//  StationDetailViewController.swift
 //  ChargeLoma
 //
-//  Created by Nontawat Kanboon on 10/1/2565 BE.
+//  Created by Nontawat Kanboon on 19/1/2565 BE.
 //
 
 import UIKit
+import FittedSheets
 import GoogleMaps
 import GooglePlaces
-import FittedSheets
 
-class DetailStationViewController: UIViewController {
-
-    @IBOutlet weak var scrollView: UIScrollView!
+class StationDetailViewController: UIViewController {
     
-    @IBOutlet weak var viewIndicator: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var imagePosterView: UIImageView!
     @IBOutlet weak var titleBadgeCount: UILabel!
     @IBOutlet weak var viewBadgeCount: UIView!
@@ -88,20 +87,19 @@ class DetailStationViewController: UIViewController {
     
     @IBOutlet weak var btnWriteReview: UIButton!
     
-    lazy var viewModel: DetailStationProtocol = {
-        let vm = DetailStationViewModel(vc: self)
+    lazy var viewModel: StationDetailProtocol = {
+        let vm = StationDetailViewModel(vc: self)
         self.configure(vm)
         self.bindToViewModel()
         return vm
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.input.getDetailStation()
+        viewModel.input.getStationDetail()
     }
     
-    func configure(_ interface: DetailStationProtocol) {
+    func configure(_ interface: StationDetailProtocol) {
         self.viewModel = interface
     }
     
@@ -110,10 +108,11 @@ class DetailStationViewController: UIViewController {
         setupMap()
         setupTableView()
         setupCheckBox()
+        self.sheetViewController?.handleScrollView(self.scrollView)
     }
     
     private func setupUI() {
-        self.scrollView.delegate = self
+        self.sheetViewController?.handleScrollView(self.scrollView)
         self.automaticallyAdjustsScrollViewInsets = false;
         self.scrollView.contentInset = .zero
         self.scrollView.scrollIndicatorInsets = .zero
@@ -121,12 +120,6 @@ class DetailStationViewController: UIViewController {
         self.scrollView.contentInsetAdjustmentBehavior = .never
         self.scrollView.insetsLayoutMarginsFromSafeArea = true
         self.scrollView.verticalScrollIndicatorInsets = .zero
-        
-        self.view.roundedTop(radius: 20)
-        self.view.layer.shadowColor = UIColor.lightGray.cgColor
-        self.view.layer.shadowOffset = .zero
-        self.view.layer.shadowRadius = 20
-        self.view.layer.shadowOpacity = 0.2
         
         let tapImageSeeAll = UITapGestureRecognizer(target: self, action: #selector(self.handleTapSeeAllGalleryPhoto(_:)))
         self.viewBadgeCount.addGestureRecognizer(tapImageSeeAll)
@@ -162,9 +155,8 @@ class DetailStationViewController: UIViewController {
         self.btnEdit.backgroundColor = .white
         self.btnEdit.setTitle("แก้ไขข้อมูล", for: .normal)
         
-        imagePosterView.roundedTop(radius: 20)
+        imagePosterView.roundedTop(radius: 12)
         imagePosterView.layer.masksToBounds = true
-        viewIndicator.setRounded(rounded: 5)
         
         viewBadgeCount.setRounded(rounded: 4)
         titleBadgeCount.font = .biggerTinyBold
@@ -190,7 +182,7 @@ class DetailStationViewController: UIViewController {
         headPlug.text = "หัวจ่าย"
         serviceCharge.text = "ค่าบริการ \(0.0) บาท"
         
-        self.bgBottomBar.alpha = 0.0
+        self.bgBottomBar.alpha = 1.0
         
         self.btnWriteReview.backgroundColor = .basePrimary
         self.btnWriteReview.titleLabel?.textColor = .white
@@ -209,7 +201,6 @@ class DetailStationViewController: UIViewController {
         mapView.delegate = self
         self.viewMap.addSubview(mapView)
         mapView.isUserInteractionEnabled = false
-
     }
     
     func setupTableView() {
@@ -270,33 +261,13 @@ class DetailStationViewController: UIViewController {
     @objc func handleTapSeeAllGalleryPhoto(_ sender: UITapGestureRecognizer? = nil) {
         debugPrint("handleTapSeeAllGalleryPhoto")
 //        NavigationManager.instance.pushVC(to: .galleryPhoto, presentation: .ModelNav(completion: nil, isFullScreen: true))
-        self.present(GalleryPhotoViewController(), animated: true, completion: nil)
     }
-    
+
 }
 
-//extension DetailStationViewController: HalfModalPresentable {
-//    public func transitionFullScreenEnd() {
-//        viewIndicator.isHidden = true
-//        scrollView.isScrollEnabled = true
-//        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
-//            self.bgBottomBar.alpha = 1.0
-//        }, completion: nil)
-//        debugPrint("isScrollEnabled")
-//    }
-//
-//    public func transitionHalfScreenEnd() {
-//        viewIndicator.isHidden = false
-////        scrollView.isScrollEnabled = false
-//        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
-//            self.bgBottomBar.alpha = 0.0
-//        }, completion: nil)
-//        debugPrint("isNoScrollEnabled")
-//    }
-//}
 
 // MARK: - Binding
-extension DetailStationViewController {
+extension StationDetailViewController {
     
     func bindToViewModel() {
         viewModel.output.didGetStationSuccess = didGetStationSuccess()
@@ -351,15 +322,13 @@ extension DetailStationViewController {
             marker.iconView =  MarkerStationView.instantiate(station: item, index: 0)
             marker.tracksViewChanges = true
             marker.map = self.mapView
-            
-            debugPrint("Station")
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 15.0)
             self.mapView.animate(to: camera)
         }
     }
 }
 
-extension DetailStationViewController : GMSMapViewDelegate {
+extension StationDetailViewController : GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         return true
     }
@@ -369,28 +338,7 @@ extension DetailStationViewController : GMSMapViewDelegate {
     }
 }
 
-////implementing extension from CLLocationManagerDelegate
-//extension DetailStationViewController: CLLocationManagerDelegate {
-//
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        guard status == .authorizedWhenInUse else {
-//            return
-//        }
-//        locationManager.startUpdatingLocation()
-//
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        guard let location = locations.first else {
-//            return
-//        }
-//        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7, bearing: 0, viewingAngle: 0)
-//        locationManager.stopUpdatingLocation()
-//    }
-//}
-
-extension DetailStationViewController: UITableViewDelegate, UITableViewDataSource {
+extension StationDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     

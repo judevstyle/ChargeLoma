@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FittedSheets
 
 public enum NavigationOpeningSender {
     case splash
@@ -21,7 +22,7 @@ public enum NavigationOpeningSender {
     case me
     
     //Detail
-    case detailStation(_ stId: String)
+    case stationDetail(_ stId: String)
     
     //SearchStation
     case searchStation(_ delegate: SearchStationViewModelDelegate, type: TypeDirectionMap)
@@ -32,6 +33,8 @@ public enum NavigationOpeningSender {
     case mapFilter
     
     case preLogin
+    
+    case galleryPhoto
     
     public var storyboardName: String {
         switch self {
@@ -51,8 +54,6 @@ public enum NavigationOpeningSender {
             return "ForYou"
         case .me:
             return "Me"
-        case .detailStation:
-            return "DetailStation"
         case .searchStation:
             return "SearchStation"
         case .profile:
@@ -61,6 +62,10 @@ public enum NavigationOpeningSender {
             return "MapFilter"
         case .preLogin:
             return "PreLogin"
+        case .galleryPhoto:
+            return "GalleryPhoto"
+        case .stationDetail:
+            return "StationDetail"
         }
     }
     
@@ -82,8 +87,6 @@ public enum NavigationOpeningSender {
             return "ForYouViewController"
         case .me:
             return "MeViewController"
-        case .detailStation:
-            return "DetailStationViewController"
         case .searchStation:
             return "SearchStationViewController"
         case .profile:
@@ -92,6 +95,10 @@ public enum NavigationOpeningSender {
             return "MapFilterViewController"
         case .preLogin:
             return "PreLoginViewController"
+        case .galleryPhoto:
+            return "GalleryPhotoViewController"
+        case .stationDetail:
+            return "StationDetailViewController"
         }
     }
     
@@ -110,6 +117,8 @@ public enum NavigationOpeningSender {
             return "เส้นทาง"
         case .foryou:
             return "สำหรับคุณ"
+        case .galleryPhoto:
+            return "รูปภาพ"
         default:
             return ""
         }
@@ -208,8 +217,8 @@ class NavigationManager {
 //                className.viewModel.input.setDelegate(delegate: delegate)
 //                viewController = className
 //            }
-        case .detailStation(let stId):
-            if let className = storyboard.instantiateInitialViewController() as? DetailStationViewController {
+        case .stationDetail(let stId):
+            if let className = storyboard.instantiateInitialViewController() as? StationDetailViewController {
                 className.viewModel.setStId(stId)
                 viewController = className
             }
@@ -281,12 +290,22 @@ class NavigationManager {
             self.navigationController.present(nav, animated: true, completion: completion)
         case .presentHalfModalAndFullScreen(let rootVC, let heightHalf, let completion):
 
-            var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
-            halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: rootVC, presentingViewController: viewController)
-            viewController.modalPresentationStyle = .custom
-            viewController.transitioningDelegate = halfModalTransitioningDelegate
-            HalfModalPresentationController.heightModal = heightHalf
-            self.navigationController.present(viewController, animated: true, completion: completion)
+//            var nav = self.getNavigationController(vc: viewController)
+//            var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
+//            halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: rootVC, presentingViewController: nav)
+//            nav.modalPresentationStyle = .custom
+//            HalfModalPresentationController.heightModal = heightHalf
+//            self.navigationController.present(nav, animated: true, completion: completion)
+            
+            let nav = self.getNavigationController(vc: viewController)
+            
+            let options: SheetOptions = SheetOptions(pullBarHeight: 24, useInlineMode: nil)
+            let sheet = SheetViewController(
+                controller: viewController,
+                sizes: [.fixed(heightHalf), .fullscreen],
+                options: options)
+    
+            self.navigationController.present(sheet, animated: true, completion: completion)
             
         case .Present(let withNav, let modalTransitionStyle, let modalPresentationStyle):
             if (self.navigationController.tabBarController != nil) {
@@ -350,30 +369,30 @@ class NavigationManager {
         
         let nav: UINavigationController = UINavigationController(rootViewController: vc)
         
-//        if #available(iOS 15.0, *) {
-//            let appearance = UINavigationBarAppearance()
-//            appearance.configureWithTransparentBackground()
-//            
-//            appearance.backgroundColor = .clear
-//            appearance.shadowColor = .clear
-//            appearance.shadowImage = UIImage()
-//            appearance.backgroundImage = UIImage()
-//            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h2Text, NSAttributedString.Key.foregroundColor: UIColor.white]
-//            
-//            nav.navigationBar.scrollEdgeAppearance = appearance
-//            nav.navigationBar.standardAppearance = appearance
-//            nav.navigationBar.compactAppearance = appearance
-//        } else {
-//            
-//            nav.navigationBar.barTintColor = UIColor.basePrimary
-//            nav.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.bottom, barMetrics: .default)
-//            nav.navigationBar.shadowImage = UIImage()
-//            nav.navigationBar.isTranslucent = true
-//            nav.navigationBar.isHidden = true
-//            nav.navigationBar.barStyle = .black
-//            nav.navigationBar.tintColor = .white
-//            nav.navigationBar.layoutIfNeeded()
-//        }
+        if #available(iOS 15.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            
+            appearance.backgroundColor = .clear
+            appearance.shadowColor = .clear
+            appearance.shadowImage = UIImage()
+            appearance.backgroundImage = UIImage()
+            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h2Text, NSAttributedString.Key.foregroundColor: UIColor.white]
+            
+            nav.navigationBar.scrollEdgeAppearance = appearance
+            nav.navigationBar.standardAppearance = appearance
+            nav.navigationBar.compactAppearance = appearance
+        } else {
+            
+            nav.navigationBar.barTintColor = UIColor.basePrimary
+            nav.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.bottom, barMetrics: .default)
+            nav.navigationBar.shadowImage = UIImage()
+            nav.navigationBar.isTranslucent = true
+            nav.navigationBar.isHidden = true
+            nav.navigationBar.barStyle = .black
+            nav.navigationBar.tintColor = .white
+            nav.navigationBar.layoutIfNeeded()
+        }
         
 
         return nav

@@ -221,9 +221,10 @@ extension MapViewController : GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
-        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: {
-            
-        }))
+        
+//        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
+        
+        NavigationManager.instance.pushVC(to: .stationDetail(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
     }
     
 }

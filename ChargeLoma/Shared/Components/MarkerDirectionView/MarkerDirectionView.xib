@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="kEX-Gb-tdJ" customClass="MarkerDirectionView" customModule="ChargeLoma" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEF-jd-5FH">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-marker" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-9U-IVk">
+                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Qrx-9U-IVk" firstAttribute="leading" secondItem="MEF-jd-5FH" secondAttribute="leading" id="T4q-mG-4st"/>
+                        <constraint firstAttribute="trailing" secondItem="Qrx-9U-IVk" secondAttribute="trailing" id="bQY-ap-19o"/>
+                        <constraint firstItem="Qrx-9U-IVk" firstAttribute="top" secondItem="MEF-jd-5FH" secondAttribute="top" id="kh4-hq-fAa"/>
+                        <constraint firstAttribute="bottom" secondItem="Qrx-9U-IVk" secondAttribute="bottom" id="vbd-8c-Or5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="l8a-N0-UZH"/>
+            <constraints>
+                <constraint firstItem="MEF-jd-5FH" firstAttribute="top" secondItem="kEX-Gb-tdJ" secondAttribute="top" id="6Vx-XW-X1x"/>
+                <constraint firstAttribute="bottom" secondItem="MEF-jd-5FH" secondAttribute="bottom" id="mnw-7i-5Qj"/>
+                <constraint firstItem="MEF-jd-5FH" firstAttribute="leading" secondItem="kEX-Gb-tdJ" secondAttribute="leading" id="tQd-c0-Ej0"/>
+                <constraint firstAttribute="trailing" secondItem="MEF-jd-5FH" secondAttribute="trailing" id="uDN-aR-yXQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="InnerView" destination="MEF-jd-5FH" id="VnW-2N-3IP"/>
+                <outlet property="bgImage" destination="Qrx-9U-IVk" id="5bH-zg-LPD"/>
+            </connections>
+            <point key="canvasLocation" x="131.15942028985509" y="33.816964285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pin-marker" width="33" height="33"/>
+    </resources>
+</document>

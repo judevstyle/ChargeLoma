@@ -32,6 +32,8 @@ class GoViewController: UIViewController {
     var sourceLocation: CLLocationCoordinate2D? = nil
     var destinationLocation: CLLocationCoordinate2D? = nil
     
+    var oldPolyLines = [GMSPolyline]()
+    
     lazy var viewModel: GoProtocol = {
         let vm = GoViewModel(vc: self)
         self.configure(vm)
@@ -152,29 +154,43 @@ extension GoViewController {
     }
     
     func renderPolylineMap() {
+        
+        //clear Old
+        if self.oldPolyLines.count > 0 {
+            for polyline in self.oldPolyLines {
+                polyline.map = nil
+            }
+        }
+        
+        self.oldPolyLines.removeAll()
+        
         let routes = viewModel.output.getListRoute()
         for route in routes {
             let path = GMSPath.init(fromEncodedPath: route.points ?? "")
             let polyline = GMSPolyline.init(path: path)
             polyline.strokeColor = .basePrimary
             polyline.strokeWidth = 5
+            self.oldPolyLines.append(polyline)
             polyline.map = self.mapView
         }
+        
+        
+        
         moveToDirection()
     }
     
     func moveToDirection() {
         guard let sourceLocation = self.sourceLocation, let destinationLocation = self.destinationLocation else { return }
-        
-        let minLatitude: Double = sourceLocation.latitude > destinationLocation.latitude ? destinationLocation.latitude : sourceLocation.latitude
-        let maxLatitude: Double = sourceLocation.latitude < destinationLocation.latitude ? destinationLocation.latitude : sourceLocation.latitude
-        let minLongitude: Double = sourceLocation.longitude > destinationLocation.longitude ? destinationLocation.longitude : sourceLocation.longitude
-        let maxLongitude: Double = sourceLocation.longitude < destinationLocation.longitude ? destinationLocation.longitude : sourceLocation.longitude
+    
+        var bounds = GMSCoordinateBounds()
+        bounds = bounds.includingCoordinate(sourceLocation)
+        bounds = bounds.includingCoordinate(destinationLocation)
+        let camUpdate = GMSCameraUpdate.fit(bounds, withPadding: 60)
 
-        let location = CLLocationCoordinate2D(latitude: (maxLatitude + minLatitude) * 0.5, longitude: (maxLongitude + minLongitude) * 0.5)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: sourceLocation.latitude, longitude: sourceLocation.longitude, zoom: 18)
+
+        self.mapView.animate(with: camUpdate)
         
-        let camera = GMSCameraPosition(target: location, zoom: 15, bearing: 0, viewingAngle: 0)
-        self.mapView.animate(to: camera)
     }
 }
 
@@ -197,7 +213,7 @@ extension GoViewController : GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
-        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 350, completion: {
+        NavigationManager.instance.pushVC(to: .stationDetail(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: {
             
         }))
     }
@@ -239,6 +255,44 @@ extension GoViewController: SearchStationViewModelDelegate {
     }
 
     func checkLocationMap() {
+        
+        var listDirectionMarkers: [GMSMarker] = []
+        let baseMarkers = viewModel.output.getListStation()
+        
+        debugPrint(baseMarkers.count)
+        debugPrint(listStationMarker.count)
+        if baseMarkers.count < self.listStationMarker.count {
+            let k = (self.listStationMarker.count - baseMarkers.count) - 1
+            for i in 0...k {
+                self.listStationMarker[(self.listStationMarker.count - 1) - i].map = nil
+                self.listStationMarker.remove(at: (self.listStationMarker.count - 1) - i)
+            }
+        }
+        
+        self.listStationMarker.enumerated().forEach({ (index, item) in
+            item.map = self.mapView
+        })
+        
+        if let sourceLocation = self.sourceLocation {
+            let marker = GMSMarker(position: sourceLocation)
+            marker.isTappable = false
+            marker.iconView =  MarkerDirectionView.instantiate()
+            marker.tracksViewChanges = true
+            listStationMarker.append(marker)
+        }
+        
+        if let destinationLocation = self.destinationLocation {
+            let marker = GMSMarker(position: destinationLocation)
+            marker.isTappable = false
+            marker.iconView =  MarkerDirectionView.instantiate()
+            marker.tracksViewChanges = true
+            listStationMarker.append(marker)
+        }
+        
+        self.listStationMarker.enumerated().forEach({ (index, item) in
+            item.map = self.mapView
+        })
+        
         guard let sourceLocation = self.sourceLocation, let destinationLocation = self.destinationLocation else { return }
         viewModel.input.getDirection(sourceLocation: sourceLocation, destinationLocation: destinationLocation)
         
