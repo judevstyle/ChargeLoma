@@ -12,14 +12,13 @@ import UIKit
 public enum StationAPI {
     case stationFilter(request: PostStationFilterRequest)
     case findOne(request: GetStationFindOneRequest)
+    case imageStation(request: GetImageStationRequest)
 }
 
 extension StationAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .stationFilter:
-            return DomainNameConfig.station.url
-        case .findOne:
+        case .stationFilter, .findOne, .imageStation:
             return DomainNameConfig.station.url
         }
     }
@@ -30,6 +29,8 @@ extension StationAPI: TargetType {
             return "/stationFilter"
         case .findOne(let request):
             return "/\(request.stId ?? "")"
+        case .imageStation:
+            return "imageStation"
         }
     }
 
@@ -51,6 +52,8 @@ extension StationAPI: TargetType {
         case let .stationFilter(request):
             return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         case let .findOne(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .imageStation(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }

@@ -13,6 +13,8 @@ public enum DomainNameConfig {
     case station
     case googleMap
     case information
+    case user
+    case favorite
 }
 
 extension DomainNameConfig {
@@ -33,6 +35,10 @@ extension DomainNameConfig {
             return "\(googleMapURL)"
         case .information:
             return "\(baseURL)/information"
+        case .user:
+            return "\(baseURL)/user"
+        case .favorite:
+            return "\(baseURL)/favorite"
         }
     }
     

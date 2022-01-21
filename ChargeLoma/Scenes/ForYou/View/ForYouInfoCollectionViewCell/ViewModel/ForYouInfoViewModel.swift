@@ -86,6 +86,6 @@ class ForYouInfoViewModel: ForYouInfoProtocol, ForYouInfoProtocolOutput {
     }
     
     func getItemViewCellHeight() -> CGFloat {
-        return 225
+        return 250
     }
 }

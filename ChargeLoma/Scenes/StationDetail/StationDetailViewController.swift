@@ -13,7 +13,7 @@ import GooglePlaces
 class StationDetailViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
     @IBOutlet weak var imagePosterView: UIImageView!
     @IBOutlet weak var titleBadgeCount: UILabel!
     @IBOutlet weak var viewBadgeCount: UIView!
@@ -93,10 +93,9 @@ class StationDetailViewController: UIViewController {
         self.bindToViewModel()
         return vm
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.input.getStationDetail()
     }
     
     func configure(_ interface: StationDetailProtocol) {
@@ -109,6 +108,14 @@ class StationDetailViewController: UIViewController {
         setupTableView()
         setupCheckBox()
         self.sheetViewController?.handleScrollView(self.scrollView)
+        viewModel.input.getStationDetail()
+        viewModel.input.getFavorite()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        mapView.clear()
+        mapView.removeFromSuperview()
+        mapView = nil
     }
     
     private func setupUI() {
@@ -148,6 +155,11 @@ class StationDetailViewController: UIViewController {
         self.btnShare.imageView?.image?.withRenderingMode(.alwaysTemplate)
         self.btnShare.tintColor = .basePrimary
         
+        
+        self.btnNavigate.addTarget(self, action: #selector(handleNavigateButton), for: .touchUpInside)
+        self.btnFavorite.addTarget(self, action: #selector(handleFavoriteButton), for: .touchUpInside)
+        self.btnShare.addTarget(self, action: #selector(handleShareButton), for: .touchUpInside)
+        
         self.btnEdit.setRounded(rounded: 8)
         self.btnEdit.setBorder(width: 1.0, color: .basePrimary)
         self.btnEdit.tintColor = .basePrimary
@@ -155,7 +167,8 @@ class StationDetailViewController: UIViewController {
         self.btnEdit.backgroundColor = .white
         self.btnEdit.setTitle("แก้ไขข้อมูล", for: .normal)
         
-        imagePosterView.roundedTop(radius: 12)
+        //        imagePosterView.roundedTop(radius: 12)
+        imagePosterView.setRounded(rounded: 8)
         imagePosterView.layer.masksToBounds = true
         
         viewBadgeCount.setRounded(rounded: 4)
@@ -193,6 +206,8 @@ class StationDetailViewController: UIViewController {
         self.bgRating.setRounded(rounded: 8)
         self.titleRating.font = .bodyText
         self.titleRating.tintColor = .white
+        
+        
     }
     
     func setupMap() {
@@ -210,7 +225,7 @@ class StationDetailViewController: UIViewController {
         plugTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         plugTableView.registerCell(identifier: PlugTableViewCell.identifier)
     }
-
+    
     func setupCheckBox() {
         headService.text = "สิ่งอำนวยความสะดวกอื่นๆ"
         headService.font = .bodyBold
@@ -260,9 +275,9 @@ class StationDetailViewController: UIViewController {
     
     @objc func handleTapSeeAllGalleryPhoto(_ sender: UITapGestureRecognizer? = nil) {
         debugPrint("handleTapSeeAllGalleryPhoto")
-//        NavigationManager.instance.pushVC(to: .galleryPhoto, presentation: .ModelNav(completion: nil, isFullScreen: true))
+        NavigationManager.instance.pushVC(to: .galleryPhoto, presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
     }
-
+    
 }
 
 
@@ -271,20 +286,22 @@ extension StationDetailViewController {
     
     func bindToViewModel() {
         viewModel.output.didGetStationSuccess = didGetStationSuccess()
-        viewModel.output.didGetStationError = didGetStationError()
+        viewModel.output.didGetFavoriteSuccess = didGetFavoriteSuccess()
     }
     
     func didGetStationSuccess() -> (() -> Void) {
         return { [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.setupValue()
-            weakSelf.plugTableView.reloadData()
+            guard let self = self else { return }
+            self.setupValue()
+            self.plugTableView.reloadData()
         }
     }
     
-    func didGetStationError() -> (() -> Void) {
+    func didGetFavoriteSuccess() -> (() -> Void) {
         return { [weak self] in
-            guard let weakSelf = self else { return }
+            guard let self = self else { return }
+            self.reloadFavorite()
+            
         }
     }
     
@@ -296,7 +313,7 @@ extension StationDetailViewController {
         if let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
             imagePosterView.kf.setImageDefault(with: urlImage)
         }
-
+        
         if let logoImage = station.provider?.logoLabel, let urlImage = URL(string: "\(logoImage)") {
             logoStationImageView.kf.setImageDefault(with: urlImage)
         }
@@ -309,7 +326,7 @@ extension StationDetailViewController {
         setupMarker(item: station)
         
         
-        descValue.text = station.stationName ?? "-"
+        descValue.text = station.stationDesc ?? "-"
         serviceCharge.text = "ค่าบริการ \(station.serviceRate ?? 0.0) บาท"
     }
     
@@ -321,9 +338,63 @@ extension StationDetailViewController {
             marker.isTappable = true
             marker.iconView =  MarkerStationView.instantiate(station: item, index: 0)
             marker.tracksViewChanges = true
-            marker.map = self.mapView
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 15.0)
-            self.mapView.animate(to: camera)
+            marker.map = mapView
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
+            mapView.animate(to: camera)
+        }
+    }
+}
+
+//MARK: - Navigate Flow
+extension StationDetailViewController {
+    func reloadFavorite() {
+        let isFavorite: Bool = viewModel.output.getIsFavorite()
+        if isFavorite == true {
+            self.btnFavorite.tintColor = .basePrimary
+        } else {
+            self.btnFavorite.tintColor = .baseTextGray
+        }
+    }
+    
+    @objc func handleNavigateButton() {
+        openGoogleMap()
+    }
+    
+    @objc func handleFavoriteButton() {
+        guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
+            NavigationManager.instance.pushVC(to: .login(self), presentation: .Present(withNav: false))
+            return
+        }
+        
+        if viewModel.output.getIsFavorite() == true {
+            viewModel.input.deleteFavorite()
+        } else {
+            viewModel.input.postFavorite()
+        }
+    }
+    
+    @objc func handleShareButton() {
+        guard let station = viewModel.output.getDataStation() else { return }
+        if let lat = station.lat, let lng = station.lng {
+            let items = [URL(string: "http://maps.google.com/maps?q=\(lat),\(lng)")!]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
+        }
+    }
+    
+    func openGoogleMap() {
+        guard let station = viewModel.output.getDataStation() else { return }
+        if let lat = station.lat, let lng = station.lng {
+            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {  //if phone has an app
+                if let url = URL(string: "comgooglemaps-x-callback://?saddr=&daddr=\(lat),\(lng)&directionsmode=driving") {
+                    UIApplication.shared.open(url, options: [:])
+                }}
+            else {
+                //Open in browser
+                if let urlDestination = URL.init(string: "https://www.google.co.in/maps/dir/?saddr=&daddr=\(lat),\(lng)&directionsmode=driving") {
+                    UIApplication.shared.open(urlDestination)
+                }
+            }
         }
     }
 }
@@ -334,7 +405,7 @@ extension StationDetailViewController : GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-
+        
     }
 }
 
@@ -370,5 +441,11 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
         default:
             return 0
         }
+    }
+}
+
+extension StationDetailViewController: LoginDelegate {
+    func didLoginSuccess() {
+        self.viewModel.input.postFavorite()
     }
 }

@@ -11,7 +11,8 @@ import FittedSheets
 
 public enum NavigationOpeningSender {
     case splash
-    case login
+    case login(_ delegate: LoginDelegate)
+    case register(_ delegate: RegisterDelegate)
     
     //Main Tabbar
     case main
@@ -42,6 +43,8 @@ public enum NavigationOpeningSender {
             return "Splash"
         case .login:
             return "Login"
+        case .register:
+            return "Register"
         case .main:
             return "Main"
         case .map:
@@ -75,6 +78,8 @@ public enum NavigationOpeningSender {
             return "SplashViewController"
         case .login:
             return "LoginViewController"
+        case .register:
+            return "RegisterViewController"
         case .main:
             return "MainTabBarController"
         case .map:
@@ -119,6 +124,8 @@ public enum NavigationOpeningSender {
             return "สำหรับคุณ"
         case .galleryPhoto:
             return "รูปภาพ"
+        case .profile:
+            return "Profile"
         default:
             return ""
         }
@@ -180,6 +187,7 @@ class NavigationManager {
     static let instance:NavigationManager = NavigationManager()
     
     var navigationController: UINavigationController!
+    var rootViewController: UIViewController!
     var currentPresentation: Presentation = .Root
     
     enum Presentation {
@@ -198,9 +206,13 @@ class NavigationManager {
         
     }
     
-    func setupWithNavigationController(navigationController: UINavigationController?) {
-        if let nav = navigationController {
+    func setupWithNavigationController(_ vc: UIViewController?) {
+        if let nav = vc?.navigationController {
             self.navigationController = nav
+        }
+        
+        if let vc = vc {
+            self.rootViewController = vc
         }
     }
     
@@ -211,12 +223,16 @@ class NavigationManager {
         var viewController: UIViewController = UIViewController()
         
         switch to {
-//        case .productDetailBottomSheet(let items, let delegate):
-//            if let className = storyboard.instantiateInitialViewController() as? ProductDetailBottomSheetViewController {
-//                className.viewModel.input.setProductItems(items: items)
-//                className.viewModel.input.setDelegate(delegate: delegate)
-//                viewController = className
-//            }
+        case .login(let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? LoginViewController {
+                className.delegate = delegate
+                viewController = className
+            }
+        case .register(let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? RegisterViewController {
+                className.delegate = delegate
+                viewController = className
+            }
         case .stationDetail(let stId):
             if let className = storyboard.instantiateInitialViewController() as? StationDetailViewController {
                 className.viewModel.setStId(stId)
@@ -248,17 +264,18 @@ class NavigationManager {
                 viewController.hidesBottomBarWhenPushed = true
             }
             
-            self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            self.navigationController.navigationBar.tintColor = .white
-            self.navigationController.pushViewController(viewController, animated: animated)
+            let topVC = UIApplication.getTopViewController()
+            topVC?.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            topVC?.navigationController?.navigationBar.tintColor = .white
+            topVC?.navigationController?.pushViewController(viewController, animated: animated)
         case .PushInTabbar:
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = false
             }
-            
-            self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            self.navigationController.navigationBar.tintColor = .white
-            self.navigationController.pushViewController(viewController, animated: animated)
+            let topVC = UIApplication.getTopViewController()
+            topVC?.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            topVC?.navigationController?.navigationBar.tintColor = .white
+            topVC?.navigationController?.pushViewController(viewController, animated: animated)
         case .Root:
             let storyboard = UIStoryboard(name: to.storyboardName, bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()
@@ -299,13 +316,14 @@ class NavigationManager {
             
             let nav = self.getNavigationController(vc: viewController)
             
-            let options: SheetOptions = SheetOptions(pullBarHeight: 24, useInlineMode: nil)
+            let options: SheetOptions = SheetOptions(pullBarHeight: 36, useInlineMode: nil)
             let sheet = SheetViewController(
-                controller: viewController,
+                controller: nav,
                 sizes: [.fixed(heightHalf), .fullscreen],
                 options: options)
-    
-            self.navigationController.present(sheet, animated: true, completion: completion)
+            
+            let topVC = UIApplication.getTopViewController()
+            topVC?.present(sheet, animated: true, completion: completion)
             
         case .Present(let withNav, let modalTransitionStyle, let modalPresentationStyle):
             if (self.navigationController.tabBarController != nil) {
@@ -313,18 +331,17 @@ class NavigationManager {
             }
             
             if withNav {
-                let nav: UINavigationController = UINavigationController(rootViewController: viewController)
+                let nav: UINavigationController = to.navController
                 nav.modalTransitionStyle = modalTransitionStyle
                 nav.modalPresentationStyle = modalPresentationStyle
-                self.navigationController.present(nav, animated: true, completion: {
-                    
-                })
+                
+                let topVC = UIApplication.getTopViewController()
+                topVC?.present(nav, animated: true, completion: nil)
             } else {
                 viewController.modalPresentationStyle = modalPresentationStyle
                 viewController.modalPresentationStyle = modalPresentationStyle
-                self.navigationController.present(viewController, animated: true, completion: {
-                    
-                })
+                let topVC = UIApplication.getTopViewController()
+                topVC?.present(viewController, animated: true, completion: nil)
             }
             
         }

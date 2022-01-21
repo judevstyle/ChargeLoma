@@ -16,7 +16,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEF-jd-5FH">
                     <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-marker" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-9U-IVk">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-marker" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-9U-IVk">
                             <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
                         </imageView>
                     </subviews>
@@ -40,7 +40,7 @@
                 <outlet property="InnerView" destination="MEF-jd-5FH" id="VnW-2N-3IP"/>
                 <outlet property="bgImage" destination="Qrx-9U-IVk" id="5bH-zg-LPD"/>
             </connections>
-            <point key="canvasLocation" x="131.15942028985509" y="33.816964285714285"/>
+            <point key="canvasLocation" x="130.43478260869566" y="33.482142857142854"/>
         </view>
     </objects>
     <resources>

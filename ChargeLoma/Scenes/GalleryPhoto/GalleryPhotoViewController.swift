@@ -11,19 +11,28 @@ class GalleryPhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
     }
-    */
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .darkContent
+    }
+    
+    func setupUI() {
+        setupCloseViewButton()
+    }
+    
+    private func setupCloseViewButton() {
+        var closeButton: UIBarButtonItem = UIBarButtonItem(image: UIImage.init(systemName: "xmark"), style: .plain, target: self, action: #selector(handleCloseViewButton))
+        closeButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = closeButton
+    }
+    
+    @objc func handleCloseViewButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

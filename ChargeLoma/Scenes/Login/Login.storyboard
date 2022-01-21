@@ -160,6 +160,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnFacebook" destination="TeJ-W8-Lht" id="5WJ-s8-OD9"/>
+                        <outlet property="btnGoogle" destination="Pzk-rc-Beu" id="naA-cM-aA9"/>
                         <outlet property="btnLogin" destination="CJF-xL-B8Y" id="pQz-rW-bji"/>
                         <outlet property="btnRegister" destination="2JE-Qg-bU0" id="VcS-fi-qzQ"/>
                         <outlet property="inputPassword" destination="PmQ-Gw-rra" id="L1x-kn-mBt"/>

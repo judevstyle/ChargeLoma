@@ -43,7 +43,6 @@ class GoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         viewModel.input.getStationFilter()
     }
     
@@ -52,6 +51,7 @@ class GoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupUI()
         setupMap()
         self.fetchMarkerMap()
     }
@@ -63,7 +63,7 @@ class GoViewController: UIViewController {
     }
     
     func setupUI() {
-        NavigationManager.instance.setupWithNavigationController(navigationController: self.navigationController)
+        NavigationManager.instance.setupWithNavigationController(self)
         headTitleStart.font = .smallText
         headTitleEnd.font = .smallText
         headTitleStart.textColor = .baseTextGray
@@ -292,6 +292,15 @@ extension GoViewController: SearchStationViewModelDelegate {
         self.listStationMarker.enumerated().forEach({ (index, item) in
             item.map = self.mapView
         })
+        
+        if (self.sourceLocation != nil && self.destinationLocation == nil) || (self.sourceLocation == nil && self.destinationLocation != nil) {
+            let lat: Double? = (self.sourceLocation?.latitude ?? self.destinationLocation?.latitude) ?? nil
+            let lng: Double? = (self.sourceLocation?.longitude ?? self.destinationLocation?.longitude) ?? nil
+            if let lat = lat, let lng = lng {
+                let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
+                mapView.animate(to: camera)
+            }
+        }
         
         guard let sourceLocation = self.sourceLocation, let destinationLocation = self.destinationLocation else { return }
         viewModel.input.getDirection(sourceLocation: sourceLocation, destinationLocation: destinationLocation)

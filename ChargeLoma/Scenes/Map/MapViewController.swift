@@ -66,9 +66,7 @@ class MapViewController: UIViewController {
     }
 
     func setupUI() {
-        NavigationManager.instance.setupWithNavigationController(navigationController: self.navigationController)
         setupSearchBar()
-        
         self.btnMapMenu.addTarget(self, action: #selector(didTapMapMenuButton), for: .touchUpInside)
         self.btnMapLocation.addTarget(self, action: #selector(didTapMapLocationButton), for: .touchUpInside)
         

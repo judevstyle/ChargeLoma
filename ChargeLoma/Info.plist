@@ -24,5 +24,33 @@
 	<string>By accessing your device&apos;s location it can pin point your location on the map.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.183166726128-7skjolpi5i31jatn5jptff5vo7gcuvrq</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1069977193741918</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1069977193741918</string>
+	<key>FacebookDisplayName</key>
+	<string>ChargeLoma</string>
+    <key>LSApplicationQueriesSchemes</key>
+        <array>
+        <string>comgooglemaps</string>
+        <string>comgooglemaps-x-callback</string>
+        </array>
 </dict>
 </plist>

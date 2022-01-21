@@ -9,12 +9,14 @@ import Foundation
 
 public struct UserDefaultsKey {
     
-    public static let DeviceId = UserDefaultsKey("ChargeLoma.Device.Id")
-    public static let AppLanguage = UserDefaultsKey("AppLanguage")
+    public static let DeviceId = UserDefaultsKey(UserDefaultsKeyType.DeviceId.rawValue)
+    public static let AppLanguage = UserDefaultsKey(UserDefaultsKeyType.AppLanguage.rawValue)
     
     //Auth
-    public static let AccessToken = UserDefaultsKey("AccessToken")
-    public static let ExpireAccessToken = UserDefaultsKey("ExpireAccessToken")
+    public static let AccessToken = UserDefaultsKey(UserDefaultsKeyType.AccessToken.rawValue)
+    public static let UID = UserDefaultsKey(UserDefaultsKeyType.UID.rawValue)
+    public static let TokenType = UserDefaultsKey(UserDefaultsKeyType.TokenType.rawValue)
+    public static let isLoggedIn = UserDefaultsKey(UserDefaultsKeyType.isLoggedIn.rawValue)
     
     private let key:String
     
@@ -84,4 +86,13 @@ public struct UserDefaultsKey {
             }
         }
     }
+}
+
+enum UserDefaultsKeyType : String {
+    case DeviceId = "ChargeLoma.Device.Id"
+    case AppLanguage = "AppLanguage"
+    case UID = "UID"
+    case AccessToken = "AccessToken"
+    case TokenType = "TokenType"
+    case isLoggedIn = "isLoggedIn"
 }

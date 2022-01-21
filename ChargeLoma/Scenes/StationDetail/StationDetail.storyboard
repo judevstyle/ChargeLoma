@@ -27,10 +27,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-UK-K2H">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                                        <rect key="frame" x="8" y="8" width="359" height="217"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcD-rt-51A">
-                                                        <rect key="frame" x="303" y="194" width="62" height="23"/>
+                                                        <rect key="frame" x="297" y="194" width="62" height="23"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Pic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2j-fn-qtQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="62" height="23"/>
@@ -52,12 +52,12 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="3kF-UK-K2H" secondAttribute="bottom" id="1Df-o2-PEh"/>
-                                                    <constraint firstItem="3kF-UK-K2H" firstAttribute="top" secondItem="Wer-WO-paq" secondAttribute="top" id="76z-x1-I5c"/>
-                                                    <constraint firstAttribute="trailing" secondItem="3kF-UK-K2H" secondAttribute="trailing" id="ZZJ-zA-cmg"/>
+                                                    <constraint firstItem="3kF-UK-K2H" firstAttribute="top" secondItem="Wer-WO-paq" secondAttribute="top" constant="8" id="76z-x1-I5c"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3kF-UK-K2H" secondAttribute="trailing" constant="8" id="ZZJ-zA-cmg"/>
                                                     <constraint firstAttribute="bottom" secondItem="ZcD-rt-51A" secondAttribute="bottom" constant="8" id="mm0-yy-Xrx"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ZcD-rt-51A" secondAttribute="trailing" constant="10" id="tru-hh-mTN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZcD-rt-51A" secondAttribute="trailing" constant="16" id="tru-hh-mTN"/>
                                                     <constraint firstAttribute="height" constant="225" id="uha-yO-lzD"/>
-                                                    <constraint firstItem="3kF-UK-K2H" firstAttribute="leading" secondItem="Wer-WO-paq" secondAttribute="leading" id="wR4-52-g7s"/>
+                                                    <constraint firstItem="3kF-UK-K2H" firstAttribute="leading" secondItem="Wer-WO-paq" secondAttribute="leading" constant="8" id="wR4-52-g7s"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOD-j3-1TY">

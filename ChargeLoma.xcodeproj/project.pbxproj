@@ -148,12 +148,41 @@
 		EFC454B5278B4AC900BFC608 /* MapFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC454B4278B4AC900BFC608 /* MapFilterViewModel.swift */; };
 		EFCA077D27948B73004DC4F2 /* MarkerDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA077C27948B73004DC4F2 /* MarkerDirectionView.swift */; };
 		EFCA077F27948B79004DC4F2 /* MarkerDirectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCA077E27948B79004DC4F2 /* MarkerDirectionView.xib */; };
+		EFCA87D6279A7AE8001BCFD3 /* GetUserProfileRssponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87D5279A7AE8001BCFD3 /* GetUserProfileRssponse.swift */; };
+		EFCA87D9279A7FDC001BCFD3 /* PostUserRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87D8279A7FDC001BCFD3 /* PostUserRegisterRequest.swift */; };
+		EFCA87DC279A80CD001BCFD3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87DB279A80CD001BCFD3 /* UserAPI.swift */; };
+		EFCA87DF279A81DE001BCFD3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87DE279A81DE001BCFD3 /* LoginViewModel.swift */; };
+		EFCA87E1279A823D001BCFD3 /* PostUserRegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87E0279A823D001BCFD3 /* PostUserRegisterResponse.swift */; };
+		EFCA87E4279A829B001BCFD3 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87E3279A829B001BCFD3 /* UserRepository.swift */; };
+		EFCA87E7279A837C001BCFD3 /* PostUserRegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87E6279A837C001BCFD3 /* PostUserRegisterUseCase.swift */; };
+		EFCA87E9279A948D001BCFD3 /* PostUserAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87E8279A948D001BCFD3 /* PostUserAuthRequest.swift */; };
+		EFCA87EF279A95C2001BCFD3 /* PostUserAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87EE279A95C2001BCFD3 /* PostUserAuthUseCase.swift */; };
+		EFCA87F2279AEAE5001BCFD3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87F1279AEAE5001BCFD3 /* ProfileViewModel.swift */; };
+		EFCA87F4279AEAF6001BCFD3 /* GetUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87F3279AEAF6001BCFD3 /* GetUserProfileUseCase.swift */; };
+		EFCA87F6279AF911001BCFD3 /* GetImageStationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87F5279AF911001BCFD3 /* GetImageStationRequest.swift */; };
+		EFCA87F8279AF91A001BCFD3 /* GetImageStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87F7279AF91A001BCFD3 /* GetImageStationResponse.swift */; };
+		EFCA87FC279AFA92001BCFD3 /* MetaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87FB279AFA92001BCFD3 /* MetaResponse.swift */; };
+		EFCA87FE279AFB11001BCFD3 /* GetImageStationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA87FD279AFB11001BCFD3 /* GetImageStationUseCase.swift */; };
+		EFCA8803279B096B001BCFD3 /* FavoriteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8802279B096B001BCFD3 /* FavoriteAPI.swift */; };
+		EFCA8808279B0BA0001BCFD3 /* FavoriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8807279B0BA0001BCFD3 /* FavoriteRequest.swift */; };
+		EFCA880B279B0DC4001BCFD3 /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA880A279B0DC4001BCFD3 /* GetFavoriteResponse.swift */; };
+		EFCA880D279B0DD1001BCFD3 /* PostFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA880C279B0DD1001BCFD3 /* PostFavoriteResponse.swift */; };
+		EFCA880F279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA880E279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift */; };
+		EFCA8811279B0FF6001BCFD3 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8810279B0FF6001BCFD3 /* FavoriteRepository.swift */; };
+		EFCA8813279B109E001BCFD3 /* GetFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8812279B109E001BCFD3 /* GetFavoriteUseCase.swift */; };
+		EFCA8815279B10A7001BCFD3 /* PostFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8814279B10A7001BCFD3 /* PostFavoriteUseCase.swift */; };
+		EFCA8817279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCA8816279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift */; };
 		EFD831F4278AECF100FDEAC5 /* MapFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD831F3278AECF100FDEAC5 /* MapFilter.storyboard */; };
 		EFD831F6278AED1B00FDEAC5 /* MapFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831F5278AED1B00FDEAC5 /* MapFilterViewController.swift */; };
 		EFD831F8278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831F7278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift */; };
 		EFD831FA278B244900FDEAC5 /* GetPlugTypeCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831F9278B244900FDEAC5 /* GetPlugTypeCategoryUseCase.swift */; };
 		EFD831FF278B2B6300FDEAC5 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD831FE278B2B6300FDEAC5 /* CheckBoxView.swift */; };
 		EFD83201278B2B6900FDEAC5 /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFD83200278B2B6900FDEAC5 /* CheckBoxView.xib */; };
+		EFD8A4D32799A80400E99CB2 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD8A4D22799A80400E99CB2 /* UIApplication+Extension.swift */; };
+		EFD8A4D62799AEF900E99CB2 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD8A4D52799AEF900E99CB2 /* Register.storyboard */; };
+		EFD8A4D82799AF0200E99CB2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD8A4D72799AF0200E99CB2 /* RegisterViewController.swift */; };
+		EFD8A4DC2799C61D00E99CB2 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD8A4DA2799C61D00E99CB2 /* ProfileTableViewCell.swift */; };
+		EFD8A4DD2799C61D00E99CB2 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFD8A4DB2799C61D00E99CB2 /* ProfileTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -299,12 +328,41 @@
 		EFC454B4278B4AC900BFC608 /* MapFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewModel.swift; sourceTree = "<group>"; };
 		EFCA077C27948B73004DC4F2 /* MarkerDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDirectionView.swift; sourceTree = "<group>"; };
 		EFCA077E27948B79004DC4F2 /* MarkerDirectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerDirectionView.xib; sourceTree = "<group>"; };
+		EFCA87D5279A7AE8001BCFD3 /* GetUserProfileRssponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileRssponse.swift; sourceTree = "<group>"; };
+		EFCA87D8279A7FDC001BCFD3 /* PostUserRegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserRegisterRequest.swift; sourceTree = "<group>"; };
+		EFCA87DB279A80CD001BCFD3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		EFCA87DE279A81DE001BCFD3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EFCA87E0279A823D001BCFD3 /* PostUserRegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserRegisterResponse.swift; sourceTree = "<group>"; };
+		EFCA87E3279A829B001BCFD3 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		EFCA87E6279A837C001BCFD3 /* PostUserRegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserRegisterUseCase.swift; sourceTree = "<group>"; };
+		EFCA87E8279A948D001BCFD3 /* PostUserAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserAuthRequest.swift; sourceTree = "<group>"; };
+		EFCA87EE279A95C2001BCFD3 /* PostUserAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserAuthUseCase.swift; sourceTree = "<group>"; };
+		EFCA87F1279AEAE5001BCFD3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		EFCA87F3279AEAF6001BCFD3 /* GetUserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileUseCase.swift; sourceTree = "<group>"; };
+		EFCA87F5279AF911001BCFD3 /* GetImageStationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageStationRequest.swift; sourceTree = "<group>"; };
+		EFCA87F7279AF91A001BCFD3 /* GetImageStationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageStationResponse.swift; sourceTree = "<group>"; };
+		EFCA87FB279AFA92001BCFD3 /* MetaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaResponse.swift; sourceTree = "<group>"; };
+		EFCA87FD279AFB11001BCFD3 /* GetImageStationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageStationUseCase.swift; sourceTree = "<group>"; };
+		EFCA8802279B096B001BCFD3 /* FavoriteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteAPI.swift; sourceTree = "<group>"; };
+		EFCA8807279B0BA0001BCFD3 /* FavoriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRequest.swift; sourceTree = "<group>"; };
+		EFCA880A279B0DC4001BCFD3 /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
+		EFCA880C279B0DD1001BCFD3 /* PostFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteResponse.swift; sourceTree = "<group>"; };
+		EFCA880E279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFavoriteResponse.swift; sourceTree = "<group>"; };
+		EFCA8810279B0FF6001BCFD3 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
+		EFCA8812279B109E001BCFD3 /* GetFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteUseCase.swift; sourceTree = "<group>"; };
+		EFCA8814279B10A7001BCFD3 /* PostFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteUseCase.swift; sourceTree = "<group>"; };
+		EFCA8816279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFavoriteUseCase.swift; sourceTree = "<group>"; };
 		EFD831F3278AECF100FDEAC5 /* MapFilter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapFilter.storyboard; sourceTree = "<group>"; };
 		EFD831F5278AED1B00FDEAC5 /* MapFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewController.swift; sourceTree = "<group>"; };
 		EFD831F7278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlugTypeCategoryResponse.swift; sourceTree = "<group>"; };
 		EFD831F9278B244900FDEAC5 /* GetPlugTypeCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlugTypeCategoryUseCase.swift; sourceTree = "<group>"; };
 		EFD831FE278B2B6300FDEAC5 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		EFD83200278B2B6900FDEAC5 /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
+		EFD8A4D22799A80400E99CB2 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		EFD8A4D52799AEF900E99CB2 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
+		EFD8A4D72799AF0200E99CB2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		EFD8A4DA2799C61D00E99CB2 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		EFD8A4DB2799C61D00E99CB2 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +429,7 @@
 		EF22139F278AB4710007B50C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA87DD279A81D3001BCFD3 /* ViewModel */,
 				EF2213A0278AB4800007B50C /* Login.storyboard */,
 				EF2213A2278AB48C0007B50C /* LoginViewController.swift */,
 			);
@@ -421,7 +480,6 @@
 				EFA36EC4279323DA00BF2E51 /* PreLogin */,
 				EF1C9A05278B6F2F0034643D /* DetailStation */,
 				EFD831F2278AECE000FDEAC5 /* MapFilter */,
-				EF22139F278AB4710007B50C /* Login */,
 				EF75C29C2788AA55004FEC64 /* Profile */,
 				EF75C29027889D7B004FEC64 /* SearchStation */,
 				EF3ACB93277C698A0096BF95 /* Me */,
@@ -429,6 +487,8 @@
 				EF3ACB89277C693D0096BF95 /* ForYou */,
 				EF3ACB84277C69260096BF95 /* Go */,
 				EF3ACB7F277C68CD0096BF95 /* Map */,
+				EF22139F278AB4710007B50C /* Login */,
+				EFD8A4D42799AEE300E99CB2 /* Register */,
 				EF3ACB78277C672D0096BF95 /* Main */,
 				EF3ACB0C277C57E90096BF95 /* Splash */,
 			);
@@ -516,6 +576,7 @@
 				EFBFA8942790785500CAFA60 /* UITextField+Extension.swift */,
 				EFA36EA827930E8F00BF2E51 /* UITableView+Extension.swift */,
 				EFA36EC0279319CD00BF2E51 /* Date+Extension.swift */,
+				EFD8A4D22799A80400E99CB2 /* UIApplication+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -644,6 +705,7 @@
 		EF75C29C2788AA55004FEC64 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA87F0279AEADA001BCFD3 /* ViewModel */,
 				EF75C29D2788AA60004FEC64 /* Profile.storyboard */,
 				EF75C29F2788AA66004FEC64 /* ProfileViewController.swift */,
 			);
@@ -728,6 +790,8 @@
 		EF8234F4277D738C00379B38 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA8801279B095C001BCFD3 /* Favorite */,
+				EFCA87DA279A80C3001BCFD3 /* User */,
 				EFA36EAD27930FCD00BF2E51 /* Information */,
 				EF7F08D4278F348300FE4E9C /* GoogleMap */,
 				EF823534277D94EA00379B38 /* Station */,
@@ -740,6 +804,9 @@
 		EF8234F5277D739100379B38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA8804279B0B7E001BCFD3 /* Favorite */,
+				EFCA87F9279AFA76001BCFD3 /* Shared */,
+				EFCA87D3279A7ABF001BCFD3 /* User */,
 				EFA36EB12793101800BF2E51 /* Information */,
 				EF7F08D7278F354C00FE4E9C /* GoogleMap */,
 				EF823537277D957A00379B38 /* Station */,
@@ -752,6 +819,8 @@
 		EF8234F6277D739A00379B38 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA8800279B094E001BCFD3 /* Favorite */,
+				EFCA87E2279A8291001BCFD3 /* User */,
 				EFA36EB6279310B300BF2E51 /* Information */,
 				EF7F08DE278F377600FE4E9C /* GoogleMap */,
 				EF63C1A327848530000664EA /* Station */,
@@ -764,6 +833,8 @@
 		EF8234F7277D73A300379B38 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				EFCA87FF279B093E001BCFD3 /* Favorite */,
+				EFCA87E5279A836D001BCFD3 /* User */,
 				EFA36EBB279311EB00BF2E51 /* Information */,
 				EF7F08E1278F386A00FE4E9C /* GoogleMap */,
 				EF823543277D9DF000379B38 /* Station */,
@@ -894,6 +965,7 @@
 			children = (
 				EF82353E277D975600379B38 /* PostStationFilterResponse.swift */,
 				EF75C2A32788B513004FEC64 /* GetStationFindOneResponse.swift */,
+				EFCA87F7279AF91A001BCFD3 /* GetImageStationResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -903,6 +975,7 @@
 			children = (
 				EF82353A277D959100379B38 /* PostStationFilterRequest.swift */,
 				EF75C2A12788B418004FEC64 /* GetStationFindOneRequest.swift */,
+				EFCA87F5279AF911001BCFD3 /* GetImageStationRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -912,6 +985,7 @@
 			children = (
 				EF823544277D9E0000379B38 /* PostStationFilterUseCase.swift */,
 				EF75C2A52788B5A6004FEC64 /* GetStationFindOneUseCase.swift */,
+				EFCA87FD279AFB11001BCFD3 /* GetImageStationUseCase.swift */,
 			);
 			path = Station;
 			sourceTree = "<group>";
@@ -1120,6 +1194,7 @@
 		EFC454AB278B3EE800BFC608 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				EFD8A4D92799C60300E99CB2 /* ProfileTableViewCell */,
 				EFA0EAE42793D843002B258D /* PlugTableViewCell */,
 				EFA36EA327930BE000BF2E51 /* ContentTableViewCell */,
 				EF7F08CF278F2CD400FE4E9C /* SearchResultTableViewCell */,
@@ -1161,6 +1236,136 @@
 			path = MarkerDirectionView;
 			sourceTree = "<group>";
 		};
+		EFCA87D3279A7ABF001BCFD3 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87D7279A7FB3001BCFD3 /* Request */,
+				EFCA87D4279A7AD6001BCFD3 /* Response */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EFCA87D4279A7AD6001BCFD3 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87D5279A7AE8001BCFD3 /* GetUserProfileRssponse.swift */,
+				EFCA87E0279A823D001BCFD3 /* PostUserRegisterResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		EFCA87D7279A7FB3001BCFD3 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87D8279A7FDC001BCFD3 /* PostUserRegisterRequest.swift */,
+				EFCA87E8279A948D001BCFD3 /* PostUserAuthRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		EFCA87DA279A80C3001BCFD3 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87DB279A80CD001BCFD3 /* UserAPI.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EFCA87DD279A81D3001BCFD3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87DE279A81DE001BCFD3 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EFCA87E2279A8291001BCFD3 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87E3279A829B001BCFD3 /* UserRepository.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EFCA87E5279A836D001BCFD3 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87E6279A837C001BCFD3 /* PostUserRegisterUseCase.swift */,
+				EFCA87EE279A95C2001BCFD3 /* PostUserAuthUseCase.swift */,
+				EFCA87F3279AEAF6001BCFD3 /* GetUserProfileUseCase.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EFCA87F0279AEADA001BCFD3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87F1279AEAE5001BCFD3 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EFCA87F9279AFA76001BCFD3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA87FB279AFA92001BCFD3 /* MetaResponse.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		EFCA87FF279B093E001BCFD3 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA8812279B109E001BCFD3 /* GetFavoriteUseCase.swift */,
+				EFCA8814279B10A7001BCFD3 /* PostFavoriteUseCase.swift */,
+				EFCA8816279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		EFCA8800279B094E001BCFD3 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA8810279B0FF6001BCFD3 /* FavoriteRepository.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		EFCA8801279B095C001BCFD3 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA8802279B096B001BCFD3 /* FavoriteAPI.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		EFCA8804279B0B7E001BCFD3 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA8806279B0B8D001BCFD3 /* Request */,
+				EFCA8805279B0B85001BCFD3 /* Response */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		EFCA8805279B0B85001BCFD3 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA880A279B0DC4001BCFD3 /* GetFavoriteResponse.swift */,
+				EFCA880C279B0DD1001BCFD3 /* PostFavoriteResponse.swift */,
+				EFCA880E279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		EFCA8806279B0B8D001BCFD3 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				EFCA8807279B0BA0001BCFD3 /* FavoriteRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		EFD831F2278AECE000FDEAC5 /* MapFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1178,6 +1383,24 @@
 				EFD83200278B2B6900FDEAC5 /* CheckBoxView.xib */,
 			);
 			path = CheckBoxView;
+			sourceTree = "<group>";
+		};
+		EFD8A4D42799AEE300E99CB2 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				EFD8A4D52799AEF900E99CB2 /* Register.storyboard */,
+				EFD8A4D72799AF0200E99CB2 /* RegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		EFD8A4D92799C60300E99CB2 /* ProfileTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFD8A4DA2799C61D00E99CB2 /* ProfileTableViewCell.swift */,
+				EFD8A4DB2799C61D00E99CB2 /* ProfileTableViewCell.xib */,
+			);
+			path = ProfileTableViewCell;
 			sourceTree = "<group>";
 		};
 		FC4C709D17F330E28E55597B /* Frameworks */ = {
@@ -1281,6 +1504,7 @@
 				EF3ACB01277C57A80096BF95 /* Assets.xcassets in Resources */,
 				EF75C29E2788AA60004FEC64 /* Profile.storyboard in Resources */,
 				EF3ACB8D277C694D0096BF95 /* ForYou.storyboard in Resources */,
+				EFD8A4DD2799C61D00E99CB2 /* ProfileTableViewCell.xib in Resources */,
 				EF3ACB90277C69600096BF95 /* AddLocation.storyboard in Resources */,
 				EF3ACB86277C692F0096BF95 /* Go.storyboard in Resources */,
 				EF3ACB4D277C59CA0096BF95 /* Kanit-Regular.ttf in Resources */,
@@ -1291,6 +1515,7 @@
 				EFA36E9827930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.xib in Resources */,
 				EF3ACB0E277C57F30096BF95 /* Splash.storyboard in Resources */,
 				EF3ACB83277C68E50096BF95 /* Map.storyboard in Resources */,
+				EFD8A4D62799AEF900E99CB2 /* Register.storyboard in Resources */,
 				EFD831F4278AECF100FDEAC5 /* MapFilter.storyboard in Resources */,
 				EFCA077F27948B79004DC4F2 /* MarkerDirectionView.xib in Resources */,
 				EFA36E9C27930B4500BF2E51 /* ForYouLastedCollectionViewCell.xib in Resources */,
@@ -1366,6 +1591,7 @@
 				EFA36EBF2793139F00BF2E51 /* ForYouViewModel.swift in Sources */,
 				EF823524277D7E2000379B38 /* ProviderMasterRepository.swift in Sources */,
 				EFD831FF278B2B6300FDEAC5 /* CheckBoxView.swift in Sources */,
+				EFD8A4DC2799C61D00E99CB2 /* ProfileTableViewCell.swift in Sources */,
 				EF3ACB70277C62CD0096BF95 /* RegEx.swift in Sources */,
 				EF8234F1277D5F1500379B38 /* UISearchBar+Extension.swift in Sources */,
 				EF75C2982788A361004FEC64 /* SearchStationViewController.swift in Sources */,
@@ -1378,11 +1604,13 @@
 				EF823508277D787300379B38 /* KeyedDecodingContainer+Extension.swift in Sources */,
 				EFC454B5278B4AC900BFC608 /* MapFilterViewModel.swift in Sources */,
 				EF3ACB81277C68DF0096BF95 /* MapViewController.swift in Sources */,
+				EFCA87D6279A7AE8001BCFD3 /* GetUserProfileRssponse.swift in Sources */,
 				EF7F08DD278F357F00FE4E9C /* GetPlaceAutoCompleteResponse.swift in Sources */,
 				EF9AF8E22791497A0051B616 /* SearchStationViewModel.swift in Sources */,
 				EF823513277D791700379B38 /* MoyaProvider+Combine.swift in Sources */,
 				EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */,
 				EF823506277D784D00379B38 /* CodableInfixOperator.swift in Sources */,
+				EFCA87E9279A948D001BCFD3 /* PostUserAuthRequest.swift in Sources */,
 				EFC454B2278B420100BFC608 /* UICollectionView+Extension.swift in Sources */,
 				EF7F08E5278F3D5300FE4E9C /* GetPlaceDetailRequest.swift in Sources */,
 				EFA36E9B27930B4500BF2E51 /* ForYouLastedCollectionViewCell.swift in Sources */,
@@ -1395,6 +1623,7 @@
 				EF8234FA277D74E400379B38 /* ProviderMasterAPI.swift in Sources */,
 				EF3ACB8B277C69470096BF95 /* ForYouViewController.swift in Sources */,
 				EFBFA89327906BD400CAFA60 /* GoViewModel.swift in Sources */,
+				EFCA880B279B0DC4001BCFD3 /* GetFavoriteResponse.swift in Sources */,
 				EF3ACB88277C69360096BF95 /* GoViewController.swift in Sources */,
 				EF823531277D81DC00379B38 /* SplashViewModel.swift in Sources */,
 				EF3ACAFF277C57A70096BF95 /* ChargeLoma.xcdatamodeld in Sources */,
@@ -1402,9 +1631,11 @@
 				EFC454AF278B3F2A00BFC608 /* FilterItemCollectionViewCell.swift in Sources */,
 				EFD831F8278B23AD00FDEAC5 /* GetPlugTypeCategoryResponse.swift in Sources */,
 				EFD831F6278AED1B00FDEAC5 /* MapFilterViewController.swift in Sources */,
+				EFD8A4D82799AF0200E99CB2 /* RegisterViewController.swift in Sources */,
 				EF823545277D9E0000379B38 /* PostStationFilterUseCase.swift in Sources */,
 				EF3ACB5E277C60390096BF95 /* NavigationManager.swift in Sources */,
 				EFA0EAE72793D871002B258D /* PlugTableViewCell.swift in Sources */,
+				EFCA87F4279AEAF6001BCFD3 /* GetUserProfileUseCase.swift in Sources */,
 				EF3ACB62277C60DC0096BF95 /* KeyboardListener.swift in Sources */,
 				EF2213A3278AB48C0007B50C /* LoginViewController.swift in Sources */,
 				EF9AF8DF279147D30051B616 /* GetPlaceDirectionUseCase.swift in Sources */,
@@ -1413,6 +1644,7 @@
 				EFA36EA127930B5F00BF2E51 /* ForYouInfoCollectionViewCell.swift in Sources */,
 				EF3ACB5B277C5E180096BF95 /* DomainNameConfig.swift in Sources */,
 				EF3ACB6C277C62890096BF95 /* Basic.swift in Sources */,
+				EFCA87F2279AEAE5001BCFD3 /* ProfileViewModel.swift in Sources */,
 				EF9AF8DD279145F00051B616 /* GetPlaceDirectionResponse.swift in Sources */,
 				EF7F08DB278F357300FE4E9C /* GetPlaceAutoCompleteRequest.swift in Sources */,
 				EFA36EBA279310EF00BF2E51 /* GetInformationFindAllResponse.swift in Sources */,
@@ -1421,26 +1653,39 @@
 				EFA36E9727930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.swift in Sources */,
 				EF82353F277D975600379B38 /* PostStationFilterResponse.swift in Sources */,
 				EF8234FD277D74F400379B38 /* PlugTypeMasterAPI.swift in Sources */,
+				EFD8A4D32799A80400E99CB2 /* UIApplication+Extension.swift in Sources */,
 				EF823519277D798700379B38 /* GetProviderMasterResponse.swift in Sources */,
 				EF0CE1C72798478E0072C156 /* StationDetailViewController.swift in Sources */,
+				EFCA87DC279A80CD001BCFD3 /* UserAPI.swift in Sources */,
+				EFCA8811279B0FF6001BCFD3 /* FavoriteRepository.swift in Sources */,
 				EF3ACB92277C697C0096BF95 /* AddLocationViewController.swift in Sources */,
 				EF75C2AB2788C4D7004FEC64 /* UIButton+Extension.swift in Sources */,
+				EFCA8803279B096B001BCFD3 /* FavoriteAPI.swift in Sources */,
 				EF75C29A2788A7DC004FEC64 /* UINavigationBar+Extension.swift in Sources */,
 				EF7F08E3278F387F00FE4E9C /* GetPlaceAutoCompleteUseCase.swift in Sources */,
+				EFCA8808279B0BA0001BCFD3 /* FavoriteRequest.swift in Sources */,
 				EF3ACB6E277C62B30096BF95 /* AsyncHelper.swift in Sources */,
 				EF34D057277DA97F0084AB8C /* UIView+Extension.swift in Sources */,
 				EF63C1A527848547000664EA /* StationRepository.swift in Sources */,
 				EF3ACB56277C5D7E0096BF95 /* UserDefaults+Extension.swift in Sources */,
 				EFD831FA278B244900FDEAC5 /* GetPlugTypeCategoryUseCase.swift in Sources */,
+				EFCA8815279B10A7001BCFD3 /* PostFavoriteUseCase.swift in Sources */,
+				EFCA880D279B0DD1001BCFD3 /* PostFavoriteResponse.swift in Sources */,
+				EFCA87DF279A81DE001BCFD3 /* LoginViewModel.swift in Sources */,
 				EF7F08D2278F2CE600FE4E9C /* SearchResultTableViewCell.swift in Sources */,
 				EF3ACB6A277C624E0096BF95 /* UserDefaults.swift in Sources */,
+				EFCA87D9279A7FDC001BCFD3 /* PostUserRegisterRequest.swift in Sources */,
+				EFCA87F6279AF911001BCFD3 /* GetImageStationRequest.swift in Sources */,
 				EF3ACB7E277C67870096BF95 /* MainTabBarController.swift in Sources */,
 				EF82350A277D788700379B38 /* AnyKey.swift in Sources */,
+				EFCA87F8279AF91A001BCFD3 /* GetImageStationResponse.swift in Sources */,
 				EFBFA8952790785500CAFA60 /* UITextField+Extension.swift in Sources */,
+				EFCA87FE279AFB11001BCFD3 /* GetImageStationUseCase.swift in Sources */,
 				EFA36EB027930FE300BF2E51 /* InformationAPI.swift in Sources */,
 				EF7F08E7278F3D5B00FE4E9C /* GetPlaceDetailResponse.swift in Sources */,
 				EF823533277D83FB00379B38 /* ToastManager.swift in Sources */,
 				EF82353B277D959100379B38 /* PostStationFilterRequest.swift in Sources */,
+				EFCA8813279B109E001BCFD3 /* GetFavoriteUseCase.swift in Sources */,
 				EF1C9A09278B6F470034643D /* DetailStationViewController.swift in Sources */,
 				EF3ACB95277C69980096BF95 /* MeViewController.swift in Sources */,
 				EF7F08D6278F349100FE4E9C /* GoogleMapAPI.swift in Sources */,
@@ -1450,24 +1695,31 @@
 				EF823526277D7E4300379B38 /* PlugTypeMasterRepository.swift in Sources */,
 				EF3ACB10277C57FC0096BF95 /* SplashViewController.swift in Sources */,
 				EFA36EBD279311FE00BF2E51 /* GetInformationFindAllUseCase.swift in Sources */,
+				EFCA87FC279AFA92001BCFD3 /* MetaResponse.swift in Sources */,
 				EFA36EB52793103500BF2E51 /* GetInformationFindAllRequest.swift in Sources */,
 				EF3ACB58277C5D850096BF95 /* UIColor+Extension.swift in Sources */,
+				EFCA8817279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift in Sources */,
 				EF9AF8DB279145E80051B616 /* GetPlaceDirectionRequest.swift in Sources */,
 				EF0EE90C27849F1F00FC148D /* MarkerStationInfoView.swift in Sources */,
+				EFCA87EF279A95C2001BCFD3 /* PostUserAuthUseCase.swift in Sources */,
 				EFA36EA627930BFB00BF2E51 /* ContentTableViewCell.swift in Sources */,
 				EF82350C277D78BD00379B38 /* Utils.swift in Sources */,
 				EF82350E277D78E900379B38 /* Decoder+Extension.swift in Sources */,
+				EFCA87E7279A837C001BCFD3 /* PostUserRegisterUseCase.swift in Sources */,
 				EF3ACB73277C638A0096BF95 /* Localizable.swift in Sources */,
 				EF82353D277D966D00379B38 /* Encodable+Extension.swift in Sources */,
 				EFA36EC1279319CD00BF2E51 /* Date+Extension.swift in Sources */,
 				EF823548277D9F0D00379B38 /* MapViewModel.swift in Sources */,
 				EF82352A277D7F1300379B38 /* GetFindAllPlugTypeMasterUseCase.swift in Sources */,
+				EFCA87E4279A829B001BCFD3 /* UserRepository.swift in Sources */,
 				EFA36EB8279310C100BF2E51 /* InformationRepository.swift in Sources */,
 				EF0EE9102784A80E00FC148D /* UIImageView+Kingfisher.swift in Sources */,
 				EF0CE1CA27985CE50072C156 /* StationDetailViewModel.swift in Sources */,
+				EFCA87E1279A823D001BCFD3 /* PostUserRegisterResponse.swift in Sources */,
 				EF75C2A02788AA66004FEC64 /* ProfileViewController.swift in Sources */,
 				EF75C2AD2788D837004FEC64 /* UIPanGestureRecognizer+Extension.swift in Sources */,
 				EF82351E277D7CFE00379B38 /* GetPlugTypeMasterResponse.swift in Sources */,
+				EFCA880F279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift in Sources */,
 				EFA36EC6279323F100BF2E51 /* PreLoginViewController.swift in Sources */,
 				EF3ACB68277C61FD0096BF95 /* Language.swift in Sources */,
 			);

@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
+
+public protocol LoginDelegate {
+    func didLoginSuccess()
+}
 
 class LoginViewController: UIViewController {
 
@@ -21,9 +29,24 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
 
+    public var delegate: LoginDelegate? = nil
+    
+    lazy var viewModel: LoginProtocol = {
+        let vm = LoginViewModel(vc: self)
+        self.configure(vm)
+        self.bindToViewModel()
+        return vm
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        GIDSignIn.sharedInstance().presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
+    }
+    
+    func configure(_ interface: LoginProtocol) {
+        self.viewModel = interface
     }
     
     private func setupUI() {
@@ -59,10 +82,132 @@ class LoginViewController: UIViewController {
         
         self.btnLogin.setRounded(rounded: 8.0)
         
-        self.btnLogin.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        self.btnLogin.addTarget(self, action: #selector(handleSignin), for: .touchUpInside)
+        self.btnFacebook.addTarget(self, action: #selector(handleFacebookSignin), for: .touchUpInside)
+        self.btnGoogle.addTarget(self, action: #selector(handleGoogleSignin), for: .touchUpInside)
+        self.btnRegister.addTarget(self, action: #selector(handleSignup), for: .touchUpInside)
+    }
+
+}
+
+// MARK: - Binding
+extension LoginViewController {
+    
+    func bindToViewModel() {
+        viewModel.output.didPostUserRegisterSuccess = didPostUserRegisterSuccess()
     }
     
-    @objc func handleLogin() {
-       
+    func didPostUserRegisterSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.stopLoding()
+            weakSelf.dismiss(animated: true, completion: nil)
+            weakSelf.delegate?.didLoginSuccess()
+        }
+    }
+    
+}
+
+extension LoginViewController {
+    @objc func handleSignin() {
+        guard let email = inputUsername.text, email != "", let password = inputPassword.text, password != "" else {
+            ToastMsg(msg: "กรอกข้อมูลให้ครบถ้วน")
+            return
+        }
+        
+        self.startLodingCircle()
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let self = self else { return }
+            self.stopLoding()
+            guard let user = authResult else {
+                return
+            }
+        }
+    }
+    
+    @objc func handleGoogleSignin() {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @objc func handleFacebookSignin() {
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: ["public_profile", "email"], viewController: self, completion: didReceiveFacebookLoginResult)
+    }
+    
+    @objc func handleSignup() {
+    
+    }
+}
+
+//MARK: - Check Auth NewUser
+extension LoginViewController {
+    
+    func checkNewAuth(user: AuthDataResult) {
+        guard let isNewUser = user.additionalUserInfo?.isNewUser, isNewUser == true else {
+            viewModel.input.userAuth()
+            return
+        }
+        viewModel.input.userRegister(user: user)
+    }
+}
+
+// MARK: - Google Auth
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        self.startLoding()
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        Auth.auth().signIn(with: credential, completion: { [self] (user, error) in
+            self.stopLoding()
+            if let error = error {
+                debugPrint("Signin Google Error : \(error.localizedDescription)")
+            }else {
+                guard let user = user else {
+                    return
+                }
+                self.checkNewAuth(user: user)
+            }
+        })
+    }
+}
+
+// MARK: - Facebook Auth
+extension LoginViewController {
+    private func didReceiveFacebookLoginResult(loginResult: LoginResult) {
+        switch loginResult {
+        case .success:
+            didLoginWithFacebook()
+        case .failed(_):
+            break
+        default: break
+        }
+    }
+    
+    fileprivate func didLoginWithFacebook() {
+        // Successful log in with Facebook
+        if let accessToken = AccessToken.current {
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            self.startLoding()
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                self.stopLoding()
+                if let error = error {
+                    debugPrint("Signin Facebook Error : \(error.localizedDescription)")
+                }else {
+                    debugPrint("Signin Facebook Success")
+                    self.dismiss(animated: true, completion: nil)
+                    self.delegate?.didLoginSuccess()
+                }
+                
+            })
+            
+        }
     }
 }

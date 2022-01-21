@@ -22,6 +22,11 @@ extension UIViewController {
         self.present(dialogMessage, animated: true, completion: nil)
     }
     
+    
+    func ToastMsg(msg:String) {
+        self.view.makeToast("\(msg)", duration: 1.5, position: .bottom)
+    }
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -39,7 +44,7 @@ extension UIViewController: NVActivityIndicatorViewable {
     
     func startLoding() {
         let size = CGSize(width: 35.0, height: 35.0)
-        startAnimating(size, message: "", type: .circleStrokeSpin, color: UIColor.gold, backgroundColor: .blackAlpha(alpha: 0.0), textColor: .white, fadeInAnimation: nil)
+        startAnimating(size, message: "", type: .circleStrokeSpin, color: UIColor.basePrimary, backgroundColor: .blackAlpha(alpha: 0.0), textColor: .white, fadeInAnimation: nil)
     }
     
     func stopLoding() {

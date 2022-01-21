@@ -12,8 +12,12 @@ target 'ChargeLoma' do
   pod 'HMSegmentedControl'
   
   pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
+  pod 'Firebase/Core'
   pod 'FittedSheets'
+  
+  # Auth
+  pod 'GoogleSignIn', '~> 5.0'
+  pod 'FBSDKLoginKit'
   
   # Pods for ChargeLoma
 
