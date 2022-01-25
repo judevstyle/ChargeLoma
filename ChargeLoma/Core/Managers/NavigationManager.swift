@@ -11,7 +11,7 @@ import FittedSheets
 
 public enum NavigationOpeningSender {
     case splash
-    case login(_ delegate: LoginDelegate)
+    case login(_ delegate: LoginDelegate, actionType: LoginActionType)
     case register(_ delegate: RegisterDelegate)
     
     //Main Tabbar
@@ -35,7 +35,13 @@ public enum NavigationOpeningSender {
     
     case preLogin
     
-    case galleryPhoto
+    case galleryPhoto(listImage: [String])
+    
+    case imageListFullScreen(listImage: [String], index: Int?)
+    
+    case addReview(_ stId: String)
+    
+    case choosePlug(_ stId: String, delegate: ChoosePlugViewModelDelegate)
     
     public var storyboardName: String {
         switch self {
@@ -69,6 +75,12 @@ public enum NavigationOpeningSender {
             return "GalleryPhoto"
         case .stationDetail:
             return "StationDetail"
+        case .imageListFullScreen:
+            return "ImageListFullScreen"
+        case .addReview:
+            return "AddReview"
+        case .choosePlug:
+            return "ChoosePlug"
         }
     }
     
@@ -104,6 +116,12 @@ public enum NavigationOpeningSender {
             return "GalleryPhotoViewController"
         case .stationDetail:
             return "StationDetailViewController"
+        case .imageListFullScreen:
+            return "ImageListFullScreenViewController"
+        case .addReview:
+            return "AddReviewViewController"
+        case .choosePlug:
+            return "ChoosePlugViewController"
         }
     }
     
@@ -126,6 +144,10 @@ public enum NavigationOpeningSender {
             return "รูปภาพ"
         case .profile:
             return "Profile"
+        case .addReview:
+            return "รีวิว"
+        case .choosePlug:
+            return "เลือกหัวชาร์จ"
         default:
             return ""
         }
@@ -181,6 +203,15 @@ public enum NavigationOpeningSender {
             return navController
         }
     }
+    
+    public var navColor: UIColor {
+        switch self {
+        case .galleryPhoto, .addReview, .choosePlug:
+            return .basePrimary
+        default:
+            return .clear
+        }
+    }
 }
 
 class NavigationManager {
@@ -223,9 +254,10 @@ class NavigationManager {
         var viewController: UIViewController = UIViewController()
         
         switch to {
-        case .login(let delegate):
+        case .login(let delegate, let actionType):
             if let className = storyboard.instantiateInitialViewController() as? LoginViewController {
                 className.delegate = delegate
+                className.actionType = actionType
                 viewController = className
             }
         case .register(let delegate):
@@ -241,6 +273,27 @@ class NavigationManager {
         case .searchStation(let delegate, let type):
             if let className = storyboard.instantiateInitialViewController() as? SearchStationViewController {
                 className.viewModel.setDelegate(delegate: delegate, type: type)
+                viewController = className
+            }
+        case .imageListFullScreen(let listImage ,let index):
+            if let className = storyboard.instantiateInitialViewController() as? ImageListFullScreenViewController {
+                className.viewModel.setListImage(listImage: listImage)
+                className.viewModel.setSelectedIndex(index: index)
+                viewController = className
+            }
+        case .galleryPhoto(let listImage):
+            if let className = storyboard.instantiateInitialViewController() as? GalleryPhotoViewController {
+                className.listImageStation = listImage
+                viewController = className
+            }
+        case .choosePlug(let stId, let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? ChoosePlugViewController {
+                className.viewModel.setupPrepare(stId, delegate: delegate)
+                viewController = className
+            }
+        case .addReview(let stId):
+            if let className = storyboard.instantiateInitialViewController() as? AddReviewViewController {
+                className.viewModel.setStId(stId)
                 viewController = className
             }
         default:
@@ -263,11 +316,18 @@ class NavigationManager {
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = true
             }
-            
+
             let topVC = UIApplication.getTopViewController()
-            topVC?.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            topVC?.navigationController?.navigationBar.tintColor = .white
-            topVC?.navigationController?.pushViewController(viewController, animated: animated)
+            if let nav = topVC?.navigationController {
+                nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                nav.navigationBar.tintColor = .white
+                nav.pushViewController(viewController, animated: animated)
+            } else {
+                debugPrint("self.navigationController")
+                self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                self.navigationController.navigationBar.tintColor = .white
+                self.navigationController.pushViewController(viewController, animated: animated)
+            }
         case .PushInTabbar:
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = false
@@ -294,26 +354,13 @@ class NavigationManager {
             self.navigationController.present(nav, animated: true, completion: completion)
         case .presentFullScreen(let completion):
             
-            let nav: UINavigationController = UINavigationController(rootViewController: viewController)
-            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            nav.navigationBar.shadowImage = UIImage()
-            nav.navigationBar.isTranslucent = true
-            nav.isNavigationBarHidden = true
-            
+            let nav: UINavigationController = self.getNavigationController(vc: viewController, to: to)
             nav.view.backgroundColor = UIColor.black
             nav.modalPresentationStyle = .overFullScreen
             nav.modalTransitionStyle = .crossDissolve
-            
-            self.navigationController.present(nav, animated: true, completion: completion)
+            let topVC = UIApplication.getTopViewController()
+            topVC?.present(nav, animated: true, completion: completion)
         case .presentHalfModalAndFullScreen(let rootVC, let heightHalf, let completion):
-
-//            var nav = self.getNavigationController(vc: viewController)
-//            var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
-//            halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: rootVC, presentingViewController: nav)
-//            nav.modalPresentationStyle = .custom
-//            HalfModalPresentationController.heightModal = heightHalf
-//            self.navigationController.present(nav, animated: true, completion: completion)
-            
             let nav = self.getNavigationController(vc: viewController)
             
             let options: SheetOptions = SheetOptions(pullBarHeight: 36, useInlineMode: nil)
@@ -331,7 +378,7 @@ class NavigationManager {
             }
             
             if withNav {
-                let nav: UINavigationController = to.navController
+                let nav: UINavigationController = self.getNavigationController(vc: viewController, to: to)
                 nav.modalTransitionStyle = modalTransitionStyle
                 nav.modalPresentationStyle = modalPresentationStyle
                 
@@ -382,7 +429,7 @@ class NavigationManager {
         }
     }
     
-    private func getNavigationController(vc: UIViewController, isTranslucent: Bool = false, isFullScreen: Bool = false) -> UINavigationController {
+    private func getNavigationController(vc: UIViewController, isTranslucent: Bool = false, isFullScreen: Bool = false, to: NavigationOpeningSender = .main) -> UINavigationController {
         
         let nav: UINavigationController = UINavigationController(rootViewController: vc)
         
@@ -390,7 +437,7 @@ class NavigationManager {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithTransparentBackground()
             
-            appearance.backgroundColor = .clear
+            appearance.backgroundColor = to.navColor
             appearance.shadowColor = .clear
             appearance.shadowImage = UIImage()
             appearance.backgroundImage = UIImage()
@@ -401,7 +448,7 @@ class NavigationManager {
             nav.navigationBar.compactAppearance = appearance
         } else {
             
-            nav.navigationBar.barTintColor = UIColor.basePrimary
+            nav.navigationBar.barTintColor = to.navColor
             nav.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.bottom, barMetrics: .default)
             nav.navigationBar.shadowImage = UIImage()
             nav.navigationBar.isTranslucent = true

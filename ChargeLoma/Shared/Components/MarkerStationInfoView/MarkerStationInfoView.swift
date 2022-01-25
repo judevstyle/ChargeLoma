@@ -42,7 +42,10 @@ class MarkerStationInfoView: UIView {
         } else {
             rateValue.text = "-"
         }
-        rateDesc.text = item?.plugDesc ?? ""
+        rateDesc.text = "| \(item?.plugDesc ?? "")"
+        
+        rateValue.sizeToFit()
+        rateDesc.sizeToFit()
     }
     
 }

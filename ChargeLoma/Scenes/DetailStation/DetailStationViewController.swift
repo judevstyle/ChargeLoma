@@ -275,25 +275,6 @@ class DetailStationViewController: UIViewController {
     
 }
 
-//extension DetailStationViewController: HalfModalPresentable {
-//    public func transitionFullScreenEnd() {
-//        viewIndicator.isHidden = true
-//        scrollView.isScrollEnabled = true
-//        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
-//            self.bgBottomBar.alpha = 1.0
-//        }, completion: nil)
-//        debugPrint("isScrollEnabled")
-//    }
-//
-//    public func transitionHalfScreenEnd() {
-//        viewIndicator.isHidden = false
-////        scrollView.isScrollEnabled = false
-//        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseInOut, animations: {
-//            self.bgBottomBar.alpha = 0.0
-//        }, completion: nil)
-//        debugPrint("isNoScrollEnabled")
-//    }
-//}
 
 // MARK: - Binding
 extension DetailStationViewController {
@@ -368,27 +349,6 @@ extension DetailStationViewController : GMSMapViewDelegate {
 
     }
 }
-
-////implementing extension from CLLocationManagerDelegate
-//extension DetailStationViewController: CLLocationManagerDelegate {
-//
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        guard status == .authorizedWhenInUse else {
-//            return
-//        }
-//        locationManager.startUpdatingLocation()
-//
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        guard let location = locations.first else {
-//            return
-//        }
-//        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7, bearing: 0, viewingAngle: 0)
-//        locationManager.stopUpdatingLocation()
-//    }
-//}
 
 extension DetailStationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

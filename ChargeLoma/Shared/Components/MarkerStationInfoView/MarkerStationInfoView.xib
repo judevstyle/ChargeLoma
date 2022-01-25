@@ -53,17 +53,17 @@
                                                         <constraint firstAttribute="height" constant="15" id="S8R-R9-Y5t"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tag-IQ-RSy">
-                                                    <rect key="frame" x="19" y="8" width="21.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tag-IQ-RSy">
+                                                    <rect key="frame" x="19" y="8" width="23" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="21.5" id="lBh-PJ-Jlz"/>
+                                                        <constraint firstAttribute="width" constant="23" id="lBh-PJ-Jlz"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="baseTextGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="| sdasdas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ6-Nv-T0N">
-                                                    <rect key="frame" x="44.5" y="9.5" width="132.5" height="14.5"/>
+                                                    <rect key="frame" x="46" y="9.5" width="131" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" name="baseTextGray"/>
                                                     <nil key="highlightedColor"/>

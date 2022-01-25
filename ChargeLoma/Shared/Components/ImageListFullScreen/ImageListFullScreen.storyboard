@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kw7-wR-8RF">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SukhumvitSet-Text.ttf">
+            <string>SukhumvitSet-Text</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Image List Full Screen View Controller-->
+        <scene sceneID="7RB-Tf-awu">
+            <objects>
+                <viewController id="Kw7-wR-8RF" customClass="ImageListFullScreenViewController" customModule="ChargeLoma" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yjH-TX-Dcs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="59P-vW-h3o">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1rg-9d-3vC">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MD5-PJ-92Y">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oyV-fj-raW">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gf-SV-aI7">
+                                <rect key="frame" x="184" y="765" width="46" height="27"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNc-Nc-6sm">
+                                        <rect key="frame" x="0.0" y="0.0" width="10" height="27"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evX-hR-rvt">
+                                        <rect key="frame" x="15" y="0.0" width="6.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxp-QF-jKS">
+                                        <rect key="frame" x="26.5" y="0.0" width="19.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Sxp-QF-jKS" secondAttribute="trailing" id="12h-EI-S9Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="BNc-Nc-6sm" secondAttribute="bottom" id="KUF-Yq-eMU"/>
+                                    <constraint firstItem="evX-hR-rvt" firstAttribute="leading" secondItem="BNc-Nc-6sm" secondAttribute="trailing" constant="5" id="S1j-Bb-C5C"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sxp-QF-jKS" secondAttribute="bottom" id="Xez-cT-9ep"/>
+                                    <constraint firstItem="evX-hR-rvt" firstAttribute="top" secondItem="0gf-SV-aI7" secondAttribute="top" id="Yjx-GN-cZh"/>
+                                    <constraint firstItem="BNc-Nc-6sm" firstAttribute="top" secondItem="0gf-SV-aI7" secondAttribute="top" id="bQy-md-V9c"/>
+                                    <constraint firstAttribute="bottom" secondItem="evX-hR-rvt" secondAttribute="bottom" id="gSL-iM-6JG"/>
+                                    <constraint firstItem="BNc-Nc-6sm" firstAttribute="leading" secondItem="0gf-SV-aI7" secondAttribute="leading" id="hij-Bb-Xog"/>
+                                    <constraint firstItem="Sxp-QF-jKS" firstAttribute="top" secondItem="0gf-SV-aI7" secondAttribute="top" id="mwH-AZ-6Cm"/>
+                                    <constraint firstItem="Sxp-QF-jKS" firstAttribute="leading" secondItem="evX-hR-rvt" secondAttribute="trailing" constant="5" id="yaF-z8-dt0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MAQ-J0-M3h"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0gf-SV-aI7" secondAttribute="bottom" constant="16" id="Evq-ff-E3D"/>
+                            <constraint firstItem="59P-vW-h3o" firstAttribute="bottom" secondItem="MAQ-J0-M3h" secondAttribute="bottom" id="GqP-5U-XKh"/>
+                            <constraint firstItem="59P-vW-h3o" firstAttribute="top" secondItem="yjH-TX-Dcs" secondAttribute="top" id="e5k-gc-czc"/>
+                            <constraint firstItem="59P-vW-h3o" firstAttribute="leading" secondItem="yjH-TX-Dcs" secondAttribute="leading" id="oqN-Cn-kwX"/>
+                            <constraint firstItem="59P-vW-h3o" firstAttribute="trailing" secondItem="yjH-TX-Dcs" secondAttribute="trailing" id="xD9-7z-koF"/>
+                            <constraint firstItem="0gf-SV-aI7" firstAttribute="centerX" secondItem="yjH-TX-Dcs" secondAttribute="centerX" id="xii-fa-9Bc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zpR-Mq-ibX">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="LXm-Xw-fS2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="closeAction:" destination="Kw7-wR-8RF" id="ROs-2S-IQj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="allPageText" destination="Sxp-QF-jKS" id="S6z-bV-r24"/>
+                        <outlet property="closeBtn" destination="LXm-Xw-fS2" id="suR-yv-Mq0"/>
+                        <outlet property="collectionView" destination="59P-vW-h3o" id="4DR-jI-Tys"/>
+                        <outlet property="currentPageText" destination="BNc-Nc-6sm" id="5ze-Lb-Qxz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N5j-SO-xes" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="41.517857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

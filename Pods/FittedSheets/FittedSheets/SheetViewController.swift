@@ -10,6 +10,7 @@
 import UIKit
 
 public class SheetViewController: UIViewController {
+    
     public private(set) var options: SheetOptions
     
     /// Default value for autoAdjustToKeyboard. Defaults to true.
@@ -470,6 +471,7 @@ public class SheetViewController: UIViewController {
                     self.isPanning = false
                     if previousSize != newSize {
                         self.sizeChanged?(self, newSize, newContentHeight)
+                        NotificationCenter.default.post(name: Notification.Name("didChangeSizeSheet"), object: nil, userInfo: ["size":"\(newSize)"])
                     }
                 })
             case .possible:

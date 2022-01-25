@@ -87,6 +87,13 @@ class StationDetailViewController: UIViewController {
     
     @IBOutlet weak var btnWriteReview: UIButton!
     
+    @IBOutlet weak var headReview: UILabel!
+    @IBOutlet weak var tableReview: UITableView!
+    @IBOutlet weak var tableReviewHeight: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var spaceScrollViewWithBottom: NSLayoutConstraint!
+    
     lazy var viewModel: StationDetailProtocol = {
         let vm = StationDetailViewModel(vc: self)
         self.configure(vm)
@@ -96,6 +103,7 @@ class StationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("didChangeSizeSheet"), object: nil)
     }
     
     func configure(_ interface: StationDetailProtocol) {
@@ -108,14 +116,22 @@ class StationDetailViewController: UIViewController {
         setupTableView()
         setupCheckBox()
         self.sheetViewController?.handleScrollView(self.scrollView)
+        
         viewModel.input.getStationDetail()
         viewModel.input.getFavorite()
+        viewModel.input.getImageStation()
+        viewModel.input.getReview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
         mapView = nil
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        self.tableReviewHeight?.constant = self.tableReview.contentSize.height
     }
     
     private func setupUI() {
@@ -167,12 +183,15 @@ class StationDetailViewController: UIViewController {
         self.btnEdit.backgroundColor = .white
         self.btnEdit.setTitle("แก้ไขข้อมูล", for: .normal)
         
-        //        imagePosterView.roundedTop(radius: 12)
         imagePosterView.setRounded(rounded: 8)
         imagePosterView.layer.masksToBounds = true
+        imagePosterView.setPlaceholderImageView()
+        imagePosterView.isUserInteractionEnabled = true
+        let tapPosterFullScreen = UITapGestureRecognizer(target: self, action: #selector(self.handleTapPosterFullScreen(_:)))
+        imagePosterView.addGestureRecognizer(tapPosterFullScreen)
         
         viewBadgeCount.setRounded(rounded: 4)
-        titleBadgeCount.font = .biggerTinyBold
+        titleBadgeCount.font = .extraSmallText
         
         titleStationValue.font = .h3Bold
         titleStationValue.textColor = .black
@@ -196,16 +215,22 @@ class StationDetailViewController: UIViewController {
         serviceCharge.text = "ค่าบริการ \(0.0) บาท"
         
         self.bgBottomBar.alpha = 1.0
+//        self.bgBottomBar.setShadowBoxView()
         
         self.btnWriteReview.backgroundColor = .basePrimary
         self.btnWriteReview.titleLabel?.textColor = .white
         self.btnWriteReview.tintColor = .white
-        self.btnWriteReview.titleLabel?.font = .bodyText
+        self.btnWriteReview.titleLabel?.font = .h3Bold
         self.btnWriteReview.setRounded(rounded: 8.0)
+        self.btnWriteReview.addTarget(self, action: #selector(handleBtnAddReview), for: .touchUpInside)
         
         self.bgRating.setRounded(rounded: 8)
-        self.titleRating.font = .bodyText
+        self.titleRating.font = .h3Bold
         self.titleRating.tintColor = .white
+        
+        
+        headReview.font = .bodyBold
+        headReview.text = "รีวิวจากผู้ใช้บริการ"
         
         
     }
@@ -224,6 +249,15 @@ class StationDetailViewController: UIViewController {
         plugTableView.dataSource = self
         plugTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         plugTableView.registerCell(identifier: PlugTableViewCell.identifier)
+        
+        
+        tableReviewHeight.constant = 0
+        tableReview.delegate = self
+        tableReview.dataSource = self
+        tableReview.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableReview.estimatedRowHeight = 80
+        tableReview.rowHeight = UITableView.automaticDimension
+        tableReview.registerCell(identifier: ReviewTableViewCell.identifier)
     }
     
     func setupCheckBox() {
@@ -274,10 +308,37 @@ class StationDetailViewController: UIViewController {
     }
     
     @objc func handleTapSeeAllGalleryPhoto(_ sender: UITapGestureRecognizer? = nil) {
-        debugPrint("handleTapSeeAllGalleryPhoto")
-        NavigationManager.instance.pushVC(to: .galleryPhoto, presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+        if let listImage = viewModel.output.getListStrImageStation(), listImage.count > 0 {
+            NavigationManager.instance.pushVC(to: .galleryPhoto(listImage: [listImage[0], listImage[0], listImage[0], listImage[0]]), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+        }
     }
     
+    @objc func handleTapPosterFullScreen(_ sender: UITapGestureRecognizer? = nil) {
+        if let listImage = viewModel.output.getListStrImageStation(), listImage.count > 0 {
+            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: [listImage[0]], index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+        }
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary? as! [String:Any]? {
+            let size = dict["size"] as? String
+            self.setBgBottomBar(isHidden: size == "fullscreen" ? false : true)
+        }
+    }
+  
+    func setBgBottomBar(isHidden: Bool) {
+        self.bgBottomBar.isHidden = false
+        self.bgBottomBar.alpha = 0.0
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
+            if isHidden == true {
+                self.bgBottomBar.alpha = 0.0
+                self.spaceScrollViewWithBottom.constant = 0
+            } else {
+                self.bgBottomBar.alpha = 1.0
+                self.spaceScrollViewWithBottom.constant = 61
+            }
+        }, completion: nil)
+    }
 }
 
 
@@ -287,6 +348,8 @@ extension StationDetailViewController {
     func bindToViewModel() {
         viewModel.output.didGetStationSuccess = didGetStationSuccess()
         viewModel.output.didGetFavoriteSuccess = didGetFavoriteSuccess()
+        viewModel.output.didGetImageStationSuccess = didGetImageStationSuccess()
+        viewModel.output.didGetReviewSuccess = didGetReviewSuccess()
     }
     
     func didGetStationSuccess() -> (() -> Void) {
@@ -305,15 +368,34 @@ extension StationDetailViewController {
         }
     }
     
-    private func setupValue() {
-        imagePosterView.kf.setImageDefault(with: URL(string: "123")!)
-        guard let station = viewModel.output.getDataStation() else { return }
-        imagePosterView.setPlaceholderImageView()
-        
-        if let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
-            imagePosterView.kf.setImageDefault(with: urlImage)
+    func didGetImageStationSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let self = self else { return }
+            let listImage = self.viewModel.output.getListImageStation()
+            if listImage.count > 0 {
+                if let posterImage = listImage[0].imgPath, let urlImage = URL(string: "\(posterImage)") {
+                    self.imagePosterView.kf.setImageDefault(with: urlImage)
+                }
+                
+                self.titleBadgeCount.text = "\(listImage.count)"
+            } else {
+                if let station = self.viewModel.output.getDataStation(), let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
+                    self.imagePosterView.kf.setImageDefault(with: urlImage)
+                }
+            }
         }
-        
+    }
+    
+    func didGetReviewSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let self = self else { return }
+            self.tableReview.reloadData()
+            self.tableReview.layoutIfNeeded()
+        }
+    }
+    
+    private func setupValue() {
+        guard let station = self.viewModel.output.getDataStation() else { return }
         if let logoImage = station.provider?.logoLabel, let urlImage = URL(string: "\(logoImage)") {
             logoStationImageView.kf.setImageDefault(with: urlImage)
         }
@@ -325,9 +407,12 @@ extension StationDetailViewController {
         
         setupMarker(item: station)
         
-        
         descValue.text = station.stationDesc ?? "-"
         serviceCharge.text = "ค่าบริการ \(station.serviceRate ?? 0.0) บาท"
+        
+        titleRating.text = "\(station.rating ?? 0.0)"
+        
+        checkMethodService()
     }
     
     func setupMarker(item: StationData) {
@@ -342,6 +427,18 @@ extension StationDetailViewController {
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
             mapView.animate(to: camera)
         }
+    }
+    
+    func checkMethodService()  {
+        guard let station = self.viewModel.output.getDataStation() else { return }
+        self.cbParking.setCheckBox(isSelected: station.isServiceParking ?? false)
+        self.cbFoodShop.setCheckBox(isSelected: station.isServiceFood ?? false)
+        self.cbCoffeeShop.setCheckBox(isSelected: station.isServiceCoffee ?? false)
+        self.cbToilet.setCheckBox(isSelected: station.isServiceRestroom ?? false)
+        self.cbMarket.setCheckBox(isSelected: station.isServiceShoping ?? false)
+        self.cbSleep.setCheckBox(isSelected: station.isServiceRestarea ?? false)
+        self.cbWifi.setCheckBox(isSelected: station.isServiceWifi ?? false)
+        self.cbOther.setCheckBox(isSelected: station.isServiceOther ?? false)
     }
 }
 
@@ -362,7 +459,7 @@ extension StationDetailViewController {
     
     @objc func handleFavoriteButton() {
         guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
-            NavigationManager.instance.pushVC(to: .login(self), presentation: .Present(withNav: false))
+            NavigationManager.instance.pushVC(to: .login(self, actionType: .favorite), presentation: .Present(withNav: false))
             return
         }
         
@@ -397,6 +494,17 @@ extension StationDetailViewController {
             }
         }
     }
+    
+    @objc func handleBtnAddReview() {
+        guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
+            NavigationManager.instance.pushVC(to: .login(self, actionType: .writeReview), presentation: .Present(withNav: false))
+            return
+        }
+        
+        if let stId = viewModel.output.getDataStation()?.stId {
+            NavigationManager.instance.pushVC(to: .addReview(stId), presentation: .presentFullScreen(completion: nil))
+        }
+    }
 }
 
 extension StationDetailViewController : GMSMapViewDelegate {
@@ -420,6 +528,9 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
             let height = viewModel.output.getItemViewCellHeight(type: .plugTableView)
             plugTableViewHeight.constant = (CGFloat(count)*height)
             return count
+        case tableReview:
+            let count = viewModel.output.getNumberOfRowsInSection(tableView, section: section, type: .reviewTableView)
+            return count
         default:
             return 0
         }
@@ -429,6 +540,8 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
         switch tableView {
         case plugTableView:
             return viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .plugTableView)
+        case tableReview:
+            return viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .reviewTableView)
         default:
             return UITableViewCell()
         }
@@ -438,14 +551,35 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
         switch tableView {
         case plugTableView:
             return viewModel.output.getItemViewCellHeight(type: .plugTableView)
+        case tableReview:
+            return viewModel.output.getItemViewCellHeight(type: .reviewTableView)
         default:
             return 0
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.viewWillLayoutSubviews()
+    }
 }
 
 extension StationDetailViewController: LoginDelegate {
-    func didLoginSuccess() {
-        self.viewModel.input.postFavorite()
+    func didLoginSuccess(actionType: LoginActionType) {
+        debugPrint("ActionType: \(actionType)")
+        switch actionType {
+        case .writeReview:
+            if let stId = viewModel.output.getDataStation()?.stId {
+                debugPrint("stID \(stId)")
+                DispatchQueue.main.async {
+                    NavigationManager.instance.pushVC(to: .addReview(stId), presentation: .presentFullScreen(completion: nil))
+                }
+            }
+        case .favorite:
+            self.viewModel.input.postFavorite()
+        default:
+            break
+        }
     }
+    
+
 }

@@ -17,7 +17,13 @@ class PlugTableViewCell: UITableViewCell {
     
     static let identifier = "PlugTableViewCell"
     
-    var item: PlugMapping? {
+    var itemPlugMapping: PlugMapping? {
+        didSet {
+            setupValue()
+        }
+    }
+    
+    var itemPlugTypeData: PlugStationData? {
         didSet {
             setupValue()
         }
@@ -42,11 +48,27 @@ class PlugTableViewCell: UITableViewCell {
     }
     
     func setupValue() {
-        if let logo = item?.plugTypeMaster?.pIcon, let urlImage = URL(string: "\(logo)") {
-            imageLogo.kf.setImageDefault(with: urlImage)
+        if let item = itemPlugMapping {
+            if let logo = item.plugTypeMaster?.pIcon, let urlImage = URL(string: "\(logo)") {
+                imageLogo.kf.setImageDefault(with: urlImage)
+            }
+            
+            titleText.text = item.plugTypeMaster?.pTitle ?? ""
+            titleBadge.text = "\(item.power ?? "") kW"
         }
         
-        titleText.text = item?.plugTypeMaster?.pTitle ?? ""
-        titleBadge.text = "\(item?.power ?? "") kW"
+        if let item = itemPlugTypeData {
+            if let logo = item.plugType?.pIcon, let urlImage = URL(string: "\(logo)") {
+                imageLogo.kf.setImageDefault(with: urlImage)
+            }
+            
+            titleText.text = item.plugType?.pTitle ?? ""
+            titleBadge.text = "\(item.power ?? "") kW"
+        }
+    }
+    
+    func setBaseBG() {
+        self.backgroundColor = .baseBG
+        self.setRounded(rounded: 5)
     }
 }

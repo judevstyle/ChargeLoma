@@ -170,7 +170,7 @@ extension ProfileViewController: UITableViewDataSource {
         guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
             switch indexPath.row {
             case 3:
-                NavigationManager.instance.pushVC(to: .login(self), presentation: .Present(withNav: false))
+                NavigationManager.instance.pushVC(to: .login(self, actionType: .unknown), presentation: .Present(withNav: false))
             default:
                 break
             }
@@ -187,7 +187,7 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: LoginDelegate {
-    func didLoginSuccess() {
+    func didLoginSuccess(actionType: LoginActionType) {
         reloadDataView()
     }
 }

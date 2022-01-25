@@ -41,12 +41,12 @@ extension PreLoginViewController {
     }
     
     @objc func handleLogin() {
-        NavigationManager.instance.pushVC(to: .login(self), presentation: .Present(withNav: false))
+        NavigationManager.instance.pushVC(to: .login(self, actionType: .unknown), presentation: .Present(withNav: false))
     }
 }
 
 extension PreLoginViewController: LoginDelegate {
-    func didLoginSuccess() {
+    func didLoginSuccess(actionType: LoginActionType) {
         
     }
 }

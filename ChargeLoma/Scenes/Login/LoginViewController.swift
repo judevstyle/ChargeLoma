@@ -12,7 +12,13 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 public protocol LoginDelegate {
-    func didLoginSuccess()
+    func didLoginSuccess(actionType: LoginActionType)
+}
+
+public enum LoginActionType {
+    case unknown
+    case writeReview
+    case favorite
 }
 
 class LoginViewController: UIViewController {
@@ -25,11 +31,12 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var btnRegister: UIButton!
     
-    
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btnGoogle: UIButton!
 
     public var delegate: LoginDelegate? = nil
+    
+    public var actionType: LoginActionType = .unknown
     
     lazy var viewModel: LoginProtocol = {
         let vm = LoginViewModel(vc: self)
@@ -99,10 +106,11 @@ extension LoginViewController {
     
     func didPostUserRegisterSuccess() -> (() -> Void) {
         return { [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.stopLoding()
-            weakSelf.dismiss(animated: true, completion: nil)
-            weakSelf.delegate?.didLoginSuccess()
+            guard let self = self else { return }
+            self.stopLoding()
+            self.dismiss(animated: true, completion: {
+                self.delegate?.didLoginSuccess(actionType: self.actionType)
+            })
         }
     }
     
@@ -202,8 +210,9 @@ extension LoginViewController {
                     debugPrint("Signin Facebook Error : \(error.localizedDescription)")
                 }else {
                     debugPrint("Signin Facebook Success")
-                    self.dismiss(animated: true, completion: nil)
-                    self.delegate?.didLoginSuccess()
+                    self.dismiss(animated: true, completion: {
+                        self.delegate?.didLoginSuccess(actionType: self.actionType)
+                    })
                 }
                 
             })

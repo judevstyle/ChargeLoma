@@ -15,6 +15,8 @@ public enum DomainNameConfig {
     case information
     case user
     case favorite
+    case review
+    case plugStation
 }
 
 extension DomainNameConfig {
@@ -39,6 +41,10 @@ extension DomainNameConfig {
             return "\(baseURL)/user"
         case .favorite:
             return "\(baseURL)/favorite"
+        case .review:
+            return "\(baseURL)/review"
+        case .plugStation:
+            return "\(baseURL)/plugStation"
         }
     }
     

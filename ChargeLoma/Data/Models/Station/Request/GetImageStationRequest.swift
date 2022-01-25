@@ -11,7 +11,7 @@ public struct GetImageStationRequest: Codable, Hashable {
     
     public var qureyStamp: String?
     public var page: Int?
-    public var lang: String?
+    public var lang: String = "th"
     public var stId: String?
     public var limit: Int?
     

@@ -87,6 +87,14 @@ class CheckBoxView: UIView {
         }
     }
     
+    func setCheckBox(isSelected: Bool) {
+        if isSelected == true {
+            self.setSelected()
+        } else {
+            self.setUnselected()
+        }
+    }
+    
     func setSelected() {
         self.isSelectedBtn = true
         btnCheckBox.setImage(UIImage.init(systemName: "checkmark.square.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)

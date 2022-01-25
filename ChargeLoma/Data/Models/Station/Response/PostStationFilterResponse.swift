@@ -30,7 +30,7 @@ public struct StationData: Codable, Hashable  {
     public var typeService: String?
     public var lat: Double?
     public var lng: Double?
-    public var is24hr: Bool = false
+    public var is24hr: Bool?
     public var servicetimeOpen: String?
     public var servicetimeClose: String?
     public var stationStatus: Int?
@@ -39,11 +39,22 @@ public struct StationData: Codable, Hashable  {
     public var stationName: String?
     public var addr: String?
     public var plugDesc: String?
-    public var isFastCharge: Bool = false
+    public var isFastCharge: Bool?
     public var rating: Double?
     public var stationDesc: String?
     public var serviceRate: Double?
     public var plugMapping: [PlugMapping]?
+    
+    //Service
+    public var isServiceCharge: Bool?
+    public var isServiceParking: Bool?
+    public var isServiceFood: Bool?
+    public var isServiceCoffee: Bool?
+    public var isServiceRestroom: Bool?
+    public var isServiceShoping: Bool?
+    public var isServiceRestarea: Bool?
+    public var isServiceWifi: Bool?
+    public var isServiceOther: Bool?
     
     public init() {}
     
@@ -64,10 +75,21 @@ public struct StationData: Codable, Hashable  {
         try addr                <- decoder["addr"]
         try plugDesc            <- decoder["plug_desc"]
         try isFastCharge        <- decoder["isFastCharge"]
-        try rating              <- decoder["p_type_id"]
+        try rating              <- decoder["rating"]
         try stationDesc         <- decoder["station_desc"]
         try serviceRate         <- decoder["service_rate"]
         try plugMapping         <- decoder["PlugMapping"]
+        
+        //Service
+        try isServiceCharge   <- decoder["is_service_charge"]
+        try isServiceParking  <- decoder["is_service_parking"]
+        try isServiceFood     <- decoder["is_service_food"]
+        try isServiceCoffee   <- decoder["is_service_coffee"]
+        try isServiceRestroom <- decoder["is_service_restroom"]
+        try isServiceShoping  <- decoder["is_service_shoping"]
+        try isServiceRestarea <- decoder["is_service_restarea"]
+        try isServiceWifi     <- decoder["is_service_wifi"]
+        try isServiceOther    <- decoder["is_service_other"]
     }
 }
 

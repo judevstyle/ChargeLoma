@@ -100,7 +100,7 @@ extension DetailStationViewModel {
         case .plugTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: PlugTableViewCell.identifier, for: indexPath) as! PlugTableViewCell
             cell.selectionStyle = .none
-            cell.item = self.dataStation?.plugMapping?[indexPath.item]
+            cell.itemPlugMapping = self.dataStation?.plugMapping?[indexPath.item]
             return cell
         case .reviewTableView:
             return UITableViewCell()

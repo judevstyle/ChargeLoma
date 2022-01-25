@@ -9,8 +9,13 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+import FittedSheets
 
-class MapViewController: UIViewController {
+public protocol MapViewControllerDelegate {
+    func didEndChangeSheet(size: SheetSize)
+}
+
+public class MapViewController: UIViewController {
 
     @IBOutlet weak var viewMap: UIView!
     
@@ -22,6 +27,8 @@ class MapViewController: UIViewController {
     var listStationMarker: [GMSMarker] = []
     
     var searchBar: UISearchBar!
+    
+    public var delegte: MapViewControllerDelegate? = nil
     
     lazy var tableSearchView : UITableView = {
         let table = UITableView()
@@ -42,7 +49,7 @@ class MapViewController: UIViewController {
         return vm
     }()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         viewModel.input.getStationFilter()
@@ -52,14 +59,14 @@ class MapViewController: UIViewController {
         self.viewModel = interface
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setBarTintColor(color: .clear)
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
         self.fetchMarkerMap()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
         mapView = nil
@@ -198,18 +205,18 @@ extension MapViewController {
 }
 
 extension MapViewController : GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard let markerView = marker.iconView as? MarkerStationView else { return false }
         return viewModel.input.didSelectMarkerAt(mapView, marker: marker)
     }
     
-    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+    public func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
         var lat = coordinate.latitude
         var lng = coordinate.longitude
     }
 
-    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+    public func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         guard let markerView = marker.iconView as? MarkerStationView else { return nil }
         let view = MarkerStationInfoView.instantiateFromNib()
         view.setupUI()
@@ -217,7 +224,7 @@ extension MapViewController : GMSMapViewDelegate {
         return view
     }
 
-    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+    public func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
         
 //        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
@@ -233,11 +240,11 @@ extension MapViewController: UISearchBarDelegate {
         // handling code
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
     }
     
-    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
         NavigationManager.instance.pushVC(to: .profile)
     }
     
@@ -256,7 +263,7 @@ extension MapViewController: UISearchBarDelegate {
 
 extension MapViewController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
             return
         }
@@ -264,7 +271,7 @@ extension MapViewController: CLLocationManagerDelegate {
         mapView.isMyLocationEnabled = true
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
         }
@@ -291,31 +298,30 @@ extension MapViewController {
 
 //TableView Delegate
 extension MapViewController: UITableViewDelegate, UITableViewDataSource  {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let count = viewModel.output.getListResultPlace().count
         return count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier) as! SearchResultTableViewCell
         let place = viewModel.output.getListResultPlace()[indexPath.item]
         cell.place = place
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let place = viewModel.output.getListResultPlace()[indexPath.item]
         viewModel.input.didSelectPlace(item: place)
     }
 }
-
