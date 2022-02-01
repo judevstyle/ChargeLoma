@@ -13,6 +13,7 @@ protocol FavoriteRepository {
     func getFavorite(request: FavoriteRequest) -> AnyPublisher<GetFavoriteResponse, Error>
     func postFavorite(request: FavoriteRequest) -> AnyPublisher<PostFavoriteResponse, Error>
     func deleteFavorite(stId: String) -> AnyPublisher<DeleteFavoriteResponse, Error>
+    func getStationFavorite(request: FavoriteRequest) -> AnyPublisher<GetStationFavoriteResponse, Error>
 }
 
 final class FavoriteRepositoryImpl: ChargeLoma.FavoriteRepository {
@@ -37,6 +38,13 @@ final class FavoriteRepositoryImpl: ChargeLoma.FavoriteRepository {
             .cb
             .request(.deleteFavorite(stId: stId))
             .map(DeleteFavoriteResponse.self)
+    }
+    
+    func getStationFavorite(request: FavoriteRequest) -> AnyPublisher<GetStationFavoriteResponse, Error> {
+        return self.provider
+            .cb
+            .request(.stationFavorite(request: request))
+            .map(GetStationFavoriteResponse.self)
     }
     
 }

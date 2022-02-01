@@ -10,6 +10,7 @@ import Moya
 import UIKit
 
 public enum FavoriteAPI {
+    case stationFavorite(request: FavoriteRequest)
     case getFavorite(request: FavoriteRequest)
     case postFavorite(request: FavoriteRequest)
     case deleteFavorite(stId: String)
@@ -18,7 +19,7 @@ public enum FavoriteAPI {
 extension FavoriteAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getFavorite, .postFavorite, .deleteFavorite:
+        case .getFavorite, .postFavorite, .deleteFavorite, .stationFavorite:
             return DomainNameConfig.favorite.url
         }
     }
@@ -31,6 +32,8 @@ extension FavoriteAPI: TargetType {
             return ""
         case .deleteFavorite(let stId):
             return "/\(stId)"
+        case .stationFavorite:
+            return "/stationFavorite"
         }
     }
 
@@ -57,6 +60,8 @@ extension FavoriteAPI: TargetType {
             return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         case .deleteFavorite:
             return .requestPlain
+        case let .stationFavorite(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }
 

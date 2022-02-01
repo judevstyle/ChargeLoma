@@ -12,15 +12,15 @@ class SearchStationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var closeBtn: UIButton!
-    
     lazy var viewModel: SearchStationProtocol = {
         let vm = SearchStationViewModel(vc: self)
         self.configure(vm)
         self.bindToViewModel()
         return vm
     }()
+    
+    var searchBar: UISearchBar!
+    var closeBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,7 @@ class SearchStationViewController: UIViewController {
     }
     
     func setupUI() {
+        closeBtn = UIButton(type: .system)
         closeBtn.setTitle("ยกเลิก", for: .normal)
         closeBtn.tintColor = .black
         closeBtn.titleLabel?.font = .bodyText
@@ -65,6 +66,9 @@ class SearchStationViewController: UIViewController {
     
     func setupSearchBar() {
         //searchBar
+        let customFrame = CGRect(x: 0, y: 0, width: view.frame.width - 95, height: 44)
+        let titleSearchView = UIView(frame: customFrame)
+        searchBar = UISearchBar(frame: customFrame)
         searchBar.delegate = self
         searchBar.placeholder = ""
         searchBar.searchBarStyle = .minimal
@@ -83,6 +87,9 @@ class SearchStationViewController: UIViewController {
         
         UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
+        
+        titleSearchView.addSubview(searchBar)
+        self.navigationItem.titleView = titleSearchView
     }
 }
 

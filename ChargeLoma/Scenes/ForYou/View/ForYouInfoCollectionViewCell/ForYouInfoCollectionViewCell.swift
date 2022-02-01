@@ -26,6 +26,7 @@ class ForYouInfoCollectionViewCell: UICollectionViewCell {
         // Initialization code
         setupUI()
         setupTableView()
+        viewModel.input.getInformation()
     }
     
     func setupTableView() {

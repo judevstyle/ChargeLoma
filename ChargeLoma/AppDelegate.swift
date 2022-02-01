@@ -11,6 +11,8 @@ import GoogleMaps
 import GooglePlaces
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 //@main
 @UIApplicationMain
@@ -25,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDg-bwviwDVeAhD_JPJt4mdCidS9dK4uvA")
         GMSPlacesClient.provideAPIKey("AIzaSyDg-bwviwDVeAhD_JPJt4mdCidS9dK4uvA")
         UIFont.loadAllFonts
+        
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
         
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -72,10 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     let handled = GIDSignIn.sharedInstance().handle(url)
     return handled
-    // return GIDSignIn.sharedInstance().handle(url,
-    // sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-    // annotation: [:])
     }
+
 
 }
 

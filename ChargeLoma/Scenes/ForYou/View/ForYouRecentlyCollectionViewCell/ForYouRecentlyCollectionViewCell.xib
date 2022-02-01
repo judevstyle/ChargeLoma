@@ -30,6 +30,9 @@
                 <constraint firstAttribute="trailing" secondItem="Ahy-vd-NGc" secondAttribute="trailing" id="jen-v7-cwy"/>
                 <constraint firstItem="Ahy-vd-NGc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tnk-tL-ASQ"/>
             </constraints>
+            <connections>
+                <outlet property="tableView" destination="Ahy-vd-NGc" id="Png-1w-5tL"/>
+            </connections>
             <point key="canvasLocation" x="132" y="58"/>
         </collectionViewCell>
     </objects>

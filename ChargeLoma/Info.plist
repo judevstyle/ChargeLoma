@@ -2,28 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Kanit-Bold.ttf</string>
-		<string>Kanit-Light.ttf</string>
-		<string>Kanit-Medium.ttf</string>
-		<string>Kanit-SemiBold.ttf</string>
-		<string>Kanit-Regular.ttf</string>
-		<string>Kanit-Thin.ttf</string>
-	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>By accessing your device&apos;s location it can pin point your location on the map.</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -47,10 +25,28 @@
 	<string>1069977193741918</string>
 	<key>FacebookDisplayName</key>
 	<string>ChargeLoma</string>
-    <key>LSApplicationQueriesSchemes</key>
-        <array>
-        <string>comgooglemaps</string>
-        <string>comgooglemaps-x-callback</string>
-        </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+		<string>comgooglemaps-x-callback</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kanit-Bold.ttf</string>
+		<string>Kanit-Light.ttf</string>
+		<string>Kanit-Medium.ttf</string>
+		<string>Kanit-SemiBold.ttf</string>
+		<string>Kanit-Regular.ttf</string>
+		<string>Kanit-Thin.ttf</string>
+	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

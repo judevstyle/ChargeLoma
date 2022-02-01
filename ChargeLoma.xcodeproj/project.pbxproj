@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AB2D7ABF4CF3B4928FA4F233 /* Pods_ChargeLoma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */; };
+		C428AE8527A4FDD4009F75FB /* GetStationFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428AE8427A4FDD4009F75FB /* GetStationFavoriteResponse.swift */; };
+		C428AE8727A4FE5C009F75FB /* GetStationFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428AE8627A4FE5C009F75FB /* GetStationFavoriteUseCase.swift */; };
+		C4426F7827A632FC001E7E29 /* ForYouRecentlyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4426F7727A632FC001E7E29 /* ForYouRecentlyViewModel.swift */; };
+		C4DFF16327A5495A006DA83A /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DFF16127A5495A006DA83A /* FavoriteTableViewCell.swift */; };
+		C4DFF16427A5495A006DA83A /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4DFF16227A5495A006DA83A /* FavoriteTableViewCell.xib */; };
 		EF0CE1C5279847850072C156 /* StationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF0CE1C4279847850072C156 /* StationDetail.storyboard */; };
 		EF0CE1C72798478E0072C156 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CE1C62798478E0072C156 /* StationDetailViewController.swift */; };
 		EF0CE1CA27985CE50072C156 /* StationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CE1C927985CE50072C156 /* StationDetailViewModel.swift */; };
@@ -216,6 +221,11 @@
 		24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChargeLoma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.release.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.release.xcconfig"; sourceTree = "<group>"; };
 		B6A3D28E1A1FF4A17CF91189 /* Pods-ChargeLoma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.debug.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.debug.xcconfig"; sourceTree = "<group>"; };
+		C428AE8427A4FDD4009F75FB /* GetStationFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStationFavoriteResponse.swift; sourceTree = "<group>"; };
+		C428AE8627A4FE5C009F75FB /* GetStationFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStationFavoriteUseCase.swift; sourceTree = "<group>"; };
+		C4426F7727A632FC001E7E29 /* ForYouRecentlyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouRecentlyViewModel.swift; sourceTree = "<group>"; };
+		C4DFF16127A5495A006DA83A /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		C4DFF16227A5495A006DA83A /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		EF0CE1C4279847850072C156 /* StationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StationDetail.storyboard; sourceTree = "<group>"; };
 		EF0CE1C62798478E0072C156 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		EF0CE1C927985CE50072C156 /* StationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewModel.swift; sourceTree = "<group>"; };
@@ -441,6 +451,23 @@
 				83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C4426F7627A632AB001E7E29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4426F7727A632FC001E7E29 /* ForYouRecentlyViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4DFF16027A54934006DA83A /* FavoriteTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C4DFF16127A5495A006DA83A /* FavoriteTableViewCell.swift */,
+				C4DFF16227A5495A006DA83A /* FavoriteTableViewCell.xib */,
+			);
+			path = FavoriteTableViewCell;
 			sourceTree = "<group>";
 		};
 		EF0CE1C3279847720072C156 /* StationDetail */ = {
@@ -1242,6 +1269,7 @@
 		EFA36E9227930AC800BF2E51 /* ForYouRecentlyCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				C4426F7627A632AB001E7E29 /* ViewModel */,
 				EFA36E9527930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.swift */,
 				EFA36E9627930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.xib */,
 			);
@@ -1389,6 +1417,7 @@
 		EFC454AB278B3EE800BFC608 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C4DFF16027A54934006DA83A /* FavoriteTableViewCell */,
 				EFC768B7279C6EAE0003EA47 /* ReviewTableViewCell */,
 				EFC136B0279C09DF00B8206D /* ImageListCollectionViewCell */,
 				EFC136A6279BFE1B00B8206D /* ImageFullScreenCollectionViewCell */,
@@ -1576,6 +1605,7 @@
 				EFCA8812279B109E001BCFD3 /* GetFavoriteUseCase.swift */,
 				EFCA8814279B10A7001BCFD3 /* PostFavoriteUseCase.swift */,
 				EFCA8816279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift */,
+				C428AE8627A4FE5C009F75FB /* GetStationFavoriteUseCase.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -1611,6 +1641,7 @@
 				EFCA880A279B0DC4001BCFD3 /* GetFavoriteResponse.swift */,
 				EFCA880C279B0DD1001BCFD3 /* PostFavoriteResponse.swift */,
 				EFCA880E279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift */,
+				C428AE8427A4FDD4009F75FB /* GetStationFavoriteResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1770,6 +1801,7 @@
 				EFA0EAE82793D871002B258D /* PlugTableViewCell.xib in Resources */,
 				EF3ACB4A277C59CA0096BF95 /* Kanit-Thin.ttf in Resources */,
 				EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */,
+				C4DFF16427A5495A006DA83A /* FavoriteTableViewCell.xib in Resources */,
 				EF1C9A07278B6F3B0034643D /* DetailStation.storyboard in Resources */,
 				EF97E0D5279D9C5E00FF68DA /* ChoosePlug.storyboard in Resources */,
 				EFA36E9827930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.xib in Resources */,
@@ -1851,12 +1883,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C428AE8527A4FDD4009F75FB /* GetStationFavoriteResponse.swift in Sources */,
 				EFA36EBF2793139F00BF2E51 /* ForYouViewModel.swift in Sources */,
 				EF823524277D7E2000379B38 /* ProviderMasterRepository.swift in Sources */,
 				EFD831FF278B2B6300FDEAC5 /* CheckBoxView.swift in Sources */,
 				EFD8A4DC2799C61D00E99CB2 /* ProfileTableViewCell.swift in Sources */,
 				EFC768B3279C66D70003EA47 /* GetReviewResponse.swift in Sources */,
 				EF3ACB70277C62CD0096BF95 /* RegEx.swift in Sources */,
+				C4DFF16327A5495A006DA83A /* FavoriteTableViewCell.swift in Sources */,
 				EF8234F1277D5F1500379B38 /* UISearchBar+Extension.swift in Sources */,
 				EF75C2982788A361004FEC64 /* SearchStationViewController.swift in Sources */,
 				EF823536277D94F700379B38 /* StationAPI.swift in Sources */,
@@ -1923,6 +1957,7 @@
 				EF75C2A62788B5A6004FEC64 /* GetStationFindOneUseCase.swift in Sources */,
 				EFA36E9727930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.swift in Sources */,
 				EF82353F277D975600379B38 /* PostStationFilterResponse.swift in Sources */,
+				C4426F7827A632FC001E7E29 /* ForYouRecentlyViewModel.swift in Sources */,
 				EF8234FD277D74F400379B38 /* PlugTypeMasterAPI.swift in Sources */,
 				EFD8A4D32799A80400E99CB2 /* UIApplication+Extension.swift in Sources */,
 				EF823519277D798700379B38 /* GetProviderMasterResponse.swift in Sources */,
@@ -2006,6 +2041,7 @@
 				EFCA880F279B0DDB001BCFD3 /* DeleteFavoriteResponse.swift in Sources */,
 				EFA36EC6279323F100BF2E51 /* PreLoginViewController.swift in Sources */,
 				EF3ACB68277C61FD0096BF95 /* Language.swift in Sources */,
+				C428AE8727A4FE5C009F75FB /* GetStationFavoriteUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2151,6 +2187,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChargeLoma/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "By accessing your device's location it can pin point your location on the map.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2184,6 +2221,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChargeLoma/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "By accessing your device's location it can pin point your location on the map.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
