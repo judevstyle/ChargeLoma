@@ -52,7 +52,6 @@ public class MapViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        viewModel.input.getStationFilter()
     }
     
     func configure(_ interface: MapProtocol) {
@@ -63,7 +62,7 @@ public class MapViewController: UIViewController {
         self.navigationController?.setBarTintColor(color: .clear)
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
-        self.fetchMarkerMap()
+        viewModel.input.getStationFilter()
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -229,7 +228,7 @@ extension MapViewController : GMSMapViewDelegate {
         
 //        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
         
-        NavigationManager.instance.pushVC(to: .stationDetail(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
+        NavigationManager.instance.pushVC(to: .stationDetail(stId, isFromPushNavigation: false), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
     }
     
 }

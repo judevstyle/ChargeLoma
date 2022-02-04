@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Image1x1CollectionViewCell" customModule="ChargeLoma" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gc-2Y-cul">
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="anP-fV-TFe">
+                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vi-EF-aPQ">
+                                <rect key="frame" x="47" y="5" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="gUd-0F-HX4"/>
+                                    <constraint firstAttribute="width" constant="23" id="smd-3b-xlt"/>
+                                </constraints>
+                                <color key="tintColor" name="baseGray"/>
+                                <state key="normal" image="x.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="cCx-zM-DH8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2Vi-EF-aPQ" secondAttribute="trailing" constant="5" id="4Qt-6L-6wQ"/>
+                            <constraint firstAttribute="bottom" secondItem="anP-fV-TFe" secondAttribute="bottom" id="AEJ-hX-TSU"/>
+                            <constraint firstItem="anP-fV-TFe" firstAttribute="top" secondItem="5Gc-2Y-cul" secondAttribute="top" id="LQ8-th-x77"/>
+                            <constraint firstItem="anP-fV-TFe" firstAttribute="leading" secondItem="5Gc-2Y-cul" secondAttribute="leading" id="OXd-Cp-QWx"/>
+                            <constraint firstItem="2Vi-EF-aPQ" firstAttribute="top" secondItem="5Gc-2Y-cul" secondAttribute="top" constant="5" id="Q9A-0I-r1J"/>
+                            <constraint firstAttribute="trailing" secondItem="anP-fV-TFe" secondAttribute="trailing" id="rGE-f5-2HH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="5Gc-2Y-cul" secondAttribute="bottom" id="DcY-IL-TSt"/>
+                <constraint firstItem="5Gc-2Y-cul" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="P0V-8E-6iM"/>
+                <constraint firstItem="5Gc-2Y-cul" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="T1Z-Jt-DTr"/>
+                <constraint firstAttribute="trailing" secondItem="5Gc-2Y-cul" secondAttribute="trailing" id="l09-FE-NcQ"/>
+            </constraints>
+            <connections>
+                <outlet property="bgView" destination="5Gc-2Y-cul" id="Lok-1M-S26"/>
+                <outlet property="deleteButton" destination="2Vi-EF-aPQ" id="2uE-lb-pfz"/>
+                <outlet property="imageView" destination="anP-fV-TFe" id="f2t-my-dFm"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="58.928571428571423"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder" width="1280" height="960"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="baseGray">
+            <color red="0.70980392156862748" green="0.70980392156862748" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

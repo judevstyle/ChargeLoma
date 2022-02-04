@@ -20,6 +20,8 @@ protocol ForYouRecentlyProtocolOutput: class {
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int) -> Int
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
     func getItemViewCellHeight() -> CGFloat
+    
+    func getItemStationData(_ tableView: UITableView, indexPath: IndexPath) -> StationFavoriteData?
 }
 
 protocol ForYouRecentlyProtocol: ForYouRecentlyProtocolInput, ForYouRecentlyProtocolOutput {
@@ -58,8 +60,6 @@ class ForYouRecentlyViewModel: ForYouRecentlyProtocol, ForYouRecentlyProtocolOut
             debugPrint("getStationFavoriteUseCase \(completion)")
             self.vc?.stopLoding()
         } receiveValue: { resp in
-            debugPrint(resp)
-            debugPrint(resp?.count)
             if let items = resp {
                 debugPrint(items)
                 self.listStationFavorite = items
@@ -85,11 +85,15 @@ class ForYouRecentlyViewModel: ForYouRecentlyProtocol, ForYouRecentlyProtocolOut
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.identifier, for: indexPath) as! FavoriteTableViewCell
         cell.selectionStyle = .none
-//        cell.item = listStationFavorite?[indexPath.item]
+        cell.favorite = self.listStationFavorite?[indexPath.item]
         return cell
     }
     
     func getItemViewCellHeight() -> CGFloat {
-        return 75
+        return 90
+    }
+    
+    func getItemStationData(_ tableView: UITableView, indexPath: IndexPath) -> StationFavoriteData? {
+        return self.listStationFavorite?[indexPath.item]
     }
 }

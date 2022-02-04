@@ -23,7 +23,7 @@ public enum NavigationOpeningSender {
     case me
     
     //Detail
-    case stationDetail(_ stId: String)
+    case stationDetail(_ stId: String, isFromPushNavigation: Bool)
     
     //SearchStation
     case searchStation(_ delegate: SearchStationViewModelDelegate, type: TypeDirectionMap)
@@ -231,6 +231,7 @@ class NavigationManager {
         case presentFullScreen(completion: (() -> Void)?)
         case presentHalfModalAndFullScreen(rootVc: UIViewController, heightHalf: CGFloat, completion: (() -> Void)?)
         case PushInTabbar
+        case PushStationDetail
     }
     
     init() {
@@ -265,9 +266,10 @@ class NavigationManager {
                 className.delegate = delegate
                 viewController = className
             }
-        case .stationDetail(let stId):
+        case .stationDetail(let stId, let isFromPushNavigation):
             if let className = storyboard.instantiateInitialViewController() as? StationDetailViewController {
                 className.viewModel.setStId(stId)
+                className.isFromPushNavigation = isFromPushNavigation
                 viewController = className
             }
         case .searchStation(let delegate, let type):
@@ -323,10 +325,25 @@ class NavigationManager {
                 nav.navigationBar.tintColor = .white
                 nav.pushViewController(viewController, animated: animated)
             } else {
-                debugPrint("self.navigationController")
                 self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 self.navigationController.navigationBar.tintColor = .white
                 self.navigationController.pushViewController(viewController, animated: animated)
+            }
+        case .PushStationDetail:
+            let topVC = UIApplication.getTopViewController()
+            if let nav = topVC?.navigationController {
+                nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                nav.navigationBar.tintColor = .white
+                nav.setBarTintColor(color: .clear, complete: {
+                    nav.pushViewController(viewController, animated: animated)
+                })
+            } else {
+                self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                self.navigationController.navigationBar.tintColor = .white
+                self.navigationController?.setBarTintColor(color: .clear, complete: {
+                    self.navigationController.pushViewController(viewController, animated: animated)
+                })
+
             }
         case .PushInTabbar:
             if (self.navigationController.tabBarController != nil) {
@@ -371,7 +388,6 @@ class NavigationManager {
             
             let topVC = UIApplication.getTopViewController()
             topVC?.present(sheet, animated: true, completion: completion)
-            
         case .Present(let withNav, let modalTransitionStyle, let modalPresentationStyle):
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = true

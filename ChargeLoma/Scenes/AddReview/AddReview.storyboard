@@ -6,7 +6,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -134,7 +133,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BHT-Xw-rVk">
-                                <rect key="frame" x="8" y="150" width="398" height="643"/>
+                                <rect key="frame" x="8" y="150" width="398" height="768"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPY-M5-ZFc">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="144.5"/>
@@ -275,42 +274,26 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5s-TO-PRD">
-                                        <rect key="frame" x="0.0" y="578" width="398" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="578" width="398" height="125"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sqd-I2-ett">
-                                                <rect key="frame" x="8" y="0.0" width="382" height="0.0"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AYu-X4-F6C" customClass="CollectionViewImageGrid" customModule="ChargeLoma" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="0.0" width="382" height="125"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" id="OyY-Kl-msw"/>
+                                                    <constraint firstAttribute="height" constant="125" id="8VW-PQ-GWh"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GKe-gP-Dhy">
-                                                    <size key="itemSize" width="128" height="128"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AgS-U4-VJW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="YdP-Zu-wdL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </collectionViewCellContentView>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="sqd-I2-ett" firstAttribute="top" secondItem="a5s-TO-PRD" secondAttribute="top" id="5aD-uk-ltZ"/>
-                                            <constraint firstItem="sqd-I2-ett" firstAttribute="leading" secondItem="a5s-TO-PRD" secondAttribute="leading" constant="8" id="AgW-HW-aMM"/>
-                                            <constraint firstAttribute="trailing" secondItem="sqd-I2-ett" secondAttribute="trailing" constant="8" id="fKP-5R-xJm"/>
-                                            <constraint firstAttribute="bottom" secondItem="sqd-I2-ett" secondAttribute="bottom" id="ssB-ke-5qQ"/>
+                                            <constraint firstItem="AYu-X4-F6C" firstAttribute="leading" secondItem="a5s-TO-PRD" secondAttribute="leading" constant="8" id="3xp-BO-6GT"/>
+                                            <constraint firstAttribute="trailing" secondItem="AYu-X4-F6C" secondAttribute="trailing" constant="8" id="R1H-GN-U3l"/>
+                                            <constraint firstAttribute="bottom" secondItem="AYu-X4-F6C" secondAttribute="bottom" id="WGi-W4-9U0"/>
+                                            <constraint firstItem="AYu-X4-F6C" firstAttribute="top" secondItem="a5s-TO-PRD" secondAttribute="top" id="neO-bf-pg2"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMK-yz-NdA">
-                                        <rect key="frame" x="0.0" y="578" width="398" height="65"/>
+                                        <rect key="frame" x="0.0" y="703" width="398" height="65"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2v-1Q-sxS">
                                                 <rect key="frame" x="136.5" y="20" width="125" height="45"/>
@@ -358,8 +341,7 @@
                         <outlet property="headIssue" destination="1iz-wQ-sTB" id="93d-ok-MmE"/>
                         <outlet property="headPlugType" destination="s29-Zd-9eN" id="v0h-yi-o8Q"/>
                         <outlet property="headPower" destination="9sw-6a-fAr" id="8er-85-jxP"/>
-                        <outlet property="imageCollectionView" destination="sqd-I2-ett" id="LGl-1G-Ga2"/>
-                        <outlet property="imageCollectionViewHeight" destination="OyY-Kl-msw" id="QIg-ZD-Xre"/>
+                        <outlet property="imageGrid" destination="AYu-X4-F6C" id="UkI-6E-cXN"/>
                         <outlet property="inputPlugType" destination="eCy-lo-7tu" id="ehA-EM-UAf"/>
                         <outlet property="inputPower" destination="iZO-OF-HDL" id="Z97-uE-hKX"/>
                         <outlet property="plugTableView" destination="fOP-dW-N9J" id="a6o-IA-jmQ"/>

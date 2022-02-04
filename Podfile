@@ -19,6 +19,9 @@ target 'ChargeLoma' do
   pod 'GoogleSignIn', '~> 5.0'
   pod 'FBSDKLoginKit'
   
+  # Realm
+  pod 'RealmSwift'
+  
   # Pods for ChargeLoma
 
 end

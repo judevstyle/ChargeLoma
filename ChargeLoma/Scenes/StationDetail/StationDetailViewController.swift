@@ -94,6 +94,12 @@ class StationDetailViewController: UIViewController {
     
     @IBOutlet weak var spaceScrollViewWithBottom: NSLayoutConstraint!
     
+    public var isFromPushNavigation: Bool = false
+    
+    @IBOutlet weak var topPosterImageConstant: NSLayoutConstraint!
+    @IBOutlet weak var leftPosterImageConstant: NSLayoutConstraint!
+    @IBOutlet weak var rightPosterImageConstant: NSLayoutConstraint!
+    
     lazy var viewModel: StationDetailProtocol = {
         let vm = StationDetailViewModel(vc: self)
         self.configure(vm)
@@ -103,14 +109,18 @@ class StationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("didChangeSizeSheet"), object: nil)
+
+        if isFromPushNavigation == false {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("didChangeSizeSheet"), object: nil)
+        }
+        
     }
     
     func configure(_ interface: StationDetailProtocol) {
         self.viewModel = interface
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {        
         setupUI()
         setupMap()
         setupTableView()
@@ -233,14 +243,26 @@ class StationDetailViewController: UIViewController {
         headReview.text = "รีวิวจากผู้ใช้บริการ"
         
         
+        if isFromPushNavigation {
+            topPosterImageConstant.constant = 0
+            leftPosterImageConstant.constant = 0
+            rightPosterImageConstant.constant = 0
+            
+            setBgBottomBar(isHidden: false)
+        }
+        
     }
     
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 13.663491595353403, longitude: 100.6061463206966, zoom: 7.0)
-        mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewMap.frame.width, height: self.viewMap.frame.height), camera: camera)
+        mapView = GMSMapView.map(withFrame: self.viewMap.bounds, camera: camera)
         mapView.delegate = self
-        self.viewMap.addSubview(mapView)
         mapView.isUserInteractionEnabled = false
+        self.viewMap.addSubview(mapView)
+        mapView.clipsToBounds = true
+        self.viewMap.clipsToBounds = true
+        mapView.autoresizingMask = .flexibleHeight
+        mapView.autoresizingMask = .flexibleWidth
     }
     
     func setupTableView() {
@@ -258,6 +280,7 @@ class StationDetailViewController: UIViewController {
         tableReview.estimatedRowHeight = 80
         tableReview.rowHeight = UITableView.automaticDimension
         tableReview.registerCell(identifier: ReviewTableViewCell.identifier)
+        tableReview.registerCell(identifier: SeeAllTableViewCell.identifier)
     }
     
     func setupCheckBox() {
@@ -309,7 +332,7 @@ class StationDetailViewController: UIViewController {
     
     @objc func handleTapSeeAllGalleryPhoto(_ sender: UITapGestureRecognizer? = nil) {
         if let listImage = viewModel.output.getListStrImageStation(), listImage.count > 0 {
-            NavigationManager.instance.pushVC(to: .galleryPhoto(listImage: [listImage[0], listImage[0], listImage[0], listImage[0]]), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+            NavigationManager.instance.pushVC(to: .galleryPhoto(listImage: listImage), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
         }
     }
     
@@ -396,7 +419,7 @@ extension StationDetailViewController {
     
     private func setupValue() {
         guard let station = self.viewModel.output.getDataStation() else { return }
-        if let logoImage = station.provider?.logoLabel, let urlImage = URL(string: "\(logoImage)") {
+        if let logoImage = station.provider?.icon, let urlImage = URL(string: "\(logoImage)") {
             logoStationImageView.kf.setImageDefault(with: urlImage)
         }
         titleStationValue.text = station.stationName ?? ""
@@ -410,7 +433,7 @@ extension StationDetailViewController {
         descValue.text = station.stationDesc ?? "-"
         serviceCharge.text = "ค่าบริการ \(station.serviceRate ?? 0.0) บาท"
         
-        titleRating.text = "\(station.rating ?? 0.0)"
+        titleRating.text = String(format:"%.1f", station.rating ?? 0.0)
         
         checkMethodService()
     }
@@ -541,7 +564,13 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
         case plugTableView:
             return viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .plugTableView)
         case tableReview:
-            return viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .reviewTableView)
+            let cell = viewModel.output.getItemViewCell(tableView, indexPath: indexPath, type: .reviewTableView)
+            if indexPath.row == 5 {
+//                tableReview.separatorStyle = .none
+            } else {
+                tableReview.separatorStyle = .singleLine
+            }
+            return cell
         default:
             return UITableViewCell()
         }

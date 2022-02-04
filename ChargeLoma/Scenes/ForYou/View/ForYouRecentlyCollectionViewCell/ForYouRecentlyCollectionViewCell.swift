@@ -32,7 +32,8 @@ class ForYouRecentlyCollectionViewCell: UICollectionViewCell {
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
+//        tableView.separatorStyle = .none
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         tableView.registerCell(identifier: FavoriteTableViewCell.identifier)
     }
@@ -64,6 +65,10 @@ extension ForYouRecentlyCollectionViewCell {
 
 extension ForYouRecentlyCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = viewModel.output.getItemStationData(tableView, indexPath: indexPath)
+        if let stId = item?.station?.stId {
+            NavigationManager.instance.pushVC(to: .stationDetail("\(stId)", isFromPushNavigation: true), presentation: .PushStationDetail)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -11,20 +11,23 @@ import UIKit
 
 public enum ReviewAPI {
     case getReview(request: GetReviewRequest)
+    case getRecentlyReview(request: GetReviewRequest)
 }
 
 extension ReviewAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getReview:
+        case .getReview, .getRecentlyReview:
             return DomainNameConfig.review.url
         }
     }
 
     public var path: String {
         switch self {
-        case .getReview(let stId):
+        case .getReview:
             return ""
+        case .getRecentlyReview:
+            return "/recentlyReview"
         }
     }
 
@@ -42,6 +45,8 @@ extension ReviewAPI: TargetType {
     public var task: Task {
         switch self {
         case let .getReview(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .getRecentlyReview(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }

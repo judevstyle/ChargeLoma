@@ -17,6 +17,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var powerText: UILabel!
     @IBOutlet weak var plugTitleText: UILabel!
     @IBOutlet weak var commentText: UILabel!
+    @IBOutlet weak var carName: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
@@ -65,12 +66,16 @@ class ReviewTableViewCell: UITableViewCell {
         dateText.font = .extraSmallText
         powerText.font = .extraSmallText
         powerText.textColor = .baseTextGray
+        
+        carName.font = .smallText
+        carName.textColor = .baseTextGray
     }
      
     func setupValue() {
         titleReview.text = data?.User?.displayName ?? ""
         dateText.text = data?.createdDate?.convertToDate()?.getFormattedDate(format: "MMM dd, HH:mm")
         powerText.text = "\(data?.power ?? 0) kW"
+        carName.text = "\(data?.User?.car ?? "")"
         
         plugTitleText.text = data?.PlugTypeMaster?.pTitle ?? ""
         commentText.text = data?.comment ?? ""

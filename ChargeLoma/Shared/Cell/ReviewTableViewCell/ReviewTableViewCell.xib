@@ -67,10 +67,18 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbd-OG-bKV">
+                        <rect key="frame" x="74" y="29" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OTu-QC-I8X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1Ba-fk-SYo"/>
                     <constraint firstItem="szg-0S-PUf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="2LW-Se-TCU"/>
+                    <constraint firstItem="Nbd-OG-bKV" firstAttribute="leading" secondItem="OTu-QC-I8X" secondAttribute="trailing" constant="8" id="2rc-NF-xm2"/>
+                    <constraint firstItem="Nbd-OG-bKV" firstAttribute="top" secondItem="szg-0S-PUf" secondAttribute="bottom" id="4TN-OS-Xrq"/>
                     <constraint firstItem="CfE-ld-GM7" firstAttribute="top" secondItem="vqu-cb-HcE" secondAttribute="bottom" id="Bl6-LB-nVP"/>
                     <constraint firstItem="szg-0S-PUf" firstAttribute="leading" secondItem="OTu-QC-I8X" secondAttribute="trailing" constant="8" id="KCm-2t-YEI"/>
                     <constraint firstItem="OTu-QC-I8X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="QcF-Qp-1cP"/>
@@ -82,13 +90,14 @@
                     <constraint firstItem="oA0-Hc-u8I" firstAttribute="top" secondItem="CfE-ld-GM7" secondAttribute="bottom" constant="8" id="fQp-ec-Brk"/>
                     <constraint firstItem="oA0-Hc-u8I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="qoI-yV-W6Y"/>
                     <constraint firstItem="N00-xh-42U" firstAttribute="top" secondItem="OZ9-50-cGh" secondAttribute="bottom" id="rbF-Xd-1k1"/>
-                    <constraint firstItem="vqu-cb-HcE" firstAttribute="top" secondItem="N00-xh-42U" secondAttribute="bottom" id="sVK-vo-uyg"/>
+                    <constraint firstItem="vqu-cb-HcE" firstAttribute="top" secondItem="Nbd-OG-bKV" secondAttribute="bottom" id="vRU-id-TfK"/>
                     <constraint firstAttribute="bottom" secondItem="oA0-Hc-u8I" secondAttribute="bottom" constant="8" id="z2C-M3-BDk"/>
                     <constraint firstItem="OZ9-50-cGh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zg2-yk-xyQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="carName" destination="Nbd-OG-bKV" id="qpo-lg-gOh"/>
                 <outlet property="collectionView" destination="oA0-Hc-u8I" id="srL-gl-n5q"/>
                 <outlet property="collectionViewHeight" destination="rGf-6u-4kg" id="pKg-am-GQz"/>
                 <outlet property="commentText" destination="CfE-ld-GM7" id="BSn-Ra-bPk"/>

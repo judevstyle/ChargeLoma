@@ -34,6 +34,7 @@ public struct ReviewData: Codable, Hashable  {
     public var User: UserProfileData?
     public var plugType: [PlugTypeData]?
     public var stationStatus: Int?
+    public var station: StationData?
     
     public init() {}
     
@@ -48,5 +49,6 @@ public struct ReviewData: Codable, Hashable  {
         try User            <- decoder["User"]
         try plugType       <- decoder["plug_type"]
         try stationStatus  <- decoder["station_status"]
+        try station         <- decoder["station"]
     }
 }

@@ -51,21 +51,31 @@ class SplashViewModel: SplashProtocol, SplashProtocolOutput {
     var didFetchDataError: (() -> Void)?
     
     func prepareFetchData() {
-        self.vc.startLoding()
-        self.getFindAllProviderMasterUseCase.execute().sink { completion in
-            debugPrint("getFindAllProviderMasterUseCase \(completion)")
-            self.vc.stopLoding()
-        } receiveValue: { respProvider in
+        if let mapFilter = StoreManager.shared.getMapFilter() {
+            self.didFetchDataSuccess?()
+        } else {
             self.vc.startLoding()
-            self.getFindAllPlugTypeMasterUseCase.execute().sink { completion in
-                debugPrint("getFindAllPlugTypeMasterUseCase \(completion)")
+            self.getFindAllProviderMasterUseCase.execute().sink { completion in
+                debugPrint("getFindAllProviderMasterUseCase \(completion)")
                 self.vc.stopLoding()
-            } receiveValue: { respPlug in
-                DataManager.instance.setProviderMaster(items: respProvider ?? [])
-                DataManager.instance.setPlugTypeMaster(items: respPlug ?? [])
-                self.didFetchDataSuccess?()
+            } receiveValue: { respProvider in
+                self.vc.startLoding()
+                self.getFindAllPlugTypeMasterUseCase.execute().sink { completion in
+                    debugPrint("getFindAllPlugTypeMasterUseCase \(completion)")
+                    self.vc.stopLoding()
+                } receiveValue: { respPlug in
+                    StoreManager.shared.clearMapFilter {
+                        var item = MapFilterModel()
+                        item.plugId = respPlug.map { $0.map { $0.pTypeId } }
+                        item.providerId = respProvider.map { $0.map { $0.pvId } }
+                        item.statusIndex = [1, 2, 3]
+                        StoreManager.shared.addMapFilter(item, completion: {
+                            self.didFetchDataSuccess?()
+                        })
+                    }
+                }.store(in: &self.anyCancellable)
             }.store(in: &self.anyCancellable)
-        }.store(in: &self.anyCancellable)
+        }
     }
 }
 

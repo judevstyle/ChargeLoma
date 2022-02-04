@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Regular.ttf">
+            <string>Kanit-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FilterItemTextCollectionViewCell" customModule="ChargeLoma" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="167" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="167" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQX-lI-7RC">
+                        <rect key="frame" x="0.0" y="0.0" width="167" height="50"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GkU-62-POG" customClass="CheckBoxView" customModule="ChargeLoma" customModuleProvider="target">
+                                <rect key="frame" x="8" y="13" width="27" height="24"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="XxA-l3-bbe"/>
+                                    <constraint firstAttribute="width" constant="27" id="vZ0-7M-Agd"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iu-0T-rs5">
+                                <rect key="frame" x="43" y="13" width="116" height="24"/>
+                                <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="16"/>
+                                <color key="textColor" name="baseTextGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GkU-62-POG" firstAttribute="leading" secondItem="wQX-lI-7RC" secondAttribute="leading" constant="8" id="31u-Jo-0aZ"/>
+                            <constraint firstItem="4iu-0T-rs5" firstAttribute="leading" secondItem="GkU-62-POG" secondAttribute="trailing" constant="8" id="9jl-zj-6JK"/>
+                            <constraint firstItem="4iu-0T-rs5" firstAttribute="centerY" secondItem="wQX-lI-7RC" secondAttribute="centerY" id="uCf-dq-ldi"/>
+                            <constraint firstAttribute="trailing" secondItem="4iu-0T-rs5" secondAttribute="trailing" constant="8" id="wyh-4C-JnE"/>
+                            <constraint firstItem="GkU-62-POG" firstAttribute="centerY" secondItem="wQX-lI-7RC" secondAttribute="centerY" id="xSS-t1-1nK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="wQX-lI-7RC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SQx-MN-q5l"/>
+                <constraint firstItem="wQX-lI-7RC" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UU3-7V-CU6"/>
+                <constraint firstAttribute="bottom" secondItem="wQX-lI-7RC" secondAttribute="bottom" id="i1u-NT-y7s"/>
+                <constraint firstAttribute="trailing" secondItem="wQX-lI-7RC" secondAttribute="trailing" id="i6b-94-QLb"/>
+            </constraints>
+            <size key="customSize" width="167" height="50"/>
+            <connections>
+                <outlet property="bgView" destination="wQX-lI-7RC" id="edi-bZ-8ry"/>
+                <outlet property="checkbox" destination="GkU-62-POG" id="UMg-Qk-pju"/>
+                <outlet property="titleText" destination="4iu-0T-rs5" id="LWS-0h-wMO"/>
+            </connections>
+            <point key="canvasLocation" x="216.66666666666669" y="64.955357142857139"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="baseTextGray">
+            <color red="0.396078431372549" green="0.396078431372549" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

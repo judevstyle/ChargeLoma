@@ -28,6 +28,7 @@ public struct FavoriteData: Codable, Hashable  {
     public var favId: String?
     public var stId: String?
     public var deleted: Bool?
+    public var station: StationData?
     
     public init() {}
     
@@ -36,5 +37,6 @@ public struct FavoriteData: Codable, Hashable  {
         try favId       <- decoder["fav_id"]
         try stId        <- decoder["st_id"]
         try deleted     <- decoder["deleted"]
+        try station     <- decoder["station"]
     }
 }

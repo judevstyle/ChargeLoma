@@ -25,9 +25,17 @@ class FilterItemCollectionViewCell: UICollectionViewCell {
     
     public var index: Int = 0
     
-    var item: PlugTypeData? {
+    var title: String? {
         didSet {
-            setupValue()
+            titleText.text = title ?? ""
+        }
+    }
+    
+    var logoImage: String? {
+        didSet {
+            if let pathImage = logoImage, let urlImage = URL(string: "\(pathImage)") {
+                imageLogo.kf.setImageDefault(with: urlImage)
+            }
         }
     }
 
@@ -46,19 +54,10 @@ class FilterItemCollectionViewCell: UICollectionViewCell {
         checkbox.index = index
     }
     
-    func setupValue(){
-        titleText.text = item?.pTitle ?? ""
-        
-        if let pathImage = item?.pIcon, let urlImage = URL(string: "\(pathImage)") {
-            imageLogo.kf.setImageDefault(with: urlImage)
-        }
-    }
-    
 }
 
 extension FilterItemCollectionViewCell: CheckBoxViewDelegate {
     func didSelected(view: CheckBoxView, isSelectedBtn: Bool, index: Int) {
         self.delegate?.didSelectedCheckMark(vc: vc, view: view, isSelectedBtn: isSelectedBtn, index: index)
     }
-    
 }

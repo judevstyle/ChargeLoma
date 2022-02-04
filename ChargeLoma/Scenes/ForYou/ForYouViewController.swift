@@ -36,6 +36,11 @@ class ForYouViewController: UIViewController {
     func configure(_ interface: ForYouProtocol) {
         self.viewModel = interface
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setBarTintColor(color: .basePrimary)
+        pageCollectionView.reloadData()
+    }
 
 }
 

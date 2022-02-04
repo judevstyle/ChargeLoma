@@ -26,7 +26,7 @@ class AddReviewViewController: UIViewController {
     
     
     let pickerPlugTypeView = ToolbarPickerView()
-    var plugList: [String] = ["test 01", "test 02"]
+    var plugList: [String] = ["ใช้งานอยู่", "เปิดเครื่องไม่ได้"]
     var selectedPlug : String?
     
     
@@ -46,8 +46,10 @@ class AddReviewViewController: UIViewController {
     @IBOutlet weak var plugTableView: UITableView!
     @IBOutlet weak var plugTableViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var imageCollectionView: UICollectionView!
-    @IBOutlet weak var imageCollectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageGrid: CollectionViewImageGrid!
+    
+    fileprivate var listImageAttachFilesBase64: [String]?
+    var imagePickerList: ImagePicker!
     
     @IBOutlet weak var btnSaveReview: UIButton!
     lazy var viewModel: AddReviewProtocol = {
@@ -62,6 +64,8 @@ class AddReviewViewController: UIViewController {
         setupUI()
         setupEvent()
         setupTableView()
+        
+        self.imagePickerList = ImagePicker(presentationController: self, sourceType: [.camera, .photoLibrary], delegate: self)
     }
     
     func configure(_ interface: AddReviewProtocol) {
@@ -138,6 +142,10 @@ class AddReviewViewController: UIViewController {
         btnAddPlug.setRounded(rounded: 5)
         
         
+        imageGrid.viewModel.input.setDelegate(delegate: self)
+        imageGrid.viewModel.input.setList(images: [])
+        imageGrid.titleLabel.isHidden = true
+        
         btnSaveReview.setTitle("รีวิว", for: .normal)
         btnSaveReview.titleLabel?.font = .h3Text
         btnSaveReview.setRounded(rounded: 8.0)
@@ -145,6 +153,7 @@ class AddReviewViewController: UIViewController {
         btnSaveReview.titleLabel?.textColor = .white
         btnSaveReview.tintColor = .white
         btnSaveReview.addTarget(self, action: #selector(handleBtnSaveReview), for: .touchUpInside)
+        
         
     }
     
@@ -336,6 +345,24 @@ extension AddReviewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let stId = viewModel.output.getStId() {
             NavigationManager.instance.pushVC(to: .choosePlug(stId, delegate: self))
+        }
+    }
+}
+
+extension AddReviewViewController: ImagePickerDelegate {
+    func didSelectImage(image: UIImage?, imagePicker: ImagePicker, base64: String) {
+        imageGrid.viewModel.input.addListImage(image: image ?? UIImage(), base64: base64)
+    }
+}
+
+extension AddReviewViewController : CollectionViewImageGridDelegate {
+    func imageListChangeAction(listBase64: [String]?) {
+        self.listImageAttachFilesBase64 = listBase64
+    }
+    
+    func didSelectItem(indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.imagePickerList.present(from: self.view)
         }
     }
 }

@@ -156,7 +156,11 @@ extension StationDetailViewModel {
         case .plugTableView:
             return self.dataStation?.plugMapping?.count ?? 0
         case .reviewTableView:
-            return self.listReview.count
+            if self.listReview.count > 5 {
+                return 5 + 1
+            } else {
+                return self.listReview.count
+            }
         }
     }
     
@@ -168,17 +172,38 @@ extension StationDetailViewModel {
             cell.itemPlugMapping = self.dataStation?.plugMapping?[indexPath.item]
             return cell
         case .reviewTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier, for: indexPath) as! ReviewTableViewCell
-            cell.selectionStyle = .none
-            if self.listReview[indexPath.row].ReviewImg?.count ?? 0 > 0 {
-                let width = ((vc.view.frame.width-32) / 3.0)
-                cell.setupCollectionHeight(width)
+            if self.listReview.count > 5 {
+                if indexPath.item == 5 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: SeeAllTableViewCell.identifier, for: indexPath) as! SeeAllTableViewCell
+                    cell.selectionStyle = .none
+                    cell.title = "อ่านรีวิวทั้งหมด"
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier, for: indexPath) as! ReviewTableViewCell
+                    cell.selectionStyle = .none
+                    if self.listReview[indexPath.row].ReviewImg?.count ?? 0 > 0 {
+                        let width = ((vc.view.frame.width-32) / 3.0)
+                        cell.setupCollectionHeight(width)
+                    } else {
+                        cell.setupCollectionHeight(0)
+                    }
+                    
+                    cell.data = listReview[indexPath.row]
+                    return cell
+                }
             } else {
-                cell.setupCollectionHeight(0)
+                let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier, for: indexPath) as! ReviewTableViewCell
+                cell.selectionStyle = .none
+                if self.listReview[indexPath.row].ReviewImg?.count ?? 0 > 0 {
+                    let width = ((vc.view.frame.width-32) / 3.0)
+                    cell.setupCollectionHeight(width)
+                } else {
+                    cell.setupCollectionHeight(0)
+                }
+                
+                cell.data = listReview[indexPath.row]
+                return cell
             }
-            
-            cell.data = listReview[indexPath.row]
-            return cell
         }
     }
     

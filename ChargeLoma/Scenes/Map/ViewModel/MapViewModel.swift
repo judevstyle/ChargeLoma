@@ -81,19 +81,25 @@ class MapViewModel: MapProtocol, MapProtocolOutput {
         
         var request: PostStationFilterRequest = PostStationFilterRequest()
         request.lang = LanguageEnvironment.shared.current?.name ?? "en"
-        DataManager.instance.getPlugTypeMaster().forEach({ item in
-            if let pTypeId = item.pTypeId {
-                request.plug.append(pTypeId)
+        
+        let storeFilter = StoreManager.shared.getMapFilter()
+        storeFilter?.plugId?.forEach({ plugId in
+            if let plugId = plugId {
+                request.plug.append(plugId)
             }
         })
         
-        DataManager.instance.getProviderMaster().forEach({ item in
-            if let pvId = item.pvId {
+        storeFilter?.providerId?.forEach({ pvId in
+            if let pvId = pvId {
                 request.provider.append(pvId)
             }
         })
         
-        request.status = [1,2,3]
+        storeFilter?.statusIndex?.forEach({ statusIndex in
+            if let statusIndex = statusIndex {
+                request.status.append(statusIndex)
+            }
+        })
         
         self.postStationFilterUseCase.execute(request: request).sink { completion in
             debugPrint("postStationFilterUseCase \(completion)")

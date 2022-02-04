@@ -11,6 +11,7 @@ import Moya
 
 protocol ReviewRepository {
     func getReview(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error>
+    func getRecentlyReview(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error>
 }
 
 final class ReviewRepositoryImpl: ChargeLoma.ReviewRepository {
@@ -20,6 +21,13 @@ final class ReviewRepositoryImpl: ChargeLoma.ReviewRepository {
         return self.provider
             .cb
             .request(.getReview(request: request))
+            .map(GetReviewResponse.self)
+    }
+    
+    func getRecentlyReview(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error> {
+        return self.provider
+            .cb
+            .request(.getRecentlyReview(request: request))
             .map(GetReviewResponse.self)
     }
     

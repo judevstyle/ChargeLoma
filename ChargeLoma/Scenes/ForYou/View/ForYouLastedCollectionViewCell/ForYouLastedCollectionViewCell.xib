@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="860"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2rT-z8-xfz">
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2rT-z8-xfz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="860"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
@@ -30,6 +30,9 @@
                 <constraint firstItem="2rT-z8-xfz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mFQ-XB-2rS"/>
                 <constraint firstAttribute="bottom" secondItem="2rT-z8-xfz" secondAttribute="bottom" id="o0G-t8-l81"/>
             </constraints>
+            <connections>
+                <outlet property="tableView" destination="2rT-z8-xfz" id="tYP-5j-7mP"/>
+            </connections>
             <point key="canvasLocation" x="133" y="58"/>
         </collectionViewCell>
     </objects>

@@ -43,7 +43,7 @@ class ForYouViewModel: ForYouProtocol, ForYouProtocolOutput {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForYouRecentlyCollectionViewCell.identifier, for: indexPath) as! ForYouRecentlyCollectionViewCell
             cell.viewModel.input.setViewController(vc: vc)
-//            cell.viewModel.input.getStationFavorite()
+            cell.viewModel.input.getStationFavorite()
             return cell
         } else if indexPath.item == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForYouLastedCollectionViewCell.identifier, for: indexPath) as! ForYouLastedCollectionViewCell

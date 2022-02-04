@@ -21,7 +21,7 @@ extension UINavigationBar {
 
 extension UINavigationController {
     
-    func setBarTintColor(color: UIColor) {
+    func setBarTintColor(color: UIColor, complete: (() -> Void)? = nil) {
         
         if #available(iOS 15.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -35,6 +35,9 @@ extension UINavigationController {
             self.navigationBar.scrollEdgeAppearance = appearance
             self.navigationBar.standardAppearance = appearance
             self.navigationBar.compactAppearance = appearance
+            DispatchQueue.main.async {
+                complete?()
+            }
         } else {
             
             self.navigationBar.barTintColor = color
@@ -45,6 +48,10 @@ extension UINavigationController {
             self.navigationBar.barStyle = .black
             self.navigationBar.tintColor = .white
             self.navigationBar.layoutIfNeeded()
+            
+            DispatchQueue.main.async {
+                complete?()
+            }
         }
     }
     

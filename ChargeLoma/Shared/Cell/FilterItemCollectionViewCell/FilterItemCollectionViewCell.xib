@@ -34,29 +34,32 @@
                                     <constraint firstAttribute="width" constant="27" id="lOb-Mw-trk"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="seK-fN-WpX">
-                                <rect key="frame" x="43" y="8.5" width="74" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="BOZ-lD-m9I"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gf-oj-OXC">
-                                <rect key="frame" x="60" y="68" width="40" height="19"/>
-                                <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="16"/>
-                                <color key="textColor" name="baseTextGray"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QT5-XE-ewc">
+                                <rect key="frame" x="43" y="8" width="74" height="79"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="seK-fN-WpX">
+                                        <rect key="frame" x="0.0" y="0.5" width="74" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="BOZ-lD-m9I"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gf-oj-OXC">
+                                        <rect key="frame" x="0.0" y="58" width="74" height="21"/>
+                                        <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="16"/>
+                                        <color key="textColor" name="baseTextGray"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QT5-XE-ewc" secondAttribute="trailing" constant="8" id="4LI-E5-GcI"/>
                             <constraint firstItem="2Z7-Mw-e99" firstAttribute="leading" secondItem="5rJ-2F-hSR" secondAttribute="leading" constant="8" id="7Yd-66-3ra"/>
-                            <constraint firstAttribute="trailing" secondItem="seK-fN-WpX" secondAttribute="trailing" constant="8" id="9B0-cC-pri"/>
-                            <constraint firstAttribute="bottom" secondItem="9Gf-oj-OXC" secondAttribute="bottom" constant="8" id="DVs-yc-M4V"/>
-                            <constraint firstItem="seK-fN-WpX" firstAttribute="leading" secondItem="2Z7-Mw-e99" secondAttribute="trailing" constant="8" id="J0x-ck-BpS"/>
-                            <constraint firstItem="9Gf-oj-OXC" firstAttribute="top" secondItem="seK-fN-WpX" secondAttribute="bottom" constant="2" id="Xbv-NQ-pdq"/>
-                            <constraint firstItem="9Gf-oj-OXC" firstAttribute="centerX" secondItem="seK-fN-WpX" secondAttribute="centerX" id="eWq-Oz-vmj"/>
-                            <constraint firstItem="2Z7-Mw-e99" firstAttribute="centerY" secondItem="seK-fN-WpX" secondAttribute="centerY" id="fgB-1n-tqy"/>
-                            <constraint firstItem="seK-fN-WpX" firstAttribute="top" secondItem="5rJ-2F-hSR" secondAttribute="top" constant="8" id="kyk-EP-Vxu"/>
+                            <constraint firstItem="2Z7-Mw-e99" firstAttribute="centerY" secondItem="seK-fN-WpX" secondAttribute="centerY" id="Ik5-JP-QQM"/>
+                            <constraint firstAttribute="bottom" secondItem="QT5-XE-ewc" secondAttribute="bottom" constant="8" id="kxD-71-3i2"/>
+                            <constraint firstItem="QT5-XE-ewc" firstAttribute="leading" secondItem="2Z7-Mw-e99" secondAttribute="trailing" constant="8" id="pez-jd-uwR"/>
+                            <constraint firstItem="QT5-XE-ewc" firstAttribute="top" secondItem="5rJ-2F-hSR" secondAttribute="top" constant="8" id="r3e-6J-QT9"/>
                         </constraints>
                     </view>
                 </subviews>

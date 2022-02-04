@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrU-pl-GDu">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrU-pl-GDu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="966"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2aP-gR-2tB">
@@ -254,7 +254,7 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqk-d8-vpJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -723,9 +723,11 @@
                         <outlet property="iconLocation" destination="2Kh-o4-wVr" id="lPf-wv-hiF"/>
                         <outlet property="iconTime" destination="1NQ-96-Ler" id="8WH-ES-9OD"/>
                         <outlet property="imagePosterView" destination="3kF-UK-K2H" id="AMz-zA-wuF"/>
+                        <outlet property="leftPosterImageConstant" destination="wR4-52-g7s" id="YqA-er-wQY"/>
                         <outlet property="logoStationImageView" destination="XWQ-hI-ZhN" id="qiq-Sd-Auz"/>
                         <outlet property="plugTableView" destination="qZD-cn-MkI" id="4M0-F8-Jfl"/>
                         <outlet property="plugTableViewHeight" destination="VsH-df-t8N" id="x6o-D5-P5i"/>
+                        <outlet property="rightPosterImageConstant" destination="ZZJ-zA-cmg" id="EYe-28-sPH"/>
                         <outlet property="scrollView" destination="CrU-pl-GDu" id="ND4-k9-5IN"/>
                         <outlet property="serviceCharge" destination="Ab3-1R-aFU" id="CUS-SS-aTb"/>
                         <outlet property="spaceScrollViewWithBottom" destination="JfH-Fw-bnb" id="nfd-vc-s3p"/>
@@ -746,6 +748,7 @@
                         <outlet property="titleStationValue" destination="pLe-T3-Zfy" id="G4n-m6-bHd"/>
                         <outlet property="titleToilet" destination="15h-mp-3e4" id="GUA-iI-eF1"/>
                         <outlet property="titleWifi" destination="aS6-po-jfe" id="7mg-Y5-uci"/>
+                        <outlet property="topPosterImageConstant" destination="76z-x1-I5c" id="hue-oX-CXQ"/>
                         <outlet property="viewBadgeCount" destination="ZcD-rt-51A" id="N3E-tm-85B"/>
                         <outlet property="viewMap" destination="hqk-d8-vpJ" id="Lpf-JI-ywP"/>
                     </connections>
