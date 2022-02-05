@@ -114,6 +114,9 @@
 		EF823548277D9F0D00379B38 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF823547277D9F0D00379B38 /* MapViewModel.swift */; };
 		EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF82354C277DA5A800379B38 /* MarkerStationView.swift */; };
 		EF82354F277DA5AE00379B38 /* MarkerStationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF82354E277DA5AE00379B38 /* MarkerStationView.xib */; };
+		EF8DE61B27AEEAF200B9C047 /* SeeAllReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8DE61A27AEEAF200B9C047 /* SeeAllReview.storyboard */; };
+		EF8DE61D27AEEAF900B9C047 /* SeeAllReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8DE61C27AEEAF900B9C047 /* SeeAllReviewViewController.swift */; };
+		EF8DE62027AEEE4500B9C047 /* SeeAllReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8DE61F27AEEE4500B9C047 /* SeeAllReviewViewModel.swift */; };
 		EF97E0CB279D36D900FF68DA /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97E0CA279D36D900FF68DA /* AddReviewViewController.swift */; };
 		EF97E0CD279D36E000FF68DA /* AddReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF97E0CC279D36E000FF68DA /* AddReview.storyboard */; };
 		EF97E0CF279D6F9900FF68DA /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF97E0CE279D6F9900FF68DA /* ToolbarPickerView.swift */; };
@@ -343,6 +346,9 @@
 		EF823547277D9F0D00379B38 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		EF82354C277DA5A800379B38 /* MarkerStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerStationView.swift; sourceTree = "<group>"; };
 		EF82354E277DA5AE00379B38 /* MarkerStationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerStationView.xib; sourceTree = "<group>"; };
+		EF8DE61A27AEEAF200B9C047 /* SeeAllReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeeAllReview.storyboard; sourceTree = "<group>"; };
+		EF8DE61C27AEEAF900B9C047 /* SeeAllReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllReviewViewController.swift; sourceTree = "<group>"; };
+		EF8DE61F27AEEE4500B9C047 /* SeeAllReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllReviewViewModel.swift; sourceTree = "<group>"; };
 		EF97E0CA279D36D900FF68DA /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
 		EF97E0CC279D36E000FF68DA /* AddReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddReview.storyboard; sourceTree = "<group>"; };
 		EF97E0CE279D6F9900FF68DA /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
@@ -580,6 +586,7 @@
 		EF3ACB0B277C57CB0096BF95 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EF8DE61927AEEADE00B9C047 /* SeeAllReview */,
 				EF97E0C9279D36C100FF68DA /* AddReview */,
 				EF0CE1C3279847720072C156 /* StationDetail */,
 				EFA0EADF2793C28C002B258D /* GalleryPhoto */,
@@ -1145,6 +1152,24 @@
 				EF82354E277DA5AE00379B38 /* MarkerStationView.xib */,
 			);
 			path = MarkerStationView;
+			sourceTree = "<group>";
+		};
+		EF8DE61927AEEADE00B9C047 /* SeeAllReview */ = {
+			isa = PBXGroup;
+			children = (
+				EF8DE61E27AEEE2B00B9C047 /* ViewModel */,
+				EF8DE61A27AEEAF200B9C047 /* SeeAllReview.storyboard */,
+				EF8DE61C27AEEAF900B9C047 /* SeeAllReviewViewController.swift */,
+			);
+			path = SeeAllReview;
+			sourceTree = "<group>";
+		};
+		EF8DE61E27AEEE2B00B9C047 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF8DE61F27AEEE4500B9C047 /* SeeAllReviewViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EF97E0C9279D36C100FF68DA /* AddReview */ = {
@@ -1927,6 +1952,7 @@
 				EF3ACB4A277C59CA0096BF95 /* Kanit-Thin.ttf in Resources */,
 				EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */,
 				C4DFF16427A5495A006DA83A /* FavoriteTableViewCell.xib in Resources */,
+				EF8DE61B27AEEAF200B9C047 /* SeeAllReview.storyboard in Resources */,
 				EFB1FF2127AABF4100BAAF9D /* CollectionViewImageGrid.xib in Resources */,
 				EF97E0D5279D9C5E00FF68DA /* ChoosePlug.storyboard in Resources */,
 				EFA36E9827930B3700BF2E51 /* ForYouRecentlyCollectionViewCell.xib in Resources */,
@@ -2034,6 +2060,7 @@
 				EFCA87D6279A7AE8001BCFD3 /* GetUserProfileRssponse.swift in Sources */,
 				EF7F08DD278F357F00FE4E9C /* GetPlaceAutoCompleteResponse.swift in Sources */,
 				EF9AF8E22791497A0051B616 /* SearchStationViewModel.swift in Sources */,
+				EF8DE62027AEEE4500B9C047 /* SeeAllReviewViewModel.swift in Sources */,
 				EF823513277D791700379B38 /* MoyaProvider+Combine.swift in Sources */,
 				EF97E0DB279D9FBF00FF68DA /* PlugStationAPI.swift in Sources */,
 				EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */,
@@ -2143,6 +2170,7 @@
 				EFA36EBD279311FE00BF2E51 /* GetInformationFindAllUseCase.swift in Sources */,
 				EFCA87FC279AFA92001BCFD3 /* MetaResponse.swift in Sources */,
 				EFA36EB52793103500BF2E51 /* GetInformationFindAllRequest.swift in Sources */,
+				EF8DE61D27AEEAF900B9C047 /* SeeAllReviewViewController.swift in Sources */,
 				EF3ACB58277C5D850096BF95 /* UIColor+Extension.swift in Sources */,
 				EFCA8817279B10B4001BCFD3 /* DeleteFavoriteUseCase.swift in Sources */,
 				EFAEC1BF27A988CA007CC424 /* FilterItemTextCollectionViewCell.swift in Sources */,

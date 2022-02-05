@@ -43,6 +43,8 @@ public enum NavigationOpeningSender {
     
     case choosePlug(_ stId: String, delegate: ChoosePlugViewModelDelegate)
     
+    case seeAllReview(items: [ReviewData])
+    
     public var storyboardName: String {
         switch self {
         case .splash:
@@ -81,6 +83,8 @@ public enum NavigationOpeningSender {
             return "AddReview"
         case .choosePlug:
             return "ChoosePlug"
+        case .seeAllReview:
+            return "SeeAllReview"
         }
     }
     
@@ -122,6 +126,8 @@ public enum NavigationOpeningSender {
             return "AddReviewViewController"
         case .choosePlug:
             return "ChoosePlugViewController"
+        case .seeAllReview:
+            return "SeeAllReviewViewController"
         }
     }
     
@@ -148,6 +154,8 @@ public enum NavigationOpeningSender {
             return "รีวิว"
         case .choosePlug:
             return "เลือกหัวชาร์จ"
+        case .seeAllReview:
+            return "รีวิว"
         default:
             return ""
         }
@@ -298,6 +306,11 @@ class NavigationManager {
                 className.viewModel.setStId(stId)
                 viewController = className
             }
+        case .seeAllReview(let items):
+            if let className = storyboard.instantiateInitialViewController() as? SeeAllReviewViewController {
+                className.viewModel.setListReview(items: items)
+                viewController = className
+            }
         default:
             viewController = storyboard.instantiateInitialViewController() ?? to.viewController
         }
@@ -350,9 +363,15 @@ class NavigationManager {
                 viewController.hidesBottomBarWhenPushed = false
             }
             let topVC = UIApplication.getTopViewController()
-            topVC?.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            topVC?.navigationController?.navigationBar.tintColor = .white
-            topVC?.navigationController?.pushViewController(viewController, animated: animated)
+            if let nav = topVC?.navigationController {
+                nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                nav.navigationBar.tintColor = .white
+                nav.pushViewController(viewController, animated: animated)
+            } else {
+                self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                self.navigationController.navigationBar.tintColor = .white
+                self.navigationController.pushViewController(viewController, animated: animated)
+            }
         case .Root:
             let storyboard = UIStoryboard(name: to.storyboardName, bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()

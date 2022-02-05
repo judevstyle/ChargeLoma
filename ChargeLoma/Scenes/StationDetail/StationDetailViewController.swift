@@ -114,25 +114,33 @@ class StationDetailViewController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("didChangeSizeSheet"), object: nil)
         }
         
+        
+        setupUI()
+//        setupMap()
+        setupTableView()
+        setupCheckBox()
+        
+        viewModel.input.getStationDetail()
+        viewModel.input.getFavorite()
+        viewModel.input.getImageStation()
+        viewModel.input.getReview()
+        
     }
     
     func configure(_ interface: StationDetailProtocol) {
         self.viewModel = interface
     }
     
-    override func viewWillAppear(_ animated: Bool) {        
-        setupUI()
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
+//        setupUI()
         setupMap()
-        setupTableView()
-        setupCheckBox()
+//        setupTableView()
+//        setupCheckBox()
         self.sheetViewController?.handleScrollView(self.scrollView)
-        
-        viewModel.input.getStationDetail()
-        viewModel.input.getFavorite()
-        viewModel.input.getImageStation()
-        viewModel.input.getReview()
+        reloadStationLocation()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
@@ -387,7 +395,6 @@ extension StationDetailViewController {
         return { [weak self] in
             guard let self = self else { return }
             self.reloadFavorite()
-            
         }
     }
     
@@ -428,28 +435,14 @@ extension StationDetailViewController {
         distanceValue.text = "ไม่พบพิกัดผู้ใช้งาน"
         timeValue.text = station.servicetimeOpen ?? ""
         
-        setupMarker(item: station)
-        
         descValue.text = station.stationDesc ?? "-"
         serviceCharge.text = "ค่าบริการ \(station.serviceRate ?? 0.0) บาท"
         
         titleRating.text = String(format:"%.1f", station.rating ?? 0.0)
         
         checkMethodService()
-    }
-    
-    func setupMarker(item: StationData) {
-        if let lat = item.lat, let lng = item.lng {
-            let position = CLLocationCoordinate2D(latitude: item.lat ?? 0.0, longitude: item.lng ?? 0.0)
-            let marker = GMSMarker(position: position)
-            marker.snippet = "\(index)"
-            marker.isTappable = true
-            marker.iconView =  MarkerStationView.instantiate(station: item, index: 0)
-            marker.tracksViewChanges = true
-            marker.map = mapView
-            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
-            mapView.animate(to: camera)
-        }
+        
+        reloadStationLocation()
     }
     
     func checkMethodService()  {
@@ -462,6 +455,21 @@ extension StationDetailViewController {
         self.cbSleep.setCheckBox(isSelected: station.isServiceRestarea ?? false)
         self.cbWifi.setCheckBox(isSelected: station.isServiceWifi ?? false)
         self.cbOther.setCheckBox(isSelected: station.isServiceOther ?? false)
+    }
+    
+    func reloadStationLocation() {
+        guard let station = self.viewModel.output.getDataStation() else { return }
+        if let lat = station.lat, let lng = station.lng {
+            let position = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            let marker = GMSMarker(position: position)
+            marker.snippet = "\(index)"
+            marker.isTappable = true
+            marker.iconView =  MarkerStationView.instantiate(station: station, index: 0)
+            marker.tracksViewChanges = true
+            marker.map = mapView
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
+            mapView.animate(to: camera)
+        }
     }
 }
 
@@ -542,6 +550,7 @@ extension StationDetailViewController : GMSMapViewDelegate {
 
 extension StationDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -594,11 +603,9 @@ extension StationDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension StationDetailViewController: LoginDelegate {
     func didLoginSuccess(actionType: LoginActionType) {
-        debugPrint("ActionType: \(actionType)")
         switch actionType {
         case .writeReview:
             if let stId = viewModel.output.getDataStation()?.stId {
-                debugPrint("stID \(stId)")
                 DispatchQueue.main.async {
                     NavigationManager.instance.pushVC(to: .addReview(stId), presentation: .presentFullScreen(completion: nil))
                 }
@@ -609,6 +616,4 @@ extension StationDetailViewController: LoginDelegate {
             break
         }
     }
-    
-
 }

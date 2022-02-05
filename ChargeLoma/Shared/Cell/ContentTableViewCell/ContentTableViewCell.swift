@@ -44,8 +44,6 @@ class ContentTableViewCell: UITableViewCell {
         if let updateDate = item?.updatedDate {
             titlsBadge.isHidden = false
             bgBadge.isHidden = false
-            debugPrint(updateDate)
-            debugPrint(updateDate.convertToDate())
             titlsBadge.text = updateDate.convertToDate()?.getFormattedDate(format: "MMM dd, HH:mm")
         } else {
             titlsBadge.isHidden = true

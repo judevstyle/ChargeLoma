@@ -177,6 +177,7 @@ extension StationDetailViewModel {
                     let cell = tableView.dequeueReusableCell(withIdentifier: SeeAllTableViewCell.identifier, for: indexPath) as! SeeAllTableViewCell
                     cell.selectionStyle = .none
                     cell.title = "อ่านรีวิวทั้งหมด"
+                    cell.delegate = self
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.identifier, for: indexPath) as! ReviewTableViewCell
@@ -300,6 +301,12 @@ extension StationDetailViewModel {
             }
             self.didGetReviewSuccess?()
         }.store(in: &self.anyCancellable)
+    }
+}
+
+extension StationDetailViewModel: SeeAllTableViewCellDelegate {
+    func didSeeAllButton() {
+        NavigationManager.instance.pushVC(to: .seeAllReview(items: self.listReview))
     }
 }
 

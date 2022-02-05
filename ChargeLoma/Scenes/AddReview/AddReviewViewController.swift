@@ -76,11 +76,7 @@ class AddReviewViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         NavigationManager.instance.setupWithNavigationController(self)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .darkContent
-    }
-    
+
     func setupUI() {
         setupCloseViewButton()
         

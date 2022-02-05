@@ -67,7 +67,6 @@ class AddReviewViewModel: AddReviewProtocol, AddReviewProtocolOutput {
             debugPrint("getPlugStationUseCase \(completion)")
             self.vc.stopLoding()
         } receiveValue: { resp in
-            debugPrint(resp)
             if let item = resp {
                 self.listPlugStation = item
                 self.didGetPlugStationSuccess?()

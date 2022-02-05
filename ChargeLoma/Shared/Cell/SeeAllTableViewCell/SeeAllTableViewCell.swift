@@ -7,11 +7,17 @@
 
 import UIKit
 
+public protocol SeeAllTableViewCellDelegate {
+    func didSeeAllButton()
+}
+
 class SeeAllTableViewCell: UITableViewCell {
     
     static let identifier = "SeeAllTableViewCell"
 
     @IBOutlet weak var buttonSeeAll: UIButton!
+    
+    public var delegate: SeeAllTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,5 +42,6 @@ class SeeAllTableViewCell: UITableViewCell {
     }
 
     @IBAction func didSeeAll(_ sender: Any) {
+        self.delegate?.didSeeAllButton()
     }
 }

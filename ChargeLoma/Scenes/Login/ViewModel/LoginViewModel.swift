@@ -80,7 +80,6 @@ class LoginViewModel: LoginProtocol, LoginProtocolOutput {
         self.vc.startLoding()
         var request = PostUserAuthRequest()
         request.uid = UserDefaultsKey.UID.string ?? ""
-        debugPrint(request.toJSON())
         self.postUserAuthUseCase.execute(request: request).sink { completion in
             debugPrint("postUserAuthUseCase \(completion)")
             self.vc.stopLoding()

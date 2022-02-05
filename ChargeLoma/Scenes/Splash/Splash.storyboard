@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Kanit-Bold.ttf">
+            <string>Kanit-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Splash View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -16,31 +21,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fdg-Cq-1dA">
-                                <rect key="frame" x="124.5" y="370.5" width="165" height="165"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HWr-Kk-6Q6">
+                                <rect key="frame" x="98.5" y="359.5" width="217" height="187"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fdg-Cq-1dA">
+                                        <rect key="frame" x="46" y="0.0" width="125" height="125"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="125" id="5Ze-g4-Rn5"/>
+                                            <constraint firstAttribute="width" constant="125" id="mJP-cj-nD4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charge Loma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73G-Fm-Uva">
+                                        <rect key="frame" x="0.0" y="133" width="217" height="54"/>
+                                        <fontDescription key="fontDescription" name="Kanit-Bold" family="Kanit" pointSize="36"/>
+                                        <color key="textColor" name="baseSecondary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="165" id="5Ze-g4-Rn5"/>
-                                    <constraint firstAttribute="width" constant="165" id="mJP-cj-nD4"/>
+                                    <constraint firstItem="73G-Fm-Uva" firstAttribute="top" secondItem="fdg-Cq-1dA" secondAttribute="bottom" constant="8" id="7po-s4-98Q"/>
+                                    <constraint firstAttribute="trailing" secondItem="73G-Fm-Uva" secondAttribute="trailing" id="Oef-Kh-3gC"/>
+                                    <constraint firstItem="73G-Fm-Uva" firstAttribute="leading" secondItem="HWr-Kk-6Q6" secondAttribute="leading" id="RVL-b5-o1Q"/>
+                                    <constraint firstItem="fdg-Cq-1dA" firstAttribute="top" secondItem="HWr-Kk-6Q6" secondAttribute="top" id="jwT-oa-bZa"/>
+                                    <constraint firstAttribute="bottom" secondItem="73G-Fm-Uva" secondAttribute="bottom" id="kxS-jT-Mad"/>
+                                    <constraint firstItem="fdg-Cq-1dA" firstAttribute="centerX" secondItem="HWr-Kk-6Q6" secondAttribute="centerX" id="u0N-1z-BIV"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="baseBG"/>
                         <constraints>
-                            <constraint firstItem="fdg-Cq-1dA" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Bdn-r2-bh6"/>
-                            <constraint firstItem="fdg-Cq-1dA" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="WW7-t7-izz"/>
+                            <constraint firstItem="HWr-Kk-6Q6" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Ofk-Fr-I0a"/>
+                            <constraint firstItem="HWr-Kk-6Q6" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="Qkz-G0-YYZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="titleText" destination="73G-Fm-Uva" id="aAY-GJ-SH2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="84"/>
+            <point key="canvasLocation" x="28.985507246376812" y="83.705357142857139"/>
         </scene>
     </scenes>
     <resources>
         <image name="logo" width="118.5" height="163"/>
         <namedColor name="baseBG">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="baseSecondary">
+            <color red="0.22745098039215686" green="0.32941176470588235" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

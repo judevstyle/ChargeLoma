@@ -134,9 +134,17 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     }
     
     func getStatusFilter() {
-        self.listStatusData.0 = [2, 3, 4]
+        self.listStatusData.0 = [1, 2, 3]
         self.listStatusData.1 = ["เปิดเร็วๆนี้", "ปิดปรับปรุง", "แสดงสถานีที่ใช้ส่วนตัว"]
         self.listStatusData.2 = [true, true, true]
+        
+        let storeFilter = StoreManager.shared.getMapFilter()
+        self.listStatusData.0.enumerated().forEach({ (index, id) in
+            let filter = storeFilter?.statusIndex?.filter { $0 == id }
+            let status: Bool = (filter?.isEmpty ?? true) == true ? false : true
+            self.listStatusData.2[index] = status
+        })
+        
         self.didGetStatusFilterSuccess?()
     }
     
@@ -177,6 +185,7 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     
     func setSelectedDCIndex(index: Int, selected: Bool) {
         self.listDCPlugTypeData.1[index] = selected
+        addRemovePlugTypeMaster(id: self.listDCPlugTypeData.0[index].pTypeId, isSeleted: selected)
     }
     
     func setSelectedProviderMasterAll(selected: Bool) {
@@ -188,10 +197,12 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     
     func setSelectedProviderMasterIndex(index: Int, selected: Bool) {
         self.listProviderMasterData.1[index] = selected
+        addRemoveProviderMaster(id: self.listProviderMasterData.0[index].pvId, isSeleted: selected)
     }
 
     func setSelectedStatusFilterIndex(index: Int, selected: Bool) {
         self.listStatusData.2[index] = selected
+        addRemoveStatusFilter(id: self.listStatusData.0[index], isSeleted: selected)
     }
 }
 
@@ -208,6 +219,44 @@ extension MapFilterViewModel {
             } else {
                 let newId = item.plugId?.filter { $0 != id }
                 request.plugId = newId
+            }
+            StoreManager.shared.clearMapFilter(completion: {
+                StoreManager.shared.addMapFilter(request, completion: {})
+            })
+        }
+    }
+    
+    func addRemoveProviderMaster(id: Int?, isSeleted: Bool) {
+        if let item = StoreManager.shared.getMapFilter() {
+            var request = MapFilterModel()
+            request = item
+            
+            if isSeleted == true {
+                var newId = item.providerId?.filter { $0 != id }
+                newId?.append(id)
+                request.providerId = newId
+            } else {
+                let newId = item.providerId?.filter { $0 != id }
+                request.providerId = newId
+            }
+            StoreManager.shared.clearMapFilter(completion: {
+                StoreManager.shared.addMapFilter(request, completion: {})
+            })
+        }
+    }
+    
+    func addRemoveStatusFilter(id: Int?, isSeleted: Bool) {
+        if let item = StoreManager.shared.getMapFilter() {
+            var request = MapFilterModel()
+            request = item
+            
+            if isSeleted == true {
+                var newId = item.statusIndex?.filter { $0 != id }
+                newId?.append(id)
+                request.statusIndex = newId
+            } else {
+                let newId = item.statusIndex?.filter { $0 != id }
+                request.statusIndex = newId
             }
             StoreManager.shared.clearMapFilter(completion: {
                 StoreManager.shared.addMapFilter(request, completion: {})

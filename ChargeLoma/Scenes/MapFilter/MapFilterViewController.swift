@@ -312,6 +312,8 @@ extension MapFilterViewController: FilterItemCollectionViewCellDelegate {
         case providerCollection:
             viewModel.input.setSelectedProviderMasterIndex(index: index, selected: isSelectedBtn)
             checkProviderAll()
+        case statusCollection:
+            viewModel.input.setSelectedStatusFilterIndex(index: index, selected: isSelectedBtn)
         default:
             break
         }

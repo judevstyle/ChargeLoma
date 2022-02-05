@@ -9,6 +9,8 @@ import UIKit
 
 class SplashViewController: UIViewController {
     
+    @IBOutlet weak var titleText: UILabel!
+    
     lazy var viewModel: SplashProtocol = {
         let vm = SplashViewModel(vc: self)
         self.configure(vm)
@@ -18,7 +20,13 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.input.prepareFetchData()
+        self.titleText.text = "Charge Loma"
+        self.titleText.font = .header1
+        self.titleText.textColor = .baseSecondary
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            self.viewModel.input.prepareFetchData()
+        })
     }
     
     func configure(_ interface: SplashProtocol) {

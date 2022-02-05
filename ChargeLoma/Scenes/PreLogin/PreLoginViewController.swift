@@ -22,6 +22,11 @@ class PreLoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationItem.hidesBackButton = true
+        
+        guard UserDefaultsKey.UID.string == nil, UserDefaultsKey.isLoggedIn.bool == false else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
     }
 
 }
@@ -47,6 +52,7 @@ extension PreLoginViewController {
 
 extension PreLoginViewController: LoginDelegate {
     func didLoginSuccess(actionType: LoginActionType) {
-        
+        debugPrint("Login Success")
+        self.navigationController?.popViewController(animated: true)
     }
 }
