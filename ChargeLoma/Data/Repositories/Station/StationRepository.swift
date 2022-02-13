@@ -13,6 +13,7 @@ protocol StationRepository {
     func postStationFilter(request: PostStationFilterRequest) -> AnyPublisher<PostStationFilterResponse, Error>
     func getFindOne(request: GetStationFindOneRequest) -> AnyPublisher<GetStationFindOneResponse, Error>
     func getImageStation(request: GetImageStationRequest) -> AnyPublisher<GetImageStationResponse, Error>
+    func createStation(request: PostStationRequest) -> AnyPublisher<PostStationResponse, Error>
 }
 
 final class StationRepositoryImpl: ChargeLoma.StationRepository {
@@ -37,5 +38,12 @@ final class StationRepositoryImpl: ChargeLoma.StationRepository {
             .cb
             .request(.imageStation(request: request))
             .map(GetImageStationResponse.self)
+    }
+    
+    func createStation(request: PostStationRequest) -> AnyPublisher<PostStationResponse, Error> {
+        return self.provider
+            .cb
+            .request(.createStation(request: request))
+            .map(PostStationResponse.self)
     }
 }

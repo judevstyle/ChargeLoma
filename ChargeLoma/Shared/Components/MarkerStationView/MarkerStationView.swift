@@ -25,7 +25,7 @@ class MarkerStationView: UIView {
         if station?.stationStatus == 3 {
             pinImage = UIImage(named: "marker_gray")!.withRenderingMode(.alwaysOriginal)
         } else {
-            if station?.isFastCharge == true {
+            if station?.is24hr == true {
                 pinImage = UIImage(named: "marker_orange")!.withRenderingMode(.alwaysOriginal)
             } else {
                 pinImage = UIImage(named: "marker_green")!.withRenderingMode(.alwaysOriginal)

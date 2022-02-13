@@ -20,6 +20,8 @@ protocol ForYouInfoProtocolOutput: class {
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int) -> Int
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
     func getItemViewCellHeight() -> CGFloat
+    
+    func getItemInfo(indexPath: IndexPath) -> InformationItem?
 }
 
 protocol ForYouInfoProtocol: ForYouInfoProtocolInput, ForYouInfoProtocolOutput {
@@ -87,5 +89,9 @@ class ForYouInfoViewModel: ForYouInfoProtocol, ForYouInfoProtocolOutput {
     
     func getItemViewCellHeight() -> CGFloat {
         return 250
+    }
+    
+    func getItemInfo(indexPath: IndexPath) -> InformationItem? {
+        return listInformation?[indexPath.item]
     }
 }

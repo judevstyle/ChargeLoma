@@ -13,6 +13,7 @@ protocol GoogleMapRepository {
     func placeAutoComplete(request: GetPlaceAutoCompleteRequest) -> AnyPublisher<GetPlaceAutoCompleteResponse, Error>
     func placeDetail(request: GetPlaceDetailRequest) -> AnyPublisher<GetPlaceDetailResponse, Error>
     func placeDirection(request: GetPlaceDirectionRequest) -> AnyPublisher<GetPlaceDirectionResponse, Error>
+    func placeGeoCode(request: GetGeocodePlaceRequest) -> AnyPublisher<GetGeocodePlaceResponse, Error>
 }
 
 final class GoogleMapRepositoryImpl: ChargeLoma.GoogleMapRepository {
@@ -37,5 +38,12 @@ final class GoogleMapRepositoryImpl: ChargeLoma.GoogleMapRepository {
             .cb
             .request(.getPlaceDirection(request: request))
             .map(GetPlaceDirectionResponse.self)
+    }
+    
+    func placeGeoCode(request: GetGeocodePlaceRequest) -> AnyPublisher<GetGeocodePlaceResponse, Error> {
+        return self.provider
+            .cb
+            .request(.getGeocodePlace(request: request))
+            .map(GetGeocodePlaceResponse.self)
     }
 }

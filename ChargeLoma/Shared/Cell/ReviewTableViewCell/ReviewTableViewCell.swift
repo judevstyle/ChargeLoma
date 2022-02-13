@@ -22,6 +22,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var statusImage: UIImageView!
     
     public var listImage: [String] = []
     
@@ -69,6 +70,10 @@ class ReviewTableViewCell: UITableViewCell {
         
         carName.font = .smallText
         carName.textColor = .baseTextGray
+        
+        statusImage.backgroundColor = .clear
+        statusImage.setPlaceholderImageView()
+        statusImage.contentMode = .scaleAspectFill
     }
      
     func setupValue() {
@@ -84,6 +89,19 @@ class ReviewTableViewCell: UITableViewCell {
             posterReview.kf.setImageDefault(with: urlImage)
         }
         
+        
+        switch data?.isCharge {
+        case true:
+            statusImage.image = UIImage(named: "yes")?.withRenderingMode(.alwaysOriginal)
+            statusImage.tintColor = .green
+        case false:
+            statusImage.image = UIImage(named: "no")?.withRenderingMode(.alwaysOriginal)
+            statusImage.tintColor = .red
+        default:
+            statusImage.image = UIImage(named: "comment")?.withRenderingMode(.alwaysOriginal)
+            statusImage.tintColor = .basePrimary
+        }
+
         var listStrImage: [String] = []
         data?.ReviewImg?.forEach({ item in
             if let pathImage = item.imgPath {

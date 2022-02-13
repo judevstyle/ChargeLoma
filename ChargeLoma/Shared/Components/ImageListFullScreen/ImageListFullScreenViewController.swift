@@ -46,7 +46,6 @@ class ImageListFullScreenViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .darkContent
     }
     
     @IBAction func closeAction(_ sender: Any) {

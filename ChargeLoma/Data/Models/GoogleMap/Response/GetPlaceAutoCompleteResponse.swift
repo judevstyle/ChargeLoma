@@ -26,6 +26,7 @@ public struct PlaceItem: Codable, Hashable  {
     public var reference: String?
     public var structuredFormatting: PredictionsStructuredFormatting?
     public var geometry: GeometryItem?
+    public var formattedAddress: String?
     
     public init() {}
     
@@ -34,6 +35,7 @@ public struct PlaceItem: Codable, Hashable  {
         try reference              <- decoder["reference"]
         try structuredFormatting   <- decoder["structured_formatting"]
         try geometry               <- decoder["geometry"]
+        try formattedAddress               <- decoder["formatted_address"]
     }
 }
 

@@ -44,7 +44,6 @@ class GoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.input.getStationFilter()
     }
     
     func configure(_ interface: GoProtocol) {
@@ -54,7 +53,7 @@ class GoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupUI()
         setupMap()
-        self.fetchMarkerMap()
+        viewModel.input.getStationFilter()
     }
 
     override func viewDidDisappear(_ animated: Bool) {

@@ -38,6 +38,8 @@ class MainTabBarController: UITabBarController {
         let meVC = tabBarNavigation(unselectImage: UIImage(named: "user"), selectImage: UIImage(named: "user"), title: "ฉัน", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .me)
         
         viewControllers = [mapVC, goVC, foryouVC, addLocationVC, meVC]
+        
+        NavigationManager.instance.setupTabbarController(self)
     }
     
     

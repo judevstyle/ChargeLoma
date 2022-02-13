@@ -87,10 +87,6 @@ public enum Language: Equatable {
 
     /// Example : pass data
     /// equivalident to "rawValue" ("th" or "en")
-    /// Indonesia (id)
-    /// Cambodia (km)
-    /// Vietnam (vi)
-    /// Philippines (fil)
     ///
     public var name: String {
         switch self {

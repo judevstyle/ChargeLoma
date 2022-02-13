@@ -18,6 +18,15 @@
           "revision": "bcb52371f2259254bac6690f92bb474a61768c47",
           "version": "5.1.1"
         }
+      },
+      {
+        "package": "SPPermissions",
+        "repositoryURL": "https://github.com/ivanvorobei/SPPermissions",
+        "state": {
+          "branch": null,
+          "revision": "14299050782ac18a40edac8e7369425c13998b68",
+          "version": "7.1.5"
+        }
       }
     ]
   },

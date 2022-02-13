@@ -13,12 +13,13 @@ public enum StationAPI {
     case stationFilter(request: PostStationFilterRequest)
     case findOne(request: GetStationFindOneRequest)
     case imageStation(request: GetImageStationRequest)
+    case createStation(request: PostStationRequest)
 }
 
 extension StationAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .stationFilter, .findOne, .imageStation:
+        case .stationFilter, .findOne, .imageStation, .createStation:
             return DomainNameConfig.station.url
         }
     }
@@ -31,12 +32,14 @@ extension StationAPI: TargetType {
             return "/\(request.stId ?? "")"
         case .imageStation:
             return "imageStation"
+        case .createStation:
+            return ""
         }
     }
 
     public var method: Moya.Method {
         switch self {
-        case .stationFilter:
+        case .stationFilter, .createStation:
             return .post
         default:
             return .get
@@ -55,6 +58,8 @@ extension StationAPI: TargetType {
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         case let .imageStation(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .createStation(request):
+            return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
 

@@ -61,7 +61,6 @@ class ForYouRecentlyViewModel: ForYouRecentlyProtocol, ForYouRecentlyProtocolOut
             self.vc?.stopLoding()
         } receiveValue: { resp in
             if let items = resp {
-                debugPrint(items)
                 self.listStationFavorite = items
                 self.didGetStationFavoriteSuccess?()
             }

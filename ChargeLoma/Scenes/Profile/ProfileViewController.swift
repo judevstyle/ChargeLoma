@@ -81,7 +81,6 @@ class ProfileViewController: UIViewController {
 
 // MARK: - Binding
 extension ProfileViewController {
-    
     func bindToViewModel() {
         viewModel.output.didGetUserProfileSuccess = didGetUserProfileSuccess()
     }
@@ -92,7 +91,6 @@ extension ProfileViewController {
             weakSelf.reloadDataView()
         }
     }
-    
 }
 
 // MARK: - event
@@ -178,6 +176,17 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         switch indexPath.row {
+        case 0:
+            NavigationManager.instance.pushVC(to: .me)
+        case 1:
+            NavigationManager.instance.pushVC(to: .seeAllFavorite)
+        case 3:
+            debugPrint("Change Language")
+            if Language.current == .thai {
+                Language.current = .english
+            } else {
+                Language.current = .thai
+            }
         case 5:
             didSignOut()
         default:

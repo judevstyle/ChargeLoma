@@ -38,7 +38,7 @@ class MarkerStationInfoView: UIView {
     func setupValue(_ item: StationData?) {
         titleText.text = item?.stationName ?? ""
         if let rating = item?.rating {
-            rateValue.text = "\(rating)"
+            rateValue.text = String(format:"%.1f", rating)
         } else {
             rateValue.text = "-"
         }

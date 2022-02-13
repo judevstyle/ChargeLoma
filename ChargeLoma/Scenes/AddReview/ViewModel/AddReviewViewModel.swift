@@ -12,10 +12,14 @@ import Combine
 protocol AddReviewProtocolInput {
     func setStId(_ stId: String)
     func setListPlug(items: [PlugStationData])
+    
+    func createReview(request: PostReviewRequest)
 }
 
 protocol AddReviewProtocolOutput: class {
     var didGetPlugStationSuccess: (() -> Void)? { get set }
+    
+    var didPostReviewSuccess: (() -> Void)? { get set }
     
     func getStId() -> String?
     
@@ -23,6 +27,8 @@ protocol AddReviewProtocolOutput: class {
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int) -> Int
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
     func getItemViewCellHeight() -> CGFloat
+    
+    func getSelectedPlug() -> PlugStationData?
 
 }
 
@@ -38,6 +44,7 @@ class AddReviewViewModel: AddReviewProtocol, AddReviewProtocolOutput {
     
     // MARK: - UseCase
     private var getPlugStationUseCase: GetPlugStationUseCase
+    private var postReviewUseCase: PostReviewUseCase
     private var anyCancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     // MARK: - Properties
@@ -50,14 +57,17 @@ class AddReviewViewModel: AddReviewProtocol, AddReviewProtocolOutput {
     
     init(
         vc: AddReviewViewController,
-        getPlugStationUseCase: GetPlugStationUseCase = GetPlugStationUseCaseImpl()
+        getPlugStationUseCase: GetPlugStationUseCase = GetPlugStationUseCaseImpl(),
+        postReviewUseCase: PostReviewUseCase = PostReviewUseCaseImpl()
     ) {
         self.vc = vc
         self.getPlugStationUseCase = getPlugStationUseCase
+        self.postReviewUseCase = postReviewUseCase
     }
     
     // MARK - Data-binding OutPut
     var didGetPlugStationSuccess: (() -> Void)?
+    var didPostReviewSuccess: (() -> Void)?
     
     func getPlugStation() {
         self.vc.startLoding()
@@ -89,7 +99,7 @@ class AddReviewViewModel: AddReviewProtocol, AddReviewProtocolOutput {
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlugTableViewCell.identifier, for: indexPath) as! PlugTableViewCell
         cell.selectionStyle = .none
-        cell.itemPlugTypeData = self.listPlugStation[indexPath.row]
+        cell.itemPlugStationData = self.listPlugStation[indexPath.row]
         cell.setBaseBG()
         return cell
     }
@@ -101,5 +111,21 @@ class AddReviewViewModel: AddReviewProtocol, AddReviewProtocolOutput {
     func setListPlug(items: [PlugStationData]) {
         self.listPlugStation = items
         self.didGetPlugStationSuccess?()
+    }
+    
+    func getSelectedPlug() -> PlugStationData? {
+        return self.listPlugStation.first
+    }
+    
+    func createReview(request: PostReviewRequest) {
+        self.vc.startLoding()
+        self.postReviewUseCase.execute(request: request).sink { completion in
+            debugPrint("postReviewUseCase \(completion)")
+            self.vc.stopLoding()
+        } receiveValue: { resp in
+            if let item = resp {
+                self.didPostReviewSuccess?()
+            }
+        }.store(in: &self.anyCancellable)
     }
 }

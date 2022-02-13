@@ -36,7 +36,6 @@ class ChoosePlugViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .darkContent
     }
     
     func setupUI() {

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDg-bwviwDVeAhD_JPJt4mdCidS9dK4uvA")
         GMSPlacesClient.provideAPIKey("AIzaSyDg-bwviwDVeAhD_JPJt4mdCidS9dK4uvA")
         UIFont.loadAllFonts
+        registerNotificationCenter()
         
         FBSDKCoreKit.ApplicationDelegate.shared.application(
             application,
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AuthCheck()
         
         presentSplashVC()
+        
         return true
     }
     
@@ -80,7 +82,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let handled = GIDSignIn.sharedInstance().handle(url)
     return handled
     }
-
-
 }
 
+extension AppDelegate {
+    private func registerNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .LanguageDidChange, object: nil)
+    }
+    
+    @objc func languageDidChange() {
+        let topVc = UIApplication.getTopViewController()
+        topVc?.startLoding()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.presentSplashVC()
+            topVc?.stopLoding()
+        }
+    }
+}

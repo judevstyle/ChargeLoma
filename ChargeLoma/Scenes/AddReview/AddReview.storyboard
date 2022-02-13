@@ -253,7 +253,7 @@
                                                     <constraint firstAttribute="width" constant="150" id="rFN-xe-P4g"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="flight-number"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlT-xa-ffX">
                                                 <rect key="frame" x="166" y="104.5" width="22" height="24"/>
@@ -338,11 +338,11 @@
                         <outlet property="btnComment" destination="JfT-Mh-dNw" id="rUA-Vx-RVv"/>
                         <outlet property="btnSaveReview" destination="f2v-1Q-sxS" id="MFp-QM-3oR"/>
                         <outlet property="headComment" destination="YRu-Ku-RyU" id="Ozu-YY-h2e"/>
-                        <outlet property="headIssue" destination="1iz-wQ-sTB" id="93d-ok-MmE"/>
+                        <outlet property="headIssue" destination="1iz-wQ-sTB" id="L26-KK-y6E"/>
                         <outlet property="headPlugType" destination="s29-Zd-9eN" id="v0h-yi-o8Q"/>
                         <outlet property="headPower" destination="9sw-6a-fAr" id="8er-85-jxP"/>
                         <outlet property="imageGrid" destination="AYu-X4-F6C" id="UkI-6E-cXN"/>
-                        <outlet property="inputPlugType" destination="eCy-lo-7tu" id="ehA-EM-UAf"/>
+                        <outlet property="inputIssueType" destination="eCy-lo-7tu" id="ycS-Ny-epH"/>
                         <outlet property="inputPower" destination="iZO-OF-HDL" id="Z97-uE-hKX"/>
                         <outlet property="plugTableView" destination="fOP-dW-N9J" id="a6o-IA-jmQ"/>
                         <outlet property="plugTableViewHeight" destination="ZzW-Kp-WKp" id="jFN-zq-Afd"/>

@@ -12,19 +12,20 @@ import UIKit
 public enum ReviewAPI {
     case getReview(request: GetReviewRequest)
     case getRecentlyReview(request: GetReviewRequest)
+    case createrReview(request: PostReviewRequest)
 }
 
 extension ReviewAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getReview, .getRecentlyReview:
+        case .getReview, .getRecentlyReview, .createrReview:
             return DomainNameConfig.review.url
         }
     }
 
     public var path: String {
         switch self {
-        case .getReview:
+        case .getReview, .createrReview:
             return ""
         case .getRecentlyReview:
             return "/recentlyReview"
@@ -33,6 +34,8 @@ extension ReviewAPI: TargetType {
 
     public var method: Moya.Method {
         switch self {
+        case .createrReview:
+            return .post
         default:
             return .get
         }
@@ -48,6 +51,8 @@ extension ReviewAPI: TargetType {
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         case let .getRecentlyReview(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .createrReview(request):
+            return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
 

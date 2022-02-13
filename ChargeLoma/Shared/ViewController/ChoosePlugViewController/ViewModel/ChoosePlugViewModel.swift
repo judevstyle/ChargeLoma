@@ -10,7 +10,8 @@ import UIKit
 import Combine
 
 public protocol ChoosePlugViewModelDelegate {
-    func didSelectedPlug(_ item: PlugStationData)
+    func didSelectedPlugStation(_ item: PlugStationData)
+    func didSelectedPlugTypeMaster(_ item: PlugTypeData, power: Int)
 }
 
 protocol ChoosePlugProtocolInput {
@@ -42,6 +43,7 @@ class ChoosePlugViewModel: ChoosePlugProtocol, ChoosePlugProtocolOutput {
     
     // MARK: - UseCase
     private var getPlugStationUseCase: GetPlugStationUseCase
+    private var getFindAllPlugTypeMasterUseCase: GetFindAllPlugTypeMasterUseCase
     private var anyCancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     // MARK: - Properties
@@ -52,14 +54,21 @@ class ChoosePlugViewModel: ChoosePlugProtocol, ChoosePlugProtocolOutput {
     //ImageStation
     public var listPlugStation: [PlugStationData] = []
     
+    public var listPlugTypeMaster: [PlugTypeData] = []
+    
+    private var selectedPlugStation: PlugStationData? = nil
+    private var selectedPlugTypeMaster: PlugTypeData? = nil
+    
     public var delegate: ChoosePlugViewModelDelegate?
     
     init(
         vc: ChoosePlugViewController,
-        getPlugStationUseCase: GetPlugStationUseCase = GetPlugStationUseCaseImpl()
+        getPlugStationUseCase: GetPlugStationUseCase = GetPlugStationUseCaseImpl(),
+        getFindAllPlugTypeMasterUseCase: GetFindAllPlugTypeMasterUseCase = GetFindAllPlugTypeMasterUseCaseImpl()
     ) {
         self.vc = vc
         self.getPlugStationUseCase = getPlugStationUseCase
+        self.getFindAllPlugTypeMasterUseCase = getFindAllPlugTypeMasterUseCase
     }
     
     // MARK - Data-binding OutPut
@@ -67,17 +76,29 @@ class ChoosePlugViewModel: ChoosePlugProtocol, ChoosePlugProtocolOutput {
     
     func getPlugStation() {
         self.vc.startLoding()
-        var request: GetPlugStationRequest = GetPlugStationRequest()
-        request.stId = self.stId
-        self.getPlugStationUseCase.execute(request: request).sink { completion in
-            debugPrint("getPlugStationUseCase \(completion)")
-            self.vc.stopLoding()
-        } receiveValue: { resp in
-            if let item = resp {
-                self.listPlugStation = item
-                self.didGetPlugStationSuccess?()
-            }
-        }.store(in: &self.anyCancellable)
+        if let stId = self.stId, !stId.isEmpty {
+            var request: GetPlugStationRequest = GetPlugStationRequest()
+            request.stId = self.stId
+            self.getPlugStationUseCase.execute(request: request).sink { completion in
+                debugPrint("getPlugStationUseCase \(completion)")
+                self.vc.stopLoding()
+            } receiveValue: { resp in
+                if let item = resp {
+                    self.listPlugStation = item
+                    self.didGetPlugStationSuccess?()
+                }
+            }.store(in: &self.anyCancellable)
+        } else {
+            self.getFindAllPlugTypeMasterUseCase.execute().sink { completion in
+                debugPrint("getFindAllPlugTypeMasterUseCase \(completion)")
+                self.vc.stopLoding()
+            } receiveValue: { resp in
+                if let item = resp {
+                    self.listPlugTypeMaster = item
+                    self.didGetPlugStationSuccess?()
+                }
+            }.store(in: &self.anyCancellable)
+        }
     }
     
     func setupPrepare(_ stId: String, delegate: ChoosePlugViewModelDelegate) {
@@ -86,13 +107,23 @@ class ChoosePlugViewModel: ChoosePlugProtocol, ChoosePlugProtocolOutput {
     }
     
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int) -> Int {
-        return self.listPlugStation.count
+        if self.listPlugStation.count != 0 {
+            return self.listPlugStation.count
+        } else {
+            return self.listPlugTypeMaster.count
+        }
     }
     
     func getItemViewCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlugTableViewCell.identifier, for: indexPath) as! PlugTableViewCell
         cell.selectionStyle = .none
-        cell.itemPlugTypeData = self.listPlugStation[indexPath.row]
+        
+        if self.listPlugStation.count != 0 {
+            cell.itemPlugStationData = self.listPlugStation[indexPath.row]
+        } else {
+            cell.itemPlugTypeData = self.listPlugTypeMaster[indexPath.row]
+        }
+
         return cell
     }
     
@@ -101,8 +132,34 @@ class ChoosePlugViewModel: ChoosePlugProtocol, ChoosePlugProtocolOutput {
     }
     
     func didSelectRowAt(_ tableView: UITableView, indexPath: IndexPath) {
-        let selectItem = self.listPlugStation[indexPath.row]
-        self.delegate?.didSelectedPlug(selectItem)
+        
+        if self.listPlugStation.count != 0 {
+            self.selectedPlugStation = self.listPlugStation[indexPath.row]
+
+            if let selected = self.selectedPlugStation {
+                self.delegate?.didSelectedPlugStation(selected)
+            }
+            self.vc.navigationController?.popViewController(animated: true)
+        } else {
+            self.selectedPlugTypeMaster = self.listPlugTypeMaster[indexPath.row]
+            
+            NavigationManager.instance.pushVC(to: .modalAddPower(delegate: self), presentation: .Present(withNav: false, modalTransitionStyle:      .crossDissolve, modalPresentationStyle: .overFullScreen))
+        }
+    
+    }
+}
+
+extension ChoosePlugViewModel: ModalAddPowerViewControllerDelegate {
+    func didSubmitPower(power: Int) {
+        
+        if let selected = self.selectedPlugStation {
+            self.delegate?.didSelectedPlugStation(selected)
+        } else {
+            if let selected = self.selectedPlugTypeMaster {
+                self.delegate?.didSelectedPlugTypeMaster(selected, power: power)
+            }
+        }
+        
         self.vc.navigationController?.popViewController(animated: true)
     }
 }

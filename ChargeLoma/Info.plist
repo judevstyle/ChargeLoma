@@ -48,11 +48,15 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>This app wants to take pictures.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app wants to use your photos.</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) camera description.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME)photos description.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>$(PRODUCT_NAME) photos add description.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your reason, why you want to track the user</string>
 </dict>
 </plist>

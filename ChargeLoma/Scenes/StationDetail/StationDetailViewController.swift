@@ -478,8 +478,10 @@ extension StationDetailViewController {
     func reloadFavorite() {
         let isFavorite: Bool = viewModel.output.getIsFavorite()
         if isFavorite == true {
+            self.btnFavorite.setImage(UIImage(named: "btn_favorite_fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
             self.btnFavorite.tintColor = .basePrimary
         } else {
+            self.btnFavorite.setImage(UIImage(named: "btn_favorite")?.withRenderingMode(.alwaysTemplate), for: .normal)
             self.btnFavorite.tintColor = .baseTextGray
         }
     }

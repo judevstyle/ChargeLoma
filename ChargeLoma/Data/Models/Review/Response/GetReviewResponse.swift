@@ -36,19 +36,27 @@ public struct ReviewData: Codable, Hashable  {
     public var stationStatus: Int?
     public var station: StationData?
     
+    //Post
+    public var ckId: Int?
+    public var deleted: Bool?
+    
     public init() {}
     
     public init(from decoder: Decoder) throws {
         try comment         <- decoder["comment"]
         try power           <- decoder["power"]
         try isCharge        <- decoder["isCharge"]
-        try carServe       <- decoder["car_serve"]
-        try createdDate    <- decoder["created_date"]
+        try carServe        <- decoder["car_serve"]
+        try createdDate     <- decoder["created_date"]
         try PlugTypeMaster  <- decoder["PlugTypeMaster"]
         try ReviewImg       <- decoder["ReviewImg"]
         try User            <- decoder["User"]
-        try plugType       <- decoder["plug_type"]
-        try stationStatus  <- decoder["station_status"]
+        try plugType        <- decoder["plug_type"]
+        try stationStatus   <- decoder["station_status"]
         try station         <- decoder["station"]
+        
+        //POST
+        try ckId            <- decoder["ck_id"]
+        try deleted         <- decoder["deleted"]
     }
 }

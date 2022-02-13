@@ -29,6 +29,12 @@ class ProfileTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         titleText.font = .h3Text
         titleText.textColor = .baseTextGray
+        
+        if Language.current == .thai {
+            flagImageView.image = UIImage(named: "flag_th")?.withRenderingMode(.alwaysOriginal)
+        } else {
+            flagImageView.image = UIImage(named: "flag_en")?.withRenderingMode(.alwaysOriginal)
+        }
     }
     
 }

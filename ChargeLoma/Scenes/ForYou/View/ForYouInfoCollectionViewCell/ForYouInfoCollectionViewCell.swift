@@ -64,6 +64,8 @@ extension ForYouInfoCollectionViewCell {
 
 extension ForYouInfoCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = viewModel.output.getItemInfo(indexPath: indexPath)
+        NavigationManager.instance.pushVC(to: .informationDetail(item: item))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

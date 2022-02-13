@@ -51,16 +51,19 @@ open class ImagePicker: NSObject {
         self.sourceType.forEach({ type in
             switch type {
             case .camera:
-                let action = setActionType(type: .camera , title: "ถ่ายภาพ")
-                alertController.addAction(action)
+                if let action = setActionType(type: .camera , title: "ถ่ายภาพ") {
+                    alertController.addAction(action)
+                }
                 break
             case .photoLibrary:
-                let action = setActionType(type: .photoLibrary , title: "เลือกจากอัลบั้ม")
-                alertController.addAction(action)
+                if let action = setActionType(type: .photoLibrary , title: "เลือกจากอัลบั้ม") {
+                    alertController.addAction(action)
+                }
                 break
             case .savedPhotosAlbum:
-                let action = setActionType(type: .savedPhotosAlbum , title: "Camera roll")
-                alertController.addAction(action)
+                if let action = setActionType(type: .savedPhotosAlbum , title: "Camera roll") {
+                    alertController.addAction(action)
+                }
                 break
             default:
                 break
@@ -78,12 +81,11 @@ open class ImagePicker: NSObject {
         self.presentationController?.present(alertController, animated: true)
     }
     
-    private func setActionType(type: UIImagePickerController.SourceType, title: String) -> UIAlertAction {
+    private func setActionType(type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
         if let action = self.action(for: type, title: title) {
             return action
         } else {
-            let action = self.action(for: type, title: title)!
-            return action
+            return nil
         }
     }
     
@@ -96,6 +98,8 @@ open class ImagePicker: NSObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.presentationController?.stopLoding()
             }
+        } else {
+            presentationController?.stopLoding()
         }
     }
 }

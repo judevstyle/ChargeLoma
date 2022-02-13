@@ -45,6 +45,16 @@ public enum NavigationOpeningSender {
     
     case seeAllReview(items: [ReviewData])
     
+    case informationDetail(item: InformationItem?)
+    
+    case chooseProvider(delegate: ChooseProviderViewModelDelegate)
+    
+    case seeAllFavorite
+    
+    case selectCurrentLocation(delegate: SelectCurrentLocationViewControllerDelegate)
+    
+    case modalAddPower(delegate: ModalAddPowerViewControllerDelegate)
+    
     public var storyboardName: String {
         switch self {
         case .splash:
@@ -85,6 +95,16 @@ public enum NavigationOpeningSender {
             return "ChoosePlug"
         case .seeAllReview:
             return "SeeAllReview"
+        case .informationDetail:
+            return "InformationDetail"
+        case .chooseProvider:
+            return "ChooseProvider"
+        case .seeAllFavorite:
+            return "SeeAllFavorite"
+        case .selectCurrentLocation:
+            return "SelectCurrentLocation"
+        case .modalAddPower:
+            return "ModalAddPower"
         }
     }
     
@@ -128,6 +148,16 @@ public enum NavigationOpeningSender {
             return "ChoosePlugViewController"
         case .seeAllReview:
             return "SeeAllReviewViewController"
+        case .informationDetail:
+            return "InformationDetailViewController"
+        case .chooseProvider:
+            return "ChooseProviderViewController"
+        case .seeAllFavorite:
+            return "SeeAllFavoriteViewController"
+        case .selectCurrentLocation:
+            return "SelectCurrentLocationViewController"
+        case .modalAddPower:
+            return "ModalAddPowerViewController"
         }
     }
     
@@ -156,6 +186,14 @@ public enum NavigationOpeningSender {
             return "เลือกหัวชาร์จ"
         case .seeAllReview:
             return "รีวิว"
+        case .informationDetail:
+            return "ประชาสัมพันธ์"
+        case .addlocation:
+            return "เพิ่มสถานีชาร์จ"
+        case .seeAllFavorite:
+            return "ชื่นชอบ"
+        case .selectCurrentLocation:
+            return "สถานที่ตั้ง"
         default:
             return ""
         }
@@ -228,6 +266,7 @@ class NavigationManager {
     var navigationController: UINavigationController!
     var rootViewController: UIViewController!
     var currentPresentation: Presentation = .Root
+    var mainTabBarController: UITabBarController!
     
     enum Presentation {
         case Present(withNav: Bool = true, modalTransitionStyle: UIModalTransitionStyle = .coverVertical, modalPresentationStyle: UIModalPresentationStyle = .automatic)
@@ -240,6 +279,7 @@ class NavigationManager {
         case presentHalfModalAndFullScreen(rootVc: UIViewController, heightHalf: CGFloat, completion: (() -> Void)?)
         case PushInTabbar
         case PushStationDetail
+        case switchTabbar(index: Int)
     }
     
     init() {
@@ -254,6 +294,10 @@ class NavigationManager {
         if let vc = vc {
             self.rootViewController = vc
         }
+    }
+    
+    func setupTabbarController(_ tabbar: UITabBarController?) {
+        self.mainTabBarController = tabbar
     }
     
     func pushVC(to: NavigationOpeningSender, presentation: Presentation = .Push, isHiddenNavigationBar: Bool = false, animated: Bool = true) {
@@ -309,6 +353,26 @@ class NavigationManager {
         case .seeAllReview(let items):
             if let className = storyboard.instantiateInitialViewController() as? SeeAllReviewViewController {
                 className.viewModel.setListReview(items: items)
+                viewController = className
+            }
+        case .informationDetail(let item):
+            if let className = storyboard.instantiateInitialViewController() as? InformationDetailViewController {
+                className.informationItem = item
+                viewController = className
+            }
+        case .chooseProvider(let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? ChooseProviderViewController {
+                className.viewModel.input.setupPrepare(delegate: delegate)
+                viewController = className
+            }
+        case .modalAddPower(let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? ModalAddPowerViewController {
+                className.delegate = delegate
+                viewController = className
+            }
+        case .selectCurrentLocation(let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? SelectCurrentLocationViewController {
+                className.delegate = delegate
                 viewController = className
             }
         default:
@@ -420,14 +484,20 @@ class NavigationManager {
                 let topVC = UIApplication.getTopViewController()
                 topVC?.present(nav, animated: true, completion: nil)
             } else {
-                viewController.modalPresentationStyle = modalPresentationStyle
+                viewController.modalTransitionStyle = modalTransitionStyle
                 viewController.modalPresentationStyle = modalPresentationStyle
                 let topVC = UIApplication.getTopViewController()
                 topVC?.present(viewController, animated: true, completion: nil)
             }
             
+        case .switchTabbar(index: let index):
+            self.mainTabBarController.selectedIndex = index
         }
         self.currentPresentation = presentation
+    }
+    
+    func switchTabbar(index: Int) {
+        self.presentVC(viewController: UIViewController(), presentation: .switchTabbar(index: index), to: .splash)
     }
     
     func setRootViewController(rootView: NavigationOpeningSender, withNav: Bool = true, isTranslucent: Bool = false, isAnimate: Bool = false, options: UIView.AnimationOptions = .curveEaseIn) {

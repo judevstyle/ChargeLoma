@@ -93,7 +93,14 @@ extension UIView {
           case leftToRight
           case rightToLeft
       }
-      
+    
+    func setBorderBottom(color: UIColor) {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
+        bottomLine.backgroundColor = color.cgColor
+        self.layer.addSublayer(bottomLine)
+    }
+    
     func applyGradient(colors: [Any]?, locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom, cornerRadius: CGFloat) {
           
           let gradientLayer = CAGradientLayer()

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AddReviewViewControllerDelegate {
+    func addReviewDismiss()
+}
+
 class AddReviewViewController: UIViewController {
 
     @IBOutlet weak var btnChargeOn: UIButton!
@@ -22,13 +26,11 @@ class AddReviewViewController: UIViewController {
     @IBOutlet weak var textComment: UITextView!
     
     @IBOutlet weak var headPlugType: UILabel!
-    @IBOutlet weak var inputPlugType: UITextField!
+    @IBOutlet weak var inputIssueType: UITextField!
     
-    
-    let pickerPlugTypeView = ToolbarPickerView()
-    var plugList: [String] = ["ใช้งานอยู่", "เปิดเครื่องไม่ได้"]
-    var selectedPlug : String?
-    
+    let pickerIssueTypeView = ToolbarPickerView()
+    var issueList: [String] = ["ใช้งานอยู่", "เปิดเครื่องไม่ได้", "เขื่อมต่อไม่ได้", "หัวจ่ายเสีย", "สถานีเลิกใช้บริการ"]
+    var selectedIssue : String?
     
     @IBOutlet weak var headIssue: UILabel!
     
@@ -52,6 +54,11 @@ class AddReviewViewController: UIViewController {
     var imagePickerList: ImagePicker!
     
     @IBOutlet weak var btnSaveReview: UIButton!
+    
+    public var selectedCategory: AddReviewCategoryType = .onCharge
+    
+    public var delegate: AddReviewViewControllerDelegate?
+    
     lazy var viewModel: AddReviewProtocol = {
         let vm = AddReviewViewModel(vc: self)
         self.configure(vm)
@@ -88,14 +95,17 @@ class AddReviewViewController: UIViewController {
         titleChargeOff.text = "ชาร์จไม่ได้"
         titleComment.text = "แสดงความคิดเห็น"
         
+        btnChargeOn.setImage(UIImage(named: "yes")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btnChargeOn.contentVerticalAlignment = .fill
         btnChargeOn.contentHorizontalAlignment = .fill
         btnChargeOn.imageView?.contentMode = .scaleAspectFit
         
+        btnChargeOff.setImage(UIImage(named: "no")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btnChargeOff.contentVerticalAlignment = .fill
         btnChargeOff.contentHorizontalAlignment = .fill
         btnChargeOff.imageView?.contentMode = .scaleAspectFit
         
+        btnComment.setImage(UIImage(named: "comment")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btnComment.contentVerticalAlignment = .fill
         btnComment.contentHorizontalAlignment = .fill
         btnComment.imageView?.contentMode = .scaleAspectFit
@@ -129,7 +139,7 @@ class AddReviewViewController: UIViewController {
         headPlugType.textColor = .baseTextGray
         headPlugType.text = "หัวจ่าย"
         
-        inputPlugType.font = .bodyText
+        inputIssueType.font = .bodyText
         
         btnAddPlug.setTitle("เลือกหัวชาร์จ", for: .normal)
         btnAddPlug.titleLabel?.font = .h3Text
@@ -155,19 +165,19 @@ class AddReviewViewController: UIViewController {
     
     func setupDelegatesPlugPickerView() {
         
-        inputPlugType.setRounded(rounded: 5)
-        inputPlugType.setPaddingLeft(padding: 8)
-        inputPlugType.setPaddingRight(padding: 8)
-        inputPlugType.delegate = self
-        inputPlugType.inputView = pickerPlugTypeView
-        inputPlugType.inputAccessoryView = pickerPlugTypeView.toolbar
+        inputIssueType.setRounded(rounded: 5)
+        inputIssueType.setPaddingLeft(padding: 8)
+        inputIssueType.setPaddingRight(padding: 8)
+        inputIssueType.delegate = self
+        inputIssueType.inputView = pickerIssueTypeView
+        inputIssueType.inputAccessoryView = pickerIssueTypeView.toolbar
         
-        pickerPlugTypeView.dataSource = self
-        pickerPlugTypeView.delegate = self
-        pickerPlugTypeView.toolbarDelegate = self
+        pickerIssueTypeView.dataSource = self
+        pickerIssueTypeView.delegate = self
+        pickerIssueTypeView.toolbarDelegate = self
         
-        inputPlugType.text = plugList[0]
-        self.selectedPlug =  plugList[0]
+        inputIssueType.text = issueList[0]
+        self.selectedIssue =  issueList[0]
     }
     
     private func setupCloseViewButton() {
@@ -194,38 +204,42 @@ class AddReviewViewController: UIViewController {
     }
     
     func selectedCategory(index: Int) {
+        
         switch index {
         case 0:
+            selectedCategory = .onCharge
             btnChargeOn.tintColor = .green
             btnChargeOff.tintColor = .lightGray
             btnComment.tintColor = .lightGray
         case 1:
+            selectedCategory = .offCharge
             btnChargeOn.tintColor = .lightGray
             btnChargeOff.tintColor = .red
             btnComment.tintColor = .lightGray
         case 2:
+            selectedCategory = .comment
             btnChargeOn.tintColor = .lightGray
             btnChargeOff.tintColor = .lightGray
             btnComment.tintColor = .basePrimary
         default:
             break
         }
-        checkBGView(index: index)
+        checkBGView()
     }
     
-    func checkBGView(index: Int) {
-        switch index {
-        case 0:
+    func checkBGView() {
+        switch selectedCategory {
+        case .onCharge:
             bgPlugView.isHidden = false
             bgIssueView.isHidden = true
             bgPowerView.isHidden = false
             bgListImageView.isHidden = false
-        case 1:
+        case .offCharge:
             bgPlugView.isHidden = false
             bgIssueView.isHidden = false
             bgPowerView.isHidden = true
             bgListImageView.isHidden = false
-        case 2:
+        case .comment:
             bgPlugView.isHidden = true
             bgIssueView.isHidden = true
             bgPowerView.isHidden = true
@@ -248,6 +262,44 @@ class AddReviewViewController: UIViewController {
     
     @objc func handleBtnSaveReview() {
         
+        var request: PostReviewRequest = PostReviewRequest()
+        
+        guard let textComment = textComment.text, !textComment.isEmpty, let stId = viewModel.output.getStId() else { return }
+        request.stId = stId
+        request.comment = textComment
+        
+        switch self.selectedCategory {
+        case .onCharge:
+            guard let plug = viewModel.output.getSelectedPlug() else { return }
+            request.pTypeId = plug.plugType?.pTypeId
+            request.power = Int("\(inputPower.text ?? "0")") ?? 0
+            request.carServe = ""
+            request.isCharge = true
+        case .offCharge:
+            guard let plug = viewModel.output.getSelectedPlug() else { return }
+            request.pTypeId = plug.plugType?.pTypeId
+            request.power = 0
+            request.carServe = selectedIssue ?? ""
+            request.isCharge = false
+        case .comment:
+            request.pTypeId = 0
+            request.power = 0
+            request.carServe = ""
+            request.isCharge = nil
+        }
+        
+        var requestReviewImg: [ReviewImgRequest] = []
+        
+        self.listImageAttachFilesBase64?.forEach({ path in
+            var imageRequest: ReviewImgRequest = ReviewImgRequest()
+            imageRequest.imgBase64 = path
+            requestReviewImg.append(imageRequest)
+        })
+        
+        request.reviewImg = requestReviewImg
+        
+        viewModel.input.createReview(request: request)
+        
     }
     
 }
@@ -257,6 +309,7 @@ extension AddReviewViewController {
     
     func bindToViewModel() {
         viewModel.output.didGetPlugStationSuccess = didGetPlugStationSuccess()
+        viewModel.output.didPostReviewSuccess = didPostReviewSuccess()
     }
     
     func didGetPlugStationSuccess() -> (() -> Void) {
@@ -265,11 +318,19 @@ extension AddReviewViewController {
             weakSelf.plugTableView.reloadData()
         }
     }
+    
+    func didPostReviewSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.addReviewDismiss()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 
 extension AddReviewViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.plugList.count
+        return self.issueList.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -277,11 +338,11 @@ extension AddReviewViewController : UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.plugList[row]
+        return self.issueList[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedPlug = self.plugList[row]
+        self.selectedIssue = self.issueList[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -291,7 +352,7 @@ extension AddReviewViewController : UIPickerViewDelegate, UIPickerViewDataSource
             pickerLabel?.font = UIFont.bodyText
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = self.plugList[row]
+        pickerLabel?.text = self.issueList[row]
         return pickerLabel!
     }
 }
@@ -299,7 +360,7 @@ extension AddReviewViewController : UIPickerViewDelegate, UIPickerViewDataSource
 extension AddReviewViewController: ToolbarPickerViewDelegate {
     
     func didTapDone() {
-        self.inputPlugType.text = self.selectedPlug ?? ""
+        self.inputIssueType.text = self.selectedIssue ?? ""
         self.view.endEditing(true)
     }
     
@@ -314,7 +375,10 @@ extension AddReviewViewController : UITextFieldDelegate {
 }
 
 extension AddReviewViewController: ChoosePlugViewModelDelegate {
-    func didSelectedPlug(_ item: PlugStationData) {
+    func didSelectedPlugTypeMaster(_ item: PlugTypeData, power: Int) {
+    }
+    
+    func didSelectedPlugStation(_ item: PlugStationData) {
         viewModel.input.setListPlug(items: [item])
     }
 }
@@ -361,4 +425,10 @@ extension AddReviewViewController : CollectionViewImageGridDelegate {
             self.imagePickerList.present(from: self.view)
         }
     }
+}
+
+public enum AddReviewCategoryType {
+    case onCharge
+    case offCharge
+    case comment
 }

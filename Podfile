@@ -22,6 +22,7 @@ target 'ChargeLoma' do
   # Realm
   pod 'RealmSwift'
   
+  pod 'RadioGroup'
   # Pods for ChargeLoma
 
 end

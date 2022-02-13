@@ -13,12 +13,13 @@ public enum GoogleMapAPI {
     case getPlaceAutoComplete(request: GetPlaceAutoCompleteRequest)
     case getPlaceDetail(request: GetPlaceDetailRequest)
     case getPlaceDirection(request: GetPlaceDirectionRequest)
+    case getGeocodePlace(request: GetGeocodePlaceRequest)
 }
 
 extension GoogleMapAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getPlaceAutoComplete, .getPlaceDetail, .getPlaceDirection:
+        case .getPlaceAutoComplete, .getPlaceDetail, .getPlaceDirection, .getGeocodePlace:
             return DomainNameConfig.googleMap.url
         }
     }
@@ -31,6 +32,8 @@ extension GoogleMapAPI: TargetType {
             return "/place/details/json"
         case .getPlaceDirection:
             return "/directions/json"
+        case .getGeocodePlace:
+            return "/geocode/json"
         }
     }
 
@@ -52,6 +55,8 @@ extension GoogleMapAPI: TargetType {
         case let .getPlaceDetail(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         case let .getPlaceDirection(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
+        case let .getGeocodePlace(request):
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }

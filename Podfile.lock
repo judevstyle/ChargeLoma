@@ -127,11 +127,14 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - RadioGroup (1.4.4):
+    - SweeterSwift
   - Realm (10.20.1):
     - Realm/Headers (= 10.20.1)
   - Realm/Headers (10.20.1)
   - RealmSwift (10.20.1):
     - Realm (= 10.20.1)
+  - SweeterSwift (1.1.4)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
@@ -144,6 +147,7 @@ DEPENDENCIES:
   - GoogleSignIn (~> 5.0)
   - HMSegmentedControl
   - Moya
+  - RadioGroup
   - RealmSwift
   - Toast-Swift
 
@@ -174,8 +178,10 @@ SPEC REPOS:
     - Moya
     - nanopb
     - PromisesObjC
+    - RadioGroup
     - Realm
     - RealmSwift
+    - SweeterSwift
     - Toast-Swift
 
 SPEC CHECKSUMS:
@@ -204,10 +210,12 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  RadioGroup: 8541fae4af7ee54125a9e237105982c1fbeedaa7
   Realm: fac5ecd031fcb81171627b74944c885662d4b266
   RealmSwift: 9b02d25acb46a14756bde9893abb99e2e3675923
+  SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 462eb069cdc17b2adac021645f6d84f2bebacb8b
+PODFILE CHECKSUM: 9684952685ec447d92c7e62d09d6c2437f8162dd
 
 COCOAPODS: 1.11.2
