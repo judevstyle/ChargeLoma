@@ -226,7 +226,7 @@
 		EFBAFE7B27AD0749005A7B7D /* MapFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAFE7A27AD0749005A7B7D /* MapFilterModel.swift */; };
 		EFBAFE7E27AD086B005A7B7D /* RealmMapFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAFE7D27AD086B005A7B7D /* RealmMapFilterModel.swift */; };
 		EFBAFE8127AD0984005A7B7D /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAFE8027AD0984005A7B7D /* StoreManager.swift */; };
-		EFBFA89327906BD400CAFA60 /* GoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBFA89227906BD400CAFA60 /* GoViewModel.swift */; };
+		EFBEF3B427C0909D00A7F2F2 /* ssss.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3B327C0909D00A7F2F2 /* ssss.swift */; };
 		EFBFA8952790785500CAFA60 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBFA8942790785500CAFA60 /* UITextField+Extension.swift */; };
 		EFC136A3279BFDB100B8206D /* ImageListFullScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC136A2279BFDB100B8206D /* ImageListFullScreen.storyboard */; };
 		EFC136A5279BFDD200B8206D /* ImageListFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC136A4279BFDD200B8206D /* ImageListFullScreenViewController.swift */; };
@@ -502,7 +502,7 @@
 		EFBAFE7A27AD0749005A7B7D /* MapFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterModel.swift; sourceTree = "<group>"; };
 		EFBAFE7D27AD086B005A7B7D /* RealmMapFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMapFilterModel.swift; sourceTree = "<group>"; };
 		EFBAFE8027AD0984005A7B7D /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
-		EFBFA89227906BD400CAFA60 /* GoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoViewModel.swift; sourceTree = "<group>"; };
+		EFBEF3B327C0909D00A7F2F2 /* ssss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ssss.swift; sourceTree = "<group>"; };
 		EFBFA8942790785500CAFA60 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		EFC136A2279BFDB100B8206D /* ImageListFullScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageListFullScreen.storyboard; sourceTree = "<group>"; };
 		EFC136A4279BFDD200B8206D /* ImageListFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListFullScreenViewController.swift; sourceTree = "<group>"; };
@@ -888,7 +888,7 @@
 		EF3ACB84277C69260096BF95 /* Go */ = {
 			isa = PBXGroup;
 			children = (
-				EFBFA89127906BC300CAFA60 /* ViewModel */,
+				EFBEF3B227C0908400A7F2F2 /* ssss */,
 				EF3ACB85277C692F0096BF95 /* Go.storyboard */,
 				EF3ACB87277C69360096BF95 /* GoViewController.swift */,
 			);
@@ -1781,12 +1781,12 @@
 			path = DBRealm;
 			sourceTree = "<group>";
 		};
-		EFBFA89127906BC300CAFA60 /* ViewModel */ = {
+		EFBEF3B227C0908400A7F2F2 /* ssss */ = {
 			isa = PBXGroup;
 			children = (
-				EFBFA89227906BD400CAFA60 /* GoViewModel.swift */,
+				EFBEF3B327C0909D00A7F2F2 /* ssss.swift */,
 			);
-			path = ViewModel;
+			path = ssss;
 			sourceTree = "<group>";
 		};
 		EFC1369F279BFD7000B8206D /* ImageListFullScreen */ = {
@@ -2380,7 +2380,6 @@
 				EF8234FA277D74E400379B38 /* ProviderMasterAPI.swift in Sources */,
 				EF2EF52027BFFBC300E68746 /* EditProfileViewController.swift in Sources */,
 				EF3ACB8B277C69470096BF95 /* ForYouViewController.swift in Sources */,
-				EFBFA89327906BD400CAFA60 /* GoViewModel.swift in Sources */,
 				EFCA880B279B0DC4001BCFD3 /* GetFavoriteResponse.swift in Sources */,
 				EFC136B3279C09F700B8206D /* ImageListCollectionViewCell.swift in Sources */,
 				EF97E0E3279DA00400FF68DA /* GetPlugStationResponse.swift in Sources */,
@@ -2412,6 +2411,7 @@
 				EF759DA927B1508F0032A25B /* PostReviewUseCase.swift in Sources */,
 				EF7F08E9278F3EF600FE4E9C /* GetPlaceDetailUseCase.swift in Sources */,
 				EF8BAE9A27B91FD800BC74E0 /* PostStationResponse.swift in Sources */,
+				EFBEF3B427C0909D00A7F2F2 /* ssss.swift in Sources */,
 				EFA36EA127930B5F00BF2E51 /* ForYouInfoCollectionViewCell.swift in Sources */,
 				EF3ACB5B277C5E180096BF95 /* DomainNameConfig.swift in Sources */,
 				EFC136A5279BFDD200B8206D /* ImageListFullScreenViewController.swift in Sources */,
