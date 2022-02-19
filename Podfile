@@ -23,6 +23,8 @@ target 'ChargeLoma' do
   pod 'RealmSwift'
   
   pod 'RadioGroup'
+  
+  pod 'MaterialComponents/TextControls+FilledTextFields'
   # Pods for ChargeLoma
 
 end

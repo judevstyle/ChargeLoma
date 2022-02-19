@@ -21,14 +21,18 @@ class MarkerStationView: UIView {
         view.station = station
         
         //Flow Status Marker
-        var pinImage: UIImage = UIImage(named: "marker_green")!.withRenderingMode(.alwaysOriginal)
+        let markerOrange: UIImage? = UIImage.imageNamed(name: "marker_orange", cache: true)
+        let markerGray: UIImage? = UIImage.imageNamed(name: "marker_gray", cache: true)
+        let markerGreen: UIImage? = UIImage.imageNamed(name: "marker_green", cache: true)
+        
+        var pinImage: UIImage? = markerGreen
         if station?.stationStatus == 3 {
-            pinImage = UIImage(named: "marker_gray")!.withRenderingMode(.alwaysOriginal)
+            pinImage = markerGray
         } else {
             if station?.is24hr == true {
-                pinImage = UIImage(named: "marker_orange")!.withRenderingMode(.alwaysOriginal)
+                pinImage = markerOrange
             } else {
-                pinImage = UIImage(named: "marker_green")!.withRenderingMode(.alwaysOriginal)
+                pinImage = markerGreen
             }
         }
         view.ImageBg.image = pinImage
@@ -37,18 +41,10 @@ class MarkerStationView: UIView {
         if let pathImage = station?.provider?.logoLabel, let urlImage = URL(string: "\(pathImage)") {
             view.imageAvatar.kf.setImageDefault(with: urlImage)
         }
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-//        view.InnerView.addGestureRecognizer(tap)
-//        view.InnerView.isUserInteractionEnabled = true
-//        view.ImageBg.isUserInteractionEnabled = true
-//        view.index = index
+
         return view
     }
-    
-//    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-//        print("TEST")
-//    }
+
 }
 
 

@@ -10,6 +10,9 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 import FittedSheets
+import SPPermissions
+import SPPermissionsLocationWhenInUse
+//import SPPermissionsLocationAlways
 
 public protocol MapViewControllerDelegate {
     func didEndChangeSheet(size: SheetSize)
@@ -23,12 +26,14 @@ public class MapViewController: UIViewController {
     @IBOutlet weak var btnMapLocation: UIButton!
     
     private let locationManager = CLLocationManager()
-    var mapView: GMSMapView!
+    var mapView: GMSMapView? = nil
     var listStationMarker: [GMSMarker] = []
     
     var searchBar: UISearchBar!
     
     public var delegte: MapViewControllerDelegate? = nil
+    
+    var changeLanguage: Language = Language.current
     
     lazy var tableSearchView : UITableView = {
         let table = UITableView()
@@ -63,11 +68,16 @@ public class MapViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
         viewModel.input.getStationFilter()
+        
+        if changeLanguage != Language.current {
+            changeLanguage = Language.current
+            NavigationManager.instance.refreshTabbar()
+        }
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
-        mapView.clear()
-        mapView.removeFromSuperview()
+        mapView?.clear()
+        mapView?.removeFromSuperview()
         mapView = nil
     }
 
@@ -81,15 +91,18 @@ public class MapViewController: UIViewController {
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 13.663491595353403, longitude: 100.6061463206966, zoom: 7.0)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewMap.frame.width, height: self.viewMap.frame.height), camera: camera)
-        mapView.delegate = self
-        mapView.isMyLocationEnabled = true
+        mapView?.delegate = self
+        mapView?.isMyLocationEnabled = true
         self.viewMap.isUserInteractionEnabled = true
-        self.viewMap.addSubview(mapView)
         self.viewMap.clipsToBounds = true
+        if let mapView = self.mapView {
+            self.viewMap.addSubview(mapView)
+        }
         
         //initializing CLLocationManager
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
     
     func setupSearchBar() {
@@ -196,7 +209,7 @@ extension MapViewController {
               let lng = place.geometry?.locationLng else { return }
 
         let camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lat, longitude: lng), zoom: 15, bearing: 0, viewingAngle: 0)
-        self.mapView.animate(to: camera)
+        self.mapView?.animate(to: camera)
         searchBar.searchTextField.text = ""
         tableSearchView.fadeOut()
         self.searchBar.endEditing(true)
@@ -226,9 +239,8 @@ extension MapViewController : GMSMapViewDelegate {
     public func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         guard let markerView = marker.iconView as? MarkerStationView, let stId = markerView.station?.stId else { return }
         
-//        NavigationManager.instance.pushVC(to: .detailStation(stId), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
-        
         NavigationManager.instance.pushVC(to: .stationDetail(stId, isFromPushNavigation: false), presentation: .presentHalfModalAndFullScreen(rootVc: self, heightHalf: 645, completion: nil))
+//        NavigationManager.instance.pushVC(to: .bGSheet(stId), presentation: .presentBackground)
     }
     
 }
@@ -267,14 +279,14 @@ extension MapViewController: CLLocationManagerDelegate {
             return
         }
         locationManager.startUpdatingLocation()
-        mapView.isMyLocationEnabled = true
+        mapView?.isMyLocationEnabled = true
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
         }
-        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7.0, bearing: 0, viewingAngle: 0)
+        mapView?.camera = GMSCameraPosition(target: location.coordinate, zoom: 14.0, bearing: 0, viewingAngle: 0)
         
         locationManager.stopUpdatingLocation()
     }
@@ -287,11 +299,20 @@ extension MapViewController {
     }
     
     @objc func didTapMapLocationButton() {
-        guard let lat = self.mapView.myLocation?.coordinate.latitude,
-              let lng = self.mapView.myLocation?.coordinate.longitude else { return }
 
-        let camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lat, longitude: lng), zoom: 15, bearing: 0, viewingAngle: 0)
-        self.mapView.animate(to: camera)
+        if SPPermissions.Permission.locationWhenInUse.authorized {
+            debugPrint("authorized")
+            guard let lat = self.mapView?.myLocation?.coordinate.latitude,
+                  let lng = self.mapView?.myLocation?.coordinate.longitude else { return }
+
+            let camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lat, longitude: lng), zoom: 14.0, bearing: 0, viewingAngle: 0)
+            self.mapView?.animate(to: camera)
+        } else {
+            debugPrint("Non authorized")
+            let permissions: [SPPermissions.Permission] = [.locationWhenInUse]
+            let controller = SPPermissions.native(permissions)
+            controller.present(on: self)
+        }
     }
 }
 

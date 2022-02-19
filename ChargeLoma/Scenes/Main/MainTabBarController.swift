@@ -14,7 +14,14 @@ class MainTabBarController: UITabBarController {
         
         self.delegate = self
         
+        NavigationManager.instance.setupTabbarController(self)
+        registerNotiSwitchLanguage(selector: #selector(languageDidChange))
         
+        setupUI()
+        setupTabbar()
+    }
+    
+    private func setupUI() {
         tabBar.tintColor = UIColor.basePrimary
         tabBar.unselectedItemTintColor = .darkGray
         tabBar.backgroundColor = UIColor.baseTabbarBG
@@ -26,67 +33,28 @@ class MainTabBarController: UITabBarController {
         tabBar.layer.shadowOpacity = 0.3
         tabBar.layer.shadowOffset = .zero
         tabBar.layer.shadowRadius = 2
-        
-        let mapVC = tabBarNavigation(unselectImage: UIImage(named: "map")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "map")?.withRenderingMode(.alwaysTemplate), title: "แผนที่", badgeValue: nil, navigationTitle: "แผนที่", navigationOpeningSender: .map)
-
-        let goVC = tabBarNavigation(unselectImage: UIImage(named: "car")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "car")?.withRenderingMode(.alwaysTemplate), title: "ไป", badgeValue: nil, navigationTitle: "Favorite", navigationOpeningSender: .go)
-
-        let foryouVC = tabBarNavigation(unselectImage: UIImage(named: "passion")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "passion")?.withRenderingMode(.alwaysTemplate), title: "สำหรับคุณ", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .foryou)
-
-        let addLocationVC = tabBarNavigation(unselectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), selectImage: UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate), title: "เพิ่มสถานี", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .addlocation)
-        
-        let meVC = tabBarNavigation(unselectImage: UIImage(named: "user"), selectImage: UIImage(named: "user"), title: "ฉัน", badgeValue: nil, navigationTitle: "", navigationOpeningSender: .me)
-        
-        viewControllers = [mapVC, goVC, foryouVC, addLocationVC, meVC]
-        
-        NavigationManager.instance.setupTabbarController(self)
     }
     
-    
-    fileprivate func tabBarNavigation(unselectImage: UIImage?, selectImage: UIImage?, title: String?, badgeValue: String?,navigationTitle: String?, navigationOpeningSender: NavigationOpeningSender) -> UINavigationController {
-
-        let navController = navigationOpeningSender.navController
-        navController.tabBarItem.image = unselectImage
-        navController.tabBarItem.selectedImage =  selectImage
-        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        navController.tabBarItem.title = title
-        navController.tabBarItem.badgeColor = .red
-        navController.tabBarItem.badgeValue = badgeValue
-        navController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.biggerTinyText], for: .normal)
-//        navController.edgesForExtendedLayout = []
-
-        //navigationController
-        
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithOpaqueBackground()
-//        appearance.backgroundColor = UIColor.basePrimary
-//        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h2Text, NSAttributedString.Key.foregroundColor: UIColor.white]
-//        rootViewcontroller?.navigationController?.navigationBar.standardAppearance = appearance;
-//        rootViewcontroller?.navigationController?.navigationBar.scrollEdgeAppearance = rootViewcontroller?.navigationController?.navigationBar.standardAppearance
-        
-//        if #available(iOS 15.0, *) {
-//            let appearance = UINavigationBarAppearance()
-//            appearance.configureWithTransparentBackground()
-//            appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.h2Text, NSAttributedString.Key.foregroundColor: UIColor.white]
-//            appearance.backgroundColor = .clear
-//            appearance.shadowImage = UIImage()
-//            appearance.backgroundImage = UIImage()
-//
-//            rootViewcontroller?.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//            rootViewcontroller?.navigationController?.navigationBar.standardAppearance = appearance
-//            rootViewcontroller?.navigationController?.navigationBar.compactAppearance = appearance
-//        } else {
-//            rootViewcontroller?.navigationController?.navigationBar.barTintColor = UIColor.gold
-//            rootViewcontroller?.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.bottom, barMetrics: .default)
-//            rootViewcontroller?.navigationController?.navigationBar.shadowImage = UIImage()
-//            rootViewcontroller?.navigationController?.navigationBar.isTranslucent = false
-//            rootViewcontroller?.navigationController?.navigationBar.isHidden = true
-//            rootViewcontroller?.navigationController?.navigationBar.barStyle = .black
-//            rootViewcontroller?.navigationController?.navigationBar.tintColor = .white
-//        }
-        
-        return navController
+    private func setupTabbar() {
+        NavigationManager.instance.refreshTabbar()
     }
+    
+    @objc func languageDidChange() {
+        debugPrint("Main Tab languageDidChange")
+//        localizeTabBar()
+    }
+    
+    deinit {
+       removeObserverDeinit()
+    }
+    
+//    func localizeTabBar() {
+//        tabBar.items![0].title = Wording.MainTabbar.Home.localized
+//        tabBar.items![1].title = Wording.MainTabbar.Go.localized
+//        tabBar.items![2].title = Wording.MainTabbar.ForYou.localized
+//        tabBar.items![3].title = Wording.MainTabbar.Add.localized
+//        tabBar.items![4].title = Wording.MainTabbar.Me.localized
+//    }
     
 }
 

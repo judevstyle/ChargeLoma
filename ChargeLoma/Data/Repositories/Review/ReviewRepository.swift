@@ -13,6 +13,8 @@ protocol ReviewRepository {
     func getReview(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error>
     func getRecentlyReview(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error>
     func postReview(request: PostReviewRequest) -> AnyPublisher<PostReviewResponse, Error>
+    func getTopReview() -> AnyPublisher<GetTopReviewResponse, Error>
+    func getReviewByUser(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error>
 }
 
 final class ReviewRepositoryImpl: ChargeLoma.ReviewRepository {
@@ -37,6 +39,20 @@ final class ReviewRepositoryImpl: ChargeLoma.ReviewRepository {
             .cb
             .request(.createrReview(request: request))
             .map(PostReviewResponse.self)
+    }
+    
+    func getTopReview() -> AnyPublisher<GetTopReviewResponse, Error> {
+        return self.provider
+            .cb
+            .request(.getTopReviewer)
+            .map(GetTopReviewResponse.self)
+    }
+    
+    func getReviewByUser(request: GetReviewRequest) -> AnyPublisher<GetReviewResponse, Error> {
+        return self.provider
+            .cb
+            .request(.getReviewByUser(request: request))
+            .map(GetReviewResponse.self)
     }
     
 }

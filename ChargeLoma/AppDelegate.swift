@@ -90,11 +90,11 @@ extension AppDelegate {
     }
     
     @objc func languageDidChange() {
-        let topVc = UIApplication.getTopViewController()
-        topVc?.startLoding()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.presentSplashVC()
-            topVc?.stopLoding()
-        }
+//        let topVc = UIApplication.getTopViewController()
+//        topVc?.startLoding()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//            self.presentSplashVC()
+//            topVc?.stopLoding()
+//        }
     }
 }

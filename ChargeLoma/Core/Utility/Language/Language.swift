@@ -38,10 +38,6 @@ public class LanguageEnvironment: ObservableObject {
 /**
  Available Notification that will posted from this source code file.
  */
-public extension Notification.Name {
-    static let LanguageDidChange = Notification.Name(rawValue: "languageDidChange")
-}
-
 
 /// Main Language enum, with current settings via
 /// Example: Language.current
@@ -130,27 +126,6 @@ public enum Language: Equatable {
         didSet {
             UserDefaultsKey.AppLanguage.set(value: self.current.name)
             Notification.Name.LanguageDidChange.post()
-        }
-    }
-
-    public func relativeTime(of: Date, from: Date = Date()) -> String {
-        let allSeconds = lround(of.timeIntervalSince(from))
-        let isAgo = allSeconds < 0
-        let absSeconds = abs(allSeconds)
-        let hours = absSeconds / 3600
-        let mins = (absSeconds % 3600) / 60
-        let seconds = absSeconds % 60
-
-        if isAgo {
-            if hours > 0 { return String(format: Wording.Timer.hoursAgo.localized, arguments: [hours]) }
-            if mins > 0 { return String(format: Wording.Timer.minutesAgo.localized, arguments: [mins]) }
-            if seconds > 0 { return String(format: Wording.Timer.secondsAgo.localized, arguments: [seconds]) }
-            return Wording.Timer.lessThanSecAgo.localized
-        } else {
-            if hours > 0 { return String(format: Wording.Timer.hours.localized, arguments: [hours]) }
-            if mins > 0 { return String(format: Wording.Timer.minutes.localized, arguments: [mins]) }
-            if seconds > 0 { return String(format: Wording.Timer.seconds.localized, arguments: [seconds]) }
-            return Wording.Timer.lessThanSec.localized
         }
     }
 }

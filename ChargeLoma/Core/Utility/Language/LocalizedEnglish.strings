@@ -1,0 +1,42 @@
+/* 
+  LocalizedEnglish.strings
+  ChargeLoma
+
+  Created by Nontawat Kanboon on 16/2/2565 BE.
+  
+*/
+
+// Profile
+"TopReview" = "Top Review";
+"Language" = "Language";
+"About" = "About";
+"Login" = "Login";
+"Logout" = "Logout";
+"Profile" = "Profile";
+"Favorite" = "Favorite";
+
+//Main Tabbar
+"Home" = "Home";
+"Go" = "Go";
+"ForYou" = "For You";
+"Add" = "Add";
+"Me" = "Me";
+
+//About
+"About_Desc" = "Charge Loma is an application help EV users find charging station in the map. Find stations near you, stations near the destination or on the way. User can post review or read reviews from other users to find shared information about EV charging experiences. Users create a sharing commodity of information and experiences, allow EV user life to be easier and conveniences. Our staffs will regularly administrate and update data to ensure correctness information all the time.";
+"About_Head_Version" = "Version";
+"About_Head_Update" = "Update Date";
+"About_Head_Developer" = "Developer";
+"About_Head_Contact" = "Contact";
+"About_Head_ThankYou" = "Thank you";
+"About_Head_Copyright" = "Copyright";
+
+//EditProfile
+"EditProfile_DisplayName" = "Display Name";
+"EditProfile_Email" = "Email";
+"EditProfile_Tel" = "Tel";
+"EditProfile_Car" = "Car";
+"EditProfile_Save" = "Save";
+"EditProfile_Register" = "Register";
+"EditProfile_Password" = "Password";
+"EditProfile_ConfirmPassword" = "Confirm Password";

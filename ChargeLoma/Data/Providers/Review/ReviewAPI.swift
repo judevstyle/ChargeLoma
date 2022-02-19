@@ -13,12 +13,14 @@ public enum ReviewAPI {
     case getReview(request: GetReviewRequest)
     case getRecentlyReview(request: GetReviewRequest)
     case createrReview(request: PostReviewRequest)
+    case getTopReviewer
+    case getReviewByUser(request: GetReviewRequest)
 }
 
 extension ReviewAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .getReview, .getRecentlyReview, .createrReview:
+        case .getReview, .getRecentlyReview, .createrReview, .getTopReviewer, .getReviewByUser:
             return DomainNameConfig.review.url
         }
     }
@@ -29,6 +31,10 @@ extension ReviewAPI: TargetType {
             return ""
         case .getRecentlyReview:
             return "/recentlyReview"
+        case .getTopReviewer:
+            return "/top-reviewer"
+        case .getReviewByUser:
+            return "/reviewByUser"
         }
     }
 
@@ -53,6 +59,10 @@ extension ReviewAPI: TargetType {
             return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         case let .createrReview(request):
             return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
+        case .getTopReviewer:
+            return .requestPlain
+        case let .getReviewByUser(request):
+            return .requestParameters(parameters: request.toJSON(), encoding: URLEncoding.queryString)
         }
     }
 

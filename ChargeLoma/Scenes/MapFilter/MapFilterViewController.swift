@@ -49,6 +49,7 @@ class MapFilterViewController: UIViewController {
         viewModel.input.getPlugTypeMaster()
         viewModel.input.getProviderMaster()
         viewModel.input.getStatusFilter()
+
     }
     
     func configure(_ interface: MapFilterProtocol) {
@@ -139,6 +140,7 @@ extension MapFilterViewController {
         return { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.acCollection.reloadData()
+            weakSelf.checkACAll()
         }
     }
     
@@ -146,6 +148,7 @@ extension MapFilterViewController {
         return { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.dcCollectionView.reloadData()
+            weakSelf.checkDCAll()
         }
     }
     
@@ -153,6 +156,7 @@ extension MapFilterViewController {
         return { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.providerCollection.reloadData()
+            weakSelf.checkProviderAll()
         }
     }
     
@@ -265,7 +269,7 @@ extension MapFilterViewController: UICollectionViewDelegateFlowLayout{
         case statusCollection:
             return CGSize(width: 125, height: 50)
         default:
-            return CGSize(width: 125, height: 95)
+            return CGSize(width: 150, height: 95)
         }
     }
 }

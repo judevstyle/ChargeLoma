@@ -95,6 +95,7 @@ class GoViewController: UIViewController {
         //initializing CLLocationManager
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
     
     @objc func handleBtnStart() {
@@ -187,7 +188,7 @@ extension GoViewController {
         bounds = bounds.includingCoordinate(destinationLocation)
         let camUpdate = GMSCameraUpdate.fit(bounds, withPadding: 60)
 
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: sourceLocation.latitude, longitude: sourceLocation.longitude, zoom: 18)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: sourceLocation.latitude, longitude: sourceLocation.longitude, zoom: 17)
 
         self.mapView.animate(with: camUpdate)
         
@@ -233,7 +234,7 @@ extension GoViewController: CLLocationManagerDelegate {
         guard let location = locations.first else {
             return
         }
-        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 7.0, bearing: 0, viewingAngle: 0)
+        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 14.0, bearing: 0, viewingAngle: 0)
         
         locationManager.stopUpdatingLocation()
     }

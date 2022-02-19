@@ -25,7 +25,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="225" height="33.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxxxxxxx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCV-QW-eYE">
-                                            <rect key="frame" x="0.0" y="0.0" width="225" height="33.5"/>
+                                            <rect key="frame" x="8" y="0.0" width="209" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -34,9 +34,9 @@
                                     <color key="backgroundColor" name="basePrimary"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="lCV-QW-eYE" secondAttribute="bottom" id="BMK-19-d09"/>
-                                        <constraint firstAttribute="trailing" secondItem="lCV-QW-eYE" secondAttribute="trailing" id="GHj-ES-egB"/>
+                                        <constraint firstAttribute="trailing" secondItem="lCV-QW-eYE" secondAttribute="trailing" constant="8" id="GHj-ES-egB"/>
                                         <constraint firstItem="lCV-QW-eYE" firstAttribute="top" secondItem="o4Y-aY-5Ht" secondAttribute="top" id="K0Q-vW-lAM"/>
-                                        <constraint firstItem="lCV-QW-eYE" firstAttribute="leading" secondItem="o4Y-aY-5Ht" secondAttribute="leading" id="fbx-bl-mq5"/>
+                                        <constraint firstItem="lCV-QW-eYE" firstAttribute="leading" secondItem="o4Y-aY-5Ht" secondAttribute="leading" constant="8" id="fbx-bl-mq5"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh1-7g-yf9">

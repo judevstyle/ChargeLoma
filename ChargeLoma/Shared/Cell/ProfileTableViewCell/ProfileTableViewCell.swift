@@ -30,6 +30,9 @@ class ProfileTableViewCell: UITableViewCell {
         titleText.font = .h3Text
         titleText.textColor = .baseTextGray
         
+    }
+    
+    func checkLanguage() {
         if Language.current == .thai {
             flagImageView.image = UIImage(named: "flag_th")?.withRenderingMode(.alwaysOriginal)
         } else {

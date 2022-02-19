@@ -10,7 +10,8 @@ import UIKit
 import Combine
 
 protocol SeeAllReviewProtocolInput {
-    func setListReview(items: [ReviewData])
+    func setListReview(items: [ReviewData]?)
+    func setUID(uid: String?)
     func getReview()
 }
 
@@ -33,8 +34,7 @@ class SeeAllReviewViewModel: SeeAllReviewProtocol, SeeAllReviewProtocolOutput {
     var output: SeeAllReviewProtocolOutput { return self }
     
     // MARK: - UseCase
-    private var getPlugTypeCategoryUseCase: GetPlugTypeCategoryUseCase
-    private var getFindAllProviderMasterUseCase: GetFindAllProviderMasterUseCase
+    private var getReviewByUserUseCase: GetReviewByUserUseCase
     private var anyCancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     // MARK: - Properties
@@ -42,25 +42,51 @@ class SeeAllReviewViewModel: SeeAllReviewProtocol, SeeAllReviewProtocolOutput {
 
     public var listReview: [ReviewData] = []
     
+    public var uid: String? = nil
+    
     init(
         vc: SeeAllReviewViewController,
-        getPlugTypeCategoryUseCase: GetPlugTypeCategoryUseCase = GetPlugTypeCategoryUseCaseImpl(),
-        getFindAllProviderMasterUseCase: GetFindAllProviderMasterUseCase = GetFindAllProviderMasterUseCaseImpl()
+        getReviewByUserUseCase: GetReviewByUserUseCase = GetReviewByUserUseCaseImpl()
     ) {
         self.vc = vc
-        self.getPlugTypeCategoryUseCase = getPlugTypeCategoryUseCase
-        self.getFindAllProviderMasterUseCase = getFindAllProviderMasterUseCase
+        self.getReviewByUserUseCase = getReviewByUserUseCase
     }
     
     // MARK - Data-binding OutPut
     var didGetReviewSuccess: (() -> Void)?
     
-    func setListReview(items: [ReviewData]) {
-        self.listReview = items
+    func setListReview(items: [ReviewData]?) {
+        self.listReview = items ?? []
+    }
+    
+    func setUID(uid: String?) {
+        self.uid = uid
     }
     
     func getReview() {
-        self.didGetReviewSuccess?()
+        if let uid = self.uid {
+            getReviewByUser(uid: uid)
+        } else {
+            self.didGetReviewSuccess?()
+        }
+    }
+    
+    func getReviewByUser(uid: String) {
+        self.listReview.removeAll()
+        var request = GetReviewRequest()
+        request.uid = uid
+        request.page = 1
+        request.lang = Language.current.name
+        self.vc.startLoding()
+        self.getReviewByUserUseCase.execute(request: request).sink { completion in
+            debugPrint("getReviewByUserUseCase \(completion)")
+            self.vc.stopLoding()
+        } receiveValue: { resp in
+            if let items = resp {
+                self.listReview = items
+                self.didGetReviewSuccess?()
+            }
+        }.store(in: &self.anyCancellable)
     }
 
 }

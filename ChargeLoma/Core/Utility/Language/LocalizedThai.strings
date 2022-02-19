@@ -1,0 +1,44 @@
+/* 
+  LocalizedThai.strings
+  ChargeLoma
+
+  Created by Nontawat Kanboon on 16/2/2565 BE.
+  
+*/
+
+// Profile
+"TopReview" = "ผู้ใช้บริการยอดฮิต";
+"Language" = "ตั้งค่าภาษา";
+"About" = "เกี่ยวกับ";
+"Login" = "เข้าสู่ระบบ";
+"Logout" = "ออกจากระบบ";
+"Profile" = "โปรไฟล์";
+"Favorite" = "ชื่นชอบ";
+
+//Main Tabbar
+"Home" = "หน้าหลัก";
+"Go" = "ไป";
+"ForYou" = "สำหรับคุณ";
+"Add" = "เพิ่มสถานี";
+"Me" = "ฉัน";
+
+
+//About
+"About_Desc" = "Charge loma เป็นแอปพลิเคชั่นช่วยให้ผู้ใช้รถยนต์ไฟฟ้าค้นหาสถานีชาร์จบริเวณใกล้เคียง บริเวณปลายทาง หรือระหว่างเส้นทางที่จะเดินทางไป ผู้ใช้สามารถเขียนรีวิวหรืออ่านรีวิวจากผู้ใช้ท่านอื่นเพื่อเป็นข้อมูลประกอบการใช้บริการ รวมถึงสามารถเพิ่มข้อมูลสถานีชาร์จใหม่ได้ ผู้ใช้ร่วมกันเป็นชุมชนเพื่อให้ข้อมูลที่เป็นประโยชน์แก่กัน ส่งเสริมให้การใช้รถยนต์ไฟฟ้าสะดวกขึ้นและแพร่หลายมากขึ้น เรามีทีมงานคอยตรวจสอบและปรับปรุงข้อมูลเพื่อให้ข้อมูลทันสมัยตลอดเวลา";
+"About_Head_Version" = "เวอร์ชั่น";
+"About_Head_Update" = "อัพเดตเมื่อ";
+"About_Head_Developer" = "ผู้พัฒนาแอป";
+"About_Head_Contact" = "ติดต่อผู้ให้บริการ";
+"About_Head_ThankYou" = "ขอบคุณ";
+"About_Head_Copyright" = "Copyright";
+
+
+//EditProfile
+"EditProfile_DisplayName" = "ชื่อที่แสดง";
+"EditProfile_Email" = "อีเมล";
+"EditProfile_Tel" = "เบอร์โทร";
+"EditProfile_Car" = "รถ";
+"EditProfile_Save" = "บันทึก";
+"EditProfile_Register" = "สมัครสมาชิก";
+"EditProfile_Password" = "รหัสผ่าน";
+"EditProfile_ConfirmPassword" = "ยืนยันรหัสผ่าน";

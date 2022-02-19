@@ -9,6 +9,7 @@ import UIKit
 import FittedSheets
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 class StationDetailViewController: UIViewController {
     
@@ -109,22 +110,10 @@ class StationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if isFromPushNavigation == false {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("didChangeSizeSheet"), object: nil)
-        }
-        
-        
         setupUI()
-//        setupMap()
         setupTableView()
         setupCheckBox()
-        
         viewModel.input.getStationDetail()
-        viewModel.input.getFavorite()
-        viewModel.input.getImageStation()
-        viewModel.input.getReview()
-        
     }
     
     func configure(_ interface: StationDetailProtocol) {
@@ -133,10 +122,7 @@ class StationDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
-//        setupUI()
         setupMap()
-//        setupTableView()
-//        setupCheckBox()
         self.sheetViewController?.handleScrollView(self.scrollView)
         reloadStationLocation()
     }
@@ -178,9 +164,9 @@ class StationDetailViewController: UIViewController {
         self.titleFavorite.text = "ชื่นชอบ"
         self.titleShare.text = "แชร์"
         
-        self.titleNavigate.font = .smallText
-        self.titleFavorite.font = .smallText
-        self.titleShare.font = .smallText
+        self.titleNavigate.font = .bodyText
+        self.titleFavorite.font = .bodyText
+        self.titleShare.font = .bodyText
         
         self.btnNavigate.imageView?.image?.withRenderingMode(.alwaysTemplate)
         self.btnNavigate.tintColor = .basePrimary
@@ -211,21 +197,21 @@ class StationDetailViewController: UIViewController {
         viewBadgeCount.setRounded(rounded: 4)
         titleBadgeCount.font = .extraSmallText
         
-        titleStationValue.font = .h3Bold
+        titleStationValue.font = .h2Bold
         titleStationValue.textColor = .black
-        adressStationValue.font = .smallText
+        adressStationValue.font = .bodyText
         adressStationValue.textColor = .baseTextGray
         
-        distanceValue.font = .extraSmallText
+        distanceValue.font = .smallText
         distanceValue.textColor = .baseTextGray
-        timeValue.font = .extraSmallText
+        timeValue.font = .smallText
         timeValue.textColor = .baseTextGray
         
-        headDesc.font = .bodyBold
-        headPlug.font = .bodyBold
-        descValue.font = .smallText
+        headDesc.font = .h3Bold
+        headPlug.font = .h3Bold
+        descValue.font = .bodyText
         descValue.textColor = .baseTextGray
-        serviceCharge.font = .smallText
+        serviceCharge.font = .bodyText
         serviceCharge.textColor = .baseTextGray
         
         headDesc.text = "รายละเอียด"
@@ -247,7 +233,7 @@ class StationDetailViewController: UIViewController {
         self.titleRating.tintColor = .white
         
         
-        headReview.font = .bodyBold
+        headReview.font = .h3Bold
         headReview.text = "รีวิวจากผู้ใช้บริการ"
         
         
@@ -255,8 +241,7 @@ class StationDetailViewController: UIViewController {
             topPosterImageConstant.constant = 0
             leftPosterImageConstant.constant = 0
             rightPosterImageConstant.constant = 0
-            
-            setBgBottomBar(isHidden: false)
+            setBgBottomBar(isHidden: false, isAnimate: false)
         }
         
     }
@@ -271,6 +256,9 @@ class StationDetailViewController: UIViewController {
         self.viewMap.clipsToBounds = true
         mapView.autoresizingMask = .flexibleHeight
         mapView.autoresizingMask = .flexibleWidth
+        let tapMapView = UITapGestureRecognizer(target: self, action: #selector(self.handleTapMapLocation))
+        self.viewMap.isUserInteractionEnabled = true
+        viewMap.addGestureRecognizer(tapMapView)
     }
     
     func setupTableView() {
@@ -293,7 +281,7 @@ class StationDetailViewController: UIViewController {
     
     func setupCheckBox() {
         headService.text = "สิ่งอำนวยความสะดวกอื่นๆ"
-        headService.font = .bodyBold
+        headService.font = .h3Bold
         
         self.cbParking.isEnableCheckBox = false
         self.cbFoodShop.isEnableCheckBox = false
@@ -349,18 +337,23 @@ class StationDetailViewController: UIViewController {
             NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: [listImage[0]], index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
         }
     }
-    
-    @objc func methodOfReceivedNotification(notification: Notification) {
-        if let dict = notification.userInfo as NSDictionary? as! [String:Any]? {
-            let size = dict["size"] as? String
-            self.setBgBottomBar(isHidden: size == "fullscreen" ? false : true)
-        }
-    }
+
   
-    func setBgBottomBar(isHidden: Bool) {
+    func setBgBottomBar(isHidden: Bool, isAnimate: Bool) {
         self.bgBottomBar.isHidden = false
         self.bgBottomBar.alpha = 0.0
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
+        
+        if isAnimate == true {
+            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
+                if isHidden == true {
+                    self.bgBottomBar.alpha = 0.0
+                    self.spaceScrollViewWithBottom.constant = 0
+                } else {
+                    self.bgBottomBar.alpha = 1.0
+                    self.spaceScrollViewWithBottom.constant = 61
+                }
+            }, completion: nil)
+        } else {
             if isHidden == true {
                 self.bgBottomBar.alpha = 0.0
                 self.spaceScrollViewWithBottom.constant = 0
@@ -368,7 +361,7 @@ class StationDetailViewController: UIViewController {
                 self.bgBottomBar.alpha = 1.0
                 self.spaceScrollViewWithBottom.constant = 61
             }
-        }, completion: nil)
+        }
     }
 }
 
@@ -388,6 +381,11 @@ extension StationDetailViewController {
             guard let self = self else { return }
             self.setupValue()
             self.plugTableView.reloadData()
+            
+            //initializing CLLocationManager
+            self.locationManager.delegate = self
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.startUpdatingLocation()
         }
     }
     
@@ -462,7 +460,6 @@ extension StationDetailViewController {
         if let lat = station.lat, let lng = station.lng {
             let position = CLLocationCoordinate2D(latitude: lat, longitude: lng)
             let marker = GMSMarker(position: position)
-            marker.snippet = "\(index)"
             marker.isTappable = true
             marker.iconView =  MarkerStationView.instantiate(station: station, index: 0)
             marker.tracksViewChanges = true
@@ -487,7 +484,7 @@ extension StationDetailViewController {
     }
     
     @objc func handleNavigateButton() {
-        openGoogleMap()
+        openDirectionGoogleMap()
     }
     
     @objc func handleFavoriteButton() {
@@ -503,6 +500,10 @@ extension StationDetailViewController {
         }
     }
     
+    @objc func handleTapMapLocation() {
+        openCenterGoogleMap()
+    }
+    
     @objc func handleShareButton() {
         guard let station = viewModel.output.getDataStation() else { return }
         if let lat = station.lat, let lng = station.lng {
@@ -512,7 +513,7 @@ extension StationDetailViewController {
         }
     }
     
-    func openGoogleMap() {
+    func openDirectionGoogleMap() {
         guard let station = viewModel.output.getDataStation() else { return }
         if let lat = station.lat, let lng = station.lng {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {  //if phone has an app
@@ -522,6 +523,22 @@ extension StationDetailViewController {
             else {
                 //Open in browser
                 if let urlDestination = URL.init(string: "https://www.google.co.in/maps/dir/?saddr=&daddr=\(lat),\(lng)&directionsmode=driving") {
+                    UIApplication.shared.open(urlDestination)
+                }
+            }
+        }
+    }
+    
+    func openCenterGoogleMap() {
+        guard let station = viewModel.output.getDataStation() else { return }
+        if let lat = station.lat, let lng = station.lng {
+            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {  //if phone has an app
+                if let url = URL(string: "comgooglemaps-x-callback://?q=&center=\(lat),\(lng)&views=satellite,traffic&zoom=15") {
+                    UIApplication.shared.open(url, options: [:])
+                }}
+            else {
+                //Open in browser
+                if let urlDestination = URL.init(string: "https://www.google.co.in/maps/dir/?q=&center=\(lat),\(lng)&views=satellite,traffic&zoom=15") {
                     UIApplication.shared.open(urlDestination)
                 }
             }
@@ -617,5 +634,37 @@ extension StationDetailViewController: LoginDelegate {
         default:
             break
         }
+    }
+}
+
+extension StationDetailViewController: CLLocationManagerDelegate {
+    
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        locationManager.startUpdatingLocation()
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+
+        if let station = self.viewModel.output.getDataStation(), let lat = station.lat, let lng = station.lng {
+            let placeLocation = CLLocation(latitude: lat, longitude: lng)
+            let distanceInMeters = location.distance(from: placeLocation)
+            let distanceInKiloMeters = distanceInMeters/1000.0
+            let timePerMin = distanceInKiloMeters/10.0
+            distanceValue.text = String(format: "%0.2f km. (%0.2f นาที)", distanceInKiloMeters, timePerMin)
+        }
+        
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+extension StationDetailViewController: SheetViewControllerDelegate {
+    func sizeModalSheetDidChange(size: SheetSize) {
+        self.setBgBottomBar(isHidden: size == .fullscreen ? false : true, isAnimate: true)
     }
 }

@@ -27,7 +27,6 @@ class MeViewController: UIViewController {
         super.viewDidLoad()
         NavigationManager.instance.setupWithNavigationController(self)
         setupUI()
-        viewModel.input.getUserMe()
     }
     
     func configure(_ interface: MeProtocol) {
@@ -36,6 +35,7 @@ class MeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setBarTintColor(color: .clear)
+        viewModel.input.getUserMe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,7 +55,7 @@ class MeViewController: UIViewController {
         btnEditImage.setRounded(rounded: btnEditImage.frame.width/2)
         btnEditImage.contentHorizontalAlignment = .fill
         btnEditImage.contentVerticalAlignment = .fill
-        btnEditImage.addTarget(self, action: #selector(didEditImage), for: .touchUpInside)
+        btnEditImage.addTarget(self, action: #selector(didEditUser), for: .touchUpInside)
         
         titleName.textColor = .white
         titleName.font = .h3Bold
@@ -69,8 +69,8 @@ class MeViewController: UIViewController {
         carText.font = .bodyText
     }
     
-    @objc func didEditImage() {
-        debugPrint("didEditImage")
+    @objc func didEditUser() {
+        NavigationManager.instance.pushVC(to: .editProfile(isRegister: false))
     }
     
     private func setupValue() {
@@ -79,9 +79,9 @@ class MeViewController: UIViewController {
             if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
                 userImage.kf.setImageDefault(with: urlImage)
             }
-            emailText.text = user.email ?? "-"
-            telText.text = user.tel ?? "-"
-            carText.text = user.car ?? "-"
+            emailText.text = user.email?.isEmpty == true ? "-" : (user.email ?? "")
+            telText.text = user.tel?.isEmpty == true ? "-" : (user.tel ?? "")
+            carText.text = user.car?.isEmpty == true ? "-" : (user.car ?? "")
         } else {
             emailText.text = "-"
             telText.text = "-"

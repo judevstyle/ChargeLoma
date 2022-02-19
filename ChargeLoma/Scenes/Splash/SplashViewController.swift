@@ -7,9 +7,7 @@
 
 import UIKit
 import SPPermissions
-import SPPermissionsCamera
 import SPPermissionsTracking
-import SPPermissionsPhotoLibrary
 
 class SplashViewController: UIViewController {
     
@@ -34,7 +32,7 @@ class SplashViewController: UIViewController {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            let permissions: [SPPermissions.Permission] = [.camera, .photoLibrary, .tracking]
+            let permissions: [SPPermissions.Permission] = [.tracking]
             let controller = SPPermissions.native(permissions)
             controller.present(on: self)
         })

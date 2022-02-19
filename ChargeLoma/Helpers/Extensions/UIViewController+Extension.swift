@@ -12,6 +12,10 @@ import NVActivityIndicatorViewExtended
 
 extension UIViewController {
     
+    func registerNotification(name: Notification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+
     func errorDialog(title: String, message: String) {
         let dialogMessage = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
         

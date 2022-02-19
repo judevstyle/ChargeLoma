@@ -47,6 +47,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NavigationManager.instance.setupWithNavigationController(self)
         setupUI()
         GIDSignIn.sharedInstance().presentingViewController = self
         GIDSignIn.sharedInstance().delegate = self
@@ -143,7 +144,7 @@ extension LoginViewController {
     }
     
     @objc func handleSignup() {
-    
+        NavigationManager.instance.pushVC(to: .editProfile(isRegister: true), presentation: .Present(withNav: false))
     }
 }
 
@@ -209,12 +210,11 @@ extension LoginViewController {
                 if let error = error {
                     debugPrint("Signin Facebook Error : \(error.localizedDescription)")
                 }else {
-                    debugPrint("Signin Facebook Success")
-                    self.dismiss(animated: true, completion: {
-                        self.delegate?.didLoginSuccess(actionType: self.actionType)
-                    })
+                    guard let user = user else {
+                        return
+                    }
+                    self.checkNewAuth(user: user)
                 }
-                
             })
             
         }

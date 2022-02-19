@@ -113,7 +113,7 @@ class StationDetailViewModel: StationDetailProtocol, StationDetailProtocolOutput
     func getStationDetail() {
         self.vc.startLoding()
         var request: GetStationFindOneRequest = GetStationFindOneRequest()
-        request.lang = LanguageEnvironment.shared.current?.name ?? "th"
+        request.lang = Language.current.name
         request.stId = self.stId
         self.getStationFindOneUseCase.execute(request: request).sink { completion in
             debugPrint("getStationFindOneUseCase \(completion)")
@@ -122,6 +122,11 @@ class StationDetailViewModel: StationDetailProtocol, StationDetailProtocolOutput
             if let item = resp {
                 self.dataStation = item
                 self.didGetStationSuccess?()
+                
+                
+                self.getFavorite()
+                self.getImageStation()
+                self.getReview()
             }
         }.store(in: &self.anyCancellable)
     }

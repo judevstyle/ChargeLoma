@@ -166,15 +166,17 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     
     func setSelectedACAll(selected: Bool) {
         self.listACPlugTypeData.1 = []
-        self.listACPlugTypeData.0.forEach({ item in
+        self.listACPlugTypeData.0.enumerated().forEach({ (index, item) in
             self.listACPlugTypeData.1.append(selected)
+            addRemovePlugTypeMaster(id: self.listACPlugTypeData.0[index].pTypeId, isSeleted: selected)
         })
     }
     
     func setSelectedDCAll(selected: Bool) {
         self.listDCPlugTypeData.1 = []
-        self.listDCPlugTypeData.0.forEach({ item in
+        self.listDCPlugTypeData.0.enumerated().forEach({ (index, item) in
             self.listDCPlugTypeData.1.append(selected)
+            addRemovePlugTypeMaster(id: self.listDCPlugTypeData.0[index].pTypeId, isSeleted: selected)
         })
     }
     
@@ -190,8 +192,9 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     
     func setSelectedProviderMasterAll(selected: Bool) {
         self.listProviderMasterData.1 = []
-        self.listProviderMasterData.0.forEach({ item in
+        self.listProviderMasterData.0.enumerated().forEach({ (index, item) in
             self.listProviderMasterData.1.append(selected)
+            addRemoveProviderMaster(id: self.listProviderMasterData.0[index].pvId, isSeleted: selected)
         })
     }
     

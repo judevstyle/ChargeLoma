@@ -9,6 +9,10 @@
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
+public protocol SheetViewControllerDelegate {
+    func sizeModalSheetDidChange(size: SheetSize)
+}
+
 public class SheetViewController: UIViewController {
     
     public private(set) var options: SheetOptions
@@ -155,6 +159,8 @@ public class SheetViewController: UIViewController {
     private var panGestureRecognizer: InitialTouchPanGestureRecognizer!
     private var prePanHeight: CGFloat = 0
     private var isPanning: Bool = false
+    
+    public var delegate: SheetViewControllerDelegate? = nil
     
     public var contentBackgroundColor: UIColor? {
         get { self.contentViewController.contentBackgroundColor }
@@ -471,7 +477,7 @@ public class SheetViewController: UIViewController {
                     self.isPanning = false
                     if previousSize != newSize {
                         self.sizeChanged?(self, newSize, newContentHeight)
-                        NotificationCenter.default.post(name: Notification.Name("didChangeSizeSheet"), object: nil, userInfo: ["size":"\(newSize)"])
+                        self.delegate?.sizeModalSheetDidChange(size: newSize)
                     }
                 })
             case .possible:

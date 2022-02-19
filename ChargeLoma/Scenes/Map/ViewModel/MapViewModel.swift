@@ -80,7 +80,7 @@ class MapViewModel: MapProtocol, MapProtocolOutput {
         self.vc.startLoding()
         
         var request: PostStationFilterRequest = PostStationFilterRequest()
-        request.lang = LanguageEnvironment.shared.current?.name ?? "en"
+        request.lang = Language.current.name
         
         let storeFilter = StoreManager.shared.getMapFilter()
         storeFilter?.plugId?.forEach({ plugId in

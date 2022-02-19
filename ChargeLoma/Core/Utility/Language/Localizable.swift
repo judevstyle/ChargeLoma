@@ -15,27 +15,40 @@ import Foundation
 
 
 public enum Wording {
-    public enum Timer: String, LocalizableDelegate {
-        case seconds = "TIME_UNIT_SECONDS %d IN"
-        case minutes = "TIME_UNIT_MINUTES %d IN"
-        case hours = "TIME_UNIT_HOURS %d IN"
-        case lessThanSec = "TIME_UNIT_LESS_THAN_SECONDS IN"
-        case secondsAgo = "TIME_UNIT_SECONDS %d AGO"
-        case minutesAgo = "TIME_UNIT_MINUTES %d AGO"
-        case hoursAgo = "TIME_UNIT_HOURS %d AGO"
-        case lessThanSecAgo = "TIME_UNIT_LESS_THAN_SECONDS AGO"
-        case dayAgo = "day ago"
-        case daysAgo = "days ago"
-        case yesterday = "Yesterday"
-        case hourAgo = "hour ago"
-        case hrsAgo = "hours ago"
-        case justNow = "just now"
-        case minuteAgo = "A minutes ago"
-        case oneMinuteAgo = "one minute ago"
+    public enum Profile: String, LocalizableDelegate {
+        case TopReview = "TopReview"
+        case Language = "Language"
+        case About = "About"
+        case Login = "Login"
+        case Logout = "Logout"
+        case Profile = "Profile"
+        case Favorite = "Favorite"
     }
     
-    public enum Biometric: String, LocalizableDelegate {
-        case bioAuthenticateFaceId = "BIOMETRIC_AUTHENTICATE_PROMPT_MESSAGE_FOR_FACEID"
-        case bioAuthenticateTouchId = "BIOMETRIC_AUTHENTICATE_PROMPT_MESSAGE_FOR_TOUCHID"
+    public enum MainTabbar: String, LocalizableDelegate {
+        case Home = "Home"
+        case Go = "Go"
+        case ForYou = "ForYou"
+        case Add = "Add"
+        case Me = "Me"
     }
+    
+    public enum About: String, LocalizableDelegate {
+        case AboutDesc = "About_Desc"
+        case AboutHeadVersion = "About_Head_Version"
+        case AboutHeadUpdate = "About_Head_Update"
+        case AboutHeadDeveloper = "About_Head_Developer"
+        case AboutHeadContact = "About_Head_Contact"
+        case AboutHeadThankYou = "About_Head_ThankYou"
+        case AboutHeadCopyright = "About_Head_Copyright"
+    }
+    
+    public enum EditProfile: String, LocalizableDelegate {
+        case EditProfile_DisplayName = "EditProfile_DisplayName"
+        case EditProfile_Email = "EditProfile_Email"
+        case EditProfile_Tel = "EditProfile_Tel"
+        case EditProfile_Car = "EditProfile_Car"
+        case EditProfile_Save = "EditProfile_Save"
+    }
+
 }

@@ -12,7 +12,6 @@ import FittedSheets
 public enum NavigationOpeningSender {
     case splash
     case login(_ delegate: LoginDelegate, actionType: LoginActionType)
-    case register(_ delegate: RegisterDelegate)
     
     //Main Tabbar
     case main
@@ -43,7 +42,7 @@ public enum NavigationOpeningSender {
     
     case choosePlug(_ stId: String, delegate: ChoosePlugViewModelDelegate)
     
-    case seeAllReview(items: [ReviewData])
+    case seeAllReview(items: [ReviewData]? = [], uid: String? = nil)
     
     case informationDetail(item: InformationItem?)
     
@@ -55,14 +54,20 @@ public enum NavigationOpeningSender {
     
     case modalAddPower(delegate: ModalAddPowerViewControllerDelegate)
     
+    case switchLanguage
+    
+    case usersHit
+    
+    case about
+    
+    case editProfile(isRegister: Bool)
+    
     public var storyboardName: String {
         switch self {
         case .splash:
             return "Splash"
         case .login:
             return "Login"
-        case .register:
-            return "Register"
         case .main:
             return "Main"
         case .map:
@@ -105,6 +110,14 @@ public enum NavigationOpeningSender {
             return "SelectCurrentLocation"
         case .modalAddPower:
             return "ModalAddPower"
+        case .switchLanguage:
+            return "SwitchLanguage"
+        case .usersHit:
+            return "UsersHit"
+        case .about:
+            return "About"
+        case .editProfile:
+            return "EditProfile"
         }
     }
     
@@ -114,8 +127,6 @@ public enum NavigationOpeningSender {
             return "SplashViewController"
         case .login:
             return "LoginViewController"
-        case .register:
-            return "RegisterViewController"
         case .main:
             return "MainTabBarController"
         case .map:
@@ -158,6 +169,14 @@ public enum NavigationOpeningSender {
             return "SelectCurrentLocationViewController"
         case .modalAddPower:
             return "ModalAddPowerViewController"
+        case .switchLanguage:
+            return "SwitchLanguageViewController"
+        case .usersHit:
+            return "UsersHitViewController"
+        case .about:
+            return "AboutViewController"
+        case .editProfile:
+            return "EditProfileViewController"
         }
     }
     
@@ -280,6 +299,8 @@ class NavigationManager {
         case PushInTabbar
         case PushStationDetail
         case switchTabbar(index: Int)
+        case presentModelHeight(completion: (() -> Void)?, height: CGFloat)
+        case presentBackground
     }
     
     init() {
@@ -300,6 +321,32 @@ class NavigationManager {
         self.mainTabBarController = tabbar
     }
     
+    func refreshTabbar() {
+        let mapVC = getTabbarNavigation(logoImage: "map", title: Wording.MainTabbar.Home.localized, sender: .map)
+        let goVC = getTabbarNavigation(logoImage: "car", title: Wording.MainTabbar.Go.localized, sender: .go)
+        let foryouVC = getTabbarNavigation(logoImage: "passion", title: Wording.MainTabbar.ForYou.localized, sender: .foryou)
+        let addLocationVC = getTabbarNavigation(logoImage: "plus", title: Wording.MainTabbar.Add.localized, sender: .addlocation)
+        let meVC = getTabbarNavigation(logoImage: "user", title: Wording.MainTabbar.Me.localized, sender: .me)
+        self.mainTabBarController.viewControllers = [mapVC, goVC, foryouVC, addLocationVC, meVC]
+    }
+    
+    private func getTabbarNavigation(logoImage: String, title: String, sender: NavigationOpeningSender) -> UINavigationController {
+      return  tabBarNavigation(unselectImage: UIImage(named: logoImage), selectImage: UIImage(named: logoImage), title: title, badgeValue: nil, navigationTitle: "", navigationOpeningSender: sender)
+    }
+    
+    fileprivate func tabBarNavigation(unselectImage: UIImage?, selectImage: UIImage?, title: String?, badgeValue: String?,navigationTitle: String?, navigationOpeningSender: NavigationOpeningSender) -> UINavigationController {
+
+        let navController = navigationOpeningSender.navController
+        navController.tabBarItem.image = unselectImage
+        navController.tabBarItem.selectedImage =  selectImage
+        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 8, right: 0)
+        navController.tabBarItem.title = title
+        navController.tabBarItem.badgeColor = .red
+        navController.tabBarItem.badgeValue = badgeValue
+        navController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.smallText], for: .normal)
+        return navController
+    }
+    
     func pushVC(to: NavigationOpeningSender, presentation: Presentation = .Push, isHiddenNavigationBar: Bool = false, animated: Bool = true) {
         let loadingStoryBoard = to.storyboardName
         
@@ -311,11 +358,6 @@ class NavigationManager {
             if let className = storyboard.instantiateInitialViewController() as? LoginViewController {
                 className.delegate = delegate
                 className.actionType = actionType
-                viewController = className
-            }
-        case .register(let delegate):
-            if let className = storyboard.instantiateInitialViewController() as? RegisterViewController {
-                className.delegate = delegate
                 viewController = className
             }
         case .stationDetail(let stId, let isFromPushNavigation):
@@ -350,9 +392,10 @@ class NavigationManager {
                 className.viewModel.setStId(stId)
                 viewController = className
             }
-        case .seeAllReview(let items):
+        case .seeAllReview(let items, let uid):
             if let className = storyboard.instantiateInitialViewController() as? SeeAllReviewViewController {
                 className.viewModel.setListReview(items: items)
+                className.viewModel.setUID(uid: uid)
                 viewController = className
             }
         case .informationDetail(let item):
@@ -373,6 +416,11 @@ class NavigationManager {
         case .selectCurrentLocation(let delegate):
             if let className = storyboard.instantiateInitialViewController() as? SelectCurrentLocationViewController {
                 className.delegate = delegate
+                viewController = className
+            }
+        case .editProfile(let isRegister):
+            if let className = storyboard.instantiateInitialViewController() as? EditProfileViewController {
+                className.isRegister = isRegister
                 viewController = className
             }
         default:
@@ -407,6 +455,11 @@ class NavigationManager {
                 self.navigationController.pushViewController(viewController, animated: animated)
             }
         case .PushStationDetail:
+            
+            if (self.navigationController.tabBarController != nil) {
+                viewController.hidesBottomBarWhenPushed = true
+            }
+            
             let topVC = UIApplication.getTopViewController()
             if let nav = topVC?.navigationController {
                 nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -453,7 +506,6 @@ class NavigationManager {
             let nav: UINavigationController = getNavigationController(vc: viewController, isTranslucent: false, isFullScreen: isFullScreen)
             self.navigationController.present(nav, animated: true, completion: completion)
         case .presentFullScreen(let completion):
-            
             let nav: UINavigationController = self.getNavigationController(vc: viewController, to: to)
             nav.view.backgroundColor = UIColor.black
             nav.modalPresentationStyle = .overFullScreen
@@ -468,6 +520,8 @@ class NavigationManager {
                 controller: nav,
                 sizes: [.fixed(heightHalf), .fullscreen],
                 options: options)
+            sheet.delegate = viewController as? SheetViewControllerDelegate
+            sheet.overlayColor = .clear
             
             let topVC = UIApplication.getTopViewController()
             topVC?.present(sheet, animated: true, completion: completion)
@@ -492,6 +546,22 @@ class NavigationManager {
             
         case .switchTabbar(index: let index):
             self.mainTabBarController.selectedIndex = index
+        case .presentModelHeight(let completion, let height):
+            let options: SheetOptions = SheetOptions(pullBarHeight: 0, useInlineMode: nil)
+            let sheet = SheetViewController(
+                controller: viewController,
+                sizes: [.fixed(height)],
+                options: options)
+            sheet.overlayColor = UIColor.black.withAlphaComponent(0.5)
+            let topVC = UIApplication.getTopViewController()
+            topVC?.present(sheet, animated: true, completion: completion)
+        case .presentBackground:
+            let nav: UINavigationController = self.getNavigationController(vc: viewController, to: to)
+            nav.view.backgroundColor = UIColor.black
+            nav.modalPresentationStyle = .overFullScreen
+            nav.modalTransitionStyle = .crossDissolve
+            let topVC = UIApplication.getTopViewController()
+            topVC?.present(nav, animated: true, completion: nil)
         }
         self.currentPresentation = presentation
     }

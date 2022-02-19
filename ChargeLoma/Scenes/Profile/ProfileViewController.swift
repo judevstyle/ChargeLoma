@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeObserver()
+        registerNotification(name: .LanguageDidChange, selector: #selector(languageDidChange))
         setupUI()
         reloadDataView()
         viewModel.input.getUserProfile()
@@ -76,6 +78,11 @@ class ProfileViewController: UIViewController {
             logoImage.image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
         }
         self.tableView.reloadData()
+    }
+    
+    @objc func languageDidChange() {
+        debugPrint("languageDidChange")
+        reloadDataView()
     }
 }
 
@@ -130,14 +137,15 @@ extension ProfileViewController: UITableViewDataSource {
         guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
             switch indexPath.row {
             case 0:
-                cell.titleText.text = "ผู้ใช้บริการยอดฮิต"
+                cell.titleText.text = Wording.Profile.TopReview.localized
             case 1:
-                cell.titleText.text = "ตั้งค่าภาษา"
+                cell.titleText.text = Wording.Profile.Language.localized
                 cell.flagImageView.isHidden = false
+                cell.checkLanguage()
             case 2:
-                cell.titleText.text = "เกี่ยวกับ"
+                cell.titleText.text = Wording.Profile.About.localized
             case 3:
-                cell.titleText.text = "เข้าสู่ระบบ"
+                cell.titleText.text = Wording.Profile.Login.localized
             default:
                 break
             }
@@ -146,18 +154,19 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.titleText.text = "โปรไฟล์"
+            cell.titleText.text = Wording.Profile.Profile.localized
         case 1:
-            cell.titleText.text = "ชื่นชอบ"
+            cell.titleText.text = Wording.Profile.Favorite.localized
         case 2:
-            cell.titleText.text = "ผู้ใช้บริการยอดฮิต"
+            cell.titleText.text = Wording.Profile.TopReview.localized
         case 3:
-            cell.titleText.text = "ตั้งค่าภาษา"
+            cell.titleText.text = Wording.Profile.Language.localized
             cell.flagImageView.isHidden = false
+            cell.checkLanguage()
         case 4:
-            cell.titleText.text = "เกี่ยวกับ"
+            cell.titleText.text = Wording.Profile.About.localized
         case 5:
-            cell.titleText.text = "ออกจากระบบ"
+            cell.titleText.text = Wording.Profile.Logout.localized
         default:
             break
         }
@@ -167,6 +176,12 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
             switch indexPath.row {
+            case 0:
+                NavigationManager.instance.pushVC(to: .usersHit)
+            case 1:
+                NavigationManager.instance.pushVC(to: .switchLanguage, presentation: .presentModelHeight(completion: nil, height: 150))
+            case 2:
+                NavigationManager.instance.pushVC(to: .about)
             case 3:
                 NavigationManager.instance.pushVC(to: .login(self, actionType: .unknown), presentation: .Present(withNav: false))
             default:
@@ -180,13 +195,12 @@ extension ProfileViewController: UITableViewDataSource {
             NavigationManager.instance.pushVC(to: .me)
         case 1:
             NavigationManager.instance.pushVC(to: .seeAllFavorite)
+        case 2:
+            NavigationManager.instance.pushVC(to: .usersHit)
         case 3:
-            debugPrint("Change Language")
-            if Language.current == .thai {
-                Language.current = .english
-            } else {
-                Language.current = .thai
-            }
+            NavigationManager.instance.pushVC(to: .switchLanguage, presentation: .presentModelHeight(completion: nil, height: 150))
+        case 4:
+            NavigationManager.instance.pushVC(to: .about)
         case 5:
             didSignOut()
         default:
