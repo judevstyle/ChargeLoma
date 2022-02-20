@@ -50,13 +50,11 @@
 	<false/>
 	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
 	<true/>
-    <key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) camera description.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>$(PRODUCT_NAME)photos description.</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>$(PRODUCT_NAME) photos add description.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Your reason, why you want to track the user</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) camera description.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) photos description.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) photos add description.</string>
 </dict>
 </plist>
