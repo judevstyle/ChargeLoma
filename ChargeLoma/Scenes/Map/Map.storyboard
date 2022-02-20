@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -23,25 +24,25 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9UU-iM-4hK">
-                                <rect key="frame" x="353" y="699" width="45" height="98"/>
+                                <rect key="frame" x="343" y="679" width="55" height="118"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt9-wk-uIr">
-                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="Gen-0Q-opp"/>
-                                            <constraint firstAttribute="width" constant="45" id="mnn-F4-iGX"/>
+                                            <constraint firstAttribute="height" constant="55" id="Gen-0Q-opp"/>
+                                            <constraint firstAttribute="width" constant="55" id="mnn-F4-iGX"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_map_menu"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="btn_map_menu"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-Pl-1Zm">
-                                        <rect key="frame" x="0.0" y="53" width="45" height="45"/>
+                                        <rect key="frame" x="0.0" y="63" width="55" height="55"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="45" id="Xxq-e9-XAd"/>
-                                            <constraint firstAttribute="height" constant="45" id="eH3-00-v34"/>
+                                            <constraint firstAttribute="width" constant="55" id="Xxq-e9-XAd"/>
+                                            <constraint firstAttribute="height" constant="55" id="eH3-00-v34"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="btn_map_location"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="btn_map_location"/>
                                     </button>
                                 </subviews>
                             </stackView>

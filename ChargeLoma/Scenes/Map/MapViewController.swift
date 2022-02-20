@@ -77,7 +77,14 @@ public class MapViewController: UIViewController {
     func setupUI() {
         setupTableView()
         setupSearchBar()
+        self.btnMapMenu.setImage(UIImage(named: "btn_map_menu")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnMapMenu.contentVerticalAlignment = .fill
+        self.btnMapMenu.contentHorizontalAlignment = .fill
         self.btnMapMenu.addTarget(self, action: #selector(didTapMapMenuButton), for: .touchUpInside)
+        
+        self.btnMapLocation.setImage(UIImage(named: "btn_map_location")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnMapLocation.contentVerticalAlignment = .fill
+        self.btnMapLocation.contentHorizontalAlignment = .fill
         self.btnMapLocation.addTarget(self, action: #selector(didTapMapLocationButton), for: .touchUpInside)
     }
     
