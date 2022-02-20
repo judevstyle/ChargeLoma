@@ -29,13 +29,6 @@ class SplashViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
             self.viewModel.input.prepareFetchData()
         })
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            let permissions: [SPPermissions.Permission] = [.tracking]
-            let controller = SPPermissions.native(permissions)
-            controller.present(on: self)
-        })
     }
     
     func configure(_ interface: SplashProtocol) {

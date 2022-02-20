@@ -73,8 +73,6 @@ class EditProfileViewController: UIViewController {
         registerKeyboardObserver()
         
         setupUI()
-        
-        imagePicker = ImagePicker(presentationController: self, sourceType: [.camera, .photoLibrary], delegate: self)
     }
     
     deinit {
@@ -176,6 +174,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @objc func didChooseImage() {
+        imagePicker = ImagePicker(presentationController: self, sourceType: [.camera, .photoLibrary], delegate: self)
         imagePicker.present(from: self.view)
     }
     

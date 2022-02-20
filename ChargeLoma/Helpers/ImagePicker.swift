@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import SPPermissions
+import SPPermissionsPhotoLibrary
+import SPPermissionsCamera
 
 public protocol ImagePickerDelegate: class {
     func didSelectImage(image: UIImage?, imagePicker: ImagePicker, base64: String)
@@ -33,37 +36,57 @@ open class ImagePicker: NSObject {
         self.pickerController.mediaTypes = ["public.image"]
     }
     
-    private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
-        guard UIImagePickerController.isSourceTypeAvailable(type) else {
-            return nil
-        }
-        
+    private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction {
         return UIAlertAction(title: title, style: .default) { [unowned self] _ in
-            self.pickerController.sourceType = type
-            self.presentationController?.present(self.pickerController, animated: true)
+            
+            switch type {
+            case .camera:
+                if SPPermissions.Permission.camera.denied || SPPermissions.Permission.camera.notDetermined {
+                    let permissions: [SPPermissions.Permission] = [.camera]
+                    let controller = SPPermissions.native(permissions)
+                    if let vc = self.presentationController {
+                        controller.present(on: vc)
+                    }
+                } else {
+                    self.pickerController.sourceType = .camera
+                    self.presentationController?.present(self.pickerController, animated: true)
+                }
+                break
+            case .photoLibrary:
+                if SPPermissions.Permission.photoLibrary.denied || SPPermissions.Permission.photoLibrary.notDetermined {
+                    let permissions: [SPPermissions.Permission] = [.photoLibrary]
+                    let controller = SPPermissions.native(permissions)
+                    if let vc = self.presentationController {
+                        controller.present(on: vc)
+                    }
+                } else {
+                    self.pickerController.sourceType = .photoLibrary
+                    self.presentationController?.present(self.pickerController, animated: true)
+                }
+            default:
+                break
+            }
         }
     }
     
     public func present(from sourceView: UIView) {
+
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
         self.sourceType.forEach({ type in
             switch type {
             case .camera:
-                if let action = setActionType(type: .camera , title: "ถ่ายภาพ") {
-                    alertController.addAction(action)
-                }
+                let action = setActionType(type: .camera , title: "ถ่ายภาพ")
+                alertController.addAction(action)
                 break
             case .photoLibrary:
-                if let action = setActionType(type: .photoLibrary , title: "เลือกจากอัลบั้ม") {
-                    alertController.addAction(action)
-                }
+                let action = setActionType(type: .photoLibrary , title: "เลือกจากอัลบั้ม")
+                alertController.addAction(action)
                 break
             case .savedPhotosAlbum:
-                if let action = setActionType(type: .savedPhotosAlbum , title: "Camera roll") {
-                    alertController.addAction(action)
-                }
+                let action = setActionType(type: .savedPhotosAlbum , title: "Camera roll")
+                alertController.addAction(action)
                 break
             default:
                 break
@@ -81,12 +104,8 @@ open class ImagePicker: NSObject {
         self.presentationController?.present(alertController, animated: true)
     }
     
-    private func setActionType(type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
-        if let action = self.action(for: type, title: title) {
-            return action
-        } else {
-            return nil
-        }
+    private func setActionType(type: UIImagePickerController.SourceType, title: String) -> UIAlertAction {
+        return self.action(for: type, title: title)
     }
     
     private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
