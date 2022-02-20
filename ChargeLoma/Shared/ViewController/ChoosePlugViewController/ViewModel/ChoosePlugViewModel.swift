@@ -17,7 +17,6 @@ public protocol ChoosePlugViewModelDelegate {
 protocol ChoosePlugProtocolInput {
     func getPlugStation()
     func setupPrepare(_ stId: String, delegate: ChoosePlugViewModelDelegate)
-    
     func didSelectRowAt(_ tableView: UITableView, indexPath: IndexPath)
 }
 

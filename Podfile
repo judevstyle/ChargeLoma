@@ -25,6 +25,8 @@ target 'ChargeLoma' do
   pod 'RadioGroup'
   
   pod 'MaterialComponents/TextControls+FilledTextFields'
+  
+  pod 'Kingfisher', '~> 7.0'
   # Pods for ChargeLoma
 
 end

@@ -26,21 +26,27 @@ class MarkerStationView: UIView {
         let markerGreen: UIImage? = UIImage.imageNamed(name: "marker_green", cache: true)
         
         var pinImage: UIImage? = markerGreen
+        
         if station?.stationStatus == 3 {
             pinImage = markerGray
+            view.imageAvatar.image = UIImage.imageNamed(name: "maintenance", cache: true)
+        } else if station?.stationStatus == 2 {
+            pinImage = markerGray
+            view.imageAvatar.image = UIImage.imageNamed(name: "soon", cache: true)
         } else {
-            if station?.is24hr == true {
+            if station?.isFastCharge == true {
                 pinImage = markerOrange
             } else {
                 pinImage = markerGreen
             }
+            
+            if let pathImage = station?.provider?.logoLabel, let urlImage = URL(string: "\(pathImage)") {
+                view.imageAvatar.kf.setImageDefault(with: urlImage)
+            }
+            
         }
-        view.ImageBg.image = pinImage
         
-
-        if let pathImage = station?.provider?.logoLabel, let urlImage = URL(string: "\(pathImage)") {
-            view.imageAvatar.kf.setImageDefault(with: urlImage)
-        }
+        view.ImageBg.image = pinImage
 
         return view
     }

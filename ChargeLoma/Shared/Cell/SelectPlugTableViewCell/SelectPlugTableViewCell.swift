@@ -27,8 +27,7 @@ class SelectPlugTableViewCell: UITableViewCell {
     func setupUI() {
         titleSelectPlug.font = .bodyText
         titleSelectPlug.textColor = .baseTextGray
-        titleSelectPlug.text = "เพิ่มหัวจ่าย"
-        
+        titleSelectPlug.text = Wording.AddStation.AddStation_Btn_AddPlug.localized
         imageSelectPlug.setRounded(rounded: imageSelectPlug.frame.width/2)
     }
     

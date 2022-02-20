@@ -57,8 +57,6 @@ extension UITextField {
         self.resignFirstResponder()
     }
     
-
-    
     func setPaddingLeft(padding: CGFloat){
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 5))
         self.leftView = paddingView
@@ -72,27 +70,7 @@ extension UITextField {
         self.rightViewMode = .always
     }
     
-    func setTextFieldBottom(color: UIColor) {
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
-        bottomLine.backgroundColor = color.cgColor
-        self.borderStyle = .none
-        self.layer.addSublayer(bottomLine)
+    func clearText() {
+        self.text = ""
     }
-    
-    func clearSubLayer(onCompletion: (() -> Void)? = nil) {
-        if let sublayers = self.layer.sublayers, sublayers.count != 0 {
-            sublayers.enumerated().forEach({ index, layer in
-                if layer.isKind(of: CALayer.self) {
-                    layer.removeFromSuperlayer()
-                }
-                if index == (sublayers.count - 1) {
-                    onCompletion?()
-                }
-            })
-        } else {
-            onCompletion?()
-        }
-    }
-    
 }

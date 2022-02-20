@@ -79,7 +79,7 @@ class GoViewModel: GoProtocol, GoProtocolOutput {
                 request.provider.append(pvId)
             }
         })
-        
+        request.status.append(1)
         storeFilter?.statusIndex?.forEach({ statusIndex in
             if let statusIndex = statusIndex {
                 request.status.append(statusIndex)

@@ -134,7 +134,7 @@ class MapFilterViewModel: MapFilterProtocol, MapFilterProtocolOutput {
     }
     
     func getStatusFilter() {
-        self.listStatusData.0 = [1, 2, 3]
+        self.listStatusData.0 = [2, 3, 4]
         self.listStatusData.1 = ["เปิดเร็วๆนี้", "ปิดปรับปรุง", "แสดงสถานีที่ใช้ส่วนตัว"]
         self.listStatusData.2 = [true, true, true]
         

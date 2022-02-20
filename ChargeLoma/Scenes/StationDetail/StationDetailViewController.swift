@@ -112,8 +112,8 @@ class StationDetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupTableView()
-        setupCheckBox()
         viewModel.input.getStationDetail()
+        setupCheckBox()
     }
     
     func configure(_ interface: StationDetailProtocol) {
@@ -131,6 +131,10 @@ class StationDetailViewController: UIViewController {
         mapView.clear()
         mapView.removeFromSuperview()
         mapView = nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupCheckBox()
     }
     
     override func viewWillLayoutSubviews() {
@@ -160,9 +164,9 @@ class StationDetailViewController: UIViewController {
         self.titleNavigate.textColor = .basePrimary
         self.titleFavorite.textColor = .basePrimary
         self.titleShare.textColor = .basePrimary
-        self.titleNavigate.text = "นำทาง"
-        self.titleFavorite.text = "ชื่นชอบ"
-        self.titleShare.text = "แชร์"
+        self.titleNavigate.text = Wording.StationDetail.StationDetail_Btn_Direction.localized
+        self.titleFavorite.text = Wording.StationDetail.StationDetail_Btn_Favorite.localized
+        self.titleShare.text = Wording.StationDetail.StationDetail_Btn_Share.localized
         
         self.titleNavigate.font = .bodyText
         self.titleFavorite.font = .bodyText
@@ -185,7 +189,8 @@ class StationDetailViewController: UIViewController {
         self.btnEdit.tintColor = .basePrimary
         self.btnEdit.titleLabel?.font = .bodyBold
         self.btnEdit.backgroundColor = .white
-        self.btnEdit.setTitle("แก้ไขข้อมูล", for: .normal)
+        self.btnEdit.setTitle(Wording.StationDetail.StationDetail_Btn_Edit.localized, for: .normal)
+        self.btnEdit.addTarget(self, action: #selector(handleBtnEdit), for: .touchUpInside)
         
         imagePosterView.setRounded(rounded: 8)
         imagePosterView.layer.masksToBounds = true
@@ -214,9 +219,9 @@ class StationDetailViewController: UIViewController {
         serviceCharge.font = .bodyText
         serviceCharge.textColor = .baseTextGray
         
-        headDesc.text = "รายละเอียด"
-        headPlug.text = "หัวจ่าย"
-        serviceCharge.text = "ค่าบริการ \(0.0) บาท"
+        headDesc.text = Wording.StationDetail.StationDetail_Head_Detail.localized
+        headPlug.text = Wording.StationDetail.StationDetail_Head_Connectors.localized
+        serviceCharge.text = "\(Wording.StationDetail.StationDetail_Head_PriceService.localized) \(0.0) บาท"
         
         self.bgBottomBar.alpha = 1.0
 //        self.bgBottomBar.setShadowBoxView()
@@ -234,7 +239,7 @@ class StationDetailViewController: UIViewController {
         
         
         headReview.font = .h3Bold
-        headReview.text = "รีวิวจากผู้ใช้บริการ"
+        headReview.text = Wording.StationDetail.StationDetail_Head_ReviewFromUser.localized
         
         
         if isFromPushNavigation {
@@ -245,6 +250,7 @@ class StationDetailViewController: UIViewController {
         }
         
     }
+
     
     func setupMap() {
         let camera = GMSCameraPosition.camera(withLatitude: 13.663491595353403, longitude: 100.6061463206966, zoom: 7.0)
@@ -280,7 +286,7 @@ class StationDetailViewController: UIViewController {
     }
     
     func setupCheckBox() {
-        headService.text = "สิ่งอำนวยความสะดวกอื่นๆ"
+        headService.text = Wording.StationDetail.StationDetail_Head_Service.localized
         headService.font = .h3Bold
         
         self.cbParking.isEnableCheckBox = false
@@ -292,38 +298,35 @@ class StationDetailViewController: UIViewController {
         self.cbWifi.isEnableCheckBox = false
         self.cbOther.isEnableCheckBox = false
         
-        self.titleParking.text = "ที่จอดรถ"
-        self.titleFoodShop.text = "ร้านอาหาร"
-        self.titleCoffeShop.text = "ร้านกาแฟ"
-        self.titleToilet.text = "ห้องน้ำ"
-        self.titleMarket.text = "ร้านค้า"
-        self.titleSleep.text = "ที่พักผ่อน"
-        self.titleWifi.text = "Wifi"
-        self.titleOther.text = "อื่นๆ"
+        self.titleParking.text = Wording.cb.Checkbox_Parking.localized
+        self.titleFoodShop.text = Wording.cb.Checkbox_Food.localized
+        self.titleCoffeShop.text = Wording.cb.Checkbox_Coffee.localized
+        self.titleToilet.text = Wording.cb.Checkbox_RestRoom.localized
+        self.titleMarket.text = Wording.cb.Checkbox_Shopping.localized
+        self.titleSleep.text = Wording.cb.Checkbox_RestArea.localized
+        self.titleWifi.text = Wording.cb.Checkbox_Wifi.localized
+        self.titleOther.text = Wording.cb.Checkbox_Other.localized
         
-        self.titleParking.font = .bodyText
-        self.titleParking.textColor = .darkGray
-        
-        self.titleFoodShop.font = .bodyText
-        self.titleFoodShop.textColor = .darkGray
-        
-        self.titleCoffeShop.font = .bodyText
-        self.titleCoffeShop.textColor = .darkGray
-        
-        self.titleToilet.font = .bodyText
-        self.titleToilet.textColor = .darkGray
-        
-        self.titleMarket.font = .bodyText
-        self.titleMarket.textColor = .darkGray
-        
-        self.titleSleep.font = .bodyText
-        self.titleSleep.textColor = .darkGray
-        
-        self.titleWifi.font = .bodyText
-        self.titleWifi.textColor = .darkGray
-        
-        self.titleOther.font = .bodyText
-        self.titleOther.textColor = .darkGray
+        setupAllTitleCheckBox()
+    }
+    
+    func setupAllTitleCheckBox() {
+        setupTitleCheckBox(label: titleParking)
+        setupTitleCheckBox(label: titleFoodShop)
+        setupTitleCheckBox(label: titleCoffeShop)
+        setupTitleCheckBox(label: titleToilet)
+        setupTitleCheckBox(label: titleMarket)
+        setupTitleCheckBox(label: titleSleep)
+        setupTitleCheckBox(label: titleWifi)
+        setupTitleCheckBox(label: titleOther)
+    }
+    
+    func setupTitleCheckBox(label: UILabel) {
+        label.font = .bodyText
+        label.textColor = .darkGray
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0;
+        label.sizeToFit()
     }
     
     @objc func handleTapSeeAllGalleryPhoto(_ sender: UITapGestureRecognizer? = nil) {
@@ -333,11 +336,17 @@ class StationDetailViewController: UIViewController {
     }
     
     @objc func handleTapPosterFullScreen(_ sender: UITapGestureRecognizer? = nil) {
+        var newListImage: [String] = []
+        if  let station = self.viewModel.output.getDataStation(), let strImage = station.stationImg {
+            newListImage.append(strImage)
+        }
         if let listImage = viewModel.output.getListStrImageStation(), listImage.count > 0 {
-            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: [listImage[0]], index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+            newListImage = newListImage + listImage
+        }
+        if newListImage.count > 0 {
+            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: newListImage, index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
         }
     }
-
   
     func setBgBottomBar(isHidden: Bool, isAnimate: Bool) {
         self.bgBottomBar.isHidden = false
@@ -400,17 +409,16 @@ extension StationDetailViewController {
         return { [weak self] in
             guard let self = self else { return }
             let listImage = self.viewModel.output.getListImageStation()
-            if listImage.count > 0 {
+            
+            if let station = self.viewModel.output.getDataStation(), let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
+                self.imagePosterView.kf.setImageDefault(with: urlImage)
+            } else if listImage.count > 0 {
                 if let posterImage = listImage[0].imgPath, let urlImage = URL(string: "\(posterImage)") {
                     self.imagePosterView.kf.setImageDefault(with: urlImage)
                 }
-                
-                self.titleBadgeCount.text = "\(listImage.count)"
-            } else {
-                if let station = self.viewModel.output.getDataStation(), let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
-                    self.imagePosterView.kf.setImageDefault(with: urlImage)
-                }
             }
+            
+            self.titleBadgeCount.text = "\(listImage.count)"
         }
     }
     
@@ -419,6 +427,7 @@ extension StationDetailViewController {
             guard let self = self else { return }
             self.tableReview.reloadData()
             self.tableReview.layoutIfNeeded()
+            self.tableReviewHeight?.constant = self.tableReview.contentSize.height
         }
     }
     
@@ -432,11 +441,24 @@ extension StationDetailViewController {
         
         distanceValue.text = "ไม่พบพิกัดผู้ใช้งาน"
         timeValue.text = station.servicetimeOpen ?? ""
+        distanceValue.sizeToFit()
         
         descValue.text = station.stationDesc ?? "-"
-        serviceCharge.text = "ค่าบริการ \(station.serviceRate ?? 0.0) บาท"
+        if let serviceRate = station.serviceRate, serviceRate != 0 {
+            serviceCharge.text = "\(Wording.StationDetail.StationDetail_Head_PriceService.localized) \(serviceRate) บาท"
+            serviceCharge.isHidden = false
+        } else {
+            serviceCharge.text = ""
+            serviceCharge.isHidden = true
+        }
         
-        titleRating.text = String(format:"%.1f", station.rating ?? 0.0)
+        if let rating = station.rating, rating != 0 {
+            titleRating.text = String(format:"%.1f", rating)
+        } else {
+            titleRating.text = "-"
+        }
+        
+        titleRating.sizeToFit()
         
         checkMethodService()
         
@@ -533,16 +555,28 @@ extension StationDetailViewController {
         guard let station = viewModel.output.getDataStation() else { return }
         if let lat = station.lat, let lng = station.lng {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {  //if phone has an app
-                if let url = URL(string: "comgooglemaps-x-callback://?q=&center=\(lat),\(lng)&views=satellite,traffic&zoom=15") {
+                if let url = URL(string: "comgooglemaps-x-callback://?q=&center=\(lat),\(lng)&views=hybrid,traffic&zoom=15") {
                     UIApplication.shared.open(url, options: [:])
                 }}
             else {
                 //Open in browser
-                if let urlDestination = URL.init(string: "https://www.google.co.in/maps/dir/?q=&center=\(lat),\(lng)&views=satellite,traffic&zoom=15") {
+                if let urlDestination = URL.init(string: "https://www.google.co.in/maps/dir/?q=&center=\(lat),\(lng)&views=hybrid,traffic&zoom=15") {
                     UIApplication.shared.open(urlDestination)
                 }
             }
         }
+//        if let lat = station.lat, let lng = station.lng {
+//            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {  //if phone has an app
+//                if let url = URL(string: "comgooglemaps-x-callback://?q=\(lat),\(lng)") {
+//                    UIApplication.shared.open(url, options: [:])
+//                }}
+//            else {
+//                //Open in browser
+//                if let urlDestination = URL.init(string: "https://www.google.co.in/maps/?q=\(lat),\(lng)") {
+//                    UIApplication.shared.open(urlDestination)
+//                }
+//            }
+//        }
     }
     
     @objc func handleBtnAddReview() {
@@ -552,8 +586,13 @@ extension StationDetailViewController {
         }
         
         if let stId = viewModel.output.getDataStation()?.stId {
-            NavigationManager.instance.pushVC(to: .addReview(stId), presentation: .presentFullScreen(completion: nil))
+            NavigationManager.instance.pushVC(to: .addReview(stId, delegate: self), presentation: .presentFullScreen(completion: nil))
         }
+    }
+    
+    @objc func handleBtnEdit() {
+        let station = viewModel.output.getDataStation()
+        NavigationManager.instance.pushVC(to: .addlocation(stationData: station,isFromPushNavigation: false, delegate: self), presentation: .presentFullScreen(completion: nil))
     }
 }
 
@@ -626,7 +665,7 @@ extension StationDetailViewController: LoginDelegate {
         case .writeReview:
             if let stId = viewModel.output.getDataStation()?.stId {
                 DispatchQueue.main.async {
-                    NavigationManager.instance.pushVC(to: .addReview(stId), presentation: .presentFullScreen(completion: nil))
+                    NavigationManager.instance.pushVC(to: .addReview(stId, delegate: self), presentation: .presentFullScreen(completion: nil))
                 }
             }
         case .favorite:
@@ -656,7 +695,10 @@ extension StationDetailViewController: CLLocationManagerDelegate {
             let distanceInMeters = location.distance(from: placeLocation)
             let distanceInKiloMeters = distanceInMeters/1000.0
             let timePerMin = distanceInKiloMeters/10.0
-            distanceValue.text = String(format: "%0.2f km. (%0.2f นาที)", distanceInKiloMeters, timePerMin)
+            let unitKm = Wording.StationDetail.StationDetail_Unit_km.localized
+            let unitMin = Wording.StationDetail.StationDetail_Unit_Min.localized
+            distanceValue.text = String(format: "%0.2f \(unitKm). (%0.2f \(unitMin))", distanceInKiloMeters, timePerMin)
+            distanceValue.sizeToFit()
         }
         
         locationManager.stopUpdatingLocation()
@@ -666,5 +708,17 @@ extension StationDetailViewController: CLLocationManagerDelegate {
 extension StationDetailViewController: SheetViewControllerDelegate {
     func sizeModalSheetDidChange(size: SheetSize) {
         self.setBgBottomBar(isHidden: size == .fullscreen ? false : true, isAnimate: true)
+    }
+}
+
+extension StationDetailViewController: AddLocationViewControllerDelegate {
+    func dismissAddLocationView() {
+        debugPrint("dismissAddLocationView")
+    }
+}
+
+extension StationDetailViewController: AddReviewViewControllerDelegate {
+    func addReviewDismiss() {
+        viewModel.input.getStationDetail()
     }
 }

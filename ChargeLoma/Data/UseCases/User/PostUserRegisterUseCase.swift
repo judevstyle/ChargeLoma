@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol PostUserRegisterUseCase {
-    func execute(request: PostUserRegisterRequest) -> AnyPublisher<UserRegisterData?, Error>
+    func execute(request: PostUpdateUserRequest) -> AnyPublisher<UserRegisterData?, Error>
 }
 
 struct PostUserRegisterUseCaseImpl: PostUserRegisterUseCase {
@@ -20,7 +20,7 @@ struct PostUserRegisterUseCaseImpl: PostUserRegisterUseCase {
         self.repository = repository
     }
 
-    func execute(request: PostUserRegisterRequest) -> AnyPublisher<UserRegisterData?, Error> {
+    func execute(request: PostUpdateUserRequest) -> AnyPublisher<UserRegisterData?, Error> {
         return self.repository
             .userRegister(request: request)
             .map { $0.data }

@@ -94,12 +94,16 @@ class ReviewTableViewCell: UITableViewCell {
         case true:
             statusImage.image = UIImage(named: "yes")?.withRenderingMode(.alwaysOriginal)
             statusImage.tintColor = .green
+            plugTitleText.isHidden = false
         case false:
             statusImage.image = UIImage(named: "no")?.withRenderingMode(.alwaysOriginal)
             statusImage.tintColor = .red
+            plugTitleText.isHidden = false
         default:
             statusImage.image = UIImage(named: "comment")?.withRenderingMode(.alwaysOriginal)
             statusImage.tintColor = .basePrimary
+            plugTitleText.text = ""
+            plugTitleText.isHidden = true
         }
 
         var listStrImage: [String] = []

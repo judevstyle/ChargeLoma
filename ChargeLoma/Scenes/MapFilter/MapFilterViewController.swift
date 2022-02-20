@@ -28,7 +28,11 @@ class MapFilterViewController: UIViewController {
     private var isSelectedStatusAll: Bool = true
     
     @IBOutlet weak var checkboxProviderAll: CheckBoxView!
-    @IBOutlet weak var checkboxStatusAll: CheckBoxView!
+    
+    @IBOutlet var headPlug: UILabel!
+    @IBOutlet var headProviders: UILabel!
+    @IBOutlet var headStatus: UILabel!
+    @IBOutlet var headCheclBoxAll: UILabel!
     
     lazy var viewModel: MapFilterProtocol = {
         let vm = MapFilterViewModel(vc: self)
@@ -73,6 +77,11 @@ class MapFilterViewController: UIViewController {
         checkboxProviderAll.delegate = self
         checkboxProviderAll.isSelectedBtn = true
         checkboxProviderAll.onClickCheckBox()
+        
+        headPlug.text = Wording.MapFilter.MapFilter_Head_Connectors.localized
+        headProviders.text = Wording.MapFilter.MapFilter_Head_Providers.localized
+        headStatus.text = Wording.MapFilter.MapFilter_Head_Status.localized
+        headCheclBoxAll.text = Wording.MapFilter.MapFilter_Head_All.localized
     }
     
     fileprivate func registerACCollection() {

@@ -28,24 +28,13 @@ public class MapViewController: UIViewController {
     private let locationManager = CLLocationManager()
     var mapView: GMSMapView? = nil
     var listStationMarker: [GMSMarker] = []
-    
-    var searchBar: UISearchBar!
-    
     public var delegte: MapViewControllerDelegate? = nil
-    
     var changeLanguage: Language = Language.current
     
-    lazy var tableSearchView : UITableView = {
-        let table = UITableView()
-        table.backgroundColor = .white
-        table.setRounded(rounded: 8)
-        table.delegate = self
-        table.dataSource = self
-        table.register(nibCellClassName: SearchResultTableViewCell.identifier)
-        table.isScrollEnabled = false
-        table.isHidden = true
-        return table
-    }()
+    @IBOutlet var inputSearchText: UITextField!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var menuProfile: UIImageView!
+    @IBOutlet var btnClearInputSearch: UIButton!
     
     lazy var viewModel: MapProtocol = {
         let vm = MapViewModel(vc: self)
@@ -64,7 +53,7 @@ public class MapViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setBarTintColor(color: .clear)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         UIApplication.shared.statusBarStyle = .darkContent
         setupMap()
         viewModel.input.getStationFilter()
@@ -74,6 +63,10 @@ public class MapViewController: UIViewController {
             NavigationManager.instance.refreshTabbar()
         }
     }
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     public override func viewDidDisappear(_ animated: Bool) {
         mapView?.clear()
@@ -82,10 +75,10 @@ public class MapViewController: UIViewController {
     }
 
     func setupUI() {
+        setupTableView()
         setupSearchBar()
         self.btnMapMenu.addTarget(self, action: #selector(didTapMapMenuButton), for: .touchUpInside)
         self.btnMapLocation.addTarget(self, action: #selector(didTapMapLocationButton), for: .touchUpInside)
-        
     }
     
     func setupMap() {
@@ -105,40 +98,37 @@ public class MapViewController: UIViewController {
         self.locationManager.startUpdatingLocation()
     }
     
-    func setupSearchBar() {
-        //searchBar
-        let customFrame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 44)
-        let titleSearchView = UIView(frame: customFrame)
-        searchBar = UISearchBar(frame: customFrame)
-//        searchBar.frame = customFrame
-        searchBar.delegate = self
-        searchBar.placeholder = ""
-        searchBar.searchBarStyle = .prominent
-        searchBar.compatibleSearchTextField.textColor = UIColor.lightGray
-        searchBar.compatibleSearchTextField.backgroundColor = UIColor.white
-        searchBar.setImage(UIImage(named: "search_icon"), for: .search, state: .normal)
-        searchBar.searchTextField.isEnabled = true
-        searchBar.tintColor = .gray
-        searchBar.searchTextField.textColor = .gray
-        searchBar.searchTextField.tintColor = .gray
-        searchBar.searchTextField.clearButtonMode = .always
-        searchBar.showsSearchResultsButton = true
-        searchBar.setImage(UIImage(named: "menu"), for: .resultsList, state: .normal)
-        
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "ค้นหา...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.smallText])
-        
-        searchBar.searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    func setupTableView() {
+        tableView.backgroundColor = .white
+        tableView.setRounded(rounded: 8)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(nibCellClassName: SearchResultTableViewCell.identifier)
+        tableView.isScrollEnabled = false
+        tableView.isHidden = true
+    }
     
-        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont.bodyText
+    func setupSearchBar() {
+        self.navigationItem.titleView = nil
+        //searchBar
+        inputSearchText.backgroundColor = .white
+        inputSearchText.setRounded(rounded: 8)
+        inputSearchText.tintColor = .basePrimary
+        inputSearchText.textColor = .baseTextGray
+        inputSearchText.setPaddingLeft(padding: 30)
+        inputSearchText.setPaddingRight(padding: 30)
+        inputSearchText.font = UIFont.h3Text
+        inputSearchText.placeholder = ""
+        inputSearchText.clearButtonMode = .always
+        inputSearchText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        titleSearchView.addSubview(searchBar)
-        self.navigationItem.titleView = titleSearchView
+        btnClearInputSearch.isHidden = true
+
+        menuProfile.isUserInteractionEnabled = true
+        let tapMenu: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapMenu))
+        menuProfile.addGestureRecognizer(tapMenu)
         
-        view.addSubview(tableSearchView)
-        tableSearchView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 200)
-        
-        
+        btnClearInputSearch.addTarget(self, action: #selector(handleClearInputSearch), for: .touchUpInside)
     }
 }
 
@@ -169,9 +159,9 @@ extension MapViewController {
     func didGetPlaceAutoCompleteSuccess() -> (() -> Void) {
         return { [weak self] in
             guard let weakSelf = self else { return }
-            weakSelf.tableSearchView.reloadData()
-            if weakSelf.tableSearchView.isHidden == true {
-                weakSelf.tableSearchView.fadeIn(0.3, onCompletion: {
+            weakSelf.tableView.reloadData()
+            if weakSelf.tableView.isHidden == true {
+                weakSelf.tableView.fadeIn(0.3, onCompletion: {
                     
                 })
             }
@@ -210,9 +200,7 @@ extension MapViewController {
 
         let camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lat, longitude: lng), zoom: 15, bearing: 0, viewingAngle: 0)
         self.mapView?.animate(to: camera)
-        searchBar.searchTextField.text = ""
-        tableSearchView.fadeOut()
-        self.searchBar.endEditing(true)
+        tableView.fadeOut()
     }
 }
 
@@ -223,9 +211,7 @@ extension MapViewController : GMSMapViewDelegate {
     }
     
     public func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        
-        var lat = coordinate.latitude
-        var lng = coordinate.longitude
+        view.endEditing(true)
     }
 
     public func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -247,25 +233,26 @@ extension MapViewController : GMSMapViewDelegate {
 
 extension MapViewController: UISearchBarDelegate {
     
-    @objc func handleTapSearch(_ sender: UITapGestureRecognizer? = nil) {
-        // handling code
-    }
-    
-    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBar.endEditing(true)
-    }
-    
-    public func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+    @objc func handleTapMenu(_ sender: UITapGestureRecognizer? = nil) {
         NavigationManager.instance.pushVC(to: .profile)
     }
     
+    @objc func handleClearInputSearch() {
+        inputSearchText.clearText()
+        textFieldDidChange(inputSearchText)
+    }
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         if let text = textField.text, !text.isEmpty {
             var request: GetPlaceAutoCompleteRequest = GetPlaceAutoCompleteRequest()
             request.input = text
+            btnClearInputSearch.isHidden = false
+            menuProfile.isHidden = true
             viewModel.input.getAutoComplete(request: request)
         } else {
-            tableSearchView.fadeOut(0.3, onCompletion: {
+            btnClearInputSearch.isHidden = true
+            menuProfile.isHidden = false
+            tableView.fadeOut(0.3, onCompletion: {
                 
             })
         }

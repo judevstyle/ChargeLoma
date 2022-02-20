@@ -11,20 +11,37 @@ import Combine
 import GoogleMaps
 
 protocol AddLocationProtocolInput {
-    func setProviderList(items: [ProviderData])
+    func setStationData(stationData: StationData?)
+    func setSelectedProviderList(items: [ProviderData])
+    
+    func getProviderMaster()
+    func getPlugStation()
+    
     func didSetPlugTypeRequest(item: PlugTypeData?, power: Int)
     func didSelectLocation(centerMapCoordinate: CLLocationCoordinate2D)
+    func setSelectLocation(centerMapCoordinate: CLLocationCoordinate2D)
     func didSelectCheckBox(isSelected: Bool, type: ServiceOtherType)
     
     func setClearResetValue()
     
-    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Int?, statusApprove: String, stationStatus: Int, note: String?)
+    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?)
 }
 
 protocol AddLocationProtocolOutput: class {
+    
+    var didSetStationDataSuccess: (() -> Void)? { get set }
+    var didGetAllProviderMasterSuccess: (() -> Void)? { get set }
     var didGetProviderMasterSuccess: (() -> Void)? { get set }
     var didSetPlugTypeRequestSuccess: (() -> Void)? { get set }
     var didGetGeoCodeSuccess: ((String?) -> Void)? { get set }
+    var didGetAllPlugTypeSuccess: (() -> Void)? { get set }
+    
+    var didUpdateStationSuccess: (() -> Void)? { get set }
+    
+    func getStationData() -> StationData?
+    
+    func getListAllProviderList() -> [ProviderData]
+    func getListAllPlugTypeList() -> [PlugTypeData]
     
     //TableView
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int, type: AddLocationTableViewType) -> Int
@@ -47,25 +64,37 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
     private var getPlugStationUseCase: GetPlugStationUseCase
     private var getGeocodePlaceUseCase: GetGeocodePlaceUseCase
     private var postStationUseCase: PostStationUseCase
+    private var getFindAllProviderMasterUseCase: GetFindAllProviderMasterUseCase
+    private var getFindAllPlugTypeMasterUseCase: GetFindAllPlugTypeMasterUseCase
     private var anyCancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     // MARK: - Properties
     private var vc: AddLocationViewController
 
     //TableView Provider
-    public var listProviderList: [ProviderData] = []
+    public var listAllProviderList: [ProviderData] = []
+    public var listSelectedProviderList: [ProviderData] = []
     
     //TableView PlugTypeMaster
-    public var listPlugTypeData: [PlugTypeData] = []
+    public var listAllPlugTypeData: [PlugTypeData] = []
+    public var listSelectedPlugTypeData: [PlugTypeData] = []
     public var listPlugMappingData: [PlugMappingRequest] = []
     
     //Select Location
     public var centerMapCoordinate: CLLocationCoordinate2D? = nil
     
+    
+    public var stationData: StationData? = nil
+    
+    var didSetStationDataSuccess: (() -> Void)?
+    
+    var didGetAllProviderMasterSuccess: (() -> Void)?
     var didGetProviderMasterSuccess: (() -> Void)?
+    
+    var didGetAllPlugTypeSuccess: (() -> Void)?
     var didSetPlugTypeRequestSuccess: (() -> Void)?
     var didGetGeoCodeSuccess: ((String?) -> Void)?
-    
+    var didUpdateStationSuccess: (() -> Void)?
     
     //CheckBox
     
@@ -82,23 +111,69 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
         vc: AddLocationViewController,
         getPlugStationUseCase: GetPlugStationUseCase = GetPlugStationUseCaseImpl(),
         getGeocodePlaceUseCase: GetGeocodePlaceUseCase = GetGeocodePlaceUseCaseImpl(),
-        postStationUseCase: PostStationUseCase = PostStationUseCaseImpl()
+        postStationUseCase: PostStationUseCase = PostStationUseCaseImpl(),
+        getFindAllProviderMasterUseCase: GetFindAllProviderMasterUseCase = GetFindAllProviderMasterUseCaseImpl(),
+        getFindAllPlugTypeMasterUseCase: GetFindAllPlugTypeMasterUseCase = GetFindAllPlugTypeMasterUseCaseImpl()
     ) {
         self.vc = vc
         self.getPlugStationUseCase = getPlugStationUseCase
         self.getGeocodePlaceUseCase = getGeocodePlaceUseCase
         self.postStationUseCase = postStationUseCase
+        self.getFindAllProviderMasterUseCase = getFindAllProviderMasterUseCase
+        self.getFindAllPlugTypeMasterUseCase = getFindAllPlugTypeMasterUseCase
     }
     
-    func setProviderList(items: [ProviderData]) {
-        self.listProviderList = items
-//        self.didGetProviderMasterSuccess?()
+    func setStationData(stationData: StationData?) {
+        self.stationData = stationData
+        
+    }
+    
+    func getStationData() -> StationData? {
+        return self.stationData
+    }
+    
+    func setSelectedProviderList(items: [ProviderData]) {
+        self.listSelectedProviderList = items
+    }
+    
+    func getListAllProviderList() -> [ProviderData] {
+        return self.listAllProviderList
+    }
+    
+    func getListAllPlugTypeList() -> [PlugTypeData] {
+        return self.listAllPlugTypeData
+    }
+    
+    func getProviderMaster() {
+        self.vc.startLoding()
+        self.getFindAllProviderMasterUseCase.execute().sink { completion in
+            debugPrint("getFindAllProviderMasterUseCase \(completion)")
+            self.vc.stopLoding()
+        } receiveValue: { resp in
+            if let item = resp {
+                self.listAllProviderList = item
+                self.didGetAllProviderMasterSuccess?()
+            }
+        }.store(in: &self.anyCancellable)
+    }
+    
+    func getPlugStation() {
+        self.vc.startLoding()
+        self.getFindAllPlugTypeMasterUseCase.execute().sink { completion in
+            debugPrint("getFindAllPlugTypeMasterUseCase \(completion)")
+            self.vc.stopLoding()
+        } receiveValue: { resp in
+            if let item = resp {
+                self.listAllPlugTypeData = item
+                self.didGetAllPlugTypeSuccess?()
+            }
+        }.store(in: &self.anyCancellable)
     }
 
     func getNumberOfRowsInSection(_ tableView: UITableView, section: Int, type: AddLocationTableViewType) -> Int {
         switch type {
         case .tableProviderView:
-            return self.listProviderList.count
+            return self.listSelectedProviderList.count
         case .tablePlugView:
             return self.listPlugMappingData.count != 0 ? (self.listPlugMappingData.count + 1) : 1
         }
@@ -110,7 +185,7 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProviderTableViewCell.identifier, for: indexPath) as! ProviderTableViewCell
             cell.selectionStyle = .none
             cell.backgroundColor = .systemGray5
-            cell.provider = listProviderList[indexPath.row]
+            cell.provider = listSelectedProviderList[indexPath.row]
             return cell
         case .tablePlugView:
             if indexPath.row == 0 {
@@ -122,7 +197,7 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
                 cell.selectionStyle = .none
                 let index = indexPath.row - 1
                 cell.delegate = self
-                cell.itemPlugTypeData = self.listPlugTypeData[index]
+                cell.itemPlugTypeData = self.listSelectedPlugTypeData[index]
                 cell.btnDelete.isHidden = false
                 cell.bgBadge.isHidden = false
                 cell.titleBadge.isHidden = false
@@ -139,7 +214,7 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
     
     func didSetPlugTypeRequest(item: PlugTypeData?, power: Int) {
         if let item = item {
-            listPlugTypeData.append(item)
+            listSelectedPlugTypeData.append(item)
             var plugMapping: PlugMappingRequest = PlugMappingRequest()
             plugMapping.pTypeId = item.pTypeId
             plugMapping.qty = 1
@@ -149,9 +224,12 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
         }
     }
     
-    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Int?, statusApprove: String, stationStatus: Int, note: String?) {
+    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?) {
         self.vc.startLoding()
         var request = PostStationRequest()
+        if let station = getStationData()  {
+            request.stId = station.stId
+        }
         request.stationNameTh = stationName
         request.stationNameEn = stationName
         request.stationDesc = stationDesc
@@ -184,26 +262,26 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
         request.isServiceOther = isOther
         
 //        Provider
-        request.pvId = self.listProviderList.first?.pvId
+        request.pvId = self.listSelectedProviderList.first?.pvId
         
         request.PlugMapping = self.listPlugMappingData
         
-        self.postStationUseCase.execute(request: request).sink { completion in
-            debugPrint("postStationUseCase \(completion)")
-            self.vc.stopLoding()
-        } receiveValue: { resp in
-            if let status = resp?.success, status == true {
-                NavigationManager.instance.switchTabbar(index: 0)
-            }
-        }.store(in: &self.anyCancellable)
+//        self.postStationUseCase.execute(request: request).sink { completion in
+//            debugPrint("postStationUseCase \(completion)")
+//            self.vc.stopLoding()
+//        } receiveValue: { resp in
+//            if let status = resp?.success, status == true {
+//                self.didUpdateStationSuccess?()
+//            }
+//        }.store(in: &self.anyCancellable)
     }
     
     func setClearResetValue() {
         self.listPlugMappingData.removeAll()
-        self.listPlugTypeData.removeAll()
+        self.listSelectedPlugTypeData.removeAll()
         self.didSetPlugTypeRequestSuccess?()
     
-        self.listProviderList.removeAll()
+        self.listSelectedProviderList.removeAll()
         self.didGetProviderMasterSuccess?()
     
         
@@ -227,13 +305,17 @@ extension AddLocationViewModel: PlugTableViewCellDelegate {
     }
     
     private func deleteListPlugTypeData(index: Int) {
-        self.listPlugTypeData.remove(at: index)
+        self.listSelectedPlugTypeData.remove(at: index)
         self.listPlugMappingData.remove(at: index)
     }
 }
 
 //Location
 extension AddLocationViewModel {
+    func setSelectLocation(centerMapCoordinate: CLLocationCoordinate2D) {
+        self.centerMapCoordinate = centerMapCoordinate
+    }
+    
     func didSelectLocation(centerMapCoordinate: CLLocationCoordinate2D) {
         self.centerMapCoordinate = centerMapCoordinate
         self.getGeocodePlace()

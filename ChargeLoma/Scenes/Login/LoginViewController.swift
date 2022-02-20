@@ -38,6 +38,7 @@ class LoginViewController: UIViewController {
     
     public var actionType: LoginActionType = .unknown
     
+    @IBOutlet var orLabel: UILabel!
     lazy var viewModel: LoginProtocol = {
         let vm = LoginViewModel(vc: self)
         self.configure(vm)
@@ -60,16 +61,22 @@ class LoginViewController: UIViewController {
     private func setupUI() {
         inputUsername.setRounded(rounded: 8)
         inputUsername.backgroundColor = UIColor.baseBG
+        inputUsername.font = .h3Text
+        inputUsername.textColor = .baseTextGray
+        
         inputPassword.setRounded(rounded: 8)
+        inputPassword.font = .h3Text
         inputPassword.backgroundColor = UIColor.baseBG
+        inputPassword.isSecureTextEntry = true
+        inputPassword.textColor = .baseTextGray
         
         let attributedUsername = NSAttributedString(
-            string: "อีเมล",
+            string: Wording.Login.Login_Email.localized,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.basePrimary, NSAttributedString.Key.font: UIFont.h3Text]
         )
         
         let attributedPassword = NSAttributedString(
-            string: "รหัสผ่าน",
+            string: Wording.Login.Login_Password.localized,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.basePrimary, NSAttributedString.Key.font: UIFont.h3Text]
         )
         inputUsername.attributedPlaceholder = attributedUsername
@@ -81,14 +88,16 @@ class LoginViewController: UIViewController {
         self.titleLogo.font = .header1
         self.titleLogo.textColor = .baseSecondary
         
-        self.btnRegister.setTitle("Register", for: .normal)
+        self.btnRegister.setTitle(Wording.Login.Login_Register.localized, for: .normal)
         self.btnRegister.titleLabel?.font = .h3Text
         self.btnRegister.titleLabel?.textColor = .basePrimary
         
-        self.btnLogin.setTitle("เข้าสู่ระบบ", for: .normal)
+        self.btnLogin.setTitle(Wording.Login.Login_Login.localized, for: .normal)
         self.btnLogin.titleLabel?.font = .h3Text
         
         self.btnLogin.setRounded(rounded: 8.0)
+        
+        orLabel.text = Wording.Login.Login_Or.localized
         
         self.btnLogin.addTarget(self, action: #selector(handleSignin), for: .touchUpInside)
         self.btnFacebook.addTarget(self, action: #selector(handleFacebookSignin), for: .touchUpInside)
@@ -125,11 +134,16 @@ extension LoginViewController {
         }
         
         self.startLodingCircle()
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
             guard let self = self else { return }
             self.stopLoding()
-            guard let user = authResult else {
-                return
+            if let error = error {
+                debugPrint("Signin with Email Error : \(error.localizedDescription)")
+            }else {
+                guard let user = user else {
+                    return
+                }
+                self.checkNewAuth(user: user)
             }
         }
     }
@@ -144,7 +158,7 @@ extension LoginViewController {
     }
     
     @objc func handleSignup() {
-        NavigationManager.instance.pushVC(to: .editProfile(isRegister: true), presentation: .Present(withNav: false))
+        NavigationManager.instance.pushVC(to: .editProfile(isRegister: true, delegate: self), presentation: .Present(withNav: false))
     }
 }
 
@@ -218,5 +232,14 @@ extension LoginViewController {
             })
             
         }
+    }
+}
+
+//Callback Register Success
+extension LoginViewController: EditProfileViewControllerDelegate {
+    func didEditUserSuccess() {
+        self.dismiss(animated: true, completion: {
+            self.delegate?.didLoginSuccess(actionType: self.actionType)
+        })
     }
 }

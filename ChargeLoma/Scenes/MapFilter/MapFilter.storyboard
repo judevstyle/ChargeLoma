@@ -273,6 +273,10 @@
                         <outlet property="checkboxDcAll" destination="jWt-tI-SfF" id="adh-sb-rYM"/>
                         <outlet property="checkboxProviderAll" destination="Kwb-E9-esh" id="oL5-D5-e5o"/>
                         <outlet property="dcCollectionView" destination="WxI-cQ-LKV" id="Rmp-6L-JNZ"/>
+                        <outlet property="headCheclBoxAll" destination="iE8-mh-cM4" id="ns8-H9-ih4"/>
+                        <outlet property="headPlug" destination="itC-9g-12k" id="DuU-2g-XCR"/>
+                        <outlet property="headProviders" destination="8bc-u1-2hK" id="MZs-Ra-VTA"/>
+                        <outlet property="headStatus" destination="1BU-K5-HNH" id="fKw-UR-8O7"/>
                         <outlet property="providerCollection" destination="5MM-43-N3a" id="fux-jX-d1v"/>
                         <outlet property="providerCollectionHeight" destination="2GS-Kh-bMK" id="JE3-gB-CNR"/>
                         <outlet property="statusCollection" destination="jcm-B6-dFX" id="HeE-jn-Kp8"/>

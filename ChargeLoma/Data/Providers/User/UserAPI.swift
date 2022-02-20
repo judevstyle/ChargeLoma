@@ -10,15 +10,16 @@ import Moya
 import UIKit
 
 public enum UserAPI {
-    case postUserRegister(request: PostUserRegisterRequest)
+    case postUserRegister(request: PostUpdateUserRequest)
     case postUserAuth(request: PostUserAuthRequest)
     case getUserProfile
+    case updateUserProfile(request: PostUpdateUserRequest)
 }
 
 extension UserAPI: TargetType {
     public var baseURL: URL {
         switch self {
-        case .postUserRegister, .postUserAuth, .getUserProfile:
+        case .postUserRegister, .postUserAuth, .getUserProfile, .updateUserProfile:
             return DomainNameConfig.user.url
         }
     }
@@ -29,7 +30,7 @@ extension UserAPI: TargetType {
             return "/register"
         case .postUserAuth:
             return "/auth"
-        case .getUserProfile:
+        case .getUserProfile, .updateUserProfile:
             return "/profile"
         }
     }
@@ -38,6 +39,8 @@ extension UserAPI: TargetType {
         switch self {
         case .postUserRegister, .postUserAuth:
             return .post
+        case .updateUserProfile:
+            return .put
         default:
             return .get
         }
@@ -55,6 +58,8 @@ extension UserAPI: TargetType {
             return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         case .getUserProfile:
             return .requestPlain
+        case let .updateUserProfile(request):
+            return .requestCompositeParameters(bodyParameters: request.toJSON(), bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
 

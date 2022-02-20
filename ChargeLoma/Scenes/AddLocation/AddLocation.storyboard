@@ -21,9 +21,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="966"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dRr-np-PXO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1482"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1480"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2o-IT-wPZ">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2o-IT-wPZ" customClass="UnderlinedUIView" customModule="ChargeLoma" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="351"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="v7S-UR-Lg0">
@@ -40,7 +40,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ojC-q8-1lg">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ojC-q8-1lg" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="113.5" width="339" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -55,7 +55,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDM-o3-twl">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDM-o3-twl" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="182" width="339" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -64,7 +64,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-ER-rNl">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-ER-rNl" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="230" width="339" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -118,15 +118,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="MOT-dp-KnM" secondAttribute="trailing" constant="8" id="t3v-mE-lgo"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GK3-Bp-SJn">
-                                                <rect key="frame" x="0.0" y="351" width="375" height="1"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="Xhl-uT-8SK"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sID-Hf-bwG">
-                                                <rect key="frame" x="0.0" y="352" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="351" width="375" height="50"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6WL-x8-3hD">
                                                         <rect key="frame" x="8" y="14.5" width="20" height="19"/>
@@ -161,10 +154,10 @@
                                                     <constraint firstAttribute="trailing" secondItem="aMD-LB-Oil" secondAttribute="trailing" constant="8" id="oc5-ok-SWo"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsb-Mk-kEL">
-                                                <rect key="frame" x="0.0" y="402" width="375" height="60"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsb-Mk-kEL" customClass="UnderlinedUIView" customModule="ChargeLoma" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="401" width="375" height="60"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-SH-6mU">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-SH-6mU" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="34" y="0.0" width="333" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -183,15 +176,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="uuY-SH-6mU" secondAttribute="trailing" constant="8" id="yGD-Qa-Fp8"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HL-ZX-n60">
-                                                <rect key="frame" x="0.0" y="462" width="375" height="1"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="mqa-SX-HVd"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YY1-b5-JJi">
-                                                <rect key="frame" x="0.0" y="463" width="375" height="146"/>
+                                                <rect key="frame" x="0.0" y="461" width="375" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fuelpump.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="deI-KX-Cgm">
                                                         <rect key="frame" x="8" y="13.5" width="20" height="21.5"/>
@@ -220,7 +206,7 @@
                                                             <action selector="handleCheckIsServiceCharge:" destination="BA6-cg-weM" eventType="valueChanged" id="1aS-lq-XJb"/>
                                                         </connections>
                                                     </switch>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NR6-4I-CI5">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NR6-4I-CI5" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="69.5" width="331" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -257,7 +243,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TaJ-iM-X7t">
-                                                <rect key="frame" x="0.0" y="609" width="375" height="40"/>
+                                                <rect key="frame" x="0.0" y="607" width="375" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYN-2q-478">
                                                         <rect key="frame" x="34" y="0.0" width="333" height="40"/>
@@ -276,7 +262,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdk-A5-HcD">
-                                                <rect key="frame" x="0.0" y="649" width="375" height="80"/>
+                                                <rect key="frame" x="0.0" y="647" width="375" height="80"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vM4-9s-2Vl">
                                                         <rect key="frame" x="34" y="0.0" width="333" height="80"/>
@@ -293,7 +279,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2d-Ci-Z1i">
-                                                <rect key="frame" x="0.0" y="729" width="375" height="28.5"/>
+                                                <rect key="frame" x="0.0" y="727" width="375" height="28.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtV-PN-hU3">
                                                         <rect key="frame" x="36" y="8" width="331" height="20.5"/>
@@ -313,7 +299,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHR-Cm-dJD">
-                                                <rect key="frame" x="0.0" y="757.5" width="375" height="80"/>
+                                                <rect key="frame" x="0.0" y="755.5" width="375" height="80"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Wvo-KR-XcB">
                                                         <rect key="frame" x="34" y="0.0" width="333" height="80"/>
@@ -330,18 +316,18 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cio-R8-58b">
-                                                <rect key="frame" x="0.0" y="837.5" width="375" height="104"/>
+                                                <rect key="frame" x="0.0" y="835.5" width="375" height="104"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWy-te-TjY">
-                                                        <rect key="frame" x="36" y="8" width="100" height="40"/>
+                                                        <rect key="frame" x="36" y="8" width="125" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Wlm-5h-ISd"/>
-                                                            <constraint firstAttribute="width" constant="100" id="jrG-sj-F0A"/>
+                                                            <constraint firstAttribute="width" constant="125" id="jrG-sj-F0A"/>
                                                         </constraints>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Button"/>
                                                     </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ax-Il-oZ7">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ax-Il-oZ7" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="56" width="331" height="40"/>
                                                         <color key="tintColor" name="basePrimary"/>
                                                         <constraints>
@@ -361,7 +347,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-T9-c9b">
-                                                <rect key="frame" x="0.0" y="941.5" width="375" height="75"/>
+                                                <rect key="frame" x="0.0" y="939.5" width="375" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-Z8-Psu">
                                                         <rect key="frame" x="36" y="0.0" width="339" height="75"/>
@@ -417,7 +403,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QcR-fa-yNH">
-                                                <rect key="frame" x="0.0" y="1016.5" width="375" height="340.5"/>
+                                                <rect key="frame" x="0.0" y="1014.5" width="375" height="340.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WFF-87-UHM">
                                                         <rect key="frame" x="8" y="7.5" width="20" height="20"/>
@@ -676,9 +662,9 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8Z-CM-cNN">
-                                                <rect key="frame" x="0.0" y="1357" width="375" height="125"/>
+                                                <rect key="frame" x="0.0" y="1355" width="375" height="125"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ikI-yV-Gnq">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ikI-yV-Gnq" customClass="UnderlinedTextField" customModule="ChargeLoma" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="8" width="331" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="y4Z-XA-2KM"/>
@@ -687,10 +673,10 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-GS-h9d">
-                                                        <rect key="frame" x="142.5" y="64" width="90" height="45"/>
+                                                        <rect key="frame" x="125" y="64" width="125" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="QFJ-Lx-ey7"/>
-                                                            <constraint firstAttribute="width" constant="90" id="nVV-Fe-HOe"/>
+                                                            <constraint firstAttribute="width" constant="125" id="nVV-Fe-HOe"/>
                                                         </constraints>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Button"/>
@@ -729,8 +715,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="box1BottomLineView" destination="GK3-Bp-SJn" id="OWT-cp-5iE"/>
-                        <outlet property="box2BottomView" destination="5HL-ZX-n60" id="dyu-yZ-Pc5"/>
                         <outlet property="box2View" destination="sID-Hf-bwG" id="iQg-dm-hib"/>
                         <outlet property="boxTablePlug" destination="uHR-Cm-dJD" id="cmR-bn-PFV"/>
                         <outlet property="boxTableProvider" destination="Cdk-A5-HcD" id="kes-7x-sy3"/>
@@ -755,14 +739,14 @@
                         <outlet property="headService" destination="G6B-0I-cvC" id="Pgj-K9-Gvj"/>
                         <outlet property="headServiceOther" destination="hZ3-rJ-IIl" id="O4I-8Y-1rY"/>
                         <outlet property="headStation" destination="fUr-IS-Xaz" id="dXl-2g-yRg"/>
-                        <outlet property="inputDesc" destination="lDM-o3-twl" id="iBM-Xy-ghs"/>
-                        <outlet property="inputLocationText" destination="2Ax-Il-oZ7" id="UN1-ih-A8W"/>
-                        <outlet property="inputNameStation" destination="ojC-q8-1lg" id="Vmg-cw-OCY"/>
-                        <outlet property="inputOpenTime" destination="uuY-SH-6mU" id="EiJ-aQ-zD1"/>
+                        <outlet property="inputDesc" destination="lDM-o3-twl" id="MW9-lU-LLN"/>
+                        <outlet property="inputLocationText" destination="2Ax-Il-oZ7" id="83I-8W-nGE"/>
+                        <outlet property="inputNameStation" destination="ojC-q8-1lg" id="TDg-2f-BVc"/>
+                        <outlet property="inputOpenTime" destination="uuY-SH-6mU" id="U9u-Yq-8YQ"/>
                         <outlet property="inputOpenTimeHeight" destination="BVo-7e-Pb5" id="vzT-uL-8BJ"/>
-                        <outlet property="inputOtherText" destination="ikI-yV-Gnq" id="dmt-5S-TV8"/>
-                        <outlet property="inputService" destination="NR6-4I-CI5" id="WSp-Gh-E64"/>
-                        <outlet property="inputTel" destination="hb6-ER-rNl" id="swv-9j-hbP"/>
+                        <outlet property="inputOtherText" destination="ikI-yV-Gnq" id="1Es-fQ-EG6"/>
+                        <outlet property="inputService" destination="NR6-4I-CI5" id="fIF-N0-5HR"/>
+                        <outlet property="inputTel" destination="hb6-ER-rNl" id="aKe-Wt-kt3"/>
                         <outlet property="radioGroupStatus" destination="sVq-df-JNw" id="SVR-Hu-wQF"/>
                         <outlet property="radioGroupStatusBox2" destination="LRl-kZ-pE1" id="U6R-Kk-4cU"/>
                         <outlet property="switchIs24Hr" destination="aMD-LB-Oil" id="fhx-Vi-dhS"/>

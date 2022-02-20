@@ -1,5 +1,5 @@
 //
-//  PostUserRegisterResponse.swift
+//  PostUpdateUserResponse.swift
 //  ChargeLoma
 //
 //  Created by Nontawat Kanboon on 21/1/2565 BE.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PostUserRegisterResponse: Codable, Hashable  {
+public struct PostUpdateUserResponse: Codable, Hashable  {
     
     public var statusCode: Int?
     public var success: Bool = false

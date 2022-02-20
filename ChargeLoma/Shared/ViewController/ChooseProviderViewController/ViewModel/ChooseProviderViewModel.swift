@@ -16,6 +16,7 @@ public protocol ChooseProviderViewModelDelegate {
 protocol ChooseProviderProtocolInput {
     func getProviderMaster()
     func setupPrepare(delegate: ChooseProviderViewModelDelegate)
+    func setProviderMaster(listProvider: [ProviderData])
     
     func didSelectRowAt(_ tableView: UITableView, indexPath: IndexPath)
 }
@@ -63,17 +64,25 @@ class ChooseProviderViewModel: ChooseProviderProtocol, ChooseProviderProtocolOut
     // MARK - Data-binding OutPut
     var didGetProviderMasterSuccess: (() -> Void)?
     
+    func setProviderMaster(listProvider: [ProviderData]) {
+        self.listProviderMaster = listProvider
+    }
+    
     func getProviderMaster() {
-        self.vc.startLoding()
-        self.getFindAllProviderMasterUseCase.execute().sink { completion in
-            debugPrint("getFindAllProviderMasterUseCase \(completion)")
-            self.vc.stopLoding()
-        } receiveValue: { resp in
-            if let item = resp {
-                self.listProviderMaster = item
-                self.didGetProviderMasterSuccess?()
-            }
-        }.store(in: &self.anyCancellable)
+        if self.listProviderMaster.count == 0 {
+            self.vc.startLoding()
+            self.getFindAllProviderMasterUseCase.execute().sink { completion in
+                debugPrint("getFindAllProviderMasterUseCase \(completion)")
+                self.vc.stopLoding()
+            } receiveValue: { resp in
+                if let item = resp {
+                    self.listProviderMaster = item
+                    self.didGetProviderMasterSuccess?()
+                }
+            }.store(in: &self.anyCancellable)
+        } else {
+            self.didGetProviderMasterSuccess?()
+        }
     }
     
     func setupPrepare(delegate: ChooseProviderViewModelDelegate) {

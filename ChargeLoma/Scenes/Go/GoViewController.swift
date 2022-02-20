@@ -69,10 +69,10 @@ class GoViewController: UIViewController {
         headTitleStart.textColor = .baseTextGray
         headTitleEnd.textColor = .baseTextGray
         
-        headTitleStart.text = "จุดเริ่มต้น"
-        headTitleEnd.text = "ปลายทาง"
-        btnStart.setTitle("ตำแหน่งปัจจุบัน", for: .normal)
-        btnEnd.setTitle("เลือกจุดหมาย", for: .normal)
+        headTitleStart.text = Wording.Go.Go_Head_Start.localized
+        headTitleEnd.text = Wording.Go.Go_Head_End.localized
+        btnStart.setTitle(Wording.Go.Go_Target_Start.localized, for: .normal)
+        btnEnd.setTitle(Wording.Go.Go_Position_End.localized, for: .normal)
         
         btnStart.titleLabel?.font = .bodyText
         btnEnd.titleLabel?.font = .bodyText
@@ -91,11 +91,6 @@ class GoViewController: UIViewController {
         self.viewMap.isUserInteractionEnabled = true
         self.viewMap.addSubview(mapView)
         self.viewMap.clipsToBounds = true
-        
-        //initializing CLLocationManager
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
     }
     
     @objc func handleBtnStart() {
@@ -120,6 +115,14 @@ extension GoViewController {
         return { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.fetchMarkerMap()
+            weakSelf.sourceLocation = nil
+            weakSelf.destinationLocation = nil
+            weakSelf.clearTargetMarker {
+                //initializing CLLocationManager
+                weakSelf.locationManager.delegate = self
+                weakSelf.locationManager.requestWhenInUseAuthorization()
+                weakSelf.locationManager.startUpdatingLocation()
+            }
         }
     }
     
@@ -235,7 +238,7 @@ extension GoViewController: CLLocationManagerDelegate {
             return
         }
         mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 14.0, bearing: 0, viewingAngle: 0)
-        
+        didSetSourceLocation(coordinate: location.coordinate)
         locationManager.stopUpdatingLocation()
     }
 }
@@ -243,7 +246,6 @@ extension GoViewController: CLLocationManagerDelegate {
 extension GoViewController: SearchStationViewModelDelegate {
     func didSuccessSelectedLocation(placeItem: PlaceItem?, type: TypeDirectionMap) {
         guard let placeItem = placeItem, let latitude = placeItem.geometry?.locationLat, let longitude = placeItem.geometry?.locationLng else { return }
-        debugPrint(placeItem)
         switch type {
         case .sourceLocation:
             self.sourceLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -254,57 +256,80 @@ extension GoViewController: SearchStationViewModelDelegate {
         }
         checkLocationMap()
     }
-
-    func checkLocationMap() {
-        
-        var listDirectionMarkers: [GMSMarker] = []
+    
+    func didSetSourceLocation(coordinate: CLLocationCoordinate2D) {
+        self.sourceLocation = coordinate
+        self.btnStart.setTitle(Wording.Go.Go_Current_Start.localized, for: .normal)
+        checkLocationMap()
+    }
+    
+    func clearTargetMarker(success: () -> Void) {
         let baseMarkers = viewModel.output.getListStation()
         
-        debugPrint(baseMarkers.count)
-        debugPrint(listStationMarker.count)
-        if baseMarkers.count < self.listStationMarker.count {
-            let k = (self.listStationMarker.count - baseMarkers.count) - 1
-            for i in 0...k {
-                self.listStationMarker[(self.listStationMarker.count - 1) - i].map = nil
-                self.listStationMarker.remove(at: (self.listStationMarker.count - 1) - i)
+        if self.listStationMarker.count > baseMarkers.count {
+            let count = (self.listStationMarker.count - baseMarkers.count)
+            debugPrint("count \(count)")
+            if count == 1 {
+                self.listStationMarker[self.listStationMarker.count - 1].map = nil
+                self.listStationMarker.remove(at: self.listStationMarker.count - 1)
+            } else if count == 2 {
+                self.listStationMarker[self.listStationMarker.count - 1].map = nil
+                self.listStationMarker.remove(at: self.listStationMarker.count - 1)
+                
+                self.listStationMarker[self.listStationMarker.count - 1].map = nil
+                self.listStationMarker.remove(at: self.listStationMarker.count - 1)
             }
+            
+            self.listStationMarker.enumerated().forEach({ (index, item) in
+                item.map = self.mapView
+            })
+            
+            success()
+        } else {
+            success()
         }
-        
-        self.listStationMarker.enumerated().forEach({ (index, item) in
-            item.map = self.mapView
+    }
+
+    func checkLocationMap() {
+        clearTargetMarker(success: {
+            self.addTargetMarker()
         })
-        
-        if let sourceLocation = self.sourceLocation {
-            let marker = GMSMarker(position: sourceLocation)
-            marker.isTappable = false
-            marker.iconView =  MarkerDirectionView.instantiate()
-            marker.tracksViewChanges = true
-            listStationMarker.append(marker)
-        }
-        
-        if let destinationLocation = self.destinationLocation {
-            let marker = GMSMarker(position: destinationLocation)
-            marker.isTappable = false
-            marker.iconView =  MarkerDirectionView.instantiate()
-            marker.tracksViewChanges = true
-            listStationMarker.append(marker)
-        }
-        
-        self.listStationMarker.enumerated().forEach({ (index, item) in
-            item.map = self.mapView
-        })
-        
-        if (self.sourceLocation != nil && self.destinationLocation == nil) || (self.sourceLocation == nil && self.destinationLocation != nil) {
-            let lat: Double? = (self.sourceLocation?.latitude ?? self.destinationLocation?.latitude) ?? nil
-            let lng: Double? = (self.sourceLocation?.longitude ?? self.destinationLocation?.longitude) ?? nil
-            if let lat = lat, let lng = lng {
-                let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
-                mapView.animate(to: camera)
+    }
+    
+    func addTargetMarker() {
+        let baseMarkers = viewModel.output.getListStation()
+        if baseMarkers.count == self.listStationMarker.count {
+            if let sourceLocation = self.sourceLocation {
+                let marker = GMSMarker(position: sourceLocation)
+                marker.isTappable = false
+                marker.iconView =  MarkerDirectionView.instantiate()
+                marker.tracksViewChanges = true
+                self.listStationMarker.append(marker)
             }
+            
+            if let destinationLocation = self.destinationLocation {
+                let marker = GMSMarker(position: destinationLocation)
+                marker.isTappable = false
+                marker.iconView =  MarkerDirectionView.instantiate()
+                marker.tracksViewChanges = true
+                self.listStationMarker.append(marker)
+            }
+            
+            self.listStationMarker.enumerated().forEach({ (index, item) in
+                item.map = self.mapView
+            })
+            
+            if (self.sourceLocation != nil && self.destinationLocation == nil) || (self.sourceLocation == nil && self.destinationLocation != nil) {
+                let lat: Double? = (self.sourceLocation?.latitude ?? self.destinationLocation?.latitude) ?? nil
+                let lng: Double? = (self.sourceLocation?.longitude ?? self.destinationLocation?.longitude) ?? nil
+                if let lat = lat, let lng = lng {
+                    let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
+                    self.mapView.animate(to: camera)
+                }
+            }
+            
+            guard let sourceLocation = self.sourceLocation, let destinationLocation = self.destinationLocation else { return }
+            self.viewModel.input.getDirection(sourceLocation: sourceLocation, destinationLocation: destinationLocation)
         }
-        
-        guard let sourceLocation = self.sourceLocation, let destinationLocation = self.destinationLocation else { return }
-        viewModel.input.getDirection(sourceLocation: sourceLocation, destinationLocation: destinationLocation)
-        
     }
 }

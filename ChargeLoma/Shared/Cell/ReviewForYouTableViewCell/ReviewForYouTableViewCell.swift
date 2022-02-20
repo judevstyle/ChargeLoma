@@ -56,15 +56,17 @@ class ReviewForYouTableViewCell: UITableViewCell {
     func setupUI() {
         posterReview.setRounded(rounded: posterReview.frame.width/2)
         posterReview.setPlaceholderImageView()
-        titleReview.font = .bodyBold
+        titleReview.font = .h3Bold
         commentText.font = .h3Text
         dateText.font = .extraSmallText
+        addressText.font = .bodyText
     }
      
     func setupValue() {
         titleReview.text = data?.User?.displayName ?? ""
         dateText.text = data?.createdDate?.convertToDate()?.getFormattedDate(format: "MMM dd, HH:mm")
         commentText.text = data?.comment ?? ""
+        addressText.text = data?.station?.stationName ?? ""
         
         if let posterUser = data?.User?.avatar, let urlImage = URL(string: "\(posterUser)") {
             posterReview.kf.setImageDefault(with: urlImage)

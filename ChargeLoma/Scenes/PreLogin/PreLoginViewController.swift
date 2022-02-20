@@ -34,7 +34,7 @@ class PreLoginViewController: UIViewController {
 extension PreLoginViewController {
     func setupUI() {
         self.titleText.text = "Charge Loma"
-        self.titleText.font = .header1
+        self.titleText.font = .header2
         self.titleText.textColor = .baseSecondary
         
         self.btnLogin.setTitle("เข้าสู่ระบบ", for: .normal)

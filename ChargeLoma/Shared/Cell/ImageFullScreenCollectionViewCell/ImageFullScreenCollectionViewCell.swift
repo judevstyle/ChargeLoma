@@ -63,4 +63,10 @@ extension ImageFullScreenCollectionViewCell: UIScrollViewDelegate {
             scrollView.contentInset = .zero
         }
     }
+    
+    public func clearZoom() {
+        debugPrint("clearZoom")
+        scrollView.zoomScale = 1.0
+        scrollView.contentInset = .zero
+    }
 }

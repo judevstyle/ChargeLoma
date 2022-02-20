@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PostUserRegisterRequest: Codable, Hashable {
+public struct PostUpdateUserRequest: Codable, Hashable {
     
     public var uid: String?
     public var displayName: String?

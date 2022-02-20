@@ -44,4 +44,12 @@ extension UnderlinedTextField: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         setUnderlineColor(color: .baseTextGray)
     }
+    
+    var getText: String? {
+        if let text = self.text, !text.isEmpty {
+            return text
+        } else {
+            return nil
+        }
+    }
 }

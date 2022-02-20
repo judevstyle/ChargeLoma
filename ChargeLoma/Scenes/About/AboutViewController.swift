@@ -38,8 +38,9 @@ class AboutViewController: UIViewController {
     private func setupUI() {
         setupLabel(label: textLabel, value: Wording.About.AboutDesc.localized)
         setupLabel(label: headVersion, value: Wording.About.AboutHeadVersion.localized)
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        setupLabel(label: valueVersion, value: appVersion)
+        let releaseVersion = Bundle.main.releaseVersionNumber ?? ""
+        let buildNumber = Bundle.main.buildVersionNumber ?? ""
+        setupLabel(label: valueVersion, value: "\(releaseVersion) (\(buildNumber))")
         
         setupLabel(label: headUpdate, value: Wording.About.AboutHeadUpdate.localized)
         setupLabel(label: valueUpdate, value: "")

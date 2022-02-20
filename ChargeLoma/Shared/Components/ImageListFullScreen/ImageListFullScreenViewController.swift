@@ -12,7 +12,7 @@ class ImageListFullScreenViewController: UIViewController {
     @IBOutlet var closeBtn: UIBarButtonItem!
     
     @IBOutlet var collectionView: UICollectionView!
-    
+
     var currentPage: Int = 1
     
     @IBOutlet var allPageText: UILabel!
@@ -116,7 +116,6 @@ extension ImageListFullScreenViewController: UICollectionViewDelegate, UICollect
         return count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return viewModel.output.getCellForItemAt(collectionView, indexPath: indexPath)
     }
@@ -129,6 +128,10 @@ extension ImageListFullScreenViewController: UICollectionViewDelegate, UICollect
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
 
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageFullScreenCollectionViewCell
+        cell.clearZoom()
+    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth = view.frame.width

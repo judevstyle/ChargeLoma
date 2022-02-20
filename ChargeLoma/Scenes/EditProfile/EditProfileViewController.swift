@@ -6,6 +6,12 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
+
+public protocol EditProfileViewControllerDelegate {
+    func didEditUserSuccess()
+}
 
 class EditProfileViewController: UIViewController {
     
@@ -53,18 +59,30 @@ class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     
+    public var delegate: EditProfileViewControllerDelegate? = nil
+    
+    lazy var viewModel: EditProfileProtocol = {
+        let vm = EditProfileViewModel(vc: self)
+        self.configure(vm)
+        self.bindToViewModel()
+        return vm
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerKeyboardObserver()
         
         setupUI()
-        setupValue()
         
         imagePicker = ImagePicker(presentationController: self, sourceType: [.camera, .photoLibrary], delegate: self)
     }
     
     deinit {
        removeObserver()
+    }
+    
+    func configure(_ interface: EditProfileProtocol) {
+        self.viewModel = interface
     }
     
     private func setupUI() {
@@ -88,15 +106,15 @@ class EditProfileViewController: UIViewController {
         
         
         setupHeadLabel(lb: headEmailRegister, title: Wording.EditProfile.EditProfile_Email.localized)
-        setupHeadLabel(lb: headPassword, title: Wording.EditProfile.EditProfile_Car.localized)
-        setupHeadLabel(lb: headConfirmPassword, title: Wording.EditProfile.EditProfile_Car.localized)
+        setupHeadLabel(lb: headPassword, title: Wording.EditProfile.EditProfile_Password.localized)
+        setupHeadLabel(lb: headConfirmPassword, title: Wording.EditProfile.EditProfile_ConfirmPassword.localized)
       
         
         btnRegister.setRounded(rounded: 5)
         btnRegister.titleLabel?.font = .h3Text
         btnRegister.tintColor = .white
         btnRegister.backgroundColor = .basePrimary
-        btnRegister.setTitle(Wording.EditProfile.EditProfile_Save.localized, for: .normal)
+        btnRegister.setTitle(Wording.EditProfile.EditProfile_Register.localized, for: .normal)
         btnRegister.addTarget(self, action: #selector(handleRegisterButton), for: .touchUpInside)
         
         bgEmailEditView.isHidden = isRegister
@@ -108,12 +126,16 @@ class EditProfileViewController: UIViewController {
         bgRegisterView.isHidden = !isRegister
         
         setupUITextFields(tf: inputDisplayName)
-        setupUITextFields(tf: inputEmail)
-        setupUITextFields(tf: inputTel)
+        setupUITextFields(tf: inputEmail, keyboardType: .emailAddress)
+        setupUITextFields(tf: inputTel, keyboardType: .phonePad)
         setupUITextFields(tf: inputCar)
-        setupUITextFields(tf: inputEmailRegister)
-        setupUITextFields(tf: inputPassword)
-        setupUITextFields(tf: inputConfirmPassword)
+        setupUITextFields(tf: inputEmailRegister, keyboardType: .emailAddress)
+        setupUITextFields(tf: inputPassword, keyboardType: .default, isSecureTextEntry: true)
+        setupUITextFields(tf: inputConfirmPassword, keyboardType: .default, isSecureTextEntry: true)
+        
+        if !isRegister {
+            viewModel.input.getUserProfile()
+        }
     }
     
     private func setupValue() {
@@ -133,10 +155,12 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    func setupUITextFields(tf: UITextField, placeholder: String = "") {
+    func setupUITextFields(tf: UITextField, placeholder: String = "", keyboardType: UIKeyboardType = .default, isSecureTextEntry: Bool = false) {
         tf.font = .h3Text
         tf.textColor = .baseTextGray
         tf.placeholder = placeholder
+        tf.isSecureTextEntry = isSecureTextEntry
+        tf.keyboardType = keyboardType
     }
     
     func setupHeadLabel(lb: UILabel, title: String) {
@@ -146,7 +170,9 @@ class EditProfileViewController: UIViewController {
     }
     
     @objc func handleSaveButton() {
-        
+        guard let displayName = inputDisplayName.getText,
+        let email = inputEmail.getText else { return }
+        viewModel.input.updateUserProfile(displayName: displayName, email: email, tel: inputTel.getText, car: inputCar.getText, avatar: imageAttachFilesBase64)
     }
     
     @objc func didChooseImage() {
@@ -156,6 +182,37 @@ class EditProfileViewController: UIViewController {
     
     @objc func handleRegisterButton() {
         
+        guard let displayName = inputDisplayName.getText,
+        let email = inputEmailRegister.getText,
+        let password = inputPassword.getText,
+        let cfpassword = inputConfirmPassword.getText,
+        password == cfpassword else { return }
+        
+        self.startLoding()
+        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+            if error != nil {
+                self.ToastMsg(msg: "\(error?.localizedDescription ?? "")")
+                self.stopLoding()
+                return
+            } else {
+                guard let user = user else {
+                    self.stopLoding()
+                    return
+                }
+                self.stopLoding()
+                self.addNewUser(user: user)
+            }
+        }
+    }
+    
+    func addNewUser(user: AuthDataResult) {
+        let userData = user.user
+        guard let displayName = inputDisplayName.getText,
+        let password = inputPassword.getText,
+        let cfpassword = inputConfirmPassword.getText,
+        password == cfpassword else { return }
+        
+        viewModel.input.registerUserProfile(uid: userData.uid, displayName: displayName, tel: inputTel.getText, email: userData.email, pass: password, cfpass: cfpassword, avatar: imageAttachFilesBase64)
     }
     
 }
@@ -170,5 +227,29 @@ extension EditProfileViewController: ImagePickerDelegate {
 extension EditProfileViewController : KeyboardListener {
     func keyboardDidUpdate(keyboardHeight: CGFloat) {
         bottomHeight.constant = keyboardHeight
+    }
+}
+
+// MARK: - Binding
+extension EditProfileViewController {
+    func bindToViewModel() {
+        viewModel.output.didGetUserProfileSuccess = didGetUserProfileSuccess()
+        viewModel.output.didUpdateUserSuccess = didUpdateUserSuccess()
+    }
+    
+    func didGetUserProfileSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.setupValue()
+        }
+    }
+    
+    func didUpdateUserSuccess() -> (() -> Void) {
+        return { [weak self] in
+            guard let weakSelf = self else { return }
+            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
+            self?.delegate?.didEditUserSuccess()
+        }
     }
 }

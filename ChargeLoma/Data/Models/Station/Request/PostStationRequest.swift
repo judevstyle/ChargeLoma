@@ -9,6 +9,7 @@ import Foundation
 
 public struct PostStationRequest: Codable, Hashable {
     
+    public var stId: String?
     public var stationNameTh: String?
     public var stationNameEn: String?
     public var stationDesc: String?
@@ -24,7 +25,7 @@ public struct PostStationRequest: Codable, Hashable {
     public var servicetimeOpen: String?
     public var servicetimeClose: String?
     public var isServiceCharge: Bool?
-    public var serviceRate: Int?
+    public var serviceRate: Double?
     public var statusApprove: String?
     public var statusMsg: String?
     public var stationStatus: Int?
@@ -45,6 +46,7 @@ public struct PostStationRequest: Codable, Hashable {
     public init() {}
     
     enum CodingKeys: String, CodingKey {
+        case stId = "st_id"
         case stationNameTh = "station_name_th"
         case stationNameEn = "station_name_en"
         case stationDesc = "station_desc"

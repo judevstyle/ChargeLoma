@@ -58,9 +58,9 @@ extension ForYouViewController {
     private func setupTopnav() {
 
         segmentedControl.sectionTitles = [
-            "ที่บันทึกไว้",
-            "รีวิวล่าสุด",
-            "ประชาสัมพันธ์"
+            Wording.ForYou.ForYou_Head_Favorite.localized,
+            Wording.ForYou.ForYou_Head_Recently.localized,
+            Wording.ForYou.ForYou_Head_Information.localized
         ]
         
         segmentedControl.frame = CGRect(x: 0, y: 12, width: topNav.frame.width, height: 38)

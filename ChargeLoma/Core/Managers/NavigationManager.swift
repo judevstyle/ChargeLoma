@@ -17,7 +17,7 @@ public enum NavigationOpeningSender {
     case main
     case map
     case go
-    case addlocation
+    case addlocation(stationData: StationData? = nil, isFromPushNavigation: Bool = false, delegate: AddLocationViewControllerDelegate? = nil)
     case foryou
     case me
     
@@ -38,7 +38,7 @@ public enum NavigationOpeningSender {
     
     case imageListFullScreen(listImage: [String], index: Int?)
     
-    case addReview(_ stId: String)
+    case addReview(_ stId: String, delegate: AddReviewViewControllerDelegate? = nil)
     
     case choosePlug(_ stId: String, delegate: ChoosePlugViewModelDelegate)
     
@@ -46,7 +46,7 @@ public enum NavigationOpeningSender {
     
     case informationDetail(item: InformationItem?)
     
-    case chooseProvider(delegate: ChooseProviderViewModelDelegate)
+    case chooseProvider(items: [ProviderData]? = nil, delegate: ChooseProviderViewModelDelegate)
     
     case seeAllFavorite
     
@@ -60,7 +60,9 @@ public enum NavigationOpeningSender {
     
     case about
     
-    case editProfile(isRegister: Bool)
+    case editProfile(isRegister: Bool, delegate: EditProfileViewControllerDelegate? = nil)
+    
+    case baseAddLocation
     
     public var storyboardName: String {
         switch self {
@@ -118,6 +120,8 @@ public enum NavigationOpeningSender {
             return "About"
         case .editProfile:
             return "EditProfile"
+        case .baseAddLocation:
+            return "BaseAddLocation"
         }
     }
     
@@ -177,6 +181,8 @@ public enum NavigationOpeningSender {
             return "AboutViewController"
         case .editProfile:
             return "EditProfileViewController"
+        case .baseAddLocation:
+            return "BaseAddLocationViewController"
         }
     }
     
@@ -190,29 +196,35 @@ public enum NavigationOpeningSender {
     public var titleNavigation: String {
         switch self {
         case .mapFilter:
-            return "Filter"
+            return Wording.NavigationTitle.NavigationTitle_Filter.localized
         case .go:
-            return "เส้นทาง"
+            return Wording.NavigationTitle.NavigationTitle_Go.localized
         case .foryou:
-            return "สำหรับคุณ"
+            return Wording.NavigationTitle.NavigationTitle_ForYou.localized
         case .galleryPhoto:
-            return "รูปภาพ"
+            return Wording.NavigationTitle.NavigationTitle_GalleryPhoto.localized
         case .profile:
-            return "Profile"
+            return Wording.NavigationTitle.NavigationTitle_Profile.localized
         case .addReview:
-            return "รีวิว"
+            return Wording.NavigationTitle.NavigationTitle_Review.localized
         case .choosePlug:
-            return "เลือกหัวชาร์จ"
+            return Wording.NavigationTitle.NavigationTitle_ChoosePlugType.localized
         case .seeAllReview:
-            return "รีวิว"
+            return Wording.NavigationTitle.NavigationTitle_Review.localized
         case .informationDetail:
-            return "ประชาสัมพันธ์"
+            return Wording.NavigationTitle.NavigationTitle_InformationDetail.localized
         case .addlocation:
-            return "เพิ่มสถานีชาร์จ"
+            return Wording.NavigationTitle.NavigationTitle_AddStation.localized
         case .seeAllFavorite:
-            return "ชื่นชอบ"
+            return Wording.NavigationTitle.NavigationTitle_Favorite.localized
         case .selectCurrentLocation:
-            return "สถานที่ตั้ง"
+            return Wording.NavigationTitle.NavigationTitle_SelectCurrentLocation.localized
+        case .about:
+            return Wording.NavigationTitle.NavigationTitle_About.localized
+        case .editProfile:
+            return Wording.NavigationTitle.NavigationTitle_EditProfile.localized
+        case .usersHit:
+            return Wording.NavigationTitle.NavigationTitle_TopReview.localized
         default:
             return ""
         }
@@ -271,7 +283,7 @@ public enum NavigationOpeningSender {
     
     public var navColor: UIColor {
         switch self {
-        case .galleryPhoto, .addReview, .choosePlug:
+        case .galleryPhoto, .addReview, .choosePlug, .addlocation:
             return .basePrimary
         default:
             return .clear
@@ -286,6 +298,8 @@ class NavigationManager {
     var rootViewController: UIViewController!
     var currentPresentation: Presentation = .Root
     var mainTabBarController: UITabBarController!
+    public var lastIndexTabbar: Int = 0
+    public var selectedIndexTabbar: Int = 0
     
     enum Presentation {
         case Present(withNav: Bool = true, modalTransitionStyle: UIModalTransitionStyle = .coverVertical, modalPresentationStyle: UIModalPresentationStyle = .automatic)
@@ -325,7 +339,7 @@ class NavigationManager {
         let mapVC = getTabbarNavigation(logoImage: "map", title: Wording.MainTabbar.Home.localized, sender: .map)
         let goVC = getTabbarNavigation(logoImage: "car", title: Wording.MainTabbar.Go.localized, sender: .go)
         let foryouVC = getTabbarNavigation(logoImage: "passion", title: Wording.MainTabbar.ForYou.localized, sender: .foryou)
-        let addLocationVC = getTabbarNavigation(logoImage: "plus", title: Wording.MainTabbar.Add.localized, sender: .addlocation)
+        let addLocationVC = getTabbarNavigation(logoImage: "plus", title: Wording.MainTabbar.Add.localized, sender: .baseAddLocation)
         let meVC = getTabbarNavigation(logoImage: "user", title: Wording.MainTabbar.Me.localized, sender: .me)
         self.mainTabBarController.viewControllers = [mapVC, goVC, foryouVC, addLocationVC, meVC]
     }
@@ -387,9 +401,10 @@ class NavigationManager {
                 className.viewModel.setupPrepare(stId, delegate: delegate)
                 viewController = className
             }
-        case .addReview(let stId):
+        case .addReview(let stId, let delegate):
             if let className = storyboard.instantiateInitialViewController() as? AddReviewViewController {
                 className.viewModel.setStId(stId)
+                className.delegate = delegate
                 viewController = className
             }
         case .seeAllReview(let items, let uid):
@@ -403,9 +418,10 @@ class NavigationManager {
                 className.informationItem = item
                 viewController = className
             }
-        case .chooseProvider(let delegate):
+        case .chooseProvider(let items, let delegate):
             if let className = storyboard.instantiateInitialViewController() as? ChooseProviderViewController {
                 className.viewModel.input.setupPrepare(delegate: delegate)
+                className.viewModel.input.setProviderMaster(listProvider: items ?? [])
                 viewController = className
             }
         case .modalAddPower(let delegate):
@@ -418,9 +434,17 @@ class NavigationManager {
                 className.delegate = delegate
                 viewController = className
             }
-        case .editProfile(let isRegister):
+        case .editProfile(let isRegister, let delegate):
             if let className = storyboard.instantiateInitialViewController() as? EditProfileViewController {
                 className.isRegister = isRegister
+                className.delegate = delegate
+                viewController = className
+            }
+        case .addlocation(let stationData, let isFromPushNavigation, let delegate):
+            if let className = storyboard.instantiateInitialViewController() as? AddLocationViewController {
+                className.isFromPushNavigation = isFromPushNavigation
+                className.delegate = delegate
+                className.viewModel.input.setStationData(stationData: stationData)
                 viewController = className
             }
         default:
@@ -443,38 +467,14 @@ class NavigationManager {
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = true
             }
-
-            let topVC = UIApplication.getTopViewController()
-            if let nav = topVC?.navigationController {
-                nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                nav.navigationBar.tintColor = .white
-                nav.pushViewController(viewController, animated: animated)
-            } else {
-                self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationController.navigationBar.tintColor = .white
-                self.navigationController.pushViewController(viewController, animated: animated)
-            }
+            self.pushViewController(vc: viewController, animated: animated, to: to)
         case .PushStationDetail:
             
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = true
             }
+            self.pushViewController(vc: viewController, animated: animated, to: to)
             
-            let topVC = UIApplication.getTopViewController()
-            if let nav = topVC?.navigationController {
-                nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                nav.navigationBar.tintColor = .white
-                nav.setBarTintColor(color: .clear, complete: {
-                    nav.pushViewController(viewController, animated: animated)
-                })
-            } else {
-                self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                self.navigationController.navigationBar.tintColor = .white
-                self.navigationController?.setBarTintColor(color: .clear, complete: {
-                    self.navigationController.pushViewController(viewController, animated: animated)
-                })
-
-            }
         case .PushInTabbar:
             if (self.navigationController.tabBarController != nil) {
                 viewController.hidesBottomBarWhenPushed = false
@@ -568,6 +568,49 @@ class NavigationManager {
     
     func switchTabbar(index: Int) {
         self.presentVC(viewController: UIViewController(), presentation: .switchTabbar(index: index), to: .splash)
+    }
+    
+    func switchLastTabbar() {
+        self.presentVC(viewController: UIViewController(), presentation: .switchTabbar(index: self.lastIndexTabbar), to: .splash)
+        didSelectTabbar(index: self.lastIndexTabbar)
+    }
+    
+    func didSelectTabbar(index: Int?) {
+        if let index = index {
+            lastIndexTabbar = selectedIndexTabbar
+            selectedIndexTabbar = index
+        }
+    }
+    
+    func pushViewController(vc: UIViewController, animated: Bool, to: NavigationOpeningSender) {
+        let topVC = UIApplication.getTopViewController()
+        if let nav = topVC?.navigationController {
+            nav.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            nav.navigationBar.tintColor = .white
+            
+            switch to {
+            case .me, .stationDetail:
+                nav.setBarTintColor(color: .clear, complete: {
+                    nav.pushViewController(vc, animated: animated)
+                })
+                break
+            default:
+                nav.pushViewController(vc, animated: animated)
+            }
+        } else {
+            self.navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            self.navigationController.navigationBar.tintColor = .white
+
+            switch to {
+            case .me, .stationDetail:
+                self.navigationController?.setBarTintColor(color: .clear, complete: {
+                    self.navigationController.pushViewController(vc, animated: animated)
+                })
+                break
+            default:
+                self.navigationController.pushViewController(vc, animated: animated)
+            }
+        }
     }
     
     func setRootViewController(rootView: NavigationOpeningSender, withNav: Bool = true, isTranslucent: Bool = false, isAnimate: Bool = false, options: UIView.AnimationOptions = .curveEaseIn) {

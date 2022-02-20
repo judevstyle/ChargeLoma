@@ -54,7 +54,7 @@ class LoginViewModel: LoginProtocol, LoginProtocolOutput {
     func userRegister(user: AuthDataResult) {
         self.vc.startLoding()
         let userData = user.user
-        var request = PostUserRegisterRequest()
+        var request = PostUpdateUserRequest()
         request.displayName = userData.displayName ?? ""
         request.tel = userData.phoneNumber ?? ""
         request.car = ""

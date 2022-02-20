@@ -95,7 +95,7 @@ class MapViewModel: MapProtocol, MapProtocolOutput {
             }
         })
         
-        request.status.append(0)
+        request.status.append(1)
         
         storeFilter?.statusIndex?.forEach({ statusIndex in
             if let statusIndex = statusIndex {

@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController {
         registerNotification(name: .LanguageDidChange, selector: #selector(languageDidChange))
         setupUI()
         reloadDataView()
-        viewModel.input.getUserProfile()
     }
     
     func configure(_ interface: ProfileProtocol) {
@@ -41,6 +40,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.setBarTintColor(color: .basePrimary)
+        viewModel.input.getUserProfile()
     }
     
     func setupUI() {
@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController {
     }
     
     func reloadDataView() {
+        navigationItem.title = Wording.NavigationTitle.NavigationTitle_Profile.localized
         if let user = AppDelegate.shareDelegate.userProfileData {
             titleText.text = user.displayName ?? ""
             if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
@@ -81,7 +82,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func languageDidChange() {
-        debugPrint("languageDidChange")
         reloadDataView()
     }
 }
@@ -109,6 +109,7 @@ extension ProfileViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.stopLoding()
                 self.reloadDataView()
+                AppDelegate.shareDelegate.resetClearAll()
             }
         } catch(let error){
             print(error)

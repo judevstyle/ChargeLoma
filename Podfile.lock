@@ -117,6 +117,7 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.0)
   - HMSegmentedControl (1.5.6)
+  - Kingfisher (7.1.2)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/private/Math (124.2.0)
@@ -182,6 +183,7 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn (~> 5.0)
   - HMSegmentedControl
+  - Kingfisher (~> 7.0)
   - "MaterialComponents/TextControls+FilledTextFields"
   - Moya
   - RadioGroup
@@ -212,6 +214,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - HMSegmentedControl
+    - Kingfisher
     - MaterialComponents
     - MDFInternationalization
     - Moya
@@ -246,6 +249,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
+  Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -257,6 +261,6 @@ SPEC CHECKSUMS:
   SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 17fa39dcc9c8388552b68f17075e644d59d570ac
+PODFILE CHECKSUM: d527ba7bf9a72002723f0d4ef7c728da5e602b75
 
 COCOAPODS: 1.11.2

@@ -40,3 +40,114 @@
 "EditProfile_Register" = "Register";
 "EditProfile_Password" = "Password";
 "EditProfile_ConfirmPassword" = "Confirm Password";
+
+//Login
+"Login_Email" = "Email";
+"Login_Password" = "Password";
+"Login_Register" = "Register";
+"Login_Login" = "LOGIN";
+"Login_Or" = "Or login by";
+
+//Map
+"Map_Search" = "Search...";
+
+//GO
+"Go_Head_Start" = "Start";
+"Go_Current_Start" = "My Location";
+"Go_Target_Start" = "Choose location";
+"Go_Head_End" = "Destination";
+"Go_Position_End" = "Choose location";
+
+//ForYou
+"ForYou_Head_Favorite" = "Favorites";
+"ForYou_Head_Recently" = "Recently Review";
+"ForYou_Head_Information" = "Information";
+
+//AddStation
+"AddStation_Head_StationName" = "Station name";
+"AddStation_Head_Description" = "Description";
+"AddStation_Placeholder_Tel" = "phone number";
+"AddStation_Head_Is24Hr" = "Open 24 hrs.";
+"AddStation_Head_Station" = "Stations";
+"AddStation_Head_ServiceCharge" = "Payment Require";
+"AddStation_Head_PriceIsHas" = "Price (optional)";
+"AddStation_Head_Provider" = "Providers";
+"AddStation_Btn_ChooseProvider" = "Choose Provider";
+"AddStation_Head_Connectors" = "Connectors";
+"AddStation_Btn_AddPlug" = "Add Plug";
+"AddStation_Btn_EditLocation" = "Edit Location";
+"AddStation_Placeholder_Address" = "address";
+"AddStation_Btn_Save" = "Save";
+"AddStation_Head_Service" = "Services";
+
+//CheckBox
+"Checkbox_PublicStation" = "Public station";
+"Checkbox_PrivateStation" = "Private station";
+"Checkbox_Normal" = "Normal";
+"Checkbox_OpenSoon" = "Open soon";
+"Checkbox_OnMaintanance" = "On maintanance";
+"Checkbox_Parking" = "Parking";
+"Checkbox_Food" = "Food";
+"Checkbox_Coffee" = "Coffee";
+"Checkbox_RestRoom" = "Rest Room";
+"Checkbox_Shopping" = "Shopping";
+"Checkbox_RestArea" = "Rest Area";
+"Checkbox_Wifi" = "Wifi";
+"Checkbox_Other" = "Other";
+
+//MapFilter
+"MapFilter_Head_Connectors" = "Connectors";
+"MapFilter_Head_Providers" = "Providers";
+"MapFilter_Head_All" = "All";
+"MapFilter_Head_Status" = "Status";
+
+//StationDetail
+"StationDetail_Unit_km" = "km";
+"StationDetail_Unit_Min" = "min";
+"StationDetail_Unit_Hr" = "hr";
+"StationDetail_Btn_Direction" = "Direction";
+"StationDetail_Btn_Favorite" = "Favorite";
+"StationDetail_Btn_Share" = "Share";
+"StationDetail_Head_Detail" = "Detail";
+"StationDetail_Head_PriceService" = "Price";
+"StationDetail_Btn_Edit" = "Edit";
+"StationDetail_Head_Connectors" = "Connectors";
+"StationDetail_Btn_Review" = "Review";
+"StationDetail_Head_Service" = "Service";
+"StationDetail_Head_ReviewFromUser" = "Review from users";
+
+//AddReview
+"AddReview_Btn_ChargedOK" = "Charged OK";
+"AddReview_Btn_CouldNotCharge" = "Could not charge";
+"AddReview_Btn_LeaveComment" = "Leave comment";
+"AddReview_Head_Comment" = "Comment";
+"AddReview_Head_Connectors" = "Connectors";
+"AddReview_Btn_ChooseConnectors" = "Choose plug type";
+"AddReview_Head_Power" = "Power";
+"AddReview_Head_Problem" = "Problem";
+"AddReview_Btn_Review" = "Review";
+
+//Problem
+"Problem_Value_InUse" = "InUse";
+"Problem_Value_CouldNotActivate" = "Could not activate";
+"Problem_Value_BlockByCar" = "Block by car";
+"Problem_Value_OutOfOrder" = "Out of order";
+"Problem_Value_StationClose" = "Station closed";
+
+//NavigationTitle
+"NavigationTitle_Go" = "Route";
+"NavigationTitle_ForYou" = "For You";
+"NavigationTitle_AddStation" = "Add Station";
+"NavigationTitle_Filter" = "Filter";
+"NavigationTitle_Review" = "Review";
+"NavigationTitle_About" = "About";
+"NavigationTitle_Favorite" = "Favorite";
+"NavigationTitle_TopReview" = "Top Review";
+"NavigationTitle_EditProfile" = "Edit Profile";
+"NavigationTitle_EditStation" = "Edit Station";
+
+"NavigationTitle_GalleryPhoto" = "Gallery";
+"NavigationTitle_Profile" = "Profile";
+"NavigationTitle_ChoosePlugType" = "Choose Plug Type";
+"NavigationTitle_InformationDetail" = "Information";
+"NavigationTitle_SelectCurrentLocation" = "Location";

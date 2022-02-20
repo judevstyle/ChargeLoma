@@ -10,32 +10,40 @@ import Combine
 import Moya
 
 protocol UserRepository {
-    func userRegister(request: PostUserRegisterRequest) -> AnyPublisher<PostUserRegisterResponse, Error>
-    func userAuth(request: PostUserAuthRequest) -> AnyPublisher<PostUserRegisterResponse, Error>
+    func userRegister(request: PostUpdateUserRequest) -> AnyPublisher<PostUpdateUserResponse, Error>
+    func userAuth(request: PostUserAuthRequest) -> AnyPublisher<PostUpdateUserResponse, Error>
     func userProfile() -> AnyPublisher<GetUserProfileRssponse, Error>
+    func updateUserProfile(request: PostUpdateUserRequest) -> AnyPublisher<GetUserProfileRssponse, Error>
 }
 
 final class UserRepositoryImpl: ChargeLoma.UserRepository {
     private let provider: MoyaProvider<UserAPI> = MoyaProvider<UserAPI>()
 
-    func userRegister(request: PostUserRegisterRequest) -> AnyPublisher<PostUserRegisterResponse, Error> {
+    func userRegister(request: PostUpdateUserRequest) -> AnyPublisher<PostUpdateUserResponse, Error> {
         return self.provider
             .cb
             .request(.postUserRegister(request: request))
-            .map(PostUserRegisterResponse.self)
+            .map(PostUpdateUserResponse.self)
     }
     
-    func userAuth(request: PostUserAuthRequest) -> AnyPublisher<PostUserRegisterResponse, Error> {
+    func userAuth(request: PostUserAuthRequest) -> AnyPublisher<PostUpdateUserResponse, Error> {
         return self.provider
             .cb
             .request(.postUserAuth(request: request))
-            .map(PostUserRegisterResponse.self)
+            .map(PostUpdateUserResponse.self)
     }
     
     func userProfile() -> AnyPublisher<GetUserProfileRssponse, Error> {
         return self.provider
             .cb
             .request(.getUserProfile)
+            .map(GetUserProfileRssponse.self)
+    }
+    
+    func updateUserProfile(request: PostUpdateUserRequest) -> AnyPublisher<GetUserProfileRssponse, Error> {
+        return self.provider
+            .cb
+            .request(.updateUserProfile(request: request))
             .map(GetUserProfileRssponse.self)
     }
     

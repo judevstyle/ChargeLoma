@@ -32,7 +32,6 @@
 		EF3ACB04277C57A80096BF95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3ACB02277C57A80096BF95 /* LaunchScreen.storyboard */; };
 		EF3ACB0E277C57F30096BF95 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3ACB0D277C57F30096BF95 /* Splash.storyboard */; };
 		EF3ACB10277C57FC0096BF95 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ACB0F277C57FC0096BF95 /* SplashViewController.swift */; };
-		EF3ACB13277C58AF0096BF95 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EF3ACB12277C58AF0096BF95 /* Kingfisher */; };
 		EF3ACB16277C58C80096BF95 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = EF3ACB15277C58C80096BF95 /* NVActivityIndicatorView */; };
 		EF3ACB18277C58C80096BF95 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = EF3ACB17277C58C80096BF95 /* NVActivityIndicatorViewExtended */; };
 		EF3ACB48277C59CA0096BF95 /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF3ACB2F277C59CA0096BF95 /* Kanit-Medium.ttf */; };
@@ -227,6 +226,12 @@
 		EFBAFE7E27AD086B005A7B7D /* RealmMapFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAFE7D27AD086B005A7B7D /* RealmMapFilterModel.swift */; };
 		EFBAFE8127AD0984005A7B7D /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAFE8027AD0984005A7B7D /* StoreManager.swift */; };
 		EFBEF3B427C0909D00A7F2F2 /* GoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3B327C0909D00A7F2F2 /* GoViewModel.swift */; };
+		EFBEF3B827C0928600A7F2F2 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3B727C0928600A7F2F2 /* Bundle+Extension.swift */; };
+		EFBEF3BA27C099D900A7F2F2 /* PutUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3B927C099D900A7F2F2 /* PutUserProfileUseCase.swift */; };
+		EFBEF3C127C09A7E00A7F2F2 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3C027C09A7E00A7F2F2 /* EditProfileViewModel.swift */; };
+		EFBEF3C427C0DDC600A7F2F2 /* BaseAddLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFBEF3C327C0DDC600A7F2F2 /* BaseAddLocation.storyboard */; };
+		EFBEF3C627C0DDD700A7F2F2 /* BaseAddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3C527C0DDD700A7F2F2 /* BaseAddLocationViewController.swift */; };
+		EFBEF3C827C0E35000A7F2F2 /* UnderlinedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBEF3C727C0E35000A7F2F2 /* UnderlinedUIView.swift */; };
 		EFBFA8952790785500CAFA60 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBFA8942790785500CAFA60 /* UITextField+Extension.swift */; };
 		EFC136A3279BFDB100B8206D /* ImageListFullScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC136A2279BFDB100B8206D /* ImageListFullScreen.storyboard */; };
 		EFC136A5279BFDD200B8206D /* ImageListFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC136A4279BFDD200B8206D /* ImageListFullScreenViewController.swift */; };
@@ -503,6 +508,12 @@
 		EFBAFE7D27AD086B005A7B7D /* RealmMapFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMapFilterModel.swift; sourceTree = "<group>"; };
 		EFBAFE8027AD0984005A7B7D /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		EFBEF3B327C0909D00A7F2F2 /* GoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoViewModel.swift; sourceTree = "<group>"; };
+		EFBEF3B727C0928600A7F2F2 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		EFBEF3B927C099D900A7F2F2 /* PutUserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutUserProfileUseCase.swift; sourceTree = "<group>"; };
+		EFBEF3C027C09A7E00A7F2F2 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		EFBEF3C327C0DDC600A7F2F2 /* BaseAddLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseAddLocation.storyboard; sourceTree = "<group>"; };
+		EFBEF3C527C0DDD700A7F2F2 /* BaseAddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAddLocationViewController.swift; sourceTree = "<group>"; };
+		EFBEF3C727C0E35000A7F2F2 /* UnderlinedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedUIView.swift; sourceTree = "<group>"; };
 		EFBFA8942790785500CAFA60 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		EFC136A2279BFDB100B8206D /* ImageListFullScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageListFullScreen.storyboard; sourceTree = "<group>"; };
 		EFC136A4279BFDD200B8206D /* ImageListFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListFullScreenViewController.swift; sourceTree = "<group>"; };
@@ -567,7 +578,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF3ACB13277C58AF0096BF95 /* Kingfisher in Frameworks */,
 				EFAEE62C27BD5DCA007F2557 /* SPPermissionsCamera in Frameworks */,
 				EFAEE63427BD5DCA007F2557 /* SPPermissionsTracking in Frameworks */,
 				EFAEE62E27BD5DCA007F2557 /* SPPermissionsLocationAlways in Frameworks */,
@@ -648,6 +658,7 @@
 		EF2EF51C27BFFBAF00E68746 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				EFBEF3BB27C09A4B00A7F2F2 /* ViewModel */,
 				EF2EF51D27BFFBBC00E68746 /* EditProfile.storyboard */,
 				EF2EF51F27BFFBC300E68746 /* EditProfileViewController.swift */,
 			);
@@ -658,6 +669,7 @@
 			isa = PBXGroup;
 			children = (
 				EF2EF52227C0138B00E68746 /* UnderlinedTextField.swift */,
+				EFBEF3C727C0E35000A7F2F2 /* UnderlinedUIView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -701,6 +713,7 @@
 		EF3ACB0B277C57CB0096BF95 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EFBEF3C227C0DDB700A7F2F2 /* BaseAddLocation */,
 				EF2EF51C27BFFBAF00E68746 /* EditProfile */,
 				EFAEE64827BD7799007F2557 /* About */,
 				EFAEE61927BD3A09007F2557 /* UsersHit */,
@@ -815,6 +828,7 @@
 				EFB1FF1627AABDBD00BAAF9D /* ImageBase64+Extension.swift */,
 				EFAEE62827BD4DF3007F2557 /* UITabBarController+Extension.swift */,
 				EF2EF51327BFD57500E68746 /* Notification+Extension.swift */,
+				EFBEF3B727C0928600A7F2F2 /* Bundle+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1789,6 +1803,23 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		EFBEF3BB27C09A4B00A7F2F2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EFBEF3C027C09A7E00A7F2F2 /* EditProfileViewModel.swift */,
+			);
+			path = "View\U0010Model";
+			sourceTree = "<group>";
+		};
+		EFBEF3C227C0DDB700A7F2F2 /* BaseAddLocation */ = {
+			isa = PBXGroup;
+			children = (
+				EFBEF3C327C0DDC600A7F2F2 /* BaseAddLocation.storyboard */,
+				EFBEF3C527C0DDD700A7F2F2 /* BaseAddLocationViewController.swift */,
+			);
+			path = BaseAddLocation;
+			sourceTree = "<group>";
+		};
 		EFC1369F279BFD7000B8206D /* ImageListFullScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -2005,6 +2036,7 @@
 				EFCA87E6279A837C001BCFD3 /* PostUserRegisterUseCase.swift */,
 				EFCA87EE279A95C2001BCFD3 /* PostUserAuthUseCase.swift */,
 				EFCA87F3279AEAF6001BCFD3 /* GetUserProfileUseCase.swift */,
+				EFBEF3B927C099D900A7F2F2 /* PutUserProfileUseCase.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2145,7 +2177,6 @@
 			);
 			name = ChargeLoma;
 			packageProductDependencies = (
-				EF3ACB12277C58AF0096BF95 /* Kingfisher */,
 				EF3ACB15277C58C80096BF95 /* NVActivityIndicatorView */,
 				EF3ACB17277C58C80096BF95 /* NVActivityIndicatorViewExtended */,
 				EFAEE62B27BD5DCA007F2557 /* SPPermissionsCamera */,
@@ -2183,7 +2214,6 @@
 			);
 			mainGroup = EF3ACAE8277C57A60096BF95;
 			packageReferences = (
-				EF3ACB11277C58AF0096BF95 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				EF3ACB14277C58C80096BF95 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				EFAEE62A27BD5DCA007F2557 /* XCRemoteSwiftPackageReference "SPPermissions" */,
 			);
@@ -2219,6 +2249,7 @@
 				EFA36EA727930BFB00BF2E51 /* ContentTableViewCell.xib in Resources */,
 				EF2EF51E27BFFBBC00E68746 /* EditProfile.storyboard in Resources */,
 				EFA36EC8279323F900BF2E51 /* PreLogin.storyboard in Resources */,
+				EFBEF3C427C0DDC600A7F2F2 /* BaseAddLocation.storyboard in Resources */,
 				EF8BAE8127B8ED8900BC74E0 /* SelectCurrentLocation.storyboard in Resources */,
 				EFC454B0278B3F2A00BFC608 /* FilterItemCollectionViewCell.xib in Resources */,
 				EF3ACB97277C699E0096BF95 /* Me.storyboard in Resources */,
@@ -2361,6 +2392,7 @@
 				EF8BAE9C27B9202200BC74E0 /* PostStationUseCase.swift in Sources */,
 				EF8DE62027AEEE4500B9C047 /* SeeAllReviewViewModel.swift in Sources */,
 				EF823513277D791700379B38 /* MoyaProvider+Combine.swift in Sources */,
+				EFBEF3C827C0E35000A7F2F2 /* UnderlinedUIView.swift in Sources */,
 				EF8BAEA327B9474B00BC74E0 /* GetGeocodePlaceUseCase.swift in Sources */,
 				EF97E0DB279D9FBF00FF68DA /* PlugStationAPI.swift in Sources */,
 				EF82354D277DA5A800379B38 /* MarkerStationView.swift in Sources */,
@@ -2374,6 +2406,7 @@
 				EF7F08E0278F378800FE4E9C /* GoogleMapRepository.swift in Sources */,
 				EFA0EAE32793C36A002B258D /* GalleryPhotoViewController.swift in Sources */,
 				EF3ACB77277C644E0096BF95 /* ConfigBundle.swift in Sources */,
+				EFBEF3C127C09A7E00A7F2F2 /* EditProfileViewModel.swift in Sources */,
 				EF823510277D78F900379B38 /* Decodable+Extension.swift in Sources */,
 				EFCA077D27948B73004DC4F2 /* MarkerDirectionView.swift in Sources */,
 				EF3ACAF5277C57A60096BF95 /* AppDelegate.swift in Sources */,
@@ -2385,6 +2418,7 @@
 				EF97E0E3279DA00400FF68DA /* GetPlugStationResponse.swift in Sources */,
 				EF759DA527B14D550032A25B /* PostReviewRequest.swift in Sources */,
 				EF3ACB88277C69360096BF95 /* GoViewController.swift in Sources */,
+				EFBEF3B827C0928600A7F2F2 /* Bundle+Extension.swift in Sources */,
 				EF823531277D81DC00379B38 /* SplashViewModel.swift in Sources */,
 				EF3ACAFF277C57A70096BF95 /* ChargeLoma.xcdatamodeld in Sources */,
 				EF75C2A42788B513004FEC64 /* GetStationFindOneResponse.swift in Sources */,
@@ -2486,6 +2520,7 @@
 				EFC768B0279C66620003EA47 /* ReviewRepository.swift in Sources */,
 				EF82352E277D80A900379B38 /* DataManager.swift in Sources */,
 				EF823526277D7E4300379B38 /* PlugTypeMasterRepository.swift in Sources */,
+				EFBEF3C627C0DDD700A7F2F2 /* BaseAddLocationViewController.swift in Sources */,
 				EF2EF51427BFD57500E68746 /* Notification+Extension.swift in Sources */,
 				EF3ACB10277C57FC0096BF95 /* SplashViewController.swift in Sources */,
 				EFA36EBD279311FE00BF2E51 /* GetInformationFindAllUseCase.swift in Sources */,
@@ -2507,6 +2542,7 @@
 				EFCA87E7279A837C001BCFD3 /* PostUserRegisterUseCase.swift in Sources */,
 				EF3ACB73277C638A0096BF95 /* Localizable.swift in Sources */,
 				EF82353D277D966D00379B38 /* Encodable+Extension.swift in Sources */,
+				EFBEF3BA27C099D900A7F2F2 /* PutUserProfileUseCase.swift in Sources */,
 				EF97E0D8279D9F4900FF68DA /* ChoosePlugViewModel.swift in Sources */,
 				EFA36EC1279319CD00BF2E51 /* Date+Extension.swift in Sources */,
 				EFAEE61D27BD3A31007F2557 /* UsersHitViewController.swift in Sources */,
@@ -2606,7 +2642,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2661,7 +2697,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2692,6 +2728,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2726,6 +2763,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2763,14 +2801,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EF3ACB11277C58AF0096BF95 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.3.1;
-			};
-		};
 		EF3ACB14277C58C80096BF95 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
@@ -2790,11 +2820,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EF3ACB12277C58AF0096BF95 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EF3ACB11277C58AF0096BF95 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		EF3ACB15277C58C80096BF95 /* NVActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EF3ACB14277C58C80096BF95 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;

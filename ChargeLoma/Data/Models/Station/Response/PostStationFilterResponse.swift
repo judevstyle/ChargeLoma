@@ -56,6 +56,8 @@ public struct StationData: Codable, Hashable  {
     public var isServiceWifi: Bool?
     public var isServiceOther: Bool?
     
+    public var note: String?
+    
     public init() {}
     
     public init(from decoder: Decoder) throws {
@@ -90,6 +92,7 @@ public struct StationData: Codable, Hashable  {
         try isServiceRestarea <- decoder["is_service_restarea"]
         try isServiceWifi     <- decoder["is_service_wifi"]
         try isServiceOther    <- decoder["is_service_other"]
+        try note              <- decoder["note"]
     }
 }
 

@@ -76,7 +76,12 @@ class PlugTableViewCell: UITableViewCell {
             }
             
             titleText.text = item.plugTypeMaster?.pTitle ?? ""
-            titleBadge.text = "\(item.power ?? "") kW"
+            
+            if let power = Int(item.power ?? "0"), power != 0 {
+                titleBadge.text = "\(power) kW"
+            } else {
+                titleBadge.text = "- kW"
+            }
         }
         
         if let item = itemPlugStationData {
@@ -85,7 +90,12 @@ class PlugTableViewCell: UITableViewCell {
             }
             
             titleText.text = item.plugType?.pTitle ?? ""
-            titleBadge.text = "\(item.power ?? "") kW"
+            
+            if let power = Int(item.power ?? "0"), power != 0 {
+                titleBadge.text = "\(power) kW"
+            } else {
+                titleBadge.text = "- kW"
+            }
         }
         
         if let item = itemPlugTypeData {

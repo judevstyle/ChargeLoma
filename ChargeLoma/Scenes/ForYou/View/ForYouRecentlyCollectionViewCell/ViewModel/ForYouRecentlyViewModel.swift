@@ -55,13 +55,16 @@ class ForYouRecentlyViewModel: ForYouRecentlyProtocol, ForYouRecentlyProtocolOut
         self.listStationFavorite?.removeAll()
         var request = FavoriteRequest()
         request.page = 1
-        request.lang = "th"
+        request.lang = Language.current.name
         self.getStationFavoriteUseCase.execute(request: request).sink { completion in
             debugPrint("getStationFavoriteUseCase \(completion)")
             self.vc?.stopLoding()
         } receiveValue: { resp in
             if let items = resp {
                 self.listStationFavorite = items
+                self.didGetStationFavoriteSuccess?()
+            } else {
+                self.listStationFavorite = []
                 self.didGetStationFavoriteSuccess?()
             }
         }.store(in: &self.anyCancellable)

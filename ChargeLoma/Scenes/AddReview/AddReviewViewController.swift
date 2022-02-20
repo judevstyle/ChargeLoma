@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AddReviewViewControllerDelegate {
+public protocol AddReviewViewControllerDelegate {
     func addReviewDismiss()
 }
 
@@ -29,7 +29,11 @@ class AddReviewViewController: UIViewController {
     @IBOutlet weak var inputIssueType: UITextField!
     
     let pickerIssueTypeView = ToolbarPickerView()
-    var issueList: [String] = ["ใช้งานอยู่", "เปิดเครื่องไม่ได้", "เขื่อมต่อไม่ได้", "หัวจ่ายเสีย", "สถานีเลิกใช้บริการ"]
+    var issueList: [String] = [Wording.Problem.Problem_Value_InUse.localized,
+                               Wording.Problem.Problem_Value_CouldNotActivate.localized,
+                               Wording.Problem.Problem_Value_BlockByCar.localized,
+                               Wording.Problem.Problem_Value_OutOfOrder.localized,
+                               Wording.Problem.Problem_Value_StationClose.localized]
     var selectedIssue : String?
     
     @IBOutlet weak var headIssue: UILabel!
@@ -91,9 +95,9 @@ class AddReviewViewController: UIViewController {
         titleChargeOff.font = .smallText
         titleComment.font = .smallText
         
-        titleChargeOn.text = "ชาร์จได้"
-        titleChargeOff.text = "ชาร์จไม่ได้"
-        titleComment.text = "แสดงความคิดเห็น"
+        titleChargeOn.text = Wording.AddReview.AddReview_Btn_ChargedOK.localized
+        titleChargeOff.text = Wording.AddReview.AddReview_Btn_CouldNotCharge.localized
+        titleComment.text = Wording.AddReview.AddReview_Btn_LeaveComment.localized
         
         btnChargeOn.setImage(UIImage(named: "yes")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btnChargeOn.contentVerticalAlignment = .fill
@@ -114,7 +118,7 @@ class AddReviewViewController: UIViewController {
         
         headComment.font = .h3Text
         headComment.textColor = .baseTextGray
-        headComment.text = "ความคิดเห็น"
+        headComment.text = Wording.AddReview.AddReview_Head_Comment.localized
         textComment.setRounded(rounded: 5)
         
         textComment.font = .bodyText
@@ -122,13 +126,13 @@ class AddReviewViewController: UIViewController {
         
         headIssue.font = .h3Text
         headIssue.textColor = .baseTextGray
-        headIssue.text = "สาเหตุที่ใช้ไม่ได้"
+        headIssue.text = Wording.AddReview.AddReview_Head_Problem.localized
         
         setupDelegatesPlugPickerView()
         
         headPower.font = .h3Text
         headPower.textColor = .baseTextGray
-        headPower.text = "กำลังไฟฟ้า"
+        headPower.text = Wording.AddReview.AddReview_Head_Power.localized
         
         inputPower.font = .bodyText
         inputPower.setRounded(rounded: 5)
@@ -137,11 +141,11 @@ class AddReviewViewController: UIViewController {
         
         headPlugType.font = .h3Text
         headPlugType.textColor = .baseTextGray
-        headPlugType.text = "หัวจ่าย"
+        headPlugType.text = Wording.AddReview.AddReview_Head_Connectors.localized
         
         inputIssueType.font = .bodyText
         
-        btnAddPlug.setTitle("เลือกหัวชาร์จ", for: .normal)
+        btnAddPlug.setTitle(Wording.AddReview.AddReview_Btn_ChooseConnectors.localized, for: .normal)
         btnAddPlug.titleLabel?.font = .h3Text
         btnAddPlug.tintColor = .baseTextGray
         btnAddPlug.titleLabel?.textColor = .baseTextGray
@@ -152,7 +156,7 @@ class AddReviewViewController: UIViewController {
         imageGrid.viewModel.input.setList(images: [])
         imageGrid.titleLabel.isHidden = true
         
-        btnSaveReview.setTitle("รีวิว", for: .normal)
+        btnSaveReview.setTitle(Wording.AddReview.AddReview_Btn_Review.localized, for: .normal)
         btnSaveReview.titleLabel?.font = .h3Text
         btnSaveReview.setRounded(rounded: 8.0)
         btnSaveReview.backgroundColor = .basePrimary
@@ -282,7 +286,7 @@ class AddReviewViewController: UIViewController {
             request.carServe = selectedIssue ?? ""
             request.isCharge = false
         case .comment:
-            request.pTypeId = 0
+            request.pTypeId = 1
             request.power = 0
             request.carServe = ""
             request.isCharge = nil
