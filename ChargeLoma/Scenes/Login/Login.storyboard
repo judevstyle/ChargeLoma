@@ -94,7 +94,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xrc-gx-MPv">
-                                <rect key="frame" x="154" y="583" width="106" height="45"/>
+                                <rect key="frame" x="123.5" y="583" width="167" height="45"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACz-kX-ATc">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
@@ -134,6 +134,25 @@
                                             <constraint firstItem="TeJ-W8-Lht" firstAttribute="top" secondItem="2Le-AX-xTO" secondAttribute="top" id="sEo-at-XDw"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTA-Nr-lhl">
+                                        <rect key="frame" x="122" y="0.0" width="45" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMD-gp-ZCb">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="apple"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="XMD-gp-ZCb" firstAttribute="top" secondItem="zTA-Nr-lhl" secondAttribute="top" id="P4y-6A-R9E"/>
+                                            <constraint firstAttribute="height" constant="45" id="RAz-rx-dmz"/>
+                                            <constraint firstAttribute="bottom" secondItem="XMD-gp-ZCb" secondAttribute="bottom" id="US8-cD-Stj"/>
+                                            <constraint firstAttribute="width" constant="45" id="ift-Sh-glc"/>
+                                            <constraint firstAttribute="trailing" secondItem="XMD-gp-ZCb" secondAttribute="trailing" id="mO9-wV-oF7"/>
+                                            <constraint firstItem="XMD-gp-ZCb" firstAttribute="leading" secondItem="zTA-Nr-lhl" secondAttribute="leading" id="r8k-2Y-TJX"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="หรือ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weL-1Q-dDX">
@@ -161,6 +180,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnApple" destination="XMD-gp-ZCb" id="3V3-Mt-H0W"/>
                         <outlet property="btnFacebook" destination="TeJ-W8-Lht" id="5WJ-s8-OD9"/>
                         <outlet property="btnGoogle" destination="Pzk-rc-Beu" id="naA-cM-aA9"/>
                         <outlet property="btnLogin" destination="CJF-xL-B8Y" id="pQz-rW-bji"/>
@@ -177,6 +197,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="apple" width="64" height="64"/>
         <image name="fb" width="45" height="45"/>
         <image name="gg" width="45" height="45"/>
         <image name="logo" width="118.5" height="163"/>
