@@ -76,7 +76,7 @@ public enum Wording {
     
     
     public enum ForYou: String, LocalizableDelegate {
-        case ForYou_Head_Favorite = "Go_Head_Start"
+        case ForYou_Head_Favorite = "ForYou_Head_Favorite"
         case ForYou_Head_Recently = "ForYou_Head_Recently"
         case ForYou_Head_Information = "ForYou_Head_Information"
     }

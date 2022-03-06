@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleText.text = "Charge Loma"
-        self.titleText.font = .header1
+        self.titleText.font = .header2
         self.titleText.textColor = .baseSecondary
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {

@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
         inputPassword.textAlignment = .center
         
         self.titleLogo.text = "Charge Loma"
-        self.titleLogo.font = .header1
+        self.titleLogo.font = .header2
         self.titleLogo.textColor = .baseSecondary
         
         self.btnRegister.setTitle(Wording.Login.Login_Register.localized, for: .normal)

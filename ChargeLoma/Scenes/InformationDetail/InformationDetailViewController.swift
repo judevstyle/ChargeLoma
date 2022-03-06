@@ -29,9 +29,10 @@ class InformationDetailViewController: UIViewController {
         self.bgBadge.setRounded(rounded: self.bgBadge.frame.height/2)
         titleText.font = .bodyBold
         titleBadge.font = .extraSmallText
-        descText.font = .smallText
         
+        descText.font = .smallText
         descText.textColor = .baseTextGray
+        descText.numberOfLines = 0
     }
     
     func setupValue()  {

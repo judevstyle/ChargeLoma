@@ -77,14 +77,18 @@ public class MapViewController: UIViewController {
     func setupUI() {
         setupTableView()
         setupSearchBar()
-        self.btnMapMenu.setImage(UIImage(named: "btn_map_menu")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnMapMenu.setImage(UIImage(named: "filter")?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.btnMapMenu.contentVerticalAlignment = .fill
         self.btnMapMenu.contentHorizontalAlignment = .fill
+        self.btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        self.btnMapMenu.setRounded(rounded: self.btnMapMenu.frame.width/2)
         self.btnMapMenu.addTarget(self, action: #selector(didTapMapMenuButton), for: .touchUpInside)
         
-        self.btnMapLocation.setImage(UIImage(named: "btn_map_location")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnMapLocation.setImage(UIImage(named: "gps")?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.btnMapLocation.contentVerticalAlignment = .fill
         self.btnMapLocation.contentHorizontalAlignment = .fill
+        self.btnMapLocation.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        self.btnMapLocation.setRounded(rounded: self.btnMapLocation.frame.width/2)
         self.btnMapLocation.addTarget(self, action: #selector(didTapMapLocationButton), for: .touchUpInside)
     }
     
