@@ -484,7 +484,7 @@ extension StationDetailViewController {
             let marker = GMSMarker(position: position)
             marker.isTappable = true
             marker.iconView =  MarkerStationView.instantiate(station: station, index: 0)
-            marker.tracksViewChanges = true
+            marker.tracksViewChanges = false
             marker.map = mapView
             let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: lng, zoom: 17.0)
             mapView.animate(to: camera)

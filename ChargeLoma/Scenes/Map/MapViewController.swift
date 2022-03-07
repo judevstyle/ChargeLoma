@@ -196,7 +196,7 @@ extension MapViewController {
             marker.snippet = "\(index)"
             marker.isTappable = true
             marker.iconView =  MarkerStationView.instantiate(station: item, index: index)
-            marker.tracksViewChanges = true
+            marker.tracksViewChanges = false
             listStationMarker.append(marker)
         })
         

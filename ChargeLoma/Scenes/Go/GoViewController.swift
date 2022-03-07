@@ -148,7 +148,7 @@ extension GoViewController {
             marker.snippet = "\(index)"
             marker.isTappable = true
             marker.iconView =  MarkerStationView.instantiate(station: item, index: index)
-            marker.tracksViewChanges = true
+            marker.tracksViewChanges = false
             listStationMarker.append(marker)
         })
         
@@ -303,7 +303,7 @@ extension GoViewController: SearchStationViewModelDelegate {
                 let marker = GMSMarker(position: sourceLocation)
                 marker.isTappable = false
                 marker.iconView =  MarkerDirectionView.instantiate()
-                marker.tracksViewChanges = true
+                marker.tracksViewChanges = false
                 self.listStationMarker.append(marker)
             }
             
@@ -311,7 +311,7 @@ extension GoViewController: SearchStationViewModelDelegate {
                 let marker = GMSMarker(position: destinationLocation)
                 marker.isTappable = false
                 marker.iconView =  MarkerDirectionView.instantiate()
-                marker.tracksViewChanges = true
+                marker.tracksViewChanges = false
                 self.listStationMarker.append(marker)
             }
             
