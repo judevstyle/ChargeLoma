@@ -266,14 +266,14 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
         
         request.PlugMapping = self.listPlugMappingData
         
-//        self.postStationUseCase.execute(request: request).sink { completion in
-//            debugPrint("postStationUseCase \(completion)")
-//            self.vc.stopLoding()
-//        } receiveValue: { resp in
-//            if let status = resp?.success, status == true {
-//                self.didUpdateStationSuccess?()
-//            }
-//        }.store(in: &self.anyCancellable)
+        self.postStationUseCase.execute(request: request).sink { completion in
+            debugPrint("postStationUseCase \(completion)")
+            self.vc.stopLoding()
+        } receiveValue: { resp in
+            if let status = resp?.success, status == true {
+                self.didUpdateStationSuccess?()
+            }
+        }.store(in: &self.anyCancellable)
     }
     
     func setClearResetValue() {

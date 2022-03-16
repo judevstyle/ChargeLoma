@@ -21,18 +21,18 @@ class MarkerStationView: UIView {
         view.station = station
         
         //Flow Status Marker
-        let markerOrange: UIImage? = UIImage.imageNamed(name: "marker_orange", cache: true)
-        let markerGray: UIImage? = UIImage.imageNamed(name: "marker_gray", cache: true)
-        let markerGreen: UIImage? = UIImage.imageNamed(name: "marker_green", cache: true)
+        let markerOrange: UIImage? = UIImage(named: "marker_orange")
+        let markerGray: UIImage? = UIImage(named: "marker_gray")
+        let markerGreen: UIImage? = UIImage(named: "marker_green")
         
         var pinImage: UIImage? = markerGreen
         
         if station?.stationStatus == 3 {
             pinImage = markerGray
-            view.imageAvatar.image = UIImage.imageNamed(name: "maintenance", cache: true)
+            view.imageAvatar.image = UIImage(named: "maintenance")
         } else if station?.stationStatus == 2 {
             pinImage = markerGray
-            view.imageAvatar.image = UIImage.imageNamed(name: "soon", cache: true)
+            view.imageAvatar.image = UIImage(named: "soon")
         } else {
             if station?.isFastCharge == true {
                 pinImage = markerOrange

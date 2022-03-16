@@ -469,11 +469,13 @@ extension AddLocationViewController {
     func didUpdateStationSuccess() -> (() -> Void) {
         return { [weak self] in
             guard let self = self else { return }
-            if self.isFromPushNavigation == true {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.dismiss(animated: true, completion: nil)
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                if self.isFromPushNavigation == true {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
         }
     }
     
