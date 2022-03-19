@@ -130,6 +130,7 @@ class StationDetailViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
+        mapView.stopRendering()
         mapView = nil
     }
     

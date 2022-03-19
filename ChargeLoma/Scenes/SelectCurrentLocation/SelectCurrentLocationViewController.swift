@@ -38,6 +38,7 @@ class SelectCurrentLocationViewController: UIViewController {
     public override func viewDidDisappear(_ animated: Bool) {
         mapView.clear()
         mapView.removeFromSuperview()
+        mapView.stopRendering()
         mapView = nil
     }
     
