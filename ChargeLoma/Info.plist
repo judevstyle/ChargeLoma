@@ -23,6 +23,8 @@
 	</array>
 	<key>FacebookAppID</key>
 	<string>1069977193741918</string>
+	<key>FacebookClientToken</key>
+	<string>571f951e68ba850b1ac109ac021711ac</string>
 	<key>FacebookDisplayName</key>
 	<string>ChargeLoma</string>
 	<key>LSApplicationQueriesSchemes</key>

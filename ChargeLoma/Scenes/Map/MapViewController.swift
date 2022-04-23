@@ -157,8 +157,12 @@ extension MapViewController {
     
     func didStationFilterSuccess() -> (() -> Void) {
         return { [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.fetchMarkerMap()
+            guard let self = self else { return }
+            self.fetchMarkerMap()
+            self.setupMap()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.fetchMarkerMap()
+            }
         }
     }
     
