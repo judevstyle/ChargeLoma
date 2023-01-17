@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,14 +24,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6Hn-O0-ClV">
-                                <rect key="frame" x="149.5" y="81" width="115" height="115"/>
+                                <rect key="frame" x="149.5" y="81" width="115" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="115" id="Pd0-gB-28Q"/>
-                                    <constraint firstAttribute="height" constant="115" id="VSg-Xo-loh"/>
+                                    <constraint firstAttribute="height" constant="85" id="VSg-Xo-loh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aha-oa-zKq">
-                                <rect key="frame" x="8" y="204" width="398" height="20.5"/>
+                                <rect key="frame" x="8" y="168" width="398" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -139,6 +139,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMD-gp-ZCb">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="apple"/>
                                             </button>
@@ -175,7 +176,7 @@
                             <constraint firstItem="Aha-oa-zKq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="ad5-OF-ab4"/>
                             <constraint firstItem="xrc-gx-MPv" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="cgm-Ha-Gx4"/>
                             <constraint firstItem="weL-1Q-dDX" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="esF-Fh-KoL"/>
-                            <constraint firstItem="Aha-oa-zKq" firstAttribute="top" secondItem="6Hn-O0-ClV" secondAttribute="bottom" constant="8" id="qkd-Yf-uG1"/>
+                            <constraint firstItem="Aha-oa-zKq" firstAttribute="top" secondItem="6Hn-O0-ClV" secondAttribute="bottom" constant="2" id="qkd-Yf-uG1"/>
                             <constraint firstItem="6Hn-O0-ClV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="37" id="wNM-OB-wlt"/>
                         </constraints>
                     </view>

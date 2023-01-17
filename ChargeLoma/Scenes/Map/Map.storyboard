@@ -60,7 +60,10 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nvH-S0-TgQ">
-                                                <rect key="frame" x="12" y="8" width="18" height="34"/>
+                                                <rect key="frame" x="12" y="4" width="26" height="42"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="26" id="SNE-WD-ET5"/>
+                                                </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RfJ-ko-MeS">
                                                 <rect key="frame" x="329" y="8" width="49" height="34"/>
@@ -88,11 +91,11 @@
                                             <constraint firstItem="1pm-4E-1I2" firstAttribute="leading" secondItem="rZB-5Y-ZBh" secondAttribute="leading" id="9Ec-D9-yGz"/>
                                             <constraint firstItem="nvH-S0-TgQ" firstAttribute="leading" secondItem="rZB-5Y-ZBh" secondAttribute="leading" constant="12" id="K6P-CP-hGh"/>
                                             <constraint firstAttribute="height" constant="50" id="KAh-vC-4z5"/>
-                                            <constraint firstItem="nvH-S0-TgQ" firstAttribute="top" secondItem="rZB-5Y-ZBh" secondAttribute="top" constant="8" id="O8v-eN-ygc"/>
+                                            <constraint firstItem="nvH-S0-TgQ" firstAttribute="top" secondItem="rZB-5Y-ZBh" secondAttribute="top" constant="4" id="O8v-eN-ygc"/>
                                             <constraint firstAttribute="trailing" secondItem="1pm-4E-1I2" secondAttribute="trailing" id="OMU-Fc-N3q"/>
                                             <constraint firstItem="RfJ-ko-MeS" firstAttribute="top" secondItem="rZB-5Y-ZBh" secondAttribute="top" constant="8" id="QyI-lg-iYx"/>
                                             <constraint firstAttribute="bottom" secondItem="1pm-4E-1I2" secondAttribute="bottom" id="Tm9-Yh-iez"/>
-                                            <constraint firstAttribute="bottom" secondItem="nvH-S0-TgQ" secondAttribute="bottom" constant="8" id="fKV-Rn-aSG"/>
+                                            <constraint firstAttribute="bottom" secondItem="nvH-S0-TgQ" secondAttribute="bottom" constant="4" id="fKV-Rn-aSG"/>
                                             <constraint firstItem="1pm-4E-1I2" firstAttribute="top" secondItem="rZB-5Y-ZBh" secondAttribute="top" id="iG3-Ts-Sxz"/>
                                             <constraint firstAttribute="trailing" secondItem="RfJ-ko-MeS" secondAttribute="trailing" constant="12" id="jex-fV-Pp9"/>
                                         </constraints>

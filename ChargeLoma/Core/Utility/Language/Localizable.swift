@@ -23,7 +23,16 @@ public enum Wording {
         case Logout = "Logout"
         case Profile = "Profile"
         case Favorite = "Favorite"
+        case Not_send = "Not_send"
+        case Pls_recheckEmail = "Pls_recheckEmail"
+        case ResetPassword = "ResetPassword"
+        case Reset_Failed = "Reset_Failed"
+        case Reset_Success = "Reset_Success"
+        case Reset_Success_Msg = "Reset_Success_Msg"
+        case Reset_Close = "Reset_Close"
+
     }
+    
     
     public enum MainTabbar: String, LocalizableDelegate {
         case Home = "Home"
@@ -41,7 +50,12 @@ public enum Wording {
         case AboutHeadContact = "About_Head_Contact"
         case AboutHeadThankYou = "About_Head_ThankYou"
         case AboutHeadCopyright = "About_Head_Copyright"
+        case About_Head_ThankYou1 = "About_Head_ThankYou1"
+        case About_Head_ThankYou2 = "About_Head_ThankYou2"
+
     }
+    
+    
     
     public enum EditProfile: String, LocalizableDelegate {
         case EditProfile_DisplayName = "EditProfile_DisplayName"
@@ -96,6 +110,8 @@ public enum Wording {
         case AddStation_Btn_EditLocation = "AddStation_Btn_EditLocation"
         case AddStation_Placeholder_Address = "AddStation_Placeholder_Address"
         case AddStation_Btn_Save = "AddStation_Btn_Save"
+        case AddStation_Btn_ChangeImage = "AddStation_Btn_ChangeImage"
+
         case AddStation_Head_Service = "AddStation_Head_Service"
     }
 

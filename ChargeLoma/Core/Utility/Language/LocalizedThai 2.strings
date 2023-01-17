@@ -1,0 +1,153 @@
+/* 
+  LocalizedThai.strings
+  ChargeLoma
+
+  Created by Nontawat Kanboon on 16/2/2565 BE.
+  
+*/
+
+// Profile
+"TopReview" = "ผู้ใช้บริการยอดฮิต";
+"Language" = "ตั้งค่าภาษา";
+"About" = "เกี่ยวกับ";
+"Login" = "เข้าสู่ระบบ";
+"Logout" = "ออกจากระบบ";
+"Profile" = "โปรไฟล์";
+"Favorite" = "ชื่นชอบ";
+
+//Main Tabbar
+"Home" = "หน้าหลัก";
+"Go" = "ไป";
+"ForYou" = "สำหรับคุณ";
+"Add" = "เพิ่มสถานี";
+"Me" = "ฉัน";
+
+
+//About
+"About_Desc" = "Charge loma เป็นแอปพลิเคชั่นช่วยให้ผู้ใช้รถยนต์ไฟฟ้าค้นหาสถานีชาร์จบริเวณใกล้เคียง บริเวณปลายทาง หรือระหว่างเส้นทางที่จะเดินทางไป ผู้ใช้สามารถเขียนรีวิวหรืออ่านรีวิวจากผู้ใช้ท่านอื่นเพื่อเป็นข้อมูลประกอบการใช้บริการ รวมถึงสามารถเพิ่มข้อมูลสถานีชาร์จใหม่ได้ ผู้ใช้ร่วมกันเป็นชุมชนเพื่อให้ข้อมูลที่เป็นประโยชน์แก่กัน ส่งเสริมให้การใช้รถยนต์ไฟฟ้าสะดวกขึ้นและแพร่หลายมากขึ้น เรามีทีมงานคอยตรวจสอบและปรับปรุงข้อมูลเพื่อให้ข้อมูลทันสมัยตลอดเวลา";
+"About_Head_Version" = "เวอร์ชั่น";
+"About_Head_Update" = "อัพเดตเมื่อ";
+"About_Head_Developer" = "ผู้พัฒนาแอป";
+"About_Head_Contact" = "ติดต่อผู้ให้บริการ";
+"About_Head_ThankYou" = "ขอบคุณ";
+"About_Head_Copyright" = "Copyright";
+
+//EditProfile
+"EditProfile_DisplayName" = "ชื่อที่แสดง";
+"EditProfile_Email" = "อีเมล";
+"EditProfile_Tel" = "เบอร์โทร";
+"EditProfile_Car" = "รถ";
+"EditProfile_Save" = "บันทึก";
+"EditProfile_Register" = "สมัครสมาชิก";
+"EditProfile_Password" = "รหัสผ่าน";
+"EditProfile_ConfirmPassword" = "ยืนยันรหัสผ่าน";
+
+//Login
+"Login_Email" = "อีเมล";
+"Login_Password" = "รหัสผ่าน";
+"Login_Register" = "ลงทะเบียน";
+"Login_Login" = "เข้าสู่ระบบ";
+"Login_Or" = "หรือเข้าสู่ระบบโดย";
+
+//Map
+"Map_Search" = "ค้นหา...";
+
+//GO
+"Go_Head_Start" = "จุดเริ่มต้น";
+"Go_Current_Start" = "ตำแหน่งปัจจุบัน";
+"Go_Target_Start" = "เลือกจุดเริ่มต้น";
+"Go_Head_End" = "ปลายทาง";
+"Go_Position_End" = "เลือกจุดหมาย";
+
+//ForYou
+"ForYou_Head_Favorite" = "ที่บันทึกไว้";
+"ForYou_Head_Recently" = "รีวิวล่าสุด";
+"ForYou_Head_Information" = "ประชาสัมพันธ์";
+
+//AddStation
+"AddStation_Head_StationName" = "ชื่อสถานีชาร์จ";
+"AddStation_Head_Description" = "คำอธิบาย";
+"AddStation_Placeholder_Tel" = "เบอร์โทร";
+"AddStation_Head_Is24Hr" = "เปิด 24 ชม.";
+"AddStation_Head_Station" = "สถานี";
+"AddStation_Head_ServiceCharge" = "มีค่าบริการ";
+"AddStation_Head_PriceIsHas" = "ราคา (ถ้ามี)";
+"AddStation_Head_Provider" = "ผู้ให้บริการ";
+"AddStation_Btn_ChooseProvider" = "เลือกผู้ให้บริการ";
+"AddStation_Head_Connectors" = "หัวจ่าย";
+"AddStation_Btn_AddPlug" = "เพิ่มหัวจ่าย";
+"AddStation_Btn_EditLocation" = "แก้ไขพิกัด";
+"AddStation_Placeholder_Address" = "ที่อยู่...";
+"AddStation_Btn_Save" = "บันทึก";
+"AddStation_Head_Service" = "สิ่งอำนวยความสะดวกอื่นๆ";
+
+//CheckBox
+"Checkbox_PublicStation" = "เปิดสาธารณะ";
+"Checkbox_PrivateStation" = "ใช้ส่วนตัว";
+"Checkbox_Normal" = "เปิดบริการ";
+"Checkbox_OpenSoon" = "เปิดเร็วๆนี้";
+"Checkbox_OnMaintanance" = "ปิดปรับปรุง";
+"Checkbox_Parking" = "ที่จอดรถ";
+"Checkbox_Food" = "ร้านอาหาร";
+"Checkbox_Coffee" = "ร้านกาแฟ";
+"Checkbox_RestRoom" = "ห้องน้ำ";
+"Checkbox_Shopping" = "ร้านค้า";
+"Checkbox_RestArea" = "ที่พักผ่อน";
+"Checkbox_Wifi" = "Wifi";
+"Checkbox_Other" = "อื่นๆ";
+
+//MapFilter
+"MapFilter_Head_Connectors" = "หัวจ่าย";
+"MapFilter_Head_Providers" = "ผู้ให้บริการ";
+"MapFilter_Head_All" = "ทั้งหมด";
+"MapFilter_Head_Status" = "สถานะ";
+
+//StationDetail
+"StationDetail_Unit_km" = "กม";
+"StationDetail_Unit_Min" = "นาที";
+"StationDetail_Unit_Hr" = "ชม";
+"StationDetail_Btn_Direction" = "นำทาง";
+"StationDetail_Btn_Favorite" = "ชื่นชอบ";
+"StationDetail_Btn_Share" = "แชร์";
+"StationDetail_Head_Detail" = "รายละเอียด";
+"StationDetail_Head_PriceService" = "ค่าบริการ";
+"StationDetail_Btn_Edit" = "แก้ไขข้อมูล";
+"StationDetail_Head_Connectors" = "หัวจ่าย";
+"StationDetail_Btn_Review" = "เขียนรีวิว";
+"StationDetail_Head_Service" = "สิ่งอำนวยความสะดวกอื่นๆ";
+"StationDetail_Head_ReviewFromUser" = "รีวิวจากผู้ใช้บริการ";
+
+//AddReview
+"AddReview_Btn_ChargedOK" = "ชาร์จได้";
+"AddReview_Btn_CouldNotCharge" = "ชาร์จไม่ได้";
+"AddReview_Btn_LeaveComment" = "แสดงความคิดเห็น";
+"AddReview_Head_Comment" = "ความคิดเห็น";
+"AddReview_Head_Connectors" = "หัวจ่าย";
+"AddReview_Btn_ChooseConnectors" = "เลือกหัวชาร์จ";
+"AddReview_Head_Power" = "กำลังไฟฟ้า";
+"AddReview_Head_Problem" = "สาเหตุที่ชาร์จไม่ได้";
+"AddReview_Btn_Review" = "รีวิว";
+
+//Problem
+"Problem_Value_InUse" = "ใช้งานอยู่";
+"Problem_Value_CouldNotActivate" = "เปิดเครื่องไม่ได้";
+"Problem_Value_BlockByCar" = "เชื่อมต่อไม่ได้";
+"Problem_Value_OutOfOrder" = "หัวจ่ายเสีย";
+"Problem_Value_StationClose" = "สถานีเลิกให้บริการ";
+
+//NavigationTitle
+"NavigationTitle_Go" = "เส้นทาง";
+"NavigationTitle_ForYou" = "สำหรับคุณ";
+"NavigationTitle_AddStation" = "เพิ่มสถานีชาร์จ";
+"NavigationTitle_Filter" = "Filter";
+"NavigationTitle_Review" = "รีวิว";
+"NavigationTitle_About" = "เกี่ยวกับ";
+"NavigationTitle_Favorite" = "ชื่นชอบ";
+"NavigationTitle_TopReview" = "ผู้ใช้บริการยอดฮิต";
+"NavigationTitle_EditProfile" = "แก้ไขข้อมูลส่วนตัว";
+"NavigationTitle_EditStation" = "แก้ไขสถานีชาร์จ";
+"NavigationTitle_GalleryPhoto" = "รูปภาพ";
+"NavigationTitle_Profile" = "โปรไฟล์";
+"NavigationTitle_ChoosePlugType" = "เลือกหัวชาร์จ";
+"NavigationTitle_InformationDetail" = "ประชาสัมพันธ์";
+"NavigationTitle_SelectCurrentLocation" = "สถานที่ตั้ง";

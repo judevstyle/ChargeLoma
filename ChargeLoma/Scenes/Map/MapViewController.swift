@@ -127,7 +127,7 @@ public class MapViewController: UIViewController {
         inputSearchText.setRounded(rounded: 8)
         inputSearchText.tintColor = .basePrimary
         inputSearchText.textColor = .baseTextGray
-        inputSearchText.setPaddingLeft(padding: 30)
+        inputSearchText.setPaddingLeft(padding: 50)
         inputSearchText.setPaddingRight(padding: 30)
         inputSearchText.font = UIFont.h3Text
         inputSearchText.placeholder = ""

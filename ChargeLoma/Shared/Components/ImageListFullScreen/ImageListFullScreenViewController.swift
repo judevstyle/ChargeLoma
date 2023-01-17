@@ -17,7 +17,8 @@ class ImageListFullScreenViewController: UIViewController {
     
     @IBOutlet var allPageText: UILabel!
     @IBOutlet var currentPageText: UILabel!
-    
+    @IBOutlet var pageView: UIView!
+
     public var initialScrollDone: Bool = false
     
     // ViewModel
@@ -113,6 +114,10 @@ extension ImageListFullScreenViewController: UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = viewModel.output.getNumberOfItemsInSection()
         allPageText.text = "\(count)"
+        if count < 2 {
+            pageView.isHidden = true
+            
+        }
         return count
     }
     

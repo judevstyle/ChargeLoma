@@ -33,8 +33,11 @@ class FilterItemCollectionViewCell: UICollectionViewCell {
     
     var logoImage: String? {
         didSet {
-            if let pathImage = logoImage, let urlImage = URL(string: "\(pathImage)") {
+
+            if let pathImage = logoImage, let urlImage = URL(string: "https://api.chargeloma.com/\(pathImage)") {
                 imageLogo.kf.setImageDefault(with: urlImage)
+                print("icon \(pathImage)")
+
             }
         }
     }

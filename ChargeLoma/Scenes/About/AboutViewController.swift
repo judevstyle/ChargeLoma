@@ -40,19 +40,19 @@ class AboutViewController: UIViewController {
         setupLabel(label: headVersion, value: Wording.About.AboutHeadVersion.localized)
         let releaseVersion = Bundle.main.releaseVersionNumber ?? ""
         let buildNumber = Bundle.main.buildVersionNumber ?? ""
-        setupLabel(label: valueVersion, value: "\(releaseVersion) (\(buildNumber))")
+        setupLabel(label: valueVersion, value: "\(releaseVersion)")
         
         setupLabel(label: headUpdate, value: Wording.About.AboutHeadUpdate.localized)
-        setupLabel(label: valueUpdate, value: "")
+        setupLabel(label: valueUpdate, value: "23/06/2022")
         
         setupLabel(label: headDeveloper, value: Wording.About.AboutHeadDeveloper.localized)
         setupLabel(label: valueDeveloper, value: "")
         
         setupLabel(label: headContact, value: Wording.About.AboutHeadContact.localized)
-        setupLabel(label: valueContact, value: "Chargeloma@gmail.com\n@Chargeloma")
+        setupLabel(label: valueContact, value: "Chargeloma@gmail.com\nChargeloma")
         
         setupLabel(label: headThankYou, value: Wording.About.AboutHeadThankYou.localized)
-        setupLabel(label: valueThankYou, value: "Piyamate Wisanuvej\nสำหรับข้อมูลพิกัดสถานีชาร์จบน\nGoogle map\n\nCaptain DIY\nสำหรับข้อมูลและรูปสถานีชาร์จจากรีวิว")
+        setupLabel(label: valueThankYou, value: "Piyamate Wisanuvej\n\(Wording.About.About_Head_ThankYou1.localized)\n\nCaptain DIY\n\(Wording.About.About_Head_ThankYou2.localized)")
         
         setupLabel(label: headCopyright, value: "© Copyright")
         setupLabel(label: valueCopyright, value: "2022 ChargeLoma.com")
@@ -63,6 +63,9 @@ class AboutViewController: UIViewController {
         label.textColor = .baseTextGray
         label.numberOfLines = 0
         label.text = value
+        label.font = label.font.withSize(16)
+
+        
     }
 
 }

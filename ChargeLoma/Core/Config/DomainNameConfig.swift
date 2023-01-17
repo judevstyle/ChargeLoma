@@ -23,7 +23,7 @@ extension DomainNameConfig {
 
     public var urlString: String {
         
-        let baseURL: String = "http://charge-loma.ssoftdev.com/api"
+        let baseURL: String = "https://api.chargeloma.com"
         let googleMapURL: String = "https://maps.googleapis.com/maps/api"
         
         switch self {

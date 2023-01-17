@@ -68,9 +68,26 @@ class ReviewForYouTableViewCell: UITableViewCell {
         commentText.text = data?.comment ?? ""
         addressText.text = data?.station?.stationName ?? ""
         
-        if let posterUser = data?.User?.avatar, let urlImage = URL(string: "\(posterUser)") {
-            posterReview.kf.setImageDefault(with: urlImage)
+        
+        
+        if (data?.User?.avatar?.length()) != nil {
+            if (data?.User?.avatar?.length())! < 40 {
+                if let logo = data?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
+                    posterReview.kf.setImageDefault(with: urlImage)
+                }
+            }else{
+                if let logo = data?.User?.avatar, let urlImage = URL(string: "\(logo)") {
+                    posterReview.kf.setImageDefault(with: urlImage)
+                }
+                
+            }
+            
+            
         }
+        
+//        if let posterUser = data?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(posterUser)") {
+//            posterReview.kf.setImageDefault(with: urlImage)
+//        }
         
         var listStrImage: [String] = []
         data?.ReviewImg?.forEach({ item in

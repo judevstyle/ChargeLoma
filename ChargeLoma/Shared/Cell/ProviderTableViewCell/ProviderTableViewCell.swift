@@ -44,7 +44,7 @@ class ProviderTableViewCell: UITableViewCell {
         titleText.text = provider?.name ?? ""
         descText.text = provider?.desv ?? ""
         
-        if let logo = provider?.icon, let urlImage = URL(string: "\(logo)") {
+        if let logo = provider?.icon, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
             logoImage.kf.setImageDefault(with: urlImage)
         }
         

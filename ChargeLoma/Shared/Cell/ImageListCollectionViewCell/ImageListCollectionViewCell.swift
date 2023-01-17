@@ -25,7 +25,7 @@ class ImageListCollectionViewCell: UICollectionViewCell {
     }
     
     func setupImage() {
-        guard let imageUrl = imageUrl, let urlImage = URL(string: "\(imageUrl)") else { return }
+        guard let imageUrl = imageUrl, let urlImage = URL(string: "https://api.chargeloma.com/\(imageUrl)") else { return }
         imageStation.kf.setImageDefault(with: urlImage)
     }
 

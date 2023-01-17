@@ -50,7 +50,7 @@ class ContentTableViewCell: UITableViewCell {
             bgBadge.isHidden = true
         }
         
-        if let poster = item?.image, let urlImage = URL(string: "\(poster)") {
+        if let poster = item?.image, let urlImage = URL(string: "https://api.chargeloma.com/\(poster)") {
             posterImageView.kf.setImageDefault(with: urlImage)
         }
     }

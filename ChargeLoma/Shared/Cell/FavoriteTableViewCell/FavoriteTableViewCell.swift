@@ -69,7 +69,7 @@ class FavoriteTableViewCell: UITableViewCell {
 //            }
             pinImage = markerOrange
             
-            if let pathImage = favorite?.station?.provider?.logoLabel, let urlImage = URL(string: "\(pathImage)") {
+            if let pathImage = favorite?.station?.provider?.logoLabel, let urlImage = URL(string: "https://api.chargeloma.com/\(pathImage)") {
                 innerMarker.kf.setImageDefault(with: urlImage)
             }
             

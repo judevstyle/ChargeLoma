@@ -18,6 +18,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var logoImage: UIImageView!
     
+    var imgAvatar = ""
+    var email = ""
+
     lazy var viewModel: ProfileProtocol = {
         let vm = ProfileViewModel(vc: self)
         self.configure(vm)
@@ -54,7 +57,34 @@ class ProfileViewController: UIViewController {
         
         titleText.text = "Charge Loma"
         descText.text = "join me"
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        logoImage.isUserInteractionEnabled = true
+        logoImage.addGestureRecognizer(singleTap)
+        
+
+
+        
     }
+    
+    
+   
+
+
+
+@objc func tapDetected(){
+    
+    
+    
+    if imgAvatar != "" {
+        let img = [imgAvatar]
+            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: img, index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+    }
+  
+    
+}
+
+    
     
     func setupTableView() {
         tableView.delegate = self
@@ -69,11 +99,32 @@ class ProfileViewController: UIViewController {
         navigationItem.title = Wording.NavigationTitle.NavigationTitle_Profile.localized
         if let user = AppDelegate.shareDelegate.userProfileData {
             titleText.text = user.displayName ?? ""
-            if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
-                logoImage.setRounded(rounded: logoImage.frame.width/2)
-                logoImage.kf.setImageDefault(with: urlImage)
+            email = user.email ?? ""
+            
+            
+            if (user.avatar?.length())! < 40 {
+//                if let logo = data?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
+//                    posterReview.kf.setImageDefault(with: urlImage)
+                    
+                    if let logoImageUrl = user.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logoImageUrl)") {
+                        logoImage.setRounded(rounded: logoImage.frame.width/2)
+                        logoImage.kf.setImageDefault(with: urlImage)
+                        imgAvatar = logoImageUrl
+                    }
+                    
+                
+            }else{
+                if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
+                    logoImage.setRounded(rounded: logoImage.frame.width/2)
+                    logoImage.kf.setImageDefault(with: urlImage)
+                    imgAvatar = logoImageUrl
+                }
+                
             }
+            
+          
         } else {
+            imgAvatar = ""
             titleText.text = "Charge Loma"
             logoImage.setRounded(rounded: 0)
             logoImage.image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
@@ -129,7 +180,7 @@ extension ProfileViewController: UITableViewDataSource {
         guard UserDefaultsKey.UID.string != nil, UserDefaultsKey.isLoggedIn.bool == true else {
             return 4
         }
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -165,8 +216,10 @@ extension ProfileViewController: UITableViewDataSource {
             cell.flagImageView.isHidden = false
             cell.checkLanguage()
         case 4:
-            cell.titleText.text = Wording.Profile.About.localized
+            cell.titleText.text = Wording.Profile.ResetPassword.localized
         case 5:
+            cell.titleText.text = Wording.Profile.About.localized
+        case 6:
             cell.titleText.text = Wording.Profile.Logout.localized
         default:
             break
@@ -201,8 +254,24 @@ extension ProfileViewController: UITableViewDataSource {
         case 3:
             NavigationManager.instance.pushVC(to: .switchLanguage, presentation: .presentModelHeight(completion: nil, height: 150))
         case 4:
-            NavigationManager.instance.pushVC(to: .about)
+            
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                DispatchQueue.main.async { if let error = error {
+                    let resetFailedAlert = UIAlertController(title: Wording.Profile.Reset_Failed.localized, message: error.localizedDescription, preferredStyle: .alert)
+                    resetFailedAlert.addAction(UIAlertAction(title: Wording.Profile.Reset_Close.localized, style: .default, handler: nil))
+                    self.present(resetFailedAlert, animated: true, completion: nil)
+                } else {
+                    let resetEmailSentAlert = UIAlertController(title: Wording.Profile.Reset_Success.localized, message: Wording.Profile.Reset_Success_Msg.localized, preferredStyle: .alert)
+                    resetEmailSentAlert.addAction(UIAlertAction(title: Wording.Profile.Reset_Close.localized, style: .default, handler: nil))
+                    self.present(resetEmailSentAlert, animated: true, completion: nil)
+                }
+                }
+            }
+
+            
         case 5:
+            NavigationManager.instance.pushVC(to: .about)
+        case 6:
             didSignOut()
         default:
             break

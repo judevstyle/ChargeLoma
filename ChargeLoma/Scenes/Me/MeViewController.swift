@@ -15,6 +15,8 @@ class MeViewController: UIViewController {
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var telText: UILabel!
     @IBOutlet weak var carText: UILabel!
+    var imgAvatar = ""
+    
     
     lazy var viewModel: MeProtocol = {
         let vm = MeViewModel(vc: self)
@@ -67,8 +69,34 @@ class MeViewController: UIViewController {
         emailText.font = .bodyText
         telText.font = .bodyText
         carText.font = .bodyText
+    
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        userImage.isUserInteractionEnabled = true
+        userImage.addGestureRecognizer(singleTap)
+        
+
+
+        
     }
     
+    
+   
+
+
+
+@objc func tapDetected(){
+    
+    
+    
+    if imgAvatar != "" {
+        let img = [imgAvatar]
+            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: img, index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+    }
+  
+    
+}
+        
+        
     @objc func didEditUser() {
         NavigationManager.instance.pushVC(to: .editProfile(isRegister: false))
     }
@@ -76,9 +104,36 @@ class MeViewController: UIViewController {
     private func setupValue() {
         if let user = AppDelegate.shareDelegate.userProfileData {
             titleName.text = user.displayName ?? "-"
-            if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
-                userImage.kf.setImageDefault(with: urlImage)
+//            if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
+//                userImage.kf.setImageDefault(with: urlImage)
+//                imgAvatar = logoImageUrl
+//            }
+            
+            
+            
+            if (user.avatar?.length())! < 40 {
+//                if let logo = data?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
+//                    posterReview.kf.setImageDefault(with: urlImage)
+                    
+                    if let logoImageUrl = user.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logoImageUrl)") {
+//                        userImage.setRounded(rounded: logoImage.frame.width/2)
+                        userImage.kf.setImageDefault(with: urlImage)
+                        imgAvatar = logoImageUrl
+                    }
+                    
+                
+            }else{
+                if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
+//                    userImage.setRounded(rounded: logoImage.frame.width/2)
+                    userImage.kf.setImageDefault(with: urlImage)
+                    imgAvatar = logoImageUrl
+                }
+                
             }
+            
+            
+            
+            
             emailText.text = user.email?.isEmpty == true ? "-" : (user.email ?? "")
             telText.text = user.tel?.isEmpty == true ? "-" : (user.tel ?? "")
             carText.text = user.car?.isEmpty == true ? "-" : (user.car ?? "")

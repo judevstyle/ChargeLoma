@@ -54,9 +54,18 @@ class TopReviewTableViewCell: UITableViewCell {
         nameLabel.text = item?.User?.displayName ?? ""
         countReview.text = "\(item?.countReview ?? 0) ครั้ง"
         
-        if let logo = item?.User?.avatar, let urlImage = URL(string: "\(logo)") {
-            userImage.kf.setImageDefault(with: urlImage)
+        if (item?.User?.avatar?.length())! < 40 {
+            if let logo = item?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
+                userImage.kf.setImageDefault(with: urlImage)
+            }
+        }else{
+            if let logo = item?.User?.avatar, let urlImage = URL(string: "\(logo)") {
+                userImage.kf.setImageDefault(with: urlImage)
+            }
+            
         }
+            
+       
     }
     
 }

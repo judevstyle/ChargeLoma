@@ -15,6 +15,10 @@ public protocol AddLocationViewControllerDelegate {
 
 class AddLocationViewController: UIViewController {
     
+    
+    var imagePickerList: ImagePicker!
+
+    
     @IBOutlet weak var headNameStation: UILabel!
     @IBOutlet weak var inputNameStation: UnderlinedTextField!
     
@@ -43,6 +47,10 @@ class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var tableProviderView: UITableView!
     @IBOutlet weak var boxTableProvider: UIView!
+
+    
+    @IBOutlet weak var stationImage: UIImageView!
+
     
     @IBOutlet weak var headPlug: UILabel!
     @IBOutlet weak var tablePlugView: UITableView!
@@ -80,11 +88,21 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var cbOther: CheckBoxView!
     @IBOutlet weak var titleOther: UILabel!
     
+    
+    @IBOutlet weak var btnChangeImageData: UIButton!
+
+    
     @IBOutlet weak var btnSaveData: UIButton!
     @IBOutlet weak var inputOtherText: UnderlinedTextField!
 
     public var typeService: String = ""
     public var stationStatus: Int = 0
+    public var imgBase64: String = ""
+
+    var nameTH = ""
+    var nameEN = ""
+    var addrTH = ""
+    var addrEN = ""
     
     lazy var viewModel: AddLocationProtocol = {
         let vm = AddLocationViewModel(vc: self)
@@ -99,6 +117,8 @@ class AddLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.imagePickerList = ImagePicker(presentationController: self, sourceType: [.camera, .photoLibrary], delegate: self)
         NavigationManager.instance.setupWithNavigationController(self)
         setupUI()
         setupTableView()
@@ -155,6 +175,34 @@ class AddLocationViewController: UIViewController {
         
         //Address
         inputLocationText.text = station.addr ?? ""
+        
+        nameEN = station.station_name_en ??  ""
+        nameTH = station.station_name_th ??  ""
+        addrTH = station.addr_th ??  ""
+        addrEN = station.addr_en ??  ""
+
+        
+        if let poster = station.stationImg, let urlImage = URL(string: "https://api.chargeloma.com/\(poster)") {
+            stationImage.kf.setImageDefault(with: urlImage)
+            imgBase64  = poster
+        }
+        
+        
+        if Language.current == Language.thai {
+            
+            print("TH")
+            
+            inputNameStation.text = nameTH
+            inputLocationText.text = addrTH
+        }
+        else {
+            print("EN")
+
+            inputNameStation.text = nameEN
+            inputLocationText.text = addrEN
+        }
+        
+        
         if let lat = station.lat , let lng = station.lng {
             viewModel.input.setSelectLocation(centerMapCoordinate: CLLocationCoordinate2D(latitude: lat, longitude: lng))
         }
@@ -242,6 +290,19 @@ class AddLocationViewController: UIViewController {
         btnSaveData.backgroundColor = .basePrimary
         btnSaveData.addTarget(self, action: #selector(handleSaveData), for: .touchUpInside)
         btnSaveData.titleLabel?.sizeToFit()
+        
+        
+        btnChangeImageData.setTitle(Wording.AddStation.AddStation_Btn_ChangeImage.localized, for: .normal)
+        btnChangeImageData.tintColor = .white
+        btnChangeImageData.setRounded(rounded: 5)
+//        btnChangeImageData.titleLabel?.font = .
+        btnChangeImageData.backgroundColor = .bgBadge
+        btnChangeImageData.addTarget(self, action: #selector(handleImageData), for: .touchUpInside)
+        btnChangeImageData.titleLabel?.sizeToFit()
+        
+        
+        
+        
         
         
         if isFromPushNavigation == true {
@@ -340,6 +401,19 @@ class AddLocationViewController: UIViewController {
         radioGroupStatusBox2.addTarget(self, action: #selector(selectedRadioStatus2), for: .valueChanged)
     }
     
+    
+    @objc func handleImageData() {
+      
+        self.imagePickerList.present(from: self.view)
+
+        
+        
+    }
+    
+
+    
+    
+    
     @objc func selectedRadioStatus1() {
         if let title = radioGroupStatus.titles[radioGroupStatus.selectedIndex], let type = RadioGroupStatusBox1Type.allValues.filter({ $0.title == title }).first  {
             self.typeService = type.value
@@ -360,8 +434,23 @@ class AddLocationViewController: UIViewController {
         guard let stationName = inputNameStation.text, !stationName.isEmpty,
         let addr = inputLocationText.text, !addr.isEmpty else { return }
         
+        
+        
+        
         let serviceRate: Double? = Double(inputService.getText ?? "0")
-        viewModel.input.createStation(stationName: stationName, stationDesc: inputDesc.getText ?? "", tel: inputTel.getText ?? "", typeService: self.typeService, is24hr: switchIs24Hr.isOn, addr: addr, servicetimeOpen: inputOpenTime.text, servicetimeClose: "", isServiceCharge: switchIsService.isOn, serviceRate: serviceRate, statusApprove: "W", stationStatus: self.stationStatus, note: inputOtherText.text)
+        
+        if Language.current == Language.thai {
+            nameTH = (inputNameStation.text ?? "")
+            addrTH = inputLocationText.text ?? ""
+        }
+        else {
+            nameEN = inputNameStation.text ?? ""
+            addrEN = inputLocationText.text ?? ""
+        }
+        
+        
+        
+        viewModel.input.createStation(stationName: nameEN,stationNameTH: nameTH, stationDesc: inputDesc.getText ?? "", tel: inputTel.getText ?? "", typeService: self.typeService, is24hr: switchIs24Hr.isOn, addr: addrEN,addrTH: addrTH, servicetimeOpen: inputOpenTime.text, servicetimeClose: "", isServiceCharge: switchIsService.isOn, serviceRate: serviceRate, statusApprove: "W", stationStatus: self.stationStatus, note: inputOtherText.text,imgBase64: imgBase64)
     }
     
     @objc func handleCloseViewButton() {
@@ -517,13 +606,13 @@ public enum RadioGroupStatusBox2Type {
     public var value: Int {
         switch self {
         case .openStatus:
-            return 0
-        case .soonStatus:
             return 1
-        case .closeStatus:
+        case .soonStatus:
             return 2
-        case .privateStatus:
+        case .closeStatus:
             return 3
+        case .privateStatus:
+            return 4
         }
     }
     
@@ -657,5 +746,14 @@ extension AddLocationViewController: CheckBoxViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension AddLocationViewController: ImagePickerDelegate {
+    func didSelectImage(image: UIImage?, imagePicker: ImagePicker, base64: String) {
+        self.stationImage.image = image
+        imgBase64 = base64
+        print("imdlsp")
+        //imageGrid.viewModel.input.addListImage(image: image ?? UIImage(), base64: base64)
     }
 }

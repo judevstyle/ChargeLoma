@@ -71,7 +71,7 @@ class PlugTableViewCell: UITableViewCell {
     
     func setupValue() {
         if let item = itemPlugMapping {
-            if let logo = item.plugTypeMaster?.pIcon, let urlImage = URL(string: "\(logo)") {
+            if let logo = item.plugTypeMaster?.pIcon, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
                 imageLogo.kf.setImageDefault(with: urlImage)
             }
             
@@ -85,7 +85,7 @@ class PlugTableViewCell: UITableViewCell {
         }
         
         if let item = itemPlugStationData {
-            if let logo = item.plugType?.pIcon, let urlImage = URL(string: "\(logo)") {
+            if let logo = item.plugType?.pIcon, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
                 imageLogo.kf.setImageDefault(with: urlImage)
             }
             
@@ -99,7 +99,7 @@ class PlugTableViewCell: UITableViewCell {
         }
         
         if let item = itemPlugTypeData {
-            if let logo = item.pIcon, let urlImage = URL(string: "\(logo)") {
+            if let logo = item.pIcon, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
                 imageLogo.kf.setImageDefault(with: urlImage)
             }
             

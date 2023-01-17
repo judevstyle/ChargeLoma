@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
         inputPassword.textAlignment = .center
         
         self.titleLogo.text = "Charge Loma"
-        self.titleLogo.font = .header2
+        self.titleLogo.font = .header3
         self.titleLogo.textColor = .baseSecondary
         
         self.btnRegister.setTitle(Wording.Login.Login_Register.localized, for: .normal)
@@ -101,6 +101,13 @@ class LoginViewController: UIViewController {
         self.btnLogin.setRounded(rounded: 8.0)
         
         orLabel.text = Wording.Login.Login_Or.localized
+        
+        let origImage = UIImage(named: "apple")
+        let tintedImage = origImage!.withRenderingMode(.alwaysTemplate)
+        self.btnApple.setImage(tintedImage, for: .normal)
+        self.btnApple.tintColor = .white
+        self.btnApple.setRounded(rounded: 4.0)
+
         
         self.btnLogin.addTarget(self, action: #selector(handleSignin), for: .touchUpInside)
         self.btnFacebook.addTarget(self, action: #selector(handleFacebookSignin), for: .touchUpInside)

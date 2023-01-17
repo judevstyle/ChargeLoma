@@ -40,7 +40,7 @@ class MarkerStationView: UIView {
                 pinImage = markerGreen
             }
             
-            if let pathImage = station?.provider?.logoLabel, let urlImage = URL(string: "\(pathImage)") {
+            if let pathImage = station?.provider?.logoLabel, let urlImage = URL(string: "https://api.chargeloma.com/\(pathImage)") {
                 view.imageAvatar.kf.setImageDefault(with: urlImage)
             }
             

@@ -411,10 +411,10 @@ extension StationDetailViewController {
             guard let self = self else { return }
             let listImage = self.viewModel.output.getListImageStation()
             
-            if let station = self.viewModel.output.getDataStation(), let posterImage = station.stationImg, let urlImage = URL(string: "\(posterImage)") {
+            if let station = self.viewModel.output.getDataStation(), let posterImage = station.stationImg, let urlImage = URL(string: "https://api.chargeloma.com/\(posterImage)") {
                 self.imagePosterView.kf.setImageDefault(with: urlImage)
             } else if listImage.count > 0 {
-                if let posterImage = listImage[0].imgPath, let urlImage = URL(string: "\(posterImage)") {
+                if let posterImage = listImage[0].imgPath, let urlImage = URL(string: "https://api.chargeloma.com/\(posterImage)") {
                     self.imagePosterView.kf.setImageDefault(with: urlImage)
                 }
             }
@@ -434,7 +434,7 @@ extension StationDetailViewController {
     
     private func setupValue() {
         guard let station = self.viewModel.output.getDataStation() else { return }
-        if let logoImage = station.provider?.icon, let urlImage = URL(string: "\(logoImage)") {
+        if let logoImage = station.provider?.icon, let urlImage = URL(string: "https://api.chargeloma.com/\(logoImage)") {
             logoStationImageView.kf.setImageDefault(with: urlImage)
         }
         titleStationValue.text = station.stationName ?? ""
@@ -529,8 +529,12 @@ extension StationDetailViewController {
     
     @objc func handleShareButton() {
         guard let station = viewModel.output.getDataStation() else { return }
-        if let lat = station.lat, let lng = station.lng {
-            let items = [URL(string: "http://maps.google.com/maps?q=\(lat),\(lng)")!]
+        if let id = station.stId {
+            
+//            val uri = "https://chargeloma.com/maps/?st_id=${station?.st_id}"
+
+            
+            let items = [URL(string: "https://chargeloma.com/maps/?st_id=\(id)")!]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
         }

@@ -24,6 +24,13 @@ public struct PostStationFilterResponse: Codable, Hashable  {
 
 public struct StationData: Codable, Hashable  {
     
+    
+    
+    public var station_name_th: String?
+    public var station_name_en: String?
+    public var addr_th: String?
+    public var addr_en: String?
+
     public var tel: String?
     public var stationImg: String?
     public var stId: String?
@@ -61,6 +68,13 @@ public struct StationData: Codable, Hashable  {
     public init() {}
     
     public init(from decoder: Decoder) throws {
+        
+        try station_name_th                 <- decoder["station_name_th"]
+        try station_name_en                 <- decoder["station_name_en"]
+        try addr_th                 <- decoder["addr_th"]
+        try addr_en                 <- decoder["addr_en"]
+
+        
         try tel                 <- decoder["tel"]
         try stationImg          <- decoder["station_img"]
         try stId                <- decoder["st_id"]

@@ -14,6 +14,15 @@
 "Logout" = "Logout";
 "Profile" = "Profile";
 "Favorite" = "Favorite";
+"Not_send" = "Email address not found or unable to sent email";
+"Pls_recheckEmail" = "Please check Email";
+"ResetPassword" = "Reset password";
+"Reset_Failed" = "Reset Failed";
+"Reset_Success" = "Reset email sent successfully";
+"Reset_Success_Msg" = "We send you an email with instructions on how to reset your password.";
+
+"Reset_Close" = "OK";
+
 
 //Main Tabbar
 "Home" = "Home";
@@ -30,6 +39,10 @@
 "About_Head_Contact" = "Contact";
 "About_Head_ThankYou" = "Thank you";
 "About_Head_Copyright" = "Copyright";
+"About_Head_ThankYou1" = "for DC EV Charging Station data";
+"About_Head_ThankYou2" = "for EV data and picture from Charging Station";
+
+
 
 //EditProfile
 "EditProfile_DisplayName" = "Display Name";
@@ -79,6 +92,7 @@
 "AddStation_Placeholder_Address" = "address";
 "AddStation_Btn_Save" = "Save";
 "AddStation_Head_Service" = "Services";
+"AddStation_Btn_ChangeImage" = "Add station image";
 
 //CheckBox
 "Checkbox_PublicStation" = "Public station";

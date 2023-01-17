@@ -15,7 +15,7 @@ class InformationDetailViewController: UIViewController {
     
     @IBOutlet weak var bgBadge: UIView!
     @IBOutlet weak var titleBadge: UILabel!
-    
+    var imgPoster = ""
     public var informationItem: InformationItem? = nil
     
     override func viewDidLoad() {
@@ -33,7 +33,27 @@ class InformationDetailViewController: UIViewController {
         descText.font = .smallText
         descText.textColor = .baseTextGray
         descText.numberOfLines = 0
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        posterImage.isUserInteractionEnabled = true
+        posterImage.addGestureRecognizer(singleTap)
+        
     }
+    
+
+    
+    
+    @objc func tapDetected(){
+        
+        
+        let img = [imgPoster]
+//        if self.listImage.count > 0 {
+            NavigationManager.instance.pushVC(to: .imageListFullScreen(listImage: img, index: 0), presentation: .Present(withNav: true, modalTransitionStyle: .crossDissolve, modalPresentationStyle: .overFullScreen))
+//        }
+        
+    }
+    
+    
     
     func setupValue()  {
         
@@ -49,8 +69,9 @@ class InformationDetailViewController: UIViewController {
             bgBadge.isHidden = true
         }
         
-        if let poster = informationItem?.image, let urlImage = URL(string: "\(poster)") {
+        if let poster = informationItem?.image, let urlImage = URL(string: "https://api.chargeloma.com/\(poster)") {
             posterImage.kf.setImageDefault(with: urlImage)
+            imgPoster = poster
         }
     }
 }

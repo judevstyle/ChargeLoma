@@ -142,6 +142,32 @@ class EditProfileViewController: UIViewController {
             if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
                 userImage.kf.setImageDefault(with: urlImage)
             }
+            
+            
+            
+            if (user.avatar?.length())! < 40 {
+//                if let logo = data?.User?.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logo)") {
+//                    posterReview.kf.setImageDefault(with: urlImage)
+                    
+                    if let logoImageUrl = user.avatar, let urlImage = URL(string: "https://api.chargeloma.com/\(logoImageUrl)") {
+//                        userImage.setRounded(rounded: logoImage.frame.width/2)
+                        userImage.kf.setImageDefault(with: urlImage)
+//                        imgAvatar = logoImageUrl
+                    }
+                    
+                
+            }else{
+                if let logoImageUrl = user.avatar, let urlImage = URL(string: "\(logoImageUrl)") {
+//                    userImage.setRounded(rounded: logoImage.frame.width/2)
+                    userImage.kf.setImageDefault(with: urlImage)
+//                    imgAvatar = logoImageUrl
+                }
+                
+            }
+            
+            
+            
+            
             inputEmail.text = user.email ?? ""
             inputTel.text = user.tel ?? ""
             inputCar.text = user.car ?? ""

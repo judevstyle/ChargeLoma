@@ -14,6 +14,18 @@
 "Logout" = "ออกจากระบบ";
 "Profile" = "โปรไฟล์";
 "Favorite" = "ชื่นชอบ";
+"Not_send" = "ไม่สามารถส่ง Email ได้";
+"Pls_recheckEmail" = "กรุณาตรวจสอบ Email";
+"ResetPassword" = "เปลียนรหัสผ่าน";
+"Reset_Failed" = "เกิดข้อผิดพลาด";
+"Reset_Success" = "ส่ง Email การเปลี่ยนแปลงรหัสผ่านเรียบร้อย";
+"Reset_Success_Msg" = "ส่งอีเมลถึงคุณพร้อมคำแนะนำในการรีเซ็ตรหัสผ่าน";
+"Reset_Close" = "ตกลง";
+
+
+
+
+
 
 //Main Tabbar
 "Home" = "หน้าหลัก";
@@ -31,6 +43,14 @@
 "About_Head_Contact" = "ติดต่อผู้ให้บริการ";
 "About_Head_ThankYou" = "ขอบคุณ";
 "About_Head_Copyright" = "Copyright";
+"About_Head_ThankYou1" = "สำหรับข้อมูลพิกัดสถานีชาร์จบน Google map";
+"About_Head_ThankYou2" = "สำหรับข้อมูลและรูปสานีชาร์";
+
+
+
+
+
+
 
 //EditProfile
 "EditProfile_DisplayName" = "ชื่อที่แสดง";
@@ -80,7 +100,7 @@
 "AddStation_Placeholder_Address" = "ที่อยู่...";
 "AddStation_Btn_Save" = "บันทึก";
 "AddStation_Head_Service" = "สิ่งอำนวยความสะดวกอื่นๆ";
-
+"AddStation_Btn_ChangeImage" = "เลือกรูปสถานี";
 //CheckBox
 "Checkbox_PublicStation" = "เปิดสาธารณะ";
 "Checkbox_PrivateStation" = "ใช้ส่วนตัว";

@@ -24,7 +24,7 @@ protocol AddLocationProtocolInput {
     
     func setClearResetValue()
     
-    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?)
+    func createStation(stationName: String, stationNameTH: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, addrTH: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?,imgBase64:String)
 }
 
 protocol AddLocationProtocolOutput: class {
@@ -224,17 +224,29 @@ class AddLocationViewModel: AddLocationProtocol, AddLocationProtocolOutput {
         }
     }
     
-    func createStation(stationName: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?) {
+    func createStation(stationName: String, stationNameTH: String, stationDesc: String, tel: String, typeService: String, is24hr: Bool, addr: String, addrTH: String, servicetimeOpen: String?, servicetimeClose: String?, isServiceCharge: Bool, serviceRate: Double?, statusApprove: String, stationStatus: Int, note: String?,imgBase64:String) {
         self.vc.startLoding()
         var request = PostStationRequest()
         if let station = getStationData()  {
             request.stId = station.stId
         }
-        request.stationNameTh = stationName
-        request.stationNameEn = stationName
+        
+        request.stationImg = imgBase64
+        
+        
+        
+//        if Language.current == Language.thai {
+            request.stationNameTh = stationNameTH
+            request.addrTh = addrTH
+
+//        }else{
+            
+            request.stationNameEn = stationName
+            request.addrEn = addr
+
+//        }
+        
         request.stationDesc = stationDesc
-        request.addrEn = addr
-        request.addrTh = addr
         request.lat = self.centerMapCoordinate?.latitude
         request.lng = self.centerMapCoordinate?.longitude
         request.typeService = typeService

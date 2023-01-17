@@ -248,7 +248,7 @@ extension MapFilterViewController: UICollectionViewDataSource {
             return  self.viewModel.output.getListDC().0.count
         case providerCollection:
             let count = self.viewModel.output.getListProviderMaster().0.count
-            self.providerCollectionHeight.constant = (CGFloat(count / 2) * 70)
+            self.providerCollectionHeight.constant = ((CGFloat(count / 2)+CGFloat(count%2)) * 70)
             return count
         case statusCollection:
             return self.viewModel.output.getListStatusFilter().0.count

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18C8893D285672D900D0EAAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C8893C285672D900D0EAAE /* GoogleService-Info.plist */; };
 		AB2D7ABF4CF3B4928FA4F233 /* Pods_ChargeLoma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */; };
 		C428AE8527A4FDD4009F75FB /* GetStationFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428AE8427A4FDD4009F75FB /* GetStationFavoriteResponse.swift */; };
 		C428AE8727A4FE5C009F75FB /* GetStationFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428AE8627A4FE5C009F75FB /* GetStationFavoriteUseCase.swift */; };
@@ -178,7 +179,7 @@
 		EFA36EBD279311FE00BF2E51 /* GetInformationFindAllUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA36EBC279311FE00BF2E51 /* GetInformationFindAllUseCase.swift */; };
 		EFA36EBF2793139F00BF2E51 /* ForYouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA36EBE2793139F00BF2E51 /* ForYouViewModel.swift */; };
 		EFA36EC1279319CD00BF2E51 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA36EC0279319CD00BF2E51 /* Date+Extension.swift */; };
-		EFA36EC32793206600BF2E51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA36EC22793206600BF2E51 /* GoogleService-Info.plist */; };
+		EFA36EC32793206600BF2E51 /* GoogleService-Info1.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA36EC22793206600BF2E51 /* GoogleService-Info1.plist */; };
 		EFA36EC6279323F100BF2E51 /* PreLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA36EC5279323F100BF2E51 /* PreLoginViewController.swift */; };
 		EFA36EC8279323F900BF2E51 /* PreLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA36EC7279323F900BF2E51 /* PreLogin.storyboard */; };
 		EFA9E88A27B8985200AEB29A /* MeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA9E88927B8985200AEB29A /* MeViewModel.swift */; };
@@ -292,6 +293,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18BDD9D42868C4BA0075E3DD /* ChargeLoma.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChargeLoma.entitlements; sourceTree = "<group>"; };
+		18C8893C285672D900D0EAAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		24B3D0F773F03A17BB265054 /* Pods_ChargeLoma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChargeLoma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A8B288E38CB8117676BB71 /* Pods-ChargeLoma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.release.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.release.xcconfig"; sourceTree = "<group>"; };
 		B6A3D28E1A1FF4A17CF91189 /* Pods-ChargeLoma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChargeLoma.debug.xcconfig"; path = "Target Support Files/Pods-ChargeLoma/Pods-ChargeLoma.debug.xcconfig"; sourceTree = "<group>"; };
@@ -465,7 +468,7 @@
 		EFA36EBC279311FE00BF2E51 /* GetInformationFindAllUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInformationFindAllUseCase.swift; sourceTree = "<group>"; };
 		EFA36EBE2793139F00BF2E51 /* ForYouViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewModel.swift; sourceTree = "<group>"; };
 		EFA36EC0279319CD00BF2E51 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		EFA36EC22793206600BF2E51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EFA36EC22793206600BF2E51 /* GoogleService-Info1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info1.plist"; sourceTree = "<group>"; };
 		EFA36EC5279323F100BF2E51 /* PreLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreLoginViewController.swift; sourceTree = "<group>"; };
 		EFA36EC7279323F900BF2E51 /* PreLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreLogin.storyboard; sourceTree = "<group>"; };
 		EFA9E88927B8985200AEB29A /* MeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewModel.swift; sourceTree = "<group>"; };
@@ -695,6 +698,7 @@
 		EF3ACAF3277C57A60096BF95 /* ChargeLoma */ = {
 			isa = PBXGroup;
 			children = (
+				18BDD9D42868C4BA0075E3DD /* ChargeLoma.entitlements */,
 				EF823549277DA57200379B38 /* Shared */,
 				EF8234F3277D737E00379B38 /* Data */,
 				EF3ACB53277C5D550096BF95 /* Helpers */,
@@ -704,7 +708,8 @@
 				EF3ACAF4277C57A60096BF95 /* AppDelegate.swift */,
 				EF3ACB02277C57A80096BF95 /* LaunchScreen.storyboard */,
 				EF3ACB05277C57A80096BF95 /* Info.plist */,
-				EFA36EC22793206600BF2E51 /* GoogleService-Info.plist */,
+				EFA36EC22793206600BF2E51 /* GoogleService-Info1.plist */,
+				18C8893C285672D900D0EAAE /* GoogleService-Info.plist */,
 				EF3ACAFD277C57A70096BF95 /* ChargeLoma.xcdatamodeld */,
 			);
 			path = ChargeLoma;
@@ -2256,7 +2261,7 @@
 				EF2213A1278AB4800007B50C /* Login.storyboard in Resources */,
 				EFA36EA227930B5F00BF2E51 /* ForYouInfoCollectionViewCell.xib in Resources */,
 				EFD83201278B2B6900FDEAC5 /* CheckBoxView.xib in Resources */,
-				EFA36EC32793206600BF2E51 /* GoogleService-Info.plist in Resources */,
+				EFA36EC32793206600BF2E51 /* GoogleService-Info1.plist in Resources */,
 				EFB1FF1527AABB1C00BAAF9D /* Image1x1CollectionViewCell.xib in Resources */,
 				EFAEE61B27BD3A25007F2557 /* UsersHit.storyboard in Resources */,
 				EFA0EAE12793C35D002B258D /* GalleryPhoto.storyboard in Resources */,
@@ -2272,6 +2277,7 @@
 				EFAEC1C027A988CA007CC424 /* FilterItemTextCollectionViewCell.xib in Resources */,
 				EF3ACB4D277C59CA0096BF95 /* Kanit-Regular.ttf in Resources */,
 				EFA0EAE82793D871002B258D /* PlugTableViewCell.xib in Resources */,
+				18C8893D285672D900D0EAAE /* GoogleService-Info.plist in Resources */,
 				EF3ACB4A277C59CA0096BF95 /* Kanit-Thin.ttf in Resources */,
 				EF0EE90E27849F2700FC148D /* MarkerStationInfoView.xib in Resources */,
 				C4DFF16427A5495A006DA83A /* FavoriteTableViewCell.xib in Resources */,
@@ -2713,28 +2719,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChargeLoma/ChargeLoma.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y46GLN8894;
+				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_TEAM = P38U266UL9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChargeLoma/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "By accessing your device's location it can pin point your location on the map.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app access user's camera to take photo for the User Reviews function. The photo will be used as part of user review within the app.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allowing access to your location to help you locate the nearest charging station and estimated travel times.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app access user's full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app access user's full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssoft.ChargeLoma;
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssoft.Charge-Loma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2748,28 +2756,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChargeLoma/ChargeLoma.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y46GLN8894;
+				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_TEAM = P38U266UL9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChargeLoma/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "By accessing your device's location it can pin point your location on the map.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app access user's camera to take photo for the User Reviews function. The photo will be used as part of user review within the app.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allowing access to your location to help you locate the nearest charging station and estimated travel times.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app access user's full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app access user's full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssoft.ChargeLoma;
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ssoft.Charge-Loma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

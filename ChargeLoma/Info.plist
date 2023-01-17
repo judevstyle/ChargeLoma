@@ -9,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.183166726128-7skjolpi5i31jatn5jptff5vo7gcuvrq</string>
+				<string>com.googleusercontent.apps.183166726128-lbqb9bpv257qpdgprenl540htc86l75t</string>
 			</array>
 		</dict>
 		<dict>
@@ -35,6 +35,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Kanit-Bold.ttf</string>
@@ -48,15 +50,5 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
-	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>This app access user&apos;s camera to take photo for the User Reviews function. The photo will be used as part of user review within the app.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app access user&apos;s full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app access user&apos;s full photo library, or only photos that user select for the User Reviews function. The photo will be used as part of user review within the app.</string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 </dict>
 </plist>
